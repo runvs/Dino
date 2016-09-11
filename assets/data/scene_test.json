@@ -1,5 +1,10 @@
 {
-    "actions": [
-        { "time": 1.5, "actor": "dino", "type": "animate", "p1": "greet", "p2" : "true"}
+	"actors":
+	[
+		{"name": "dino", "position": "dinoStart"}
+	],
+    "actions": 
+	[
+        { "time": 1.5, "actor": "dino", "type": "animate", "p1": "walk", "p2" : "true"}
     ]
 }

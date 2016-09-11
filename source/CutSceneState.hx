@@ -14,15 +14,24 @@ class CutSceneState extends FlxState
 {
 	var _timer : Float;	
 	var _actions : Array<CutSceneAction>;
+	var _actors : Array<CutSceneActor>;
+	
 	
 	override public function create():Void
 	{
 		super.create();
 		
 		_actions = new Array<CutSceneAction>();
+		_actors = new Array<CutSceneActor>();
 		
 		var data : CutSceneData;
 		data = Json.parse(Assets.getText(AssetPaths.scene_test__json));
+		
+		for (i in 0...data.actors.length)
+		{
+			createActor(data.actors[i]);
+		}
+		
 		
 		for (i in 0...data.actions.length)
 		{			
@@ -30,6 +39,12 @@ class CutSceneState extends FlxState
 		}
 		
 		_timer = 0;
+	}
+	
+	function createActor(ad:ActorData) 
+	{
+		var a : CutSceneActor = new CutSceneActor(ad.name);
+		_actors.push(a);
 	}
 	
 	function convertAction(a:ActionData) 
@@ -98,15 +113,38 @@ class CutSceneState extends FlxState
 			if (a.performed) continue;
 			if (a.trigger) a.perform(this);
 		}
-	}
-	
-	function PerformAction(a:ActionData) 
-	{
 		
+		for (i in 0..._actors.length)
+		{
+			_actors[i].update(elapsed);
+		}
+	}
+	
+	override public function draw () :  Void 
+	{
+		super.draw();
+		for (i in 0..._actors.length)
+		{
+			_actors[i].draw();
+		}
 	}
 	
 	
-	
+	public function getActor (name :String) : CutSceneActor
+	{
+		var ret : CutSceneActor = null;
+		
+		for (i in 0..._actors.length)
+		{
+			if (_actors[i].name == name)
+			{
+				ret = _actors[i];
+				break;
+			}
+		}
+		
+		return ret;
+	}
 	
 }
 
@@ -119,8 +157,15 @@ typedef ActionData =
 	var p2 : String;
 }
 
+typedef ActorData =
+{
+	var name : String;
+	var position : String;
+}
+
 typedef CutSceneData = 
 {
     var actions : Array<ActionData>;
+	var actors : Array<ActorData>;
 }
 
