@@ -1,4 +1,5 @@
 package ;
+import flixel.tweens.FlxTween;
 
 /**
  * ...
@@ -7,8 +8,8 @@ package ;
 class CutSceneActionFade extends CutSceneAction
 {
 
-	public var targetAlpha: Float;
-	public var duration : Float;
+	var targetAlpha: Float;
+	var duration : Float;
 	
 	public function new(a: String, t :Float, d: Float) 
 	{
@@ -20,8 +21,14 @@ class CutSceneActionFade extends CutSceneAction
 	public override function perform(scene : CutSceneState)
 	{
 		super.perform(scene);
-		
 		trace("fade action perform!");
+		
+		var ac : CutSceneActor = scene.getActor(this.actor);
+		
+		if (ac != null)
+		{
+			FlxTween.tween(ac, { alpha:targetAlpha }, duration);
+		}
 	}
 	
 }

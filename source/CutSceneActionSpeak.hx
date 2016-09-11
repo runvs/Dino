@@ -7,8 +7,8 @@ package ;
 class CutSceneActionSpeak extends CutSceneAction
 {
 
-	public var icon : String;
-	public var duration : Float;
+	var icon : String;
+	var duration : Float;
 	
 	public function new(a: String, i :String, d: Float) 
 	{

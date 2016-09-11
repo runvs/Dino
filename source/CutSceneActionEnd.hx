@@ -1,4 +1,5 @@
 package ;
+import flixel.FlxG;
 
 /**
  * ...
@@ -7,19 +8,30 @@ package ;
 class CutSceneActionEnd extends CutSceneAction
 {
 
-	public var next : String;
+	var what : String;
+	var next : String;
 	
-	public function new(a: String, n :String) 
+	public function new(a: String, w: String, n :String) 
 	{
 		super(a);
+		what = w;
 		next = n;
+		
 	}
 	
 	public override function perform(scene : CutSceneState)
 	{
 		super.perform(scene);
-		
 		trace("end action perform!");
+		
+		if ( what == "play")
+		{
+			FlxG.switchState(new PlayState());
+		}
+		else if (what == "cut")
+		{
+			FlxG.switchState(new CutSceneState());
+		}
 	}
 	
 }

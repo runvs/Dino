@@ -65,8 +65,6 @@ class CutSceneState extends FlxState
 	{
 		if (a.time < 0) 
 			throw "Action Error: Time must not be negative!";
-		if (a.actor != "dino" && a.actor != "baby" && a.actor != "mole" && a.actor != "egg" && a.actor != "global")
-			throw "Action Error: Actor " + a.actor  + " not known!";
 		
 			var action : CutSceneAction = null;
 			
@@ -101,7 +99,7 @@ class CutSceneState extends FlxState
 			}
 			else if (a.type == "end")
 			{
-				action = new CutSceneActionEnd(a.actor, a.p1);
+				action = new CutSceneActionEnd(a.actor, a.p1, a.p2);
 			}
 			else
 			{
@@ -147,11 +145,12 @@ class CutSceneState extends FlxState
 	override public function draw () :  Void 
 	{
 		super.draw();
+		_speechbubbles.draw();
 		for (i in 0..._actors.length)
 		{
 			_actors[i].draw();
 		}
-		_speechbubbles.draw();
+		
 	}
 	
 	public function getPosition (name :String) : PositionData

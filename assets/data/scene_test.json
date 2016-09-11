@@ -1,18 +1,23 @@
 {
 	"positions":
 	[
+		{"name": "origin",   "x": 0,  "y": 0},
 		{"name": "dinoStart",   "x": 16,  "y": 24},
 		{"name": "dinoEnd",     "x": 96, "y": 24}
 	],
 	"actors":
 	[
-		{"name": "dino", "position": "dinoStart"}
+		{"name": "dino", "position": "dinoStart"},
+		{"name": "overlay", "position": "origin"}
 	],
     "actions": 
 	[
+		{ "time": 0.0,  "actor": "overlay", "type" : "fade", "p1":"0", "p2":"0.5"},
 		{ "time": 1.5,  "actor": "dino", "type": "animate", "p1": "walk", "p2" : "true"},
 		{ "time": 1.5,  "actor": "dino", "type": "move", "p1": "dinoEnd", "p2": "3.0" },
 		{ "time": 4.5,  "actor": "dino", "type": "animate", "p1": "idle", "p2" : "true"},
-		{ "time": 4.8,  "actor": "dino", "type": "speak", "p1":"heart", "p2": "1.5"}
+		{ "time": 4.6,  "actor": "dino", "type": "speak", "p1":"heart", "p2": "1.5"},
+		{ "time": 5.0,  "actor": "overlay", "type" : "fade", "p1":"1.0", "p2":"0.75"},
+		{ "time": 5.75, "actor": "global", "type" : "end", "p1" : "play", "p2":"default"}
     ]
 }

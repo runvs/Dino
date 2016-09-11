@@ -9,8 +9,8 @@ import flixel.util.FlxTimer;
 class CutSceneActionMove extends CutSceneAction
 {
 
-	public var target : String;
-	public var duration : Float;
+	var target : String;
+	var duration : Float;
 	
 	public function new(a: String, t :String, d: Float) 
 	{

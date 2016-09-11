@@ -7,8 +7,8 @@ package ;
 class CutSceneActionAnimation extends CutSceneAction
 {
 
-	public var animation : String;
-	public var force : Bool;
+	var animation : String;
+	var force : Bool;
 	
 	public function new(a: String, anim :String, f: Bool) 
 	{

@@ -1,8 +1,10 @@
 package;
 
+import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
+import flixel.util.FlxColor;
 
 /**
  * ...
@@ -35,7 +37,14 @@ class CutSceneActor extends FlxSprite
 				setFacingFlip(FlxObject.LEFT, false, false);
 				setFacingFlip(FlxObject.RIGHT, true, false);
 
+			case "overlay":
+				trace("load overlay");
+				this.makeGraphic(FlxG.width, FlxG.height, FlxColor.WHITE);
+				this.scrollFactor.set();
+				this.color.setRGB(0, 0, 0);
+				
 			default:
+				throw "Actor " + name + "not known";
 				
 		}
 	}
