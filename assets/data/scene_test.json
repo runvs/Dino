@@ -1,0 +1,5 @@
+{
+    "actions": [
+        { "time": 1.5, "actor": "dino", "type": "animate", "p1": "greet", "p2" : "true"}
+    ]
+}

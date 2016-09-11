@@ -7,6 +7,8 @@ import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 
+
+
 class MenuState extends FlxState
 {
 	override public function create():Void
@@ -19,6 +21,6 @@ class MenuState extends FlxState
 	{
 		super.update(elapsed);
 		
-		FlxG.switchState(new PlayState());
+		FlxG.switchState(new CutSceneState());
 	}
 }

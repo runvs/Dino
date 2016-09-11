@@ -14,6 +14,8 @@ class PlayState extends FlxState
 	
 	var bottom : FlxSprite;
 	
+	
+	
 	override public function create():Void
 	{
 		super.create();

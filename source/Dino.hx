@@ -93,7 +93,7 @@ class Dino extends FlxSprite
 			{
 				facing = FlxObject.LEFT;
 			}
-			// make turning easier
+			// make turning more easy
 			if ((velocity.x > 0 && vx < 0) || (velocity.x < 0 && vx > 0))
 			{
 				this.velocity.x *= 0.5;
