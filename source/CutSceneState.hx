@@ -2,6 +2,7 @@ package ;
 
 //import ActionAnimation;
 //import CutSceneAction;
+import flixel.FlxG;
 import flixel.FlxState;
 import flixel.group.FlxSpriteGroup;
 import haxe.Json;
@@ -20,7 +21,6 @@ class CutSceneState extends FlxState
 	var _actions : Array<CutSceneAction>;
 	
 	var _speechbubbles : FlxSpriteGroup;
-	
 	
 	
 	override public function create():Void
@@ -45,6 +45,15 @@ class CutSceneState extends FlxState
 		for (i in 0...data.actions.length)
 		{			
 			convertAction(data.actions[i]);
+		}
+		
+		if (data.follow != null)
+		{
+			var ac : CutSceneActor = getActor(data.follow);
+			if (ac != null)
+			{
+				FlxG.camera.follow(ac);
+			}
 		}
 		
 		_timer = 0;
@@ -211,6 +220,7 @@ typedef CutSceneData =
 	var positions : Array<PositionData>;
     var actors : Array<ActorData>;
 	var actions : Array<ActionData>;
+	var follow : String;
 }
 
 

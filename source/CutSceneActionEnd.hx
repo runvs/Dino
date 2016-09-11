@@ -16,13 +16,12 @@ class CutSceneActionEnd extends CutSceneAction
 		super(a);
 		what = w;
 		next = n;
-		
 	}
 	
 	public override function perform(scene : CutSceneState)
 	{
 		super.perform(scene);
-		trace("end action perform!");
+		trace("end action perform! " + next);
 		
 		if ( what == "play")
 		{

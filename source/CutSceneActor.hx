@@ -42,6 +42,9 @@ class CutSceneActor extends FlxSprite
 				this.makeGraphic(FlxG.width, FlxG.height, FlxColor.WHITE);
 				this.scrollFactor.set();
 				this.color.setRGB(0, 0, 0);
+			case "invis":
+				trace ("load invis");
+				this.makeGraphic(1, 1, FlxColor.TRANSPARENT);
 				
 			default:
 				throw "Actor " + name + "not known";
