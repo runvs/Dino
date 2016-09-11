@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 
@@ -31,6 +32,9 @@ class CutSceneActor extends FlxSprite
 				this.animation.add("jumpUp", [14, 15, 16], 4, false);
 				this.animation.add("jumpDown", [18, 19], 4, false);
 				this.animation.play("idle");
+				setFacingFlip(FlxObject.LEFT, false, false);
+				setFacingFlip(FlxObject.RIGHT, true, false);
+
 			default:
 				
 		}
@@ -39,5 +43,15 @@ class CutSceneActor extends FlxSprite
 	public override function update (elapsed : Float ) : Void 
 	{
 		super.update(elapsed);
+		
+		if(velocity.x > 0)
+		{
+			facing = FlxObject.RIGHT;
+		}
+		else if(velocity.x < 0)
+		{
+			facing = FlxObject.LEFT;
+		}
+
 	}
 }

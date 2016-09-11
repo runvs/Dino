@@ -20,8 +20,14 @@ class CutSceneActionSpeak extends CutSceneAction
 	public override function perform(scene : CutSceneState)
 	{
 		super.perform(scene);
-		
 		trace("speak action perform!");
+		
+		var ac : CutSceneActor = scene.getActor(this.actor);
+		if (ac != null)
+		{
+			var s : SpeechBubble = new SpeechBubble(ac, icon, duration);
+			scene.addSpeechBubble(s);
+		}
 	}
 	
 }

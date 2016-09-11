@@ -3,6 +3,7 @@ package ;
 //import ActionAnimation;
 //import CutSceneAction;
 import flixel.FlxState;
+import flixel.group.FlxSpriteGroup;
 import haxe.Json;
 import openfl.Assets;
 
@@ -13,8 +14,13 @@ import openfl.Assets;
 class CutSceneState extends FlxState
 {
 	var _timer : Float;	
-	var _actions : Array<CutSceneAction>;
+	
+	var _positions : Array<PositionData>;
 	var _actors : Array<CutSceneActor>;
+	var _actions : Array<CutSceneAction>;
+	
+	var _speechbubbles : FlxSpriteGroup;
+	
 	
 	
 	override public function create():Void
@@ -27,11 +33,14 @@ class CutSceneState extends FlxState
 		var data : CutSceneData;
 		data = Json.parse(Assets.getText(AssetPaths.scene_test__json));
 		
+		_positions = data.positions;
+		_speechbubbles = new FlxSpriteGroup();
+		
+		
 		for (i in 0...data.actors.length)
 		{
 			createActor(data.actors[i]);
 		}
-		
 		
 		for (i in 0...data.actions.length)
 		{			
@@ -44,6 +53,11 @@ class CutSceneState extends FlxState
 	function createActor(ad:ActorData) 
 	{
 		var a : CutSceneActor = new CutSceneActor(ad.name);
+		var p : PositionData = getPosition(ad.position);
+		if (p != null)
+		{
+			a.setPosition(p.x, p.y);
+		}
 		_actors.push(a);
 	}
 	
@@ -61,31 +75,31 @@ class CutSceneState extends FlxState
 				var f : Bool = (a.p2 == "true"? true : false);
 				action = new CutSceneActionAnimation(a.actor, a.p1, f);
 			}
-			else if (a.type != "speak")
+			else if (a.type == "speak")
 			{
 				var d : Float = Std.parseFloat(a.p2);
 				action = new CutSceneActionSpeak(a.actor, a.p1, d);
 			}
-			else if (a.type != "move")
+			else if (a.type == "move")
 			{
 				var d : Float = Std.parseFloat(a.p2);
 				action = new CutSceneActionMove(a.actor, a.p1, d);
 			}
-			else if (a.type != "wiggle")
+			else if (a.type == "wiggle")
 			{
 				throw "Action wiggle not implemented yet";
 			}
-			else if (a.type != "fade")
+			else if (a.type == "fade")
 			{
 				var ta : Float = Std.parseFloat(a.p1);
 				var duration : Float = Std.parseFloat(a.p2);
 				action = new CutSceneActionFade(a.actor, ta, duration);
 			}
-			else if (a.type != "sound")
+			else if (a.type == "sound")
 			{
 				throw "Action Sound not implemented yet";
 			}
-			else if (a.type != "end")
+			else if (a.type == "end")
 			{
 				action = new CutSceneActionEnd(a.actor, a.p1);
 			}
@@ -118,6 +132,16 @@ class CutSceneState extends FlxState
 		{
 			_actors[i].update(elapsed);
 		}
+		
+		_speechbubbles.update(elapsed);
+		clearBubbles();
+	}
+	
+	function clearBubbles() 
+	{
+		var newlist = new FlxSpriteGroup();
+		_speechbubbles.forEach(function (s) { if (s.alive) newlist.add(s); } );
+		_speechbubbles = newlist;
 	}
 	
 	override public function draw () :  Void 
@@ -127,8 +151,23 @@ class CutSceneState extends FlxState
 		{
 			_actors[i].draw();
 		}
+		_speechbubbles.draw();
 	}
 	
+	public function getPosition (name :String) : PositionData
+	{
+		var ret : PositionData = null;
+		
+		for (i in 0... _positions.length)
+		{
+			if (_positions[i].name == name)
+			{
+				ret = _positions[i];
+				break;
+			}
+		}
+		return ret;
+	}
 	
 	public function getActor (name :String) : CutSceneActor
 	{
@@ -142,8 +181,12 @@ class CutSceneState extends FlxState
 				break;
 			}
 		}
-		
 		return ret;
+	}
+	
+	public function addSpeechBubble (s : SpeechBubble)
+	{
+		_speechbubbles.add(s);
 	}
 	
 }
@@ -163,9 +206,12 @@ typedef ActorData =
 	var position : String;
 }
 
+
 typedef CutSceneData = 
 {
-    var actions : Array<ActionData>;
-	var actors : Array<ActorData>;
+	var positions : Array<PositionData>;
+    var actors : Array<ActorData>;
+	var actions : Array<ActionData>;
 }
+
 
