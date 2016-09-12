@@ -27,6 +27,7 @@ class Dino extends FlxSprite
 		this.animation.add("jumpDown", [18, 19, 20], 6, false);
 		this.animation.play("idle");
 		
+		this.cameras = [GP.CameraMain];
 		setFacingFlip(FlxObject.LEFT, false, false);
 		setFacingFlip(FlxObject.RIGHT, true, false);
 		

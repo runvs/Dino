@@ -50,6 +50,7 @@ class CutSceneActor extends FlxSprite
 				throw "Actor " + name + "not known";
 				
 		}
+		this.cameras = [GP.CameraMain];
 	}
 	
 	public override function update (elapsed : Float ) : Void 

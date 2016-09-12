@@ -1,4 +1,7 @@
 package;
+import flixel.FlxCamera;
+import flixel.FlxG;
+import flixel.util.FlxColor;
 
 /**
  * ...
@@ -20,5 +23,22 @@ class GP
 	
 	public static var WorldGravity (default, null) : Float = 150;
 	public static var WorldTileSizeInPixel (default, null) : Int = 16;
+	
+	public static var CameraMain (default, default) : FlxCamera;// = ;
+	public static var CameraOverlay (default, default) : FlxCamera;// = new FlxCamera(0, 0, 800, 600, 1);
+	
+	public static function CamerasCreate()
+	{
+		trace("setting cameras");
+		CameraMain = new FlxCamera(0, 0, 800, 600, 5);
+		CameraOverlay = new FlxCamera(0, 0, 800, 600, 1);
+		CameraOverlay.bgColor = FlxColor.TRANSPARENT;
+		
+		// check if camera List has to be cleared
+		FlxG.cameras.reset(GP.CameraMain);
+		FlxG.cameras.add(GP.CameraOverlay);
+		
+		
+	}
 	
 }

@@ -61,7 +61,7 @@ class CutSceneState extends FlxState
 			var ac : CutSceneActor = getActor(data.follow);
 			if (ac != null)
 			{
-				FlxG.camera.follow(ac);
+				GP.CameraMain.follow(ac);
 			}
 		}
 		

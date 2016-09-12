@@ -112,6 +112,7 @@ class TiledLevel extends TiledMap
 						s.loadGraphic(AssetPaths.tileset__png, true, 16, 16);
 						s.animation.add("idle", [tileType-1]);
 						s.animation.play("idle");
+						s.cameras = [GP.CameraMain];
 						foregroundTiles.add(s);
 						CreateCollisionTile(i, j, tileType);
 					}
@@ -126,6 +127,7 @@ class TiledLevel extends TiledMap
 	{
 		bg = new FlxSprite();
 		bg.loadGraphic(AssetPaths.background__png, false, 156, 64);
+		bg.cameras = [GP.CameraMain];
 		//bg.scrollFactor.set(0.75, 1);
 	}
 	
