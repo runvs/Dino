@@ -30,12 +30,21 @@ class CutSceneActionMove extends CutSceneAction
 		{
 			// that is a dumb way of doing it
 			//FlxTween.tween(ac, { x: p.x, y: p.y }, duration);
-			var vx : Float = (p.x - ac.x) / duration;
 			
-			ac.velocity.x = vx;
-			
-			var t : FlxTimer= new FlxTimer();
-			t.start(duration, function (t) { ac.velocity.x = 0; } );
+			if (duration > 0)
+			{
+				var vx : Float = (p.x - ac.x) / duration;
+				var vy : Float = (p.y - ac.y) / duration;
+				ac.velocity.x = vx;
+				ac.velocity.y = vy;
+				
+				var t : FlxTimer= new FlxTimer();
+				t.start(duration, function (t) { ac.velocity.x = 0; ac.velocity.y = 0; } );
+			}
+			else
+			{
+				ac.setPosition(p.x, p.y);
+			}
 		}
 	}
 	
