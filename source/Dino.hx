@@ -21,10 +21,10 @@ class Dino extends FlxSprite
 		super();
 		
 		this.loadGraphic(AssetPaths.dino__png, true, 24, 18);
-		this.animation.add("idle", [0], 40);
-		this.animation.add("walk", [ 1, 2, 3, 0], 4);
-		this.animation.add("jumpUp", [14, 15, 16], 4, false);
-		this.animation.add("jumpDown", [18, 19], 4, false);
+		this.animation.add("idle", [5,5,5,4,5,5,5,5,5,6,7,8,9], 4);
+		this.animation.add("walk", [0, 1, 2, 3], 4);
+		this.animation.add("jumpUp", [15, 16, 17], 4, false);
+		this.animation.add("jumpDown", [18, 19, 20], 6, false);
 		this.animation.play("idle");
 		
 		setFacingFlip(FlxObject.LEFT, false, false);
@@ -65,7 +65,7 @@ class Dino extends FlxSprite
 		else
 		{
 			if (velocity.y > 0)
-			this.animation.play("jumpDown", true);
+			this.animation.play("jumpDown", false);
 		}
 	}
 	

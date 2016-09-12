@@ -21,6 +21,6 @@ class MenuState extends FlxState
 	{
 		super.update(elapsed);
 		
-		FlxG.switchState(new CutSceneState());
+		FlxG.switchState(new CutSceneState("assets/data/scene_test.json"));
 	}
 }

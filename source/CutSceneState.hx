@@ -22,16 +22,25 @@ class CutSceneState extends FlxState
 	
 	var _speechbubbles : FlxSpriteGroup;
 	
+	var _name: String;
+	
+	override public function new (n:String)
+	{
+		super(); 	
+		_name = n;
+	}
 	
 	override public function create():Void
 	{
 		super.create();
-		
+
 		_actions = new Array<CutSceneAction>();
 		_actors = new Array<CutSceneActor>();
 		
+		trace("creating scene " + _name);
+		
 		var data : CutSceneData;
-		data = Json.parse(Assets.getText(AssetPaths.scene_test__json));
+		data = Json.parse(Assets.getText(_name));
 		
 		_positions = data.positions;
 		_speechbubbles = new FlxSpriteGroup();

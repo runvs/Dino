@@ -29,7 +29,7 @@ class CutSceneActionEnd extends CutSceneAction
 		}
 		else if (what == "cut")
 		{
-			FlxG.switchState(new CutSceneState());
+			FlxG.switchState(new CutSceneState(next));
 		}
 	}
 	
