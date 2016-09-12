@@ -28,25 +28,13 @@ class PlayState extends FlxState
 	override public function create():Void
 	{
 		super.create();
-		//GP.CameraMain = new FlxCamera(0, 0, 100, 75, 8);
-		//GP.CameraOverlay = new FlxCamera(0, 0, 800, 600, 1);
-		//GP.CameraOverlay.bgColor = FlxColor.TRANSPARENT;
-		//FlxG.cameras.add(GP.CameraMain);
-		//FlxG.cameras.add(GP.CameraOverlay);
 		GP.CamerasCreate();
 		
-		//var s1 : FlxSprite = new FlxSprite( 20, 20);
-		//s1.makeGraphic(2, 2, FlxColor.RED);
-		//s1.velocity.x = 10;
-		//s1.cameras = [GP.CameraMain];
-		//add(s1);
-	
+		
 		level = new TiledLevel(levelName);
 		add(level.bg);
-		//add(level.foregroundTiles);
-		//add(level.collisionMap);
-	
-				var s2 : FlxSprite = new FlxSprite( 100, 100);
+		
+		var s2 : FlxSprite = new FlxSprite( 100, 100);
 		s2.makeGraphic(400, 1, FlxColor.ORANGE);
 		s2.cameras = [GP.CameraOverlay];
 		add(s2);
@@ -54,8 +42,6 @@ class PlayState extends FlxState
 		d = new Dino();
 		d.setPosition(20, 20);
 		add(d);
-		
-
 	}
 	
 	

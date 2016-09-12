@@ -27,13 +27,15 @@ class CutSceneState extends FlxState
 	override public function new (n:String)
 	{
 		super(); 	
+		
 		_name = n;
 	}
 	
 	override public function create():Void
 	{
 		super.create();
-
+		GP.CamerasCreate();
+		
 		_actions = new Array<CutSceneAction>();
 		_actors = new Array<CutSceneActor>();
 		
