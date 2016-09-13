@@ -38,21 +38,21 @@ class CutSceneState extends FlxState
 		_actions = new Array<CutSceneAction>();
 		_actors = new Array<CutSceneActor>();
 		
-		trace("creating scene " + _name);
+		//trace("creating scene " + _name);
 		
 		var data : CutSceneData;
-		trace("parsing started");
+		//trace("parsing started");
 		data = Json.parse(Assets.getText(_name));
-		trace("parsing complete");
+		//trace("parsing complete");
 		
-		trace("converting Positions");
+		//trace("converting Positions");
 		_positions = new Array<CutScenePosition>();
 		for (i in 0...data.positions.length)
 		{
 			var p : CutScenePosition = new CutScenePosition(data.positions[i].x, data.positions[i].y, data.positions[i].name);
 			_positions.push(p);
 		}
-		trace("converting Positions done");
+		//trace("converting Positions done");
 		
 		_speechbubbles = new Array<SpeechBubble>();
 		
@@ -86,7 +86,7 @@ class CutSceneState extends FlxState
 		var p : CutScenePosition = getPosition(ad.position);
 		if (p != null)
 		{
-			trace("Actor: " + a.name + " setposition x/y" + p.x + " " + p.y);
+			//trace("Actor: " + a.name + " setposition x/y" + p.x + " " + p.y);
 			a.setPosition(p.x, p.y);
 		}
 		_actors.push(a);
@@ -193,14 +193,14 @@ class CutSceneState extends FlxState
 	public function getPosition (name :String) : CutScenePosition
 	{
 		var ret : CutScenePosition = null;
-		trace("getPosition");
-		trace("_positions.length " + _positions.length);
-		trace("name " + name);
+		//trace("getPosition");
+		//trace("_positions.length " + _positions.length);
+		//trace("name " + name);
 		for (i in 0... _positions.length)
 		{
 			
-			trace("i: " + i + " data: " + _positions[i]);
-			trace("i: " + i + " name: " + _positions[i].name);
+			//trace("i: " + i + " data: " + _positions[i]);
+			//trace("i: " + i + " name: " + _positions[i].name);
 			if (_positions[i].name == name)
 			{
 				ret = _positions[i];

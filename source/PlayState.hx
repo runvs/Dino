@@ -4,6 +4,7 @@ import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.math.FlxPoint;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
@@ -18,6 +19,8 @@ class PlayState extends FlxState
 	var level : TiledLevel;
 	
 	var levelName : String;
+	
+	var _flocks : Flocks;
 	
 	public function new ( n : String )
 	{
@@ -46,8 +49,21 @@ class PlayState extends FlxState
 		add(s2);
 		
 		d = new Dino();
-		d.setPosition(20, 20);
+		d.setPosition(0,0);
 		add(d);
+		//GP.CameraMain.follow(d);
+		
+		//var st: FlxSprite = new FlxSprite(0,0);
+		//st.makeGraphic(1, 1, FlxColor.WHITE);
+		//st.cameras = [GP.CameraMain];
+		//add(st);
+		GP.CameraMain.follow(d, FlxCameraFollowStyle.TOPDOWN, 0.15);
+		
+		GP.CameraMain.targetOffset.set(FlxG.width/GP.CameraMain.zoom/10, FlxG.height/GP.CameraMain.zoom/10);
+		
+		_flocks = new Flocks(function(s) { s.makeGraphic(1, 1, FlxColor.fromRGB(175,175,175, 150)); }, 20, GP.CameraMain );
+		add(_flocks);
+		
 	}
 	
 	
@@ -65,6 +81,7 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		MyInput.update();
+		//trace(GP.CameraMain.target.x);
 		super.update(elapsed);
 		level.foregroundTiles.update(elapsed);
 		level.collisionMap.update(elapsed);

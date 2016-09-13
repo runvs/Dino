@@ -30,7 +30,7 @@ class GP
 	public static function CamerasCreate()
 	{
 		trace("setting cameras");
-		CameraMain = new FlxCamera(0, 0, 800, 600, 5);
+		CameraMain = new FlxCamera(0, 0, Std.int(FlxG.width/5), Std.int(FlxG.height/5), 5);
 		CameraOverlay = new FlxCamera(0, 0, 800, 600, 1);
 		CameraOverlay.bgColor = FlxColor.TRANSPARENT;
 		trace(CameraMain.pixelPerfectRender);
