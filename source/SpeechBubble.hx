@@ -25,13 +25,8 @@ class SpeechBubble extends FlxSprite
 		this.offset.set(0, 16);
 		this.cameras = [GP.CameraMain];
 		
-		icon = new FlxSprite();
-		icon.cameras = [GP.CameraMain];
-		if (i == "heart")
-		{
-			icon.loadGraphic(AssetPaths.heart__png, false, 16, 16);
-			icon.offset.set(0, 16);
-		}
+		
+		LoadIcon(i);
 		
 	}
 	
@@ -54,6 +49,56 @@ class SpeechBubble extends FlxSprite
 	{
 		super.draw();
 		icon.draw();
+	}
+	
+	private function LoadIcon(i : String):Void 
+	{
+		icon = new FlxSprite();
+		icon.cameras = [GP.CameraMain];
+		if ( i == "heart")
+		{
+				icon.loadGraphic(AssetPaths.icon_heart__png, false, 16, 16);
+				icon.offset.set(0, 16);
+		}
+		else if (i == "house")
+		{
+				icon.loadGraphic(AssetPaths.icon_house__png, false, 16, 16);
+				icon.offset.set(0, 16);
+		}
+		else if (i == "fish")
+		{
+				icon.loadGraphic(AssetPaths.icon_house__png, false, 16, 16);
+				icon.offset.set(0, 16);
+		}
+		else if (i == "apple")
+		{
+				icon.loadGraphic(AssetPaths.icon_house__png, false, 16, 16);
+				icon.offset.set(0, 16);
+		}
+		else if (i == "flower")
+		{
+				icon.loadGraphic(AssetPaths.icon_house__png, false, 16, 16);
+				icon.offset.set(0, 16);
+		}
+		else if (i == "egg")
+		{
+				icon.loadGraphic(AssetPaths.icon_house__png, false, 16, 16);
+				icon.offset.set(0, 16);
+		}
+		else if (i == "excamation")
+		{
+				icon.loadGraphic(AssetPaths.icon_house__png, false, 16, 16);
+				icon.offset.set(0, 16);
+		}
+		else if (i == "question")
+		{
+				icon.loadGraphic(AssetPaths.icon_house__png, false, 16, 16);
+				icon.offset.set(0, 16);
+		}
+		else
+		{
+			throw "Speechbubble of type: "  + i + " no known!";
+		}
 	}
 	
 	
