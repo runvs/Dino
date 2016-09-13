@@ -126,9 +126,9 @@ class TiledLevel extends TiledMap
 	function loadBackground() 
 	{
 		bg = new FlxSprite();
-		bg.loadGraphic(AssetPaths.background__png, false, 156, 64);
+		bg.loadGraphic(AssetPaths.background_morning__png, false, 160, 120);
 		bg.cameras = [GP.CameraMain];
-		//bg.scrollFactor.set(0.75, 1);
+		bg.scrollFactor.set(0, 0);
 	}
 	
 	

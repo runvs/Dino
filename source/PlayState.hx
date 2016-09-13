@@ -41,9 +41,18 @@ class PlayState extends FlxState
 		//add(s1);
 		
 		level = new TiledLevel(levelName);
-		//level.bg.y = (FlxG.height/5) - level.bg.height;
-		add(level.bg);
 		
+		
+		add(level.bg);
+		add(level.foregroundTiles);
+		
+		GP.CameraMain.setScrollBounds( 
+		-10 * GP.WorldTileSizeInPixel, 10 * GP.WorldTileSizeInPixel, 
+		-10 * GP.WorldTileSizeInPixel, 4 * GP.WorldTileSizeInPixel);
+		
+		GP.CameraOverlay.setScrollBounds( 
+		-10 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, 10 * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
+		-10 * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 4 * GP.WorldTileSizeInPixel* GP.CameraMain.zoom);
 		var s2 : FlxSprite = new FlxSprite( 100, 100);
 		s2.makeGraphic(400, 1, FlxColor.ORANGE);
 		s2.cameras = [GP.CameraOverlay];
