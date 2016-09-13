@@ -20,7 +20,7 @@ class CutSceneState extends FlxState
 	var _actors : Array<CutSceneActor>;
 	var _actions : Array<CutSceneAction>;
 	
-	var _speechbubbles : FlxSpriteGroup;
+	var _speechbubbles : Array<SpeechBubble>;
 	
 	var _name: String;
 	
@@ -54,7 +54,7 @@ class CutSceneState extends FlxState
 		}
 		trace("converting Positions done");
 		
-		_speechbubbles = new FlxSpriteGroup();
+		_speechbubbles = new Array<SpeechBubble>();
 		
 		
 		for (i in 0...data.actors.length)
@@ -162,21 +162,27 @@ class CutSceneState extends FlxState
 			_actors[i].update(elapsed);
 		}
 		
-		_speechbubbles.update(elapsed);
+		for (s in _speechbubbles)
+		{
+			s.update(elapsed);
+		}
 		clearBubbles();
 	}
 	
 	function clearBubbles() 
 	{
-		var newlist = new FlxSpriteGroup();
-		_speechbubbles.forEach(function (s) { if (s.alive) newlist.add(s); } );
+		var newlist = new Array<SpeechBubble>();
+		for (s in _speechbubbles) { if (s.alive) newlist.push(s); }
 		_speechbubbles = newlist;
 	}
 	
 	override public function draw () :  Void 
 	{
 		super.draw();
-		_speechbubbles.draw();
+		for (s in _speechbubbles)
+		{
+			s.draw();
+		}
 		for (i in 0..._actors.length)
 		{
 			_actors[i].draw();
@@ -221,7 +227,7 @@ class CutSceneState extends FlxState
 	
 	public function addSpeechBubble (s : SpeechBubble)
 	{
-		_speechbubbles.add(s);
+		_speechbubbles.push(s);
 	}
 	
 }
