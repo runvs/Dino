@@ -30,8 +30,14 @@ class PlayState extends FlxState
 		super.create();
 		GP.CamerasCreate();
 		
+		//var s1 : FlxSprite = new FlxSprite( 2, 2);
+		//s1.makeGraphic(2, 2, FlxColor.RED);
+		//s1.velocity.x = 10;
+		//s1.cameras = [GP.CameraMain];
+		//add(s1);
 		
 		level = new TiledLevel(levelName);
+		//level.bg.y = (FlxG.height/5) - level.bg.height;
 		add(level.bg);
 		
 		var s2 : FlxSprite = new FlxSprite( 100, 100);
@@ -53,18 +59,13 @@ class PlayState extends FlxState
 		//bottom.immovable = true;
 		////add(bottom);
 		//
-		//var s1 : FlxSprite = new FlxSprite( 2, 2);
-		//s1.makeGraphic(2, 2, FlxColor.RED);
-		//s1.cameras = [GP.CameraMain];
-		//add(s1);
+		
 	//}
 //
 	override public function update(elapsed:Float):Void
 	{
 		MyInput.update();
 		super.update(elapsed);
-		
-		//FlxG.collide(d, bottom);
 		level.foregroundTiles.update(elapsed);
 		level.collisionMap.update(elapsed);
 		FlxG.collide(d, level.collisionMap);
