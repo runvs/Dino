@@ -4,6 +4,9 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
+import flixel.tweens.FlxTween;
+import flixel.util.FlxColor;
+import flixel.util.FlxTimer;
 
 /**
  * ...
@@ -16,6 +19,9 @@ class Dino extends FlxSprite
 	var _jumpTimer : Float;
 	var _isOnGround : Bool;
 	
+	var _stepsDirt : MyParticleSystem;
+	var _stepsTimer :Float = 0;
+	
 	public function new() 
 	{
 		super();
@@ -23,8 +29,8 @@ class Dino extends FlxSprite
 		this.loadGraphic(AssetPaths.dino__png, true, 24, 18);
 		this.animation.add("idle", [5,5,5,4,5,5,5,5,5,6,7,8,9], 4);
 		this.animation.add("walk", [0, 1, 2, 3], 4);
-		this.animation.add("jumpUp", [15, 16, 17], 4, false);
-		this.animation.add("jumpDown", [18, 19, 20], 6, false);
+		this.animation.add("jumpUp", [15, 16, 17, 18], 4, false);
+		this.animation.add("jumpDown", [19], 6, true);
 		this.animation.play("idle");
 		
 		this.cameras = [GP.CameraMain];
@@ -35,6 +41,9 @@ class Dino extends FlxSprite
 		_jumpTimer = 0;
 		this.drag.set(GP.DinoMovementDragX, GP.DinoMovementDragY);
 		this.maxVelocity.set(GP.DinoMovementMaxVelocityX, GP.DinoMovementMaxVelocityY);
+		
+		_stepsDirt = new MyParticleSystem();
+		_stepsDirt.cameras = [GP.CameraMain];
 	} 
 	
 	public override function update(elapsed : Float) : Void 
@@ -45,8 +54,8 @@ class Dino extends FlxSprite
 		handleInput();
 		handleAnimations();
 		super.update(elapsed);
-		
-		
+		_stepsDirt.update(elapsed);
+		_stepsTimer -= elapsed;
 	}
 	
 	function handleAnimations() 
@@ -57,6 +66,7 @@ class Dino extends FlxSprite
 			if (Math.abs(velocity.x) != 0 )
 			{
 				this.animation.play("walk");
+				SpawnStepsDirt();
 			}
 			else 
 			{
@@ -67,6 +77,31 @@ class Dino extends FlxSprite
 		{
 			if (velocity.y > 0)
 			this.animation.play("jumpDown", false);
+		}
+	}
+	
+	function SpawnStepsDirt() 
+	{
+		if (_stepsTimer <= 0 && _isOnGround)
+		{
+			_stepsTimer = 0.25;
+			_stepsDirt.Spawn(4, function(s:FlxSprite) 
+			{
+				s.alive = true;
+				s.alpha = 1;
+				var T : Float = 0.45;
+				s.setPosition(x + this.width/2 + FlxG.random.floatNormal(0,1) , y + height );
+				//s.alpha = FlxG.random.float(0.125, 0.35);
+				//FlxTween.tween(s, { alpha:0 }, T, { onComplete: function(t:FlxTween) : Void { s.alive = false; } } );
+				s.velocity.set( FlxG.random.floatNormal(0, 4), - 40+ FlxG.random.floatNormal(0, 1));
+				s.acceleration.set(0, 175);
+				var t : FlxTimer = new FlxTimer();
+				t.start(T, function (t) { s.alive = false; s.alpha = 0; } );
+			},
+			function (s:FlxSprite)
+			{
+				s.makeGraphic(1, 1, FlxColor.fromRGB(54,38,22));
+			});
 		}
 	}
 	
@@ -125,5 +160,11 @@ class Dino extends FlxSprite
 			trace("attack");
 			_attackCooldown = 0.5;
 		}
+	}
+	
+	public override function draw()
+	{
+		_stepsDirt.draw();
+		super.draw();
 	}
 }
