@@ -33,7 +33,7 @@ class GP
 		CameraMain = new FlxCamera(0, 0, Std.int(FlxG.width/5), Std.int(FlxG.height/5), 5);
 		CameraOverlay = new FlxCamera(0, 0, 800, 600, 1);
 		CameraOverlay.bgColor = FlxColor.TRANSPARENT;
-		trace(CameraMain.pixelPerfectRender);
+		//trace(CameraMain.pixelPerfectRender);
 		CameraMain.pixelPerfectRender = true;
 		
 		// check if camera List has to be cleared
