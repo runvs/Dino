@@ -33,7 +33,8 @@ class CutSceneState extends FlxState
 	override public function create():Void
 	{
 		super.create();
-
+		GP.CamerasCreate();
+		
 		_actions = new Array<CutSceneAction>();
 		_actors = new Array<CutSceneActor>();
 		
@@ -61,7 +62,7 @@ class CutSceneState extends FlxState
 			var ac : CutSceneActor = getActor(data.follow);
 			if (ac != null)
 			{
-				FlxG.camera.follow(ac);
+				GP.CameraMain.follow(ac);
 			}
 		}
 		

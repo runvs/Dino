@@ -27,6 +27,7 @@ class Dino extends FlxSprite
 		this.animation.add("jumpDown", [18, 19, 20], 6, false);
 		this.animation.play("idle");
 		
+		this.cameras = [GP.CameraMain];
 		setFacingFlip(FlxObject.LEFT, false, false);
 		setFacingFlip(FlxObject.RIGHT, true, false);
 		
@@ -50,7 +51,7 @@ class Dino extends FlxSprite
 	
 	function handleAnimations() 
 	{
-		trace(velocity.x + " " + velocity.y);
+		//trace(velocity.x + " " + velocity.y);
 		if (Math.abs(velocity.y) < 0.05)
 		{
 			if (Math.abs(velocity.x) != 0 )
@@ -80,7 +81,7 @@ class Dino extends FlxSprite
 		var vy : Float = MyInput.yVal * _accelFactor;
 		var l : Float = Math.sqrt(vx * vx + vy * vy);
 
-		trace(vx);
+		//trace(vx);
 		
 		if (l >= 25)
 		{

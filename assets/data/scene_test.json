@@ -20,6 +20,6 @@
 		{ "time": 4.6,  "actor": "dino", "type": "speak", "p1":"heart", "p2": "1.5"},
 		{ "time": 4.6,  "actor": "dino", "type": "move", "p1": "dinoStart", "p2": "0.01" },
 		{ "time": 5.0,  "actor": "overlay", "type" : "fade", "p1":"1.0", "p2":"0.75"},
-		{ "time": 5.75, "actor": "global", "type" : "end", "p1" : "play"}
+		{ "time": 5.75, "actor": "global", "type" : "end", "p1" : "play", "p2":"assets/data/level_E.tmx"}
     ]
 }

@@ -23,8 +23,10 @@ class SpeechBubble extends FlxSprite
 		timer = d;
 		this.loadGraphic(AssetPaths.speechbubble__png, false, 16, 16);
 		this.offset.set(0, 16);
+		this.cameras = [GP.CameraMain];
 		
 		icon = new FlxSprite();
+		icon.cameras = [GP.CameraMain];
 		if (i == "heart")
 		{
 			icon.loadGraphic(AssetPaths.heart__png, false, 16, 16);
@@ -51,7 +53,6 @@ class SpeechBubble extends FlxSprite
 	public override function draw () : Void 
 	{
 		super.draw();
-		
 		icon.draw();
 	}
 	

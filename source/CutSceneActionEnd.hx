@@ -25,7 +25,7 @@ class CutSceneActionEnd extends CutSceneAction
 		
 		if ( what == "play")
 		{
-			FlxG.switchState(new PlayState());
+			FlxG.switchState(new PlayState(next));
 		}
 		else if (what == "cut")
 		{
