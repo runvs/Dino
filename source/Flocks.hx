@@ -14,19 +14,19 @@ import flixel.util.FlxColor;
  */
 class Flocks extends FlxSpriteGroup
 {
-	public var globalVelocityX : Float= 0;
-	public var globalVelocityY : Float = 0;
+	private var _globalVelocityX : Float= 0;
+	private var _globalVelocityY : Float = 0;
 	
-	private var timer : Float = 0;
+	private var _timer : Float = 0;
 	private var _cam : FlxCamera;
 
 	// encoded as frequency and phase
-	private var individualVelocity:Array <FlxPoint>;
+	private var _individualVelocity:Array <FlxPoint>;
 	
 	public function new( f : FlxSprite-> Void, N : Int = 80, cam : FlxCamera) 
 	{
 		super();
-		individualVelocity = new Array<FlxPoint>();
+		_individualVelocity = new Array<FlxPoint>();
 		if ( cam != null)
 		{
 			_cam = cam;
@@ -44,7 +44,7 @@ class Flocks extends FlxSpriteGroup
 			f(s);
 			add(s);
 			
-			individualVelocity.push(new FlxPoint(FlxG.random.floatNormal(1.0, 0.25), FlxG.random.float(0,Math.PI)));
+			_individualVelocity.push(new FlxPoint(FlxG.random.floatNormal(1.0, 0.25), FlxG.random.float(0,Math.PI)));
 		}
 	}
 	
@@ -54,15 +54,15 @@ class Flocks extends FlxSpriteGroup
 		
 		super.update(elapsed);
 		
-		timer  += elapsed;
-		globalVelocityX =  3* Math.sin( timer * 0.5);
-		globalVelocityY = 3 + 1* Math.sin( timer* 0.3 + 1.234);
+		_timer  += elapsed;
+		_globalVelocityX =  3* Math.sin( _timer * 0.5);
+		_globalVelocityY = 3 + 1* Math.sin( _timer* 0.3 + 1.234);
 		for (i in 0...this.length)
 		{
 			
 			var s : FlxSprite = this.members[i];
-			var vx : Float = globalVelocityX + 4* Math.sin( timer * individualVelocity[i].x + individualVelocity[i].y);
-			var vy : Float = globalVelocityY + 2* Math.sin( timer * individualVelocity[i].x + Math.PI/4 + individualVelocity[i].y);
+			var vx : Float = _globalVelocityX + 4* Math.sin( _timer * _individualVelocity[i].x + _individualVelocity[i].y);
+			var vy : Float = _globalVelocityY + 2* Math.sin( _timer * _individualVelocity[i].x + Math.PI/4 + _individualVelocity[i].y);
 			s.velocity.set(vx,vy);
 			
 			var p : FlxPoint = new FlxPoint();

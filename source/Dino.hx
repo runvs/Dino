@@ -18,6 +18,7 @@ class Dino extends FlxSprite
 	
 	var _jumpTimer : Float;
 	var _isOnGround : Bool;
+	var _isOnGroundTimer  : Float = 0;
 	
 	var _stepsDirt : MyParticleSystem;
 	var _stepsTimer :Float = 0;
@@ -49,6 +50,8 @@ class Dino extends FlxSprite
 	public override function update(elapsed : Float) : Void 
 	{
 		_isOnGround = (velocity.y == 0);
+		if ( _isOnGround) _isOnGroundTimer += elapsed;
+		else _isOnGroundTimer = 0;
 		_attackCooldown -= elapsed;
 		_jumpTimer -= elapsed;
 		handleInput();
@@ -82,7 +85,7 @@ class Dino extends FlxSprite
 	
 	function SpawnStepsDirt() 
 	{
-		if (_stepsTimer <= 0 && _isOnGround)
+		if (_stepsTimer <= 0 && _isOnGroundTimer >= 0.15)
 		{
 			_stepsTimer = 0.25;
 			_stepsDirt.Spawn(4, function(s:FlxSprite) 

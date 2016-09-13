@@ -15,17 +15,17 @@ import flixel.util.FlxTimer;
 class MyParticleSystem extends FlxSpriteGroup
 {
 
-	private var rng : FlxRandom ;
+	// maximum number of Particles in this Particle System.
+	// making this larger will have an impact on performance
 	public var mySize : Int;
 	
-	private var idx : Int;
+	// index, which particle is the next active one (used for recycling particles)
+	private var _idx : Int;
 	public function new() 
 	{
 		super();
-		rng = new FlxRandom();
 		mySize = 100;
-		idx = 0;
-		//this.scrollFactor.set();		
+		_idx = 0;
 	}
 
 	public function Spawn(n: Int, setup : FlxSprite->Void, init : FlxSprite-> Void)
@@ -76,11 +76,11 @@ class MyParticleSystem extends FlxSpriteGroup
 			
 			while (leftToDo >= 0)
 			{
-				var s : FlxSprite = this.members[idx];
-				idx++;
+				var s : FlxSprite = this.members[_idx];
+				_idx++;
 				leftToDo--;
-				if (idx == this.length -1)
-					idx = 0;
+				if (_idx == this.length -1)
+					_idx = 0;
 				setup(s);
 			}
 		}

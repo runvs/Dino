@@ -47,11 +47,11 @@ class PlayState extends FlxState
 		add(level.foregroundTiles);
 		
 		GP.CameraMain.setScrollBounds( 
-		-10 * GP.WorldTileSizeInPixel, 10 * GP.WorldTileSizeInPixel, 
+		-2 * GP.WorldTileSizeInPixel, 10 * GP.WorldTileSizeInPixel, 
 		-10 * GP.WorldTileSizeInPixel, 4 * GP.WorldTileSizeInPixel);
 		
 		GP.CameraOverlay.setScrollBounds( 
-		-10 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, 10 * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
+		-2 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, 10 * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
 		-10 * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 4 * GP.WorldTileSizeInPixel* GP.CameraMain.zoom);
 		var s2 : FlxSprite = new FlxSprite( 100, 100);
 		s2.makeGraphic(400, 1, FlxColor.ORANGE);
@@ -63,18 +63,15 @@ class PlayState extends FlxState
 		add(d);
 		
 		doverlay = new FlxSprite(d.x, d.y);
-		doverlay.makeGraphic(1, 1, FlxColor.TRANSPARENT);
+		doverlay.makeGraphic(120, 90, FlxColor.RED);
+		doverlay.alpha = 0.5;
 		doverlay.cameras = [GP.CameraOverlay];
 		add(doverlay);
 		
 		
 		
-		//var st: FlxSprite = new FlxSprite(0,0);
-		//st.makeGraphic(1, 1, FlxColor.WHITE);
-		//st.cameras = [GP.CameraMain];
-		//add(st);
 		GP.CameraMain.follow(d, FlxCameraFollowStyle.LOCKON, 0.20);
-		GP.CameraMain.targetOffset.set(FlxG.width/GP.CameraMain.zoom/10, FlxG.height/GP.CameraMain.zoom/10);
+		//GP.CameraMain.targetOffset.set(FlxG.width/GP.CameraMain.zoom/10, FlxG.height/GP.CameraMain.zoom/10);
 		GP.CameraOverlay.follow(doverlay, FlxCameraFollowStyle.LOCKON , 0.20);
 		
 		_flocks = new Flocks(function(s) { s.makeGraphic(1, 1, FlxColor.fromRGB(175,175,175, 150)); }, 20, GP.CameraMain );
