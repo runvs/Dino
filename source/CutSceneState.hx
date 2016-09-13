@@ -16,7 +16,7 @@ class CutSceneState extends FlxState
 {
 	var _timer : Float;	
 	
-	var _positions : Array<PositionData>;
+	var _positions : Array<CutScenePosition>;
 	var _actors : Array<CutSceneActor>;
 	var _actions : Array<CutSceneAction>;
 	
@@ -41,9 +41,19 @@ class CutSceneState extends FlxState
 		trace("creating scene " + _name);
 		
 		var data : CutSceneData;
+		trace("parsing started");
 		data = Json.parse(Assets.getText(_name));
+		trace("parsing complete");
 		
-		_positions = data.positions;
+		trace("converting Positions");
+		_positions = new Array<CutScenePosition>();
+		for (i in 0...data.positions.length)
+		{
+			var p : CutScenePosition = new CutScenePosition(data.positions[i].x, data.positions[i].y, data.positions[i].name);
+			_positions.push(p);
+		}
+		trace("converting Positions done");
+		
 		_speechbubbles = new FlxSpriteGroup();
 		
 		
@@ -71,10 +81,12 @@ class CutSceneState extends FlxState
 	
 	function createActor(ad:ActorData) 
 	{
+		
 		var a : CutSceneActor = new CutSceneActor(ad.name);
-		var p : PositionData = getPosition(ad.position);
+		var p : CutScenePosition = getPosition(ad.position);
 		if (p != null)
 		{
+			trace("Actor: " + a.name + " setposition x/y" + p.x + " " + p.y);
 			a.setPosition(p.x, p.y);
 		}
 		_actors.push(a);
@@ -172,12 +184,17 @@ class CutSceneState extends FlxState
 		
 	}
 	
-	public function getPosition (name :String) : PositionData
+	public function getPosition (name :String) : CutScenePosition
 	{
-		var ret : PositionData = null;
-		
+		var ret : CutScenePosition = null;
+		trace("getPosition");
+		trace("_positions.length " + _positions.length);
+		trace("name " + name);
 		for (i in 0... _positions.length)
 		{
+			
+			trace("i: " + i + " data: " + _positions[i]);
+			trace("i: " + i + " name: " + _positions[i].name);
 			if (_positions[i].name == name)
 			{
 				ret = _positions[i];
@@ -224,6 +241,12 @@ typedef ActorData =
 	var position : String;
 }
 
+typedef PositionData =
+{
+	var x : Float;
+	var y : Float;
+	var name : String;
+}
 
 typedef CutSceneData = 
 {

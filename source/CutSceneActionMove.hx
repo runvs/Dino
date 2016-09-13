@@ -25,7 +25,7 @@ class CutSceneActionMove extends CutSceneAction
 		trace("move action perform!");
 		
 		var ac : CutSceneActor = scene.getActor(this.actor);
-		var p : PositionData = scene.getPosition(this.target);
+		var p : CutScenePosition = scene.getPosition(this.target);
 		if (ac != null && p != null)
 		{
 			// that is a dumb way of doing it

@@ -56,7 +56,11 @@ class CutSceneActor extends FlxSprite
 	public override function update (elapsed : Float ) : Void 
 	{
 		super.update(elapsed);
-		
+
+		if (name == "dino")
+		{
+			trace("dino update x/y: " +  x + " " + y);
+		}
 		if(velocity.x > 0)
 		{
 			facing = FlxObject.RIGHT;
