@@ -13,6 +13,7 @@ import flixel.addons.editors.tiled.TiledTileLayer;
 import flixel.addons.editors.tiled.TiledTileSet;
 import flixel.group.FlxGroup;
 import flixel.group.FlxSpriteGroup;
+import flixel.math.FlxPoint;
 import flixel.system.FlxSound;
 import flixel.tile.FlxTilemap;
 import flixel.tweens.FlxEase;
@@ -50,6 +51,9 @@ class TiledLevel extends TiledMap
 	public var collisionMap : FlxSpriteGroup;
 	
 	
+	public var exits : Array<Exit>;
+	public var entries : Array<Entry>;
+	
 	public function new(tiledLevel:Dynamic)
 	{
 		super(tiledLevel);
@@ -59,6 +63,9 @@ class TiledLevel extends TiledMap
 		foregroundTiles = new FlxGroup();
 		topTiles = new FlxGroup();
 		collisionMap = new FlxSpriteGroup();
+		
+		exits = new Array<Exit>();
+		entries = new Array<Entry>();
 		
 		// Load Tile Maps
 		for (layer in layers)
@@ -128,10 +135,27 @@ class TiledLevel extends TiledMap
 	
 	function loadBackground() 
 	{
-		bg = new FlxSprite();
-		bg.loadGraphic(AssetPaths.background_morning__png, false, 160, 120);
-		bg.cameras = [GP.CameraMain];
-		bg.scrollFactor.set(0, 0);
+		for (layer in layers)
+		{
+			if (layer.type != TiledLayerType.OBJECT) continue;
+			if (layer.name != "global") continue;
+			//trace("global layer found");
+			var bgName : String = layer.properties.get("background");
+			if (bgName == null)
+			{
+				trace("Background not set!");
+				return;
+			}
+			//trace("parse xy");
+			var bgsx : Int = Std.parseInt(layer.properties.get("backgroundSizeX"));
+			var bgsy : Int = Std.parseInt(layer.properties.get("backgroundSizeY"));
+			//trace("create sprite");
+			bg = new FlxSprite();
+			bg.loadGraphic("assets/images/"+bgName, false, bgsx, bgsy);
+			bg.cameras = [GP.CameraMain];
+			bg.scrollFactor.set(0, 0);
+		}
+		
 	}
 	
 	
@@ -177,11 +201,39 @@ class TiledLevel extends TiledMap
 
 			
 			//objects layer
-			if (layer.name == "objects" || layer.name == "enemies")
+			if (layer.name == "exits")
 			{
 				for (o in objectLayer.objects)
 				{
-					loadObject( o, objectLayer);
+					var x:Int = o.x;
+					var y:Int = o.y;
+					//
+					//// objects in tiled are aligned bottom-left (top-left in flixel)
+					if (o.gid != -1)
+						y -= objectLayer.map.getGidOwner(o.gid).tileHeight;
+					switch (o.type.toLowerCase())
+					{
+						case "exit":
+							trace("exit");
+							var e : Exit = new Exit();
+							e.setPosition(x, y);
+							e.makeGraphic(o.width, o.height, FlxColor.YELLOW);
+							e.alpha = 0.2;
+							e.targetLevel = o.properties.get("level");
+							e.entryID= Std.parseInt(o.properties.get("EntryID"));
+							e.cameras = [GP.CameraMain];
+							exits.push(e);
+						case "entry":
+							trace("entry");
+							var e : Entry = new Entry();
+							e.setPosition(x, y);
+							e.entryID = Std.parseInt(o.properties.get("ID"));
+							e.makeGraphic(o.width, o.height, FlxColor.GREEN);
+							e.alpha = 0.2;
+							e.cameras = [GP.CameraMain];
+							entries.push(e);
+					}
+			
 				}
 			}
 		}
@@ -203,5 +255,20 @@ class TiledLevel extends TiledMap
 			case "exit":
 				trace("exit");
 		}
+	}
+	public function getEntryPoint(tID: Int) : FlxPoint
+	{
+		var p : FlxPoint = new FlxPoint();
+		
+		for (e in entries)
+		{
+			if (e.entryID == tID)
+			{
+				p.x = e.x;
+				p.y = e.y;
+				break;
+			}
+		}
+		return p;
 	}
 }

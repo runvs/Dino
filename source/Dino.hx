@@ -24,6 +24,10 @@ class Dino extends FlxSprite
 	var _stepsDirt : MyParticleSystem;
 	var _stepsTimer :Float = 0;
 	
+	public var isOnExit : Bool = false;
+	private var exitBar : HudBar;
+	public var transport : Bool = false;
+	
 	public function new() 
 	{
 		super();
@@ -46,6 +50,9 @@ class Dino extends FlxSprite
 		
 		_stepsDirt = new MyParticleSystem();
 		_stepsDirt.cameras = [GP.CameraMain];
+		exitBar = new HudBar(0, 0, 16, 4, false);
+		exitBar.cameras = [GP.CameraMain];
+		exitBar._background.color = FlxColor.TRANSPARENT;
 	} 
 	
 	public override function update(elapsed : Float) : Void 
@@ -60,6 +67,10 @@ class Dino extends FlxSprite
 		super.update(elapsed);
 		_stepsDirt.update(elapsed);
 		_stepsTimer -= elapsed;
+		exitBar.setPosition(x, y - 2);
+		exitBar.update(elapsed);
+		transport = exitBar.health >= 1;
+		if (exitBar.health <= 0) exitBar.health = 0;
 	}
 	
 	function handleAnimations() 
@@ -111,7 +122,6 @@ class Dino extends FlxSprite
 	
 	function handleInput()
     {
-		
 		var _accelFactor : Float = GP.DinoMovementAccelerationFactor;
 		
 		acceleration.set();
@@ -140,6 +150,15 @@ class Dino extends FlxSprite
 			}
 		}
 		
+		if (isOnExit && vy < -0.1)
+		{
+			exitBar.health += FlxG.elapsed * 1;
+		}
+		else
+		{
+			exitBar.health -= FlxG.elapsed;
+		}
+	
 		var ay : Float = GP.WorldGravity;
 		acceleration.set(vx,ay);
 		
@@ -171,5 +190,15 @@ class Dino extends FlxSprite
 	{
 		_stepsDirt.draw();
 		super.draw();
+		exitBar.draw();
+	}
+	
+	public function teleport()
+	{
+		this.velocity.set();
+		this.transport = false;
+		isOnExit = false;
+		exitBar.health = 0;
+		
 	}
 }

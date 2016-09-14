@@ -61,25 +61,21 @@ class PlayState extends FlxState
 		var s2 : FlxSprite = new FlxSprite( 100, 100);
 		s2.makeGraphic(400, 1, FlxColor.ORANGE);
 		s2.cameras = [GP.CameraOverlay];
-		add(s2);
+		//add(s2);
 		
 		d = new Dino();
 		d.setPosition(0,0);
 		add(d);
 		
 		doverlay = new FlxSprite(d.x, d.y);
+		//doverlay.makeGraphic(120, 90, FlxColor.TRANSPARENT);
 		doverlay.makeGraphic(120, 90, FlxColor.RED);
 		doverlay.alpha = 0.5;
 		doverlay.cameras = [GP.CameraOverlay];
 		add(doverlay);
 		
-		
-		
 		GP.CameraMain.follow(d, FlxCameraFollowStyle.LOCKON, 0.20);
-		//GP.CameraMain.targetOffset.set(FlxG.width/GP.CameraMain.zoom/10, FlxG.height/GP.CameraMain.zoom/10);
 		GP.CameraOverlay.follow(doverlay, FlxCameraFollowStyle.LOCKON , 0.20);
-		
-
 		
 		var v : Vignette = new Vignette(GP.CameraOverlay);
 		add(v);
@@ -95,5 +91,45 @@ class PlayState extends FlxState
 		level.collisionMap.update(elapsed);
 		FlxG.collide(d, level.collisionMap);
 		d.touchedGround = d.isTouching(FlxObject.DOWN);
+		CheckExits();
+	}
+	
+	function CheckExits() 
+	{
+		d.isOnExit = false;
+		for (e in level.exits)
+		{
+			if (FlxG.overlap(d, e))
+			{
+				trace("overlap");
+				d.isOnExit = true;
+				if (d.transport)
+					SwitchLevel(e);
+				break;
+			}
+		}
+	}
+	
+	function SwitchLevel(e:Exit) 
+	{
+		level = new TiledLevel("assets/data/" + e.targetLevel);
+		var p : FlxPoint = level.getEntryPoint(e.entryID);
+		d.setPosition(p.x, p.y);
+		d.teleport();
+	}
+	
+	
+	override public function draw ()
+	{
+		super.draw();
+		
+		for (e in level.exits)
+		{
+			e.draw();
+		}
+		for (e in level.entries)
+		{
+			e.draw();
+		}
 	}
 }
