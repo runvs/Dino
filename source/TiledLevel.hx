@@ -40,6 +40,7 @@ class TiledLevel extends TiledMap
 	
 	// All Tiles that should be drawn in the same layer as the player
 	public var foregroundTiles:FlxGroup;
+	public var foregroundTiles2:FlxGroup;
 	
 	// All Tiles that can be drawn on top of the foreground tiles
 	public var topTiles:FlxGroup;
@@ -61,6 +62,7 @@ class TiledLevel extends TiledMap
 		levelPath = tiledLevel;
 		
 		foregroundTiles = new FlxGroup();
+		foregroundTiles2 = new FlxGroup();
 		topTiles = new FlxGroup();
 		collisionMap = new FlxSpriteGroup();
 		
@@ -123,7 +125,14 @@ class TiledLevel extends TiledMap
 						s.animation.add("idle", [tileType-1]);
 						s.animation.play("idle");
 						s.cameras = [GP.CameraMain];
-						foregroundTiles.add(s);
+						if (tileLayer.name == "tiles")
+						{
+							foregroundTiles.add(s);
+						}
+						else if (tileLayer.name == "tiles2")
+						{
+							foregroundTiles2.add(s);
+						}
 						CreateCollisionTile(i, j, tileType);
 					}
 				}
@@ -173,7 +182,7 @@ class TiledLevel extends TiledMap
 			// no collision for tiles in row 0
 			return;
 		}
-		else if (rowIndex == 1 ||rowIndex == 2)
+		else if (rowIndex == 1)
 		{
 			//trace("addinc collision sprite at " + Std.string(x) + " " + Std.string(y) );
 			var c : FlxSprite = new FlxSprite(x * 16, y * 16);
@@ -214,7 +223,7 @@ class TiledLevel extends TiledMap
 					switch (o.type.toLowerCase())
 					{
 						case "exit":
-							trace("exit");
+							//trace("exit");
 							var e : Exit = new Exit();
 							e.setPosition(x, y);
 							e.makeGraphic(o.width, o.height, FlxColor.YELLOW);
@@ -224,7 +233,7 @@ class TiledLevel extends TiledMap
 							e.cameras = [GP.CameraMain];
 							exits.push(e);
 						case "entry":
-							trace("entry");
+							//trace("entry");
 							var e : Entry = new Entry();
 							e.setPosition(x, y);
 							e.entryID = Std.parseInt(o.properties.get("ID"));

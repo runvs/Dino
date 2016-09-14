@@ -52,7 +52,9 @@ class Dino extends FlxSprite
 		_stepsDirt.cameras = [GP.CameraMain];
 		exitBar = new HudBar(0, 0, 16, 4, false);
 		exitBar.cameras = [GP.CameraMain];
+		exitBar.scrollFactor.set(1, 1);
 		exitBar._background.color = FlxColor.TRANSPARENT;
+		exitBar.health = 0;
 	} 
 	
 	public override function update(elapsed : Float) : Void 

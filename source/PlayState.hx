@@ -18,7 +18,7 @@ class PlayState extends FlxState
 	
 	var bottom : FlxSprite;
 	
-	var level : TiledLevel;
+	var _level : TiledLevel;
 	
 	var levelName : String;
 	
@@ -41,31 +41,33 @@ class PlayState extends FlxState
 		//s1.cameras = [GP.CameraMain];
 		//add(s1);
 		
-		level = new TiledLevel(levelName);
+		_level = new TiledLevel(levelName);
 		
 				
-		add(level.bg);
+		add(_level.bg);
 		
 		_flocks = new Flocks(function(s) { s.makeGraphic(1, 1, FlxColor.fromRGB(175,175,175, 175)); }, 20, GP.CameraMain );
 		add(_flocks);
 		
-		add(level.foregroundTiles);
+		add(_level.foregroundTiles);
+		add(_level.foregroundTiles2);
 		
 		GP.CameraMain.setScrollBounds( 
-		-2 * GP.WorldTileSizeInPixel, 10 * GP.WorldTileSizeInPixel, 
-		-10 * GP.WorldTileSizeInPixel, 4 * GP.WorldTileSizeInPixel);
+		-2 * GP.WorldTileSizeInPixel, (_level.tileWidth + 6) * GP.WorldTileSizeInPixel, 
+		-10 * GP.WorldTileSizeInPixel, (_level.tileHeight-4) * GP.WorldTileSizeInPixel);
 		
 		GP.CameraOverlay.setScrollBounds( 
-		-2 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, 10 * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
-		-10 * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 4 * GP.WorldTileSizeInPixel* GP.CameraMain.zoom);
+		-2 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.tileWidth + 6) * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
+		-10 * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, (_level.tileHeight - 4)  * GP.WorldTileSizeInPixel* GP.CameraMain.zoom);
+		
 		var s2 : FlxSprite = new FlxSprite( 100, 100);
 		s2.makeGraphic(400, 1, FlxColor.ORANGE);
 		s2.cameras = [GP.CameraOverlay];
 		//add(s2);
 		
 		d = new Dino();
-		d.setPosition(0,0);
 		add(d);
+		d.setPosition(_level.getEntryPoint(1).x, _level.getEntryPoint(1).y);
 		
 		doverlay = new FlxSprite(d.x, d.y);
 		//doverlay.makeGraphic(120, 90, FlxColor.TRANSPARENT);
@@ -87,20 +89,30 @@ class PlayState extends FlxState
 		MyInput.update();
 		doverlay.setPosition(d.x * GP.CameraMain.zoom, d.y * GP.CameraMain.zoom);
 		super.update(elapsed);
-		level.foregroundTiles.update(elapsed);
-		level.collisionMap.update(elapsed);
-		FlxG.collide(d, level.collisionMap);
+		_level.foregroundTiles.update(elapsed);
+		_level.collisionMap.update(elapsed);
+		FlxG.collide(d, _level.collisionMap);
 		d.touchedGround = d.isTouching(FlxObject.DOWN);
 		CheckExits();
+		for (e in _level.exits)
+		{
+			e.update(elapsed);
+		}
+		for (e in _level.entries)
+		{
+			e.update(elapsed);
+		}
 	}
 	
 	function CheckExits() 
 	{
 		d.isOnExit = false;
-		for (e in level.exits)
+		for (e in _level.exits)
 		{
+			if (e.targetLevel == "") continue;
 			if (FlxG.overlap(d, e))
 			{
+				
 				trace("overlap");
 				d.isOnExit = true;
 				if (d.transport)
@@ -112,8 +124,8 @@ class PlayState extends FlxState
 	
 	function SwitchLevel(e:Exit) 
 	{
-		level = new TiledLevel("assets/data/" + e.targetLevel);
-		var p : FlxPoint = level.getEntryPoint(e.entryID);
+		_level = new TiledLevel("assets/data/" + e.targetLevel);
+		var p : FlxPoint = _level.getEntryPoint(e.entryID);
 		d.setPosition(p.x, p.y);
 		d.teleport();
 	}
@@ -123,11 +135,11 @@ class PlayState extends FlxState
 	{
 		super.draw();
 		
-		for (e in level.exits)
+		for (e in _level.exits)
 		{
 			e.draw();
 		}
-		for (e in level.entries)
+		for (e in _level.entries)
 		{
 			e.draw();
 		}
