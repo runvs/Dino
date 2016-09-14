@@ -48,6 +48,8 @@ class Flocks extends FlxSpriteGroup
 		}
 	}
 	
+	
+	
 	public override function update (elapsed : Float)
 	{
 		
@@ -55,8 +57,8 @@ class Flocks extends FlxSpriteGroup
 		super.update(elapsed);
 		
 		_timer  += elapsed;
-		_globalVelocityX =  3* Math.sin( _timer * 0.5);
-		_globalVelocityY = 3 + 1* Math.sin( _timer* 0.3 + 1.234);
+		_globalVelocityX = 2* Math.sin( _timer * 0.5);
+		_globalVelocityY = 2* Math.sin( _timer* 0.3 + 1.234);
 		for (i in 0...this.length)
 		{
 			

@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxCamera;
 import flixel.FlxG;
+import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.math.FlxPoint;
@@ -42,8 +43,12 @@ class PlayState extends FlxState
 		
 		level = new TiledLevel(levelName);
 		
-		
+				
 		add(level.bg);
+		
+		_flocks = new Flocks(function(s) { s.makeGraphic(1, 1, FlxColor.fromRGB(175,175,175, 175)); }, 20, GP.CameraMain );
+		add(_flocks);
+		
 		add(level.foregroundTiles);
 		
 		GP.CameraMain.setScrollBounds( 
@@ -74,8 +79,10 @@ class PlayState extends FlxState
 		//GP.CameraMain.targetOffset.set(FlxG.width/GP.CameraMain.zoom/10, FlxG.height/GP.CameraMain.zoom/10);
 		GP.CameraOverlay.follow(doverlay, FlxCameraFollowStyle.LOCKON , 0.20);
 		
-		_flocks = new Flocks(function(s) { s.makeGraphic(1, 1, FlxColor.fromRGB(175,175,175, 150)); }, 20, GP.CameraMain );
-		add(_flocks);
+
+		
+		var v : Vignette = new Vignette(GP.CameraOverlay);
+		add(v);
 		
 	}
 	
@@ -87,5 +94,6 @@ class PlayState extends FlxState
 		level.foregroundTiles.update(elapsed);
 		level.collisionMap.update(elapsed);
 		FlxG.collide(d, level.collisionMap);
+		d.touchedGround = d.isTouching(FlxObject.DOWN);
 	}
 }

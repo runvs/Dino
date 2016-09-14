@@ -18,6 +18,7 @@ class Dino extends FlxSprite
 	
 	var _jumpTimer : Float;
 	var _isOnGround : Bool;
+	public var touchedGround : Bool = false;
 	var _isOnGroundTimer  : Float = 0;
 	
 	var _stepsDirt : MyParticleSystem;
@@ -69,7 +70,10 @@ class Dino extends FlxSprite
 			if (Math.abs(velocity.x) != 0 )
 			{
 				this.animation.play("walk");
-				SpawnStepsDirt();
+				if (_stepsTimer <= 0 && touchedGround)
+				{
+					SpawnStepsDirt();
+				}
 			}
 			else 
 			{
@@ -84,28 +88,25 @@ class Dino extends FlxSprite
 	}
 	
 	function SpawnStepsDirt() 
-	{
-		if (_stepsTimer <= 0 && _isOnGroundTimer >= 0.15)
+	{		
+		_stepsTimer = 0.35;
+		_stepsDirt.Spawn(4, function(s:FlxSprite) 
 		{
-			_stepsTimer = 0.25;
-			_stepsDirt.Spawn(4, function(s:FlxSprite) 
-			{
-				s.alive = true;
-				s.alpha = 1;
-				var T : Float = 0.45;
-				s.setPosition(x + this.width/2 + FlxG.random.floatNormal(0,1) , y + height );
-				//s.alpha = FlxG.random.float(0.125, 0.35);
-				//FlxTween.tween(s, { alpha:0 }, T, { onComplete: function(t:FlxTween) : Void { s.alive = false; } } );
-				s.velocity.set( FlxG.random.floatNormal(0, 4), - 40+ FlxG.random.floatNormal(0, 1));
-				s.acceleration.set(0, 175);
-				var t : FlxTimer = new FlxTimer();
-				t.start(T, function (t) { s.alive = false; s.alpha = 0; } );
-			},
-			function (s:FlxSprite)
-			{
-				s.makeGraphic(1, 1, FlxColor.fromRGB(54,38,22));
-			});
-		}
+			s.alive = true;
+			s.alpha = 1;
+			var T : Float = 0.45;
+			s.setPosition(x + this.width/2 + FlxG.random.floatNormal(0,1) , y + height );
+			//s.alpha = FlxG.random.float(0.125, 0.35);
+			//FlxTween.tween(s, { alpha:0 }, T, { onComplete: function(t:FlxTween) : Void { s.alive = false; } } );
+			s.velocity.set( FlxG.random.floatNormal(0, 4), - 40+ FlxG.random.floatNormal(0, 1));
+			s.acceleration.set(0, 175);
+			var t : FlxTimer = new FlxTimer();
+			t.start(T, function (t) { s.alive = false; s.alpha = 0; } );
+		},
+		function (s:FlxSprite)
+		{
+			s.makeGraphic(1, 1, FlxColor.fromRGB(54,38,22));
+		});
 	}
 	
 	function handleInput()
@@ -152,6 +153,7 @@ class Dino extends FlxSprite
 				_jumpTimer = 0.25;
 				this.animation.play("jumpUp", true);
 				this.velocity.set(velocity.x, GP.DinoMovementJumpStrength);
+				SpawnStepsDirt();
 			}
 		}
     }
