@@ -14,7 +14,6 @@ import flixel.util.FlxColor;
 class PlayState extends FlxState
 {
 	var d : Dino;
-	var doverlay : FlxSprite;
 	
 	var bottom : FlxSprite;
 	
@@ -53,12 +52,12 @@ class PlayState extends FlxState
 		add(_level.foregroundTiles2);
 		
 		GP.CameraMain.setScrollBounds( 
-		-2 * GP.WorldTileSizeInPixel, (_level.tileWidth + 6) * GP.WorldTileSizeInPixel, 
-		-10 * GP.WorldTileSizeInPixel, (_level.tileHeight-4) * GP.WorldTileSizeInPixel);
+		-2 * GP.WorldTileSizeInPixel, (_level.width) * GP.WorldTileSizeInPixel, 
+		-10 * GP.WorldTileSizeInPixel, (_level.height) * GP.WorldTileSizeInPixel);
 		
 		GP.CameraOverlay.setScrollBounds( 
-		-2 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.tileWidth + 6) * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
-		-10 * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, (_level.tileHeight - 4)  * GP.WorldTileSizeInPixel* GP.CameraMain.zoom);
+		-2 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.width) * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
+		-10 * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, (_level.height)  * GP.WorldTileSizeInPixel* GP.CameraMain.zoom);
 		
 		var s2 : FlxSprite = new FlxSprite( 100, 100);
 		s2.makeGraphic(400, 1, FlxColor.ORANGE);
@@ -69,15 +68,9 @@ class PlayState extends FlxState
 		add(d);
 		d.setPosition(_level.getEntryPoint(1).x, _level.getEntryPoint(1).y);
 		
-		doverlay = new FlxSprite(d.x, d.y);
-		//doverlay.makeGraphic(120, 90, FlxColor.TRANSPARENT);
-		doverlay.makeGraphic(120, 90, FlxColor.RED);
-		doverlay.alpha = 0.5;
-		doverlay.cameras = [GP.CameraOverlay];
-		add(doverlay);
 		
 		GP.CameraMain.follow(d, FlxCameraFollowStyle.LOCKON, 0.20);
-		GP.CameraOverlay.follow(doverlay, FlxCameraFollowStyle.LOCKON , 0.20);
+		GP.CameraOverlay.follow(d.overlay, FlxCameraFollowStyle.LOCKON , 0.20);
 		
 		var v : Vignette = new Vignette(GP.CameraOverlay);
 		add(v);
@@ -87,7 +80,7 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		MyInput.update();
-		doverlay.setPosition(d.x * GP.CameraMain.zoom, d.y * GP.CameraMain.zoom);
+		
 		super.update(elapsed);
 		_level.foregroundTiles.update(elapsed);
 		_level.collisionMap.update(elapsed);

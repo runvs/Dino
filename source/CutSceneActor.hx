@@ -14,12 +14,20 @@ class CutSceneActor extends FlxSprite
 {
 
 	public var name (default, null) : String ;
+	public var overlay : FlxSprite;
+	
 	public function new(n: String) 
 	{
 		name = n;
 		super();
 		
 		LoadActor();
+		
+		overlay = new FlxSprite();
+		//doverlay.makeGraphic(120, 90, FlxColor.TRANSPARENT);
+		overlay.makeGraphic(120, 90, FlxColor.RED);
+		overlay.alpha = 0.5;
+		overlay.cameras = [GP.CameraOverlay];
 	}
 	
 	function LoadActor() 
@@ -56,7 +64,7 @@ class CutSceneActor extends FlxSprite
 	public override function update (elapsed : Float ) : Void 
 	{
 		super.update(elapsed);
-		
+		overlay.setPosition(x * GP.CameraMain.zoom, y * GP.CameraMain.zoom);
 		if(velocity.x > 0)
 		{
 			facing = FlxObject.RIGHT;

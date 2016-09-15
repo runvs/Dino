@@ -2,9 +2,11 @@ package ;
 
 //import ActionAnimation;
 //import CutSceneAction;
+import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.group.FlxSpriteGroup;
+import flixel.util.FlxColor;
 import haxe.Json;
 import openfl.Assets;
 
@@ -24,6 +26,9 @@ class CutSceneState extends FlxState
 	
 	var _name: String;
 	
+	var _level : TiledLevel;
+	var _flocks : Flocks;
+	
 	override public function new (n:String)
 	{
 		super(); 	
@@ -37,13 +42,16 @@ class CutSceneState extends FlxState
 		
 		_actions = new Array<CutSceneAction>();
 		_actors = new Array<CutSceneActor>();
-		
+		_speechbubbles = new Array<SpeechBubble>();
 		//trace("creating scene " + _name);
 		
 		var data : CutSceneData;
 		//trace("parsing started");
 		data = Json.parse(Assets.getText(_name));
 		//trace("parsing complete");
+		
+		LoadLevel(data);
+		
 		
 		//trace("converting Positions");
 		_positions = new Array<CutScenePosition>();
@@ -54,7 +62,7 @@ class CutSceneState extends FlxState
 		}
 		//trace("converting Positions done");
 		
-		_speechbubbles = new Array<SpeechBubble>();
+		
 		
 		
 		for (i in 0...data.actors.length)
@@ -72,11 +80,32 @@ class CutSceneState extends FlxState
 			var ac : CutSceneActor = getActor(data.follow);
 			if (ac != null)
 			{
-				GP.CameraMain.follow(ac);
+				GP.CameraMain.follow(ac, FlxCameraFollowStyle.LOCKON, 0.20);
+				GP.CameraOverlay.follow(ac.overlay, FlxCameraFollowStyle.LOCKON , 0.20);
+		
 			}
 		}
 		
 		_timer = 0;
+	}
+	
+	function LoadLevel(data:CutSceneData) 
+	{
+		if (data.level != null)
+		{
+			_level = new TiledLevel(data.level);
+			GP.CameraMain.setScrollBounds( 
+			-2 * GP.WorldTileSizeInPixel, (_level.width) * GP.WorldTileSizeInPixel, 
+			-10 * GP.WorldTileSizeInPixel, (_level.height) * GP.WorldTileSizeInPixel);
+			
+			GP.CameraOverlay.setScrollBounds( 
+			-2 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.width) * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
+			-10 * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, (_level.height)  * GP.WorldTileSizeInPixel* GP.CameraMain.zoom);			
+		}
+		_flocks = new Flocks(function(s) { s.makeGraphic(1, 1, FlxColor.fromRGB(175,175,175, 175)); }, 20, GP.CameraMain );
+		
+		
+		
 	}
 	
 	function createActor(ad:ActorData) 
@@ -148,6 +177,10 @@ class CutSceneState extends FlxState
 	{
 		super.update(elapsed);
 		_timer += elapsed;
+		_level.bg.update(elapsed);
+		_flocks.update(elapsed);
+		_level.foregroundTiles.update(elapsed);
+		_level.foregroundTiles2.update(elapsed);
 		
 		for (i in 0..._actions.length)
 		{
@@ -179,6 +212,10 @@ class CutSceneState extends FlxState
 	override public function draw () :  Void 
 	{
 		super.draw();
+		_level.bg.draw();
+		_flocks.draw();
+		_level.foregroundTiles.draw();
+		_level.foregroundTiles2.draw();
 		for (s in _speechbubbles)
 		{
 			s.draw();
@@ -260,6 +297,7 @@ typedef CutSceneData =
     var actors : Array<ActorData>;
 	var actions : Array<ActionData>;
 	var follow : String;
+	var level : String;
 }
 
 
