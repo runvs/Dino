@@ -94,7 +94,7 @@ class PlayState extends BasicState
 		}
 		inTransition = true;
 		FlxTween.tween(_overlay, { alpha:1.0 }, 0.75, {onComplete:function(t){FlxG.switchState(new CutSceneState("assets/data/" + e.script));}});
-		
+		FlxTween.tween(_moonSprite, {alpha:0.0 }, 0.75 );	
 	}
 	
 	function SwitchLevel(e:Exit) 
@@ -108,8 +108,10 @@ class PlayState extends BasicState
 	
 	override public function internalDraw ()
 	{
+		_moonSprite.draw();
 		//trace("PlayState internal draw");
 		d.draw();
+		
 		for (e in _level.exits)
 		{
 			//e.draw();

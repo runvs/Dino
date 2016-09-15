@@ -20,6 +20,8 @@ class BasicState extends FlxState
 	
 	var _vignette : Vignette;
 	
+	public var _moonSprite : FlxSprite;
+	
 	var inTransition : Bool = false;
 	var _overlay :FlxSprite;
 	public function new() 
@@ -32,6 +34,13 @@ class BasicState extends FlxState
 		//trace("BasicState Create");
 		super.create();
 		GP.CamerasCreate();
+		
+		
+		_moonSprite = new FlxSprite(200, 0);
+		_moonSprite.loadGraphic(AssetPaths.moon__png, false, 256, 256);
+		_moonSprite.cameras = [GP.CameraOverlay];
+		_moonSprite.scrollFactor.set(0.1, 0);
+		_moonSprite.alpha = 0.2;
 		
 		_flocks = new Flocks(function(s) { s.makeGraphic(1, 1, FlxColor.fromRGB(175, 175, 175, 175)); }, 25, GP.CameraMain );
 		_vignette = new Vignette(GP.CameraOverlay);
@@ -90,6 +99,7 @@ class BasicState extends FlxState
 	{
 		//trace("BasicState draw");
 		_level.bg.draw();
+		
 		_flocks.draw();
 		_level.foregroundTiles.draw();
 		_level.foregroundTiles2.draw();

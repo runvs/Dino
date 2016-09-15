@@ -24,7 +24,6 @@ class CutSceneActor extends FlxSprite
 		LoadActor();
 		
 		overlay = new FlxSprite();
-		//doverlay.makeGraphic(120, 90, FlxColor.TRANSPARENT);
 		overlay.makeGraphic(120, 90, FlxColor.RED);
 		overlay.alpha = 0.5;
 		overlay.cameras = [GP.CameraOverlay];
@@ -44,12 +43,13 @@ class CutSceneActor extends FlxSprite
 				this.animation.play("idle");
 				setFacingFlip(FlxObject.LEFT, false, false);
 				setFacingFlip(FlxObject.RIGHT, true, false);
-
+				
 			case "overlay":
 				trace("load overlay");
 				this.makeGraphic(FlxG.width, FlxG.height, FlxColor.WHITE);
 				this.scrollFactor.set();
 				this.color.setRGB(0, 0, 0);
+				this.cameras = [GP.CameraOverlay];
 			case "invis":
 				trace ("load invis");
 				this.makeGraphic(1, 1, FlxColor.TRANSPARENT);

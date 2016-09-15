@@ -4,7 +4,7 @@
 	"positions":
 	[
 		{"name": "origin",   "x": 0,  "y": 0},
-		{"name": "dinoStart",   "x": 96,  "y": 64}
+		{"name": "dinoStart",   "x": 112,  "y": 142}
 	],
 	"actors":
 	[

@@ -115,7 +115,7 @@ class CutSceneState extends BasicState
 	
 	override public function internalDraw () :  Void 
 	{
-	
+		_moonSprite.draw();
 		for (s in _speechbubbles)
 		{
 			s.draw();
@@ -129,7 +129,6 @@ class CutSceneState extends BasicState
 	
 	function createActor(ad:ActorData) 
 	{
-		
 		var a : CutSceneActor = new CutSceneActor(ad.name);
 		var p : CutScenePosition = getPosition(ad.position);
 		if (p != null)

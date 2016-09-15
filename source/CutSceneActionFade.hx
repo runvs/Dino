@@ -27,7 +27,12 @@ class CutSceneActionFade extends CutSceneAction
 		
 		if (ac != null)
 		{
+			
 			FlxTween.tween(ac, { alpha:targetAlpha }, duration);
+			if (ac.name == "overlay" && targetAlpha == 1)
+			{
+				FlxTween.tween(scene._moonSprite, { alpha:0 }, duration);
+			}
 		}
 	}
 	
