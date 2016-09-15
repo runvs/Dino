@@ -76,6 +76,9 @@ class BasicState extends FlxState
 		//trace("BasicState draw");
 		_level.bg.draw();
 		_flocks.draw();
+		_level.foregroundTiles.draw();
+		_level.foregroundTiles2.draw();
+		
 		
 		super.draw();
 		internalDraw();

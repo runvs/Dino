@@ -82,8 +82,6 @@ class PlayState extends BasicState
 	override public function internalDraw ()
 	{
 		//trace("PlayState internal draw");
-		_level.foregroundTiles.draw();
-		_level.foregroundTiles2.draw();
 		d.draw();
 		_level.topTiles.draw();
 		for (e in _level.exits)

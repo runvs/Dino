@@ -14,7 +14,7 @@ import openfl.Assets;
  * ...
  * @author 
  */
-class CutSceneState extends FlxState
+class CutSceneState extends BasicState
 {
 	var _timer : Float;	
 	
@@ -26,9 +26,6 @@ class CutSceneState extends FlxState
 	
 	var _name: String;
 	
-	var _level : TiledLevel;
-	var _flocks : Flocks;
-	
 	override public function new (n:String)
 	{
 		super(); 	
@@ -38,7 +35,6 @@ class CutSceneState extends FlxState
 	override public function create():Void
 	{
 		super.create();
-		GP.CamerasCreate();
 		
 		_actions = new Array<CutSceneAction>();
 		_actors = new Array<CutSceneActor>();
@@ -50,7 +46,11 @@ class CutSceneState extends FlxState
 		data = Json.parse(Assets.getText(_name));
 		//trace("parsing complete");
 		
-		LoadLevel(data);
+		if (data.level != null)
+		{
+			_levelName = data.level;
+			LoadLevel();
+		}
 		
 		
 		//trace("converting Positions");
@@ -61,9 +61,6 @@ class CutSceneState extends FlxState
 			_positions.push(p);
 		}
 		//trace("converting Positions done");
-		
-		
-		
 		
 		for (i in 0...data.actors.length)
 		{
@@ -89,24 +86,46 @@ class CutSceneState extends FlxState
 		_timer = 0;
 	}
 	
-	function LoadLevel(data:CutSceneData) 
+	override public function internalUpdate(elapsed:Float):Void
 	{
-		if (data.level != null)
+		_timer += elapsed;
+		_level.bg.update(elapsed);
+		_level.foregroundTiles.update(elapsed);
+		_level.foregroundTiles2.update(elapsed);
+		
+		for (i in 0..._actions.length)
 		{
-			_level = new TiledLevel(data.level);
-			GP.CameraMain.setScrollBounds( 
-			-2 * GP.WorldTileSizeInPixel, (_level.width) * GP.WorldTileSizeInPixel, 
-			-10 * GP.WorldTileSizeInPixel, (_level.height) * GP.WorldTileSizeInPixel);
-			
-			GP.CameraOverlay.setScrollBounds( 
-			-2 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.width) * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
-			-10 * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, (_level.height)  * GP.WorldTileSizeInPixel* GP.CameraMain.zoom);			
+			var a : CutSceneAction = _actions[i];
+			a.update(elapsed);
+			if (a.performed) continue;
+			if (a.trigger) a.perform(this);
 		}
-		_flocks = new Flocks(function(s) { s.makeGraphic(1, 1, FlxColor.fromRGB(175,175,175, 175)); }, 20, GP.CameraMain );
 		
+		for (i in 0..._actors.length)
+		{
+			_actors[i].update(elapsed);
+		}
 		
-		
+		for (s in _speechbubbles)
+		{
+			s.update(elapsed);
+		}
+		clearBubbles();
 	}
+	
+	override public function internalDraw () :  Void 
+	{
+	
+		for (s in _speechbubbles)
+		{
+			s.draw();
+		}
+		for (i in 0..._actors.length)
+		{
+			_actors[i].draw();
+		}
+	}
+	
 	
 	function createActor(ad:ActorData) 
 	{
@@ -173,34 +192,7 @@ class CutSceneState extends FlxState
 	
 	
 
-	override public function update(elapsed:Float):Void
-	{
-		super.update(elapsed);
-		_timer += elapsed;
-		_level.bg.update(elapsed);
-		_flocks.update(elapsed);
-		_level.foregroundTiles.update(elapsed);
-		_level.foregroundTiles2.update(elapsed);
-		
-		for (i in 0..._actions.length)
-		{
-			var a : CutSceneAction = _actions[i];
-			a.update(elapsed);
-			if (a.performed) continue;
-			if (a.trigger) a.perform(this);
-		}
-		
-		for (i in 0..._actors.length)
-		{
-			_actors[i].update(elapsed);
-		}
-		
-		for (s in _speechbubbles)
-		{
-			s.update(elapsed);
-		}
-		clearBubbles();
-	}
+	
 	
 	function clearBubbles() 
 	{
@@ -209,23 +201,6 @@ class CutSceneState extends FlxState
 		_speechbubbles = newlist;
 	}
 	
-	override public function draw () :  Void 
-	{
-		super.draw();
-		_level.bg.draw();
-		_flocks.draw();
-		_level.foregroundTiles.draw();
-		_level.foregroundTiles2.draw();
-		for (s in _speechbubbles)
-		{
-			s.draw();
-		}
-		for (i in 0..._actors.length)
-		{
-			_actors[i].draw();
-		}
-		
-	}
 	
 	public function getPosition (name :String) : CutScenePosition
 	{
