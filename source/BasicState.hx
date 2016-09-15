@@ -1,6 +1,9 @@
 package;
 
+import flixel.FlxG;
+import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 
 /**
@@ -17,6 +20,8 @@ class BasicState extends FlxState
 	
 	var _vignette : Vignette;
 	
+	var inTransition : Bool = false;
+	var _overlay :FlxSprite;
 	public function new() 
 	{
 		super();
@@ -30,6 +35,12 @@ class BasicState extends FlxState
 		
 		_flocks = new Flocks(function(s) { s.makeGraphic(1, 1, FlxColor.fromRGB(175, 175, 175, 175)); }, 25, GP.CameraMain );
 		_vignette = new Vignette(GP.CameraOverlay);
+		_overlay = new FlxSprite(0, 0);
+		_overlay.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		_overlay.scrollFactor.set();
+		_overlay.alpha = 1.0;
+		FlxTween.tween(_overlay, { alpha:0.0 }, 0.5);
+		
 	}
 	
 	public function LoadLevel()
@@ -56,12 +67,16 @@ class BasicState extends FlxState
 	
 	public override function update(elapsed: Float) : Void 
 	{
-		//trace("BasicState update");
-		MyInput.update();
 		super.update(elapsed);
 		_flocks.update(elapsed);
 		_level.collisionMap.update(elapsed);
-		internalUpdate(elapsed);
+		if (!inTransition)
+		{
+			//trace("BasicState update");
+			MyInput.update();
+			
+			internalUpdate(elapsed);
+		}
 		
 	}
 	
@@ -84,6 +99,7 @@ class BasicState extends FlxState
 		internalDraw();
 		
 		_vignette.draw();
+		_overlay.draw();
 	}
 	
 }

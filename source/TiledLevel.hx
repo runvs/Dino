@@ -229,6 +229,8 @@ class TiledLevel extends TiledMap
 							e.makeGraphic(o.width, o.height, FlxColor.YELLOW);
 							e.alpha = 0.2;
 							e.targetLevel = o.properties.get("level");
+							e.type = o.properties.get("type");
+							e.script = o.properties.get("script");
 							e.entryID= Std.parseInt(o.properties.get("EntryID"));
 							e.cameras = [GP.CameraMain];
 							exits.push(e);

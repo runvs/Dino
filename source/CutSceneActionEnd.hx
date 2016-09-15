@@ -31,6 +31,10 @@ class CutSceneActionEnd extends CutSceneAction
 		{
 			FlxG.switchState(new CutSceneState(next));
 		}
+		else if (what == "menu")
+		{
+			FlxG.switchState(new EndState());
+		}
 	}
 	
 }

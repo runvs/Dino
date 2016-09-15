@@ -13,7 +13,7 @@ class Vignette extends FlxSprite
 {
 	var _cam : FlxCamera;
 
-	public function new(c:FlxCamera, maxAlpha : Float = 0.55, rangescale : Float = 0.95, exponent : Float = 2) 
+	public function new(c:FlxCamera, maxAlpha : Float = 0.45, rangescale : Float = 0.9, exponent : Float = 2) 
 	{
 		super();
 		

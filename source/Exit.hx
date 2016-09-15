@@ -11,7 +11,10 @@ class Exit extends FlxSprite
 {
 
 	public var targetLevel : String = "";
+	public var script : String = "";
 	public var entryID : Int = -1;
+	public var type : String = "";
+	
 	
 	public function new() 
 	{

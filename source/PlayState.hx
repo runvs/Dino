@@ -7,6 +7,7 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.math.FlxPoint;
 import flixel.text.FlxText;
+import flixel.tweens.FlxTween;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import flixel.util.FlxColor;
@@ -57,17 +58,43 @@ class PlayState extends BasicState
 		d.isOnExit = false;
 		for (e in _level.exits)
 		{
-			if (e.targetLevel == "") continue;
+			
+			if (e.type == "") continue;
 			if (FlxG.overlap(d, e))
 			{
-				
-				trace("overlap");
-				d.isOnExit = true;
-				if (d.transport)
-					SwitchLevel(e);
-				break;
+				if (e.type == "enter")
+				{
+					trace("overlap");
+					d.isOnExit = true;
+					if (d.transport)
+					{
+						if (e.targetLevel != "")
+							SwitchLevel(e);
+						else
+							StartCutScene(e);
+					}
+					break;
+				}
+				else if (e.type == "touch")
+				{
+					if (e.targetLevel != "")
+							SwitchLevel(e);
+						else
+							StartCutScene(e);
+				}
 			}
 		}
+	}
+	
+	function StartCutScene(e:Exit) 
+	{
+		if (e.script == "") 
+		{	
+			trace("Error: No Script given!");
+		}
+		inTransition = true;
+		FlxTween.tween(_overlay, { alpha:1.0 }, 0.75, {onComplete:function(t){FlxG.switchState(new CutSceneState("assets/data/" + e.script));}});
+		
 	}
 	
 	function SwitchLevel(e:Exit) 
@@ -83,14 +110,13 @@ class PlayState extends BasicState
 	{
 		//trace("PlayState internal draw");
 		d.draw();
-		_level.topTiles.draw();
 		for (e in _level.exits)
 		{
-			e.draw();
+			//e.draw();
 		}
 		for (e in _level.entries)
 		{
-			e.draw();
+			//e.draw();
 		}
 	}
 }

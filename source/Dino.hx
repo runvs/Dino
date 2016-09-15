@@ -207,7 +207,7 @@ class Dino extends FlxSprite
 	{
 		_stepsDirt.draw();
 		super.draw();
-		exitBar.draw();
+		//exitBar.draw();
 	}
 	
 	public function teleport(x:Float, y:Float)

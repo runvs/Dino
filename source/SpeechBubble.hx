@@ -37,7 +37,7 @@ class SpeechBubble extends FlxSprite
 	{
 		super.update(elapsed);
 		_age += elapsed;
-		this.setPosition(_parent.x + _parent.width, _parent.y);
+		this.setPosition(_parent.x + _parent.width/2, _parent.y- this.height/3*2);
 		_icon.update(elapsed);
 		_icon.setPosition(x, y);
 		_timer -= elapsed;
@@ -48,8 +48,8 @@ class SpeechBubble extends FlxSprite
 			this.alive = false;
 			
 		}
-		this.offset.y = 3 * Math.sin(2.75 * _age);
-		_icon.offset.y = 3*Math.sin(2.75 * _age);
+		this.offset.y =  2*Math.sin(2.75 * _age);
+		_icon.offset.y = 2*Math.sin(2.75 * _age);
 	}
 	
 	public override function draw () : Void 
