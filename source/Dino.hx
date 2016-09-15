@@ -210,8 +210,9 @@ class Dino extends FlxSprite
 		exitBar.draw();
 	}
 	
-	public function teleport()
+	public function teleport(x:Float, y:Float)
 	{
+		this.setPosition(x, y);
 		this.velocity.set();
 		this.transport = false;
 		isOnExit = false;

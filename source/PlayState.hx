@@ -11,81 +11,36 @@ import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import flixel.util.FlxColor;
 
-class PlayState extends FlxState
+class PlayState extends BasicState
 {
 	var d : Dino;
-	
-	var bottom : FlxSprite;
-	
-	var _level : TiledLevel;
-	
-	var levelName : String;
-	
-	var _flocks : Flocks;
 	
 	public function new ( n : String )
 	{
 		super();
-		levelName = n;
+		_levelName =  n;
 	}
 	
 	override public function create():Void
 	{
 		super.create();
-		GP.CamerasCreate();
-		
-		//var s1 : FlxSprite = new FlxSprite( 2, 2);
-		//s1.makeGraphic(2, 2, FlxColor.RED);
-		//s1.velocity.x = 10;
-		//s1.cameras = [GP.CameraMain];
-		//add(s1);
-		
-		_level = new TiledLevel(levelName);
-		
-				
-		add(_level.bg);
-		
-		_flocks = new Flocks(function(s) { s.makeGraphic(1, 1, FlxColor.fromRGB(175,175,175, 175)); }, 20, GP.CameraMain );
-		add(_flocks);
-		
-		add(_level.foregroundTiles);
-		add(_level.foregroundTiles2);
-		
-		GP.CameraMain.setScrollBounds( 
-		-2 * GP.WorldTileSizeInPixel, (_level.width) * GP.WorldTileSizeInPixel, 
-		-10 * GP.WorldTileSizeInPixel, (_level.height) * GP.WorldTileSizeInPixel);
-		
-		GP.CameraOverlay.setScrollBounds( 
-		-2 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.width) * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
-		-10 * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, (_level.height)  * GP.WorldTileSizeInPixel* GP.CameraMain.zoom);
-		
-		var s2 : FlxSprite = new FlxSprite( 100, 100);
-		s2.makeGraphic(400, 1, FlxColor.ORANGE);
-		s2.cameras = [GP.CameraOverlay];
-		//add(s2);
+		trace("PlayState Create");
+		LoadLevel();
 		
 		d = new Dino();
-		add(d);
 		d.setPosition(_level.getEntryPoint(1).x, _level.getEntryPoint(1).y);
-		
-		
+		trace("PlayState Camera Follow");
 		GP.CameraMain.follow(d, FlxCameraFollowStyle.LOCKON, 0.20);
 		GP.CameraOverlay.follow(d.overlay, FlxCameraFollowStyle.LOCKON , 0.20);
-		
-		var v : Vignette = new Vignette(GP.CameraOverlay);
-		add(v);
-		
 	}
 	
-	override public function update(elapsed:Float):Void
-	{
-		MyInput.update();
-		
-		super.update(elapsed);
-		_level.foregroundTiles.update(elapsed);
-		_level.collisionMap.update(elapsed);
+	override public function internalUpdate(elapsed:Float):Void
+	{	
+		//trace("PlayState internal Update");
+		d.update(elapsed);
 		FlxG.collide(d, _level.collisionMap);
 		d.touchedGround = d.isTouching(FlxObject.DOWN);
+		
 		CheckExits();
 		for (e in _level.exits)
 		{
@@ -117,17 +72,20 @@ class PlayState extends FlxState
 	
 	function SwitchLevel(e:Exit) 
 	{
-		_level = new TiledLevel("assets/data/" + e.targetLevel);
+		_levelName = "assets/data/" + e.targetLevel;
+		LoadLevel();
+		
 		var p : FlxPoint = _level.getEntryPoint(e.entryID);
-		d.setPosition(p.x, p.y);
-		d.teleport();
+		d.teleport(p.x, p.y);
 	}
 	
-	
-	override public function draw ()
+	override public function internalDraw ()
 	{
-		super.draw();
-		
+		//trace("PlayState internal draw");
+		_level.foregroundTiles.draw();
+		_level.foregroundTiles2.draw();
+		d.draw();
+		_level.topTiles.draw();
 		for (e in _level.exits)
 		{
 			e.draw();
