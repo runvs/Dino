@@ -28,7 +28,7 @@ class BasicState extends FlxState
 		super.create();
 		GP.CamerasCreate();
 		
-		_flocks = new Flocks(function(s) { s.makeGraphic(1, 1, FlxColor.fromRGB(175, 175, 175, 175)); }, 20, GP.CameraMain );
+		_flocks = new Flocks(function(s) { s.makeGraphic(1, 1, FlxColor.fromRGB(175, 175, 175, 175)); }, 25, GP.CameraMain );
 		_vignette = new Vignette(GP.CameraOverlay);
 	}
 	

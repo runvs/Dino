@@ -25,8 +25,10 @@
 		{ "time": 6.0,  "actor": "dino", "type": "move", "p1": "dinoEnd2", "p2": "0.01" },
 		{ "time": 6.5,  "actor": "dino", "type": "move", "p1": "dinoEnd", "p2": "0.01" },
 		
-		{ "time": 7,  "actor": "dino", "type": "speak", "p1":"house", "p2": "1.5"},
-		{ "time": 8.5,  "actor": "overlay", "type" : "fade", "p1":"1.0", "p2":"0.75"},
-		{ "time": 9.25, "actor": "global", "type" : "end", "p1" : "play", "p2":"assets/data/intro2.tmx"}
+		{ "time": 7,  "actor": "dino", "type": "speak", "p1":"house", "p2": "1.75"},
+		{ "time": 9,  "actor": "dino", "type": "speak", "p1":"question", "p2": "1.75"},
+		{ "time": 11,  "actor": "dino", "type": "speak", "p1":"left", "p2": "1.75"},
+		{ "time": 12,  "actor": "overlay", "type" : "fade", "p1":"1.0", "p2":"0.75"},
+		{ "time": 12.75, "actor": "global", "type" : "end", "p1" : "play", "p2":"assets/data/intro2.tmx"}
     ]
 }

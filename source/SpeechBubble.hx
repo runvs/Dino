@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
+import flixel.util.FlxColor;
 
 /**
  * ...
@@ -10,19 +11,21 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 class SpeechBubble extends FlxSprite
 {
 	
-	private var parent : FlxSprite;
+	private var _parent : FlxSprite;
 
-	private var timer : Float;
+	private var _timer : Float;
 	
-	private var icon : FlxSprite;
+	private var _icon : FlxSprite;
+	
+	private var _age  : Float = 0;
 	
 	public function new(p: FlxSprite, i : String, d : Float) 
 	{
 		super();
-		parent = p;
-		timer = d;
+		_parent = p;
+		_timer = d;
 		this.loadGraphic(AssetPaths.speechbubble__png, false, 16, 16);
-		this.offset.set(0, 16);
+		this.color = FlxColor.fromRGB(175, 175, 175, 175);
 		this.cameras = [GP.CameraMain];
 		
 		
@@ -33,67 +36,75 @@ class SpeechBubble extends FlxSprite
 	public override function update (elapsed : Float) : Void 
 	{
 		super.update(elapsed);
-		this.setPosition(parent.x + parent.width, parent.y);
-		icon.setPosition(x, y);
-		timer -= elapsed;
-		if (timer <= 0)
+		_age += elapsed;
+		this.setPosition(_parent.x + _parent.width, _parent.y);
+		_icon.update(elapsed);
+		_icon.setPosition(x, y);
+		_timer -= elapsed;
+		if (_timer <= 0)
 		{
 			this.alpha = 0;
-			icon.alpha = 0;
+			_icon.alpha = 0;
 			this.alive = false;
 			
 		}
+		this.offset.y = 3 * Math.sin(2.75 * _age);
+		_icon.offset.y = 3*Math.sin(2.75 * _age);
 	}
 	
 	public override function draw () : Void 
 	{
 		super.draw();
-		icon.draw();
+		_icon.draw();
 	}
 	
 	private function LoadIcon(i : String):Void 
 	{
-		icon = new FlxSprite();
-		icon.cameras = [GP.CameraMain];
+		_icon = new FlxSprite();
+		_icon.cameras = [GP.CameraMain];
 		if ( i == "heart")
 		{
-				icon.loadGraphic(AssetPaths.icon_heart__png, false, 16, 16);
-				icon.offset.set(0, 16);
+				_icon.loadGraphic(AssetPaths.icon_heart__png, true, 16, 16);
+				_icon.animation.add("idle", [0, 1], 3);
+				_icon.animation.play("idle");
 		}
 		else if (i == "house")
 		{
-				icon.loadGraphic(AssetPaths.icon_house__png, false, 16, 16);
-				icon.offset.set(0, 16);
+				_icon.loadGraphic(AssetPaths.icon_house__png, true, 16, 16);
+				_icon.animation.add("idle", [0, 1, 2, 3], 6);
+				_icon.animation.play("idle");
+		}
+		else if (i == "left")
+		{
+				_icon.loadGraphic(AssetPaths.icon_left__png, false, 16, 16);
+				_icon.animation.play("idle");
 		}
 		else if (i == "fish")
 		{
-				icon.loadGraphic(AssetPaths.icon_house__png, false, 16, 16);
-				icon.offset.set(0, 16);
+				_icon.loadGraphic(AssetPaths.icon_house__png, false, 16, 16);
 		}
 		else if (i == "apple")
 		{
-				icon.loadGraphic(AssetPaths.icon_house__png, false, 16, 16);
-				icon.offset.set(0, 16);
+				_icon.loadGraphic(AssetPaths.icon_house__png, false, 16, 16);
 		}
 		else if (i == "flower")
 		{
-				icon.loadGraphic(AssetPaths.icon_house__png, false, 16, 16);
-				icon.offset.set(0, 16);
+				_icon.loadGraphic(AssetPaths.icon_house__png, false, 16, 16);
 		}
 		else if (i == "egg")
 		{
-				icon.loadGraphic(AssetPaths.icon_house__png, false, 16, 16);
-				icon.offset.set(0, 16);
+				_icon.loadGraphic(AssetPaths.icon_house__png, false, 16, 16);
 		}
 		else if (i == "excamation")
 		{
-				icon.loadGraphic(AssetPaths.icon_house__png, false, 16, 16);
-				icon.offset.set(0, 16);
+				_icon.loadGraphic(AssetPaths.icon_house__png, false, 16, 16);
 		}
 		else if (i == "question")
 		{
-				icon.loadGraphic(AssetPaths.icon_house__png, false, 16, 16);
-				icon.offset.set(0, 16);
+				_icon.loadGraphic(AssetPaths.icon_questionmark__png, true, 16, 16);
+				_icon.animation.add("idle", [0, 1], 3);
+				_icon.animation.play("idle");
+				
 		}
 		else
 		{
