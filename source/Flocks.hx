@@ -20,12 +20,15 @@ class Flocks extends FlxSpriteGroup
 	private var _timer : Float = 0;
 	private var _cam : FlxCamera;
 
+	private var _padding : Float = 10;
+	
 	// encoded as frequency and phase
 	private var _individualVelocity:Array <FlxPoint>;
 	
-	public function new( f : FlxSprite-> Void, N : Int = 80, cam : FlxCamera) 
+	public function new( f : FlxSprite-> Void, N : Int = 80, cam : FlxCamera, padding : Float = 10) 
 	{
 		super();
+		_padding = padding;
 		_individualVelocity = new Array<FlxPoint>();
 		if ( cam != null)
 		{
@@ -39,7 +42,7 @@ class Flocks extends FlxSpriteGroup
 		this.cameras = [_cam];
 		for (i in 0 ... N)
 		{
-			var s : FlxSprite = new FlxSprite( FlxG.random.float(0, FlxG.width/_cam.zoom), FlxG.random.float(0, FlxG.height/_cam.zoom));
+			var s : FlxSprite = new FlxSprite( FlxG.random.float(-_padding, FlxG.width/_cam.zoom + _padding), FlxG.random.float(_padding, FlxG.height/_cam.zoom + _padding));
 			s.cameras = [_cam];
 			f(s);
 			add(s);
@@ -68,15 +71,14 @@ class Flocks extends FlxSpriteGroup
 			s.velocity.set(vx,vy);
 			
 			var p : FlxPoint = new FlxPoint();
-			//trace("World " + s.x + " " + s.y);
-			//trace("Screen " + s.getScreenPosition(p, _cam).x + " " + s.getScreenPosition(p, _cam).y);
+			
 			var pret : FlxPoint = s.getScreenPosition(p, _cam);
 			
-			if (pret.x < -s.width - 10) s.x += FlxG.width/_cam.zoom + s.width + 10;
-			if (pret.x > FlxG.width/_cam.zoom + 10) s.x -= FlxG.width/_cam.zoom + s.width + 10;
+			if (pret.x < -s.width - _padding) s.x += FlxG.width/_cam.zoom + s.width + _padding;
+			if (pret.x > FlxG.width/_cam.zoom + _padding) s.x -= FlxG.width/_cam.zoom + s.width + _padding;
 			
-			if (pret.y < -s.height - 10) s.y += FlxG.height/_cam.zoom + 10 + s.height ;
-			if (pret.y > FlxG.height/_cam.zoom + 10) s.y -= FlxG.height/_cam.zoom + 10 + s.height;
+			if (pret.y < -s.height - _padding) s.y += FlxG.height/_cam.zoom + -_padding + s.height ;
+			if (pret.y > FlxG.height/_cam.zoom + _padding) s.y -= FlxG.height/_cam.zoom + _padding + s.height;
 		}
 	}
 

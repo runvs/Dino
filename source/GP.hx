@@ -1,6 +1,8 @@
 package;
 import flixel.FlxCamera;
 import flixel.FlxG;
+import flixel.FlxObject;
+import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 
 /**
@@ -51,4 +53,15 @@ class GP
 		
 	}
 	
+	public static function CamerasFollow(tracerMain : FlxObject, tracer : FlxObject)
+	{
+			GP.CameraUnderlay.follow(tracer, FlxCameraFollowStyle.LOCKON , 0.20);
+		GP.CameraUnderlay.focusOn(new FlxPoint(tracer.x, tracer.y));
+		
+		GP.CameraMain.follow(tracerMain, FlxCameraFollowStyle.LOCKON, 0.20);
+		GP.CameraMain.focusOn(new FlxPoint(tracerMain.x, tracerMain.y));
+		
+		GP.CameraOverlay.follow(tracer, FlxCameraFollowStyle.LOCKON , 0.20);
+		GP.CameraOverlay.focusOn(new FlxPoint(tracer.x, tracer.y));
+	}
 }

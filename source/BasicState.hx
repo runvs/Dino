@@ -88,6 +88,10 @@ class BasicState extends FlxState
 		super.update(elapsed);
 		_flakes.update(elapsed);
 		_level.collisionMap.update(elapsed);
+		_level.bg.update(elapsed);
+		_level.foregroundTiles.update(elapsed);
+		_level.foregroundTiles2.update(elapsed);
+		
 		if (!inTransition)
 		{
 			//trace("BasicState update");
@@ -109,14 +113,15 @@ class BasicState extends FlxState
 		//trace("BasicState draw");
 		_level.bg.draw();
 		
+		_moonSprite.draw();
+		
 		_flakes.draw();
+		
 		_level.foregroundTiles.draw();
 		_level.foregroundTiles2.draw();
 		
-		
 		super.draw();
 		internalDraw();
-		
 		
 		_vignette.draw();
 		_overlay.draw();

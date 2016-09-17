@@ -16,7 +16,7 @@ import openfl.Assets;
  */
 class CutSceneState extends BasicState
 {
-	var _timer : Float;	
+	var _timer : Float = 0;	
 	
 	var _positions : Array<CutScenePosition>;
 	var _actors : Array<CutSceneActor>;
@@ -39,22 +39,21 @@ class CutSceneState extends BasicState
 		_actions = new Array<CutSceneAction>();
 		_actors = new Array<CutSceneActor>();
 		_speechbubbles = new Array<SpeechBubble>();
-		//trace("creating scene " + _name);
+		_positions = new Array<CutScenePosition>();
 		
+		parseJsonData();
+	}
+
+		
+	function parseJsonData():Void 
+	{
 		var data : CutSceneData;
-		//trace("parsing started");
 		data = Json.parse(Assets.getText(_name));
-		//trace("parsing complete");
-		
 		if (data.level != null)
 		{
 			_levelName = data.level;
 			LoadLevel();
 		}
-		
-		
-		//trace("converting Positions");
-		_positions = new Array<CutScenePosition>();
 		for (i in 0...data.positions.length)
 		{
 			var p : CutScenePosition = new CutScenePosition(data.positions[i].x, data.positions[i].y, data.positions[i].name);
@@ -77,34 +76,25 @@ class CutSceneState extends BasicState
 			var ac : CutSceneActor = getActor(data.follow);
 			if (ac != null)
 			{
-				GP.CameraUnderlay.follow(ac.overlay, FlxCameraFollowStyle.LOCKON , 0.20);
-				GP.CameraMain.follow(ac, FlxCameraFollowStyle.LOCKON, 0.20);
-				GP.CameraOverlay.follow(ac.overlay, FlxCameraFollowStyle.LOCKON , 0.20);
-		
+				GP.CamerasFollow(ac, ac.overlay);
 			}
 		}
-		
-		_timer = 0;
 	}
+	
 	
 	override public function internalUpdate(elapsed:Float):Void
 	{
 		_timer += elapsed;
-		_level.bg.update(elapsed);
-		_level.foregroundTiles.update(elapsed);
-		_level.foregroundTiles2.update(elapsed);
-		
-		for (i in 0..._actions.length)
+		for (a in _actions)
 		{
-			var a : CutSceneAction = _actions[i];
 			a.update(elapsed);
 			if (a.performed) continue;
 			if (a.trigger) a.perform(this);
 		}
 		
-		for (i in 0..._actors.length)
+		for (a in _actors)
 		{
-			_actors[i].update(elapsed);
+			a.update(elapsed);
 		}
 		
 		for (s in _speechbubbles)
@@ -116,7 +106,6 @@ class CutSceneState extends BasicState
 	
 	override public function internalDraw () :  Void 
 	{
-		_moonSprite.draw();
 		for (s in _speechbubbles)
 		{
 			s.draw();
@@ -187,12 +176,7 @@ class CutSceneState extends BasicState
 			
 			action.timer = a.time;
 			_actions.push(action);
-			
 	}
-	
-	
-
-	
 	
 	function clearBubbles() 
 	{
@@ -200,22 +184,16 @@ class CutSceneState extends BasicState
 		for (s in _speechbubbles) { if (s.alive) newlist.push(s); }
 		_speechbubbles = newlist;
 	}
-	
+
 	
 	public function getPosition (name :String) : CutScenePosition
 	{
 		var ret : CutScenePosition = null;
-		//trace("getPosition");
-		//trace("_positions.length " + _positions.length);
-		//trace("name " + name);
-		for (i in 0... _positions.length)
-		{
-			
-			//trace("i: " + i + " data: " + _positions[i]);
-			//trace("i: " + i + " name: " + _positions[i].name);
-			if (_positions[i].name == name)
+		for (p in _positions)
+		{		
+			if (p.name == name)
 			{
-				ret = _positions[i];
+				ret = p;
 				break;
 			}
 		}
@@ -226,11 +204,11 @@ class CutSceneState extends BasicState
 	{
 		var ret : CutSceneActor = null;
 		
-		for (i in 0..._actors.length)
+		for (a in _actors)
 		{
-			if (_actors[i].name == name)
+			if (a.name == name)
 			{
-				ret = _actors[i];
+				ret = a;
 				break;
 			}
 		}
@@ -243,6 +221,8 @@ class CutSceneState extends BasicState
 	}
 	
 }
+
+
 
 typedef ActionData = 
 {

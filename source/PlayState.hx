@@ -25,22 +25,12 @@ class PlayState extends BasicState
 	override public function create():Void
 	{
 		super.create();
-		trace("PlayState Create");
 		LoadLevel();
 		
 		d = new Dino();
 		d.setPosition(_level.getEntryPoint(1).x, _level.getEntryPoint(1).y);
-		trace("PlayState Camera Follow");
 		
-		GP.CameraUnderlay.follow(d.tracer, FlxCameraFollowStyle.LOCKON , 0.20);
-		GP.CameraUnderlay.focusOn(new FlxPoint(d.tracer.x, d.tracer.y));
-		
-		GP.CameraMain.follow(d, FlxCameraFollowStyle.LOCKON, 0.20);
-		GP.CameraMain.focusOn(new FlxPoint(d.x, d.y));
-		
-		GP.CameraOverlay.follow(d.tracer, FlxCameraFollowStyle.LOCKON , 0.20);
-		GP.CameraOverlay.focusOn(new FlxPoint(d.tracer.x, d.tracer.y));
-		
+		GP.CamerasFollow(d, d.tracer);
 	}
 	
 	override public function internalUpdate(elapsed:Float):Void
@@ -116,7 +106,6 @@ class PlayState extends BasicState
 	
 	override public function internalDraw ()
 	{
-		_moonSprite.draw();
 		//trace("PlayState internal draw");
 		d.draw();
 		
