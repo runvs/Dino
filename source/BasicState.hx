@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.tweens.FlxTween;
+import flixel.util.FlxCollision;
 import flixel.util.FlxColor;
 
 /**
@@ -43,7 +44,8 @@ class BasicState extends FlxState
 		_moonSprite.loadGraphic(AssetPaths.moon__png, false, 256, 256);
 		_moonSprite.cameras = [GP.CameraUnderlay];
 		_moonSprite.scrollFactor.set(0.1, 0);
-		_moonSprite.alpha = 0.2;
+		_moonSprite.color = FlxColor.fromRGB(200,200,200);
+		_moonSprite.alpha = 1.0;
 		_moonSprite.scale.set(0.5, 0.5);
 		
 		_flakes = new Flakes(GP.CameraMain, 10);
@@ -120,8 +122,9 @@ class BasicState extends FlxState
 		//trace("BasicState draw");
 		_level.bg.draw();
 		
-		_moonSprite.draw();
+		
 		_stars.draw();
+		_moonSprite.draw();
 		
 		//_flakes.draw();
 		

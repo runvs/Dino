@@ -29,7 +29,7 @@ class PlayState extends BasicState
 		
 		d = new Dino();
 		d.setPosition(_level.getEntryPoint(1).x, _level.getEntryPoint(1).y);
-		
+		d.update(0.1);// to update d.tracer
 		GP.CamerasFollow(d, d.tracer);
 	}
 	
@@ -58,6 +58,7 @@ class PlayState extends BasicState
 		{
 			
 			if (e.type == "") continue;
+			if (!e.checkConditions()) continue;
 			if (FlxG.overlap(d, e))
 			{
 				if (e.type == "enter")

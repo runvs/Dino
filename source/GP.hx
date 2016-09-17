@@ -11,7 +11,6 @@ import flixel.util.FlxColor;
  */
 class GP
 {
-	
 	public static var DinoMovementDragX (default, null) : Float = 1000;
 	public static var DinoMovementDragY (default, null) : Float = 100;
 	
@@ -23,7 +22,7 @@ class GP
 	public static var DinoMovementJumpStrength (default, null) : Float = -100;
 	
 	
-	public static var WorldGravity (default, null) : Float = 150;
+	public static var WorldGravity (default, null) : Float = 175;
 	public static var WorldTileSizeInPixel (default, null) : Int = 16;
 	
 	public static var CameraUnderlay (default, default) : FlxCamera;
@@ -55,13 +54,13 @@ class GP
 	
 	public static function CamerasFollow(tracerMain : FlxObject, tracer : FlxObject)
 	{
-			GP.CameraUnderlay.follow(tracer, FlxCameraFollowStyle.LOCKON , 0.20);
 		GP.CameraUnderlay.focusOn(new FlxPoint(tracer.x, tracer.y));
+		GP.CameraUnderlay.follow(tracer, FlxCameraFollowStyle.LOCKON , 0.20);
 		
-		GP.CameraMain.follow(tracerMain, FlxCameraFollowStyle.LOCKON, 0.20);
 		GP.CameraMain.focusOn(new FlxPoint(tracerMain.x, tracerMain.y));
+		GP.CameraMain.follow(tracerMain, FlxCameraFollowStyle.LOCKON, 0.20);
 		
-		GP.CameraOverlay.follow(tracer, FlxCameraFollowStyle.LOCKON , 0.20);
 		GP.CameraOverlay.focusOn(new FlxPoint(tracer.x, tracer.y));
+		GP.CameraOverlay.follow(tracer, FlxCameraFollowStyle.LOCKON , 0.20);
 	}
 }

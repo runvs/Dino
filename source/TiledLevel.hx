@@ -233,6 +233,7 @@ class TiledLevel extends TiledMap
 							e.script = o.properties.get("script");
 							e.entryID= Std.parseInt(o.properties.get("EntryID"));
 							e.cameras = [GP.CameraMain];
+							e.createConditions(o.properties.get("conditions"));
 							exits.push(e);
 						case "entry":
 							//trace("entry");

@@ -34,21 +34,21 @@ class StarField extends ScreenWrappingSpriteGroup
 		
 		for (i in 0 ... 35)
 		{
-			var s : FlxSprite = new FlxSprite( FlxG.random.float(-_padding, FlxG.width/_cam.zoom + _padding), FlxG.random.float(_padding, FlxG.height/_cam.zoom + _padding));
-			s.cameras = [_cam];
-			var r : Int = FlxG.random.int(175, 255);
-			var g : Int = FlxG.random.int(175, 255);
-			var b : Int = FlxG.random.int(175, 255);
-			s.makeGraphic(2, 2, FlxColor.fromRGB(r, g, b, 255));
-			s.scrollFactor.set(0.1, 0);
-			add(s);
+			var spr : FlxSprite = new FlxSprite( FlxG.random.float(-_padding, FlxG.width/_cam.zoom + _padding), FlxG.random.float(_padding, FlxG.height/_cam.zoom + _padding));
+			spr.cameras = [_cam];
+			var h : Float = FlxG.random.float(0, 360);
+			var s : Float = 0.3;
+			var b : Float = 0.9;
+			spr.makeGraphic(2, 2, FlxColor.fromHSB(h, s*s, b, 1),true);
+			spr.scrollFactor.set(0.1, 0);
+			add(spr);
 			
 			_individualFrequencies.push(new FlxPoint(FlxG.random.floatNormal(1.0, 0.25), FlxG.random.float(0, Math.PI)));
 			
 			
-			var gs : FlxSprite = new FlxSprite(s.x - glowSizeHalf, s.y - glowSizeHalf);
-			
-			gs.makeGraphic(Std.int(glowSizeHalf*2), Std.int(glowSizeHalf*2), FlxColor.fromRGB(r, g, b, 255), false);
+			var gs : FlxSprite = new FlxSprite(spr.x , spr.y );
+			gs.offset.set(glowSizeHalf, glowSizeHalf);
+			gs.makeGraphic(Std.int(glowSizeHalf*2), Std.int(glowSizeHalf*2), FlxColor.TRANSPARENT, true);
 		
 			var distmax = Math.sqrt(glowSizeHalf*glowSizeHalf + glowSizeHalf*glowSizeHalf);
 			
@@ -61,7 +61,7 @@ class StarField extends ScreenWrappingSpriteGroup
 					
 					var dist = Math.sqrt(dx * dx + dy * dy);
 					var a = 1.0 - Math.pow(dist / glowSizeHalf , 1.0/5.0);
-					gs.pixels.setPixel32(i, j, FlxColor.fromRGBFloat(1, 1, 1, a));
+					gs.pixels.setPixel32(i, j, FlxColor.fromHSB(h, s,b , a));
 				}
 			}
 			gs.cameras = [_cam];
