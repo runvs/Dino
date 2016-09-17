@@ -161,7 +161,7 @@ class TiledLevel extends TiledMap
 			//trace("create sprite");
 			bg = new FlxSprite();
 			bg.loadGraphic("assets/images/"+bgName, false, bgsx, bgsy);
-			bg.cameras = [GP.CameraMain];
+			bg.cameras = [GP.CameraUnderlay];
 			bg.scrollFactor.set(0, 0);
 		}
 		
@@ -276,7 +276,7 @@ class TiledLevel extends TiledMap
 			if (e.entryID == tID)
 			{
 				p.x = e.x;
-				p.y = e.y;
+				p.y = e.y + 16;
 				break;
 			}
 		}

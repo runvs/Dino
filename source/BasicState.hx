@@ -13,7 +13,7 @@ import flixel.util.FlxColor;
 class BasicState extends FlxState
 {
 
-	var _flocks : Flocks;
+	var _flakes : Flocks;
 	
 	var _level : TiledLevel;
 	var _levelName : String;
@@ -24,6 +24,7 @@ class BasicState extends FlxState
 	
 	var inTransition : Bool = false;
 	var _overlay :FlxSprite;
+	
 	public function new() 
 	{
 		super();
@@ -38,11 +39,12 @@ class BasicState extends FlxState
 		
 		_moonSprite = new FlxSprite(200, 0);
 		_moonSprite.loadGraphic(AssetPaths.moon__png, false, 256, 256);
-		_moonSprite.cameras = [GP.CameraOverlay];
+		_moonSprite.cameras = [GP.CameraUnderlay];
 		_moonSprite.scrollFactor.set(0.1, 0);
 		_moonSprite.alpha = 0.2;
+		_moonSprite.scale.set(0.5, 0.5);
 		
-		_flocks = new Flocks(function(s) { s.makeGraphic(1, 1, FlxColor.fromRGB(175, 175, 175, 175)); }, 25, GP.CameraMain );
+		_flakes = new Flocks(function(s) { s.makeGraphic(1, 1, FlxColor.fromRGB(175, 175, 175, 175)); }, 25, GP.CameraMain );
 		_vignette = new Vignette(GP.CameraOverlay);
 		_overlay = new FlxSprite(0, 0);
 		_overlay.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
@@ -50,12 +52,19 @@ class BasicState extends FlxState
 		_overlay.alpha = 1.0;
 		FlxTween.tween(_overlay, { alpha:0.0 }, 0.5);
 		
+		
+		
 	}
 	
 	public function LoadLevel()
 	{
 		//trace("BasicState LoadLevel");
 		_level = new TiledLevel(_levelName);
+	
+		GP.CameraUnderlay.setScrollBounds( 
+		-1 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.width - 1) * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
+		-10 * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, (_level.height)  * GP.WorldTileSizeInPixel* GP.CameraMain.zoom);
+	
 		
 		GP.CameraMain.setScrollBounds( 
 		1 * GP.WorldTileSizeInPixel, (_level.width - 1) * GP.WorldTileSizeInPixel, 
@@ -77,7 +86,7 @@ class BasicState extends FlxState
 	public override function update(elapsed: Float) : Void 
 	{
 		super.update(elapsed);
-		_flocks.update(elapsed);
+		_flakes.update(elapsed);
 		_level.collisionMap.update(elapsed);
 		if (!inTransition)
 		{
@@ -100,13 +109,14 @@ class BasicState extends FlxState
 		//trace("BasicState draw");
 		_level.bg.draw();
 		
-		_flocks.draw();
+		_flakes.draw();
 		_level.foregroundTiles.draw();
 		_level.foregroundTiles2.draw();
 		
 		
 		super.draw();
 		internalDraw();
+		
 		
 		_vignette.draw();
 		_overlay.draw();

@@ -27,7 +27,8 @@ class Dino extends FlxSprite
 	public var isOnExit : Bool = false;
 	private var exitBar : HudBar;
 	public var transport : Bool = false;
-	public var overlay : FlxSprite;
+	
+	public var tracer : FlxSprite;
 	
 	public function new() 
 	{
@@ -57,11 +58,11 @@ class Dino extends FlxSprite
 		exitBar._background.color = FlxColor.TRANSPARENT;
 		exitBar.health = 0;
 		
-		overlay = new FlxSprite();
+		tracer = new FlxSprite();
 		//doverlay.makeGraphic(120, 90, FlxColor.TRANSPARENT);
-		overlay.makeGraphic(120, 90, FlxColor.RED);
-		overlay.alpha = 0.5;
-		overlay.cameras = [GP.CameraOverlay];
+		tracer.makeGraphic(120, 90, FlxColor.RED);
+		tracer.alpha = 0.5;
+		tracer.cameras = [GP.CameraOverlay];
 	} 
 	
 	public override function update(elapsed : Float) : Void 
@@ -74,7 +75,7 @@ class Dino extends FlxSprite
 		handleInput();
 		handleAnimations();
 		super.update(elapsed);
-		overlay.setPosition(x * GP.CameraMain.zoom, y * GP.CameraMain.zoom);
+		tracer.setPosition(x * GP.CameraMain.zoom, y * GP.CameraMain.zoom);
 		_stepsDirt.update(elapsed);
 		_stepsTimer -= elapsed;
 		exitBar.setPosition(x, y - 2);

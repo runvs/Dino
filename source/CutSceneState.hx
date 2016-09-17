@@ -77,6 +77,7 @@ class CutSceneState extends BasicState
 			var ac : CutSceneActor = getActor(data.follow);
 			if (ac != null)
 			{
+				GP.CameraUnderlay.follow(ac.overlay, FlxCameraFollowStyle.LOCKON , 0.20);
 				GP.CameraMain.follow(ac, FlxCameraFollowStyle.LOCKON, 0.20);
 				GP.CameraOverlay.follow(ac.overlay, FlxCameraFollowStyle.LOCKON , 0.20);
 		
