@@ -13,12 +13,14 @@ import flixel.util.FlxColor;
 class BasicState extends FlxState
 {
 
-	var _flakes : Flocks;
+
 	
 	var _level : TiledLevel;
 	var _levelName : String;
 	
 	var _vignette : Vignette;
+	var _flakes : Flakes;
+	var _stars : StarField;
 	
 	public var _moonSprite : FlxSprite;
 	
@@ -44,7 +46,11 @@ class BasicState extends FlxState
 		_moonSprite.alpha = 0.2;
 		_moonSprite.scale.set(0.5, 0.5);
 		
-		_flakes = new Flocks(function(s) { s.makeGraphic(1, 1, FlxColor.fromRGB(175, 175, 175, 175)); }, 25, GP.CameraMain );
+		_flakes = new Flakes(GP.CameraMain, 10);
+		
+		_stars = new StarField(GP.CameraUnderlay, 10);
+		_stars.scrollFactor.set(0.1, 0);
+		
 		_vignette = new Vignette(GP.CameraOverlay);
 		_overlay = new FlxSprite(0, 0);
 		_overlay.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
@@ -87,6 +93,7 @@ class BasicState extends FlxState
 	{
 		super.update(elapsed);
 		_flakes.update(elapsed);
+		_stars.update(elapsed);
 		_level.collisionMap.update(elapsed);
 		_level.bg.update(elapsed);
 		_level.foregroundTiles.update(elapsed);
@@ -114,8 +121,9 @@ class BasicState extends FlxState
 		_level.bg.draw();
 		
 		_moonSprite.draw();
+		_stars.draw();
 		
-		_flakes.draw();
+		//_flakes.draw();
 		
 		_level.foregroundTiles.draw();
 		_level.foregroundTiles2.draw();
