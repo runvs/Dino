@@ -7,22 +7,22 @@ package;
 class StoryManager
 {
 
-	private static var _values : Map<String, Bool> = new Map<String,Bool>();
+	private static var _valuesBool : Map<String, Bool> = new Map<String,Bool>();
 	
-	public static function get (k : String) : Bool
+	public static function getBool (k : String) : Bool
 	{
 		if (k == null)
 			throw "ERROR in StoryManager.get: Key is null";
 		
-		return _values.get(k);
+		return _valuesBool.get(k);
 	}
 	
-	public static function set (k:String, v :Bool)
+	public static function setBool (k:String, v :Bool)
 	{
 		if (k == null)
 			throw "ERROR in StoryManager.set: Key is null";
 		
-		_values.set(k, v);
+		_valuesBool.set(k, v);
 	}
 	
 }

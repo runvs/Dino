@@ -16,6 +16,7 @@ class Entry extends FlxSprite
 	{
 		super();
 		
+		cameras = [GP.CameraMain];
 	}
 	
 }

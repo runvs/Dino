@@ -13,9 +13,6 @@ import flixel.util.FlxColor;
  */
 class BasicState extends FlxState
 {
-
-
-	
 	var _level : TiledLevel;
 	var _levelName : String;
 	
@@ -38,10 +35,9 @@ class BasicState extends FlxState
 		//trace("BasicState Create");
 		super.create();
 		GP.CamerasCreate();
-		
-		
-		_moonSprite = new FlxSprite(200, 0);
-		_moonSprite.loadGraphic(AssetPaths.moon__png, false, 256, 256);
+				
+		_moonSprite = new FlxSprite(100, -100);
+		_moonSprite.loadGraphic(AssetPaths.moon__png, false, 450, 450);
 		_moonSprite.cameras = [GP.CameraUnderlay];
 		_moonSprite.scrollFactor.set(0.1, 0);
 		_moonSprite.color = FlxColor.fromRGB(200,200,200);
@@ -81,7 +77,6 @@ class BasicState extends FlxState
 		GP.CameraOverlay.setScrollBounds( 
 		-1 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.width - 1) * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
 		-10 * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, (_level.height)  * GP.WorldTileSizeInPixel* GP.CameraMain.zoom);
-		
 	}
 	
 	// should be overwritten by child classes

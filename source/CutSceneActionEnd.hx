@@ -35,6 +35,14 @@ class CutSceneActionEnd extends CutSceneAction
 		{
 			FlxG.switchState(new EndState());
 		}
+		else if (what == "gather")
+		{
+			FlxG.switchState(new GatherState(next));
+		}
+		else
+		{
+			throw "ERROR: Unknown String in CutSceneActionEnd: " + what;
+		}
 	}
 	
 }

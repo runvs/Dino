@@ -55,6 +55,8 @@ class TiledLevel extends TiledMap
 	
 	public var exits : Array<Exit>;
 	public var entries : Array<Entry>;
+	public var collectibles : Array<Collectible>;
+	
 	
 	public function new(tiledLevel:Dynamic)
 	{
@@ -69,6 +71,7 @@ class TiledLevel extends TiledMap
 		
 		exits = new Array<Exit>();
 		entries = new Array<Entry>();
+		collectibles = new Array<Collectible>();
 		
 		// Load Tile Maps
 		for (layer in layers)
@@ -221,66 +224,78 @@ class TiledLevel extends TiledMap
 				continue;
 			var objectLayer:TiledObjectLayer = cast layer;
 
-			
 			//objects layer
-			if (layer.name == "exits")
+			if (objectLayer.name == "exits")
+			{	
+				LoadExits(objectLayer);
+			}
+			else if (objectLayer.name == "collectibles")
 			{
-				for (o in objectLayer.objects)
-				{
-					var x:Int = o.x;
-					var y:Int = o.y;
-					//
-					//// objects in tiled are aligned bottom-left (top-left in flixel)
-					if (o.gid != -1)
-						y -= objectLayer.map.getGidOwner(o.gid).tileHeight;
-					switch (o.type.toLowerCase())
-					{
-						case "exit":
-							//trace("exit");
-							var e : Exit = new Exit();
-							e.setPosition(x, y);
-							e.makeGraphic(o.width, o.height, FlxColor.YELLOW);
-							e.alpha = 0.2;
-							e.targetLevel = o.properties.get("level");
-							e.type = o.properties.get("type");
-							e.script = o.properties.get("script");
-							e.entryID= Std.parseInt(o.properties.get("EntryID"));
-							e.cameras = [GP.CameraMain];
-							e.createConditions(o.properties.get("conditions"));
-							exits.push(e);
-						case "entry":
-							//trace("entry");
-							var e : Entry = new Entry();
-							e.setPosition(x, y);
-							e.entryID = Std.parseInt(o.properties.get("ID"));
-							e.makeGraphic(o.width, o.height, FlxColor.GREEN);
-							e.alpha = 0.2;
-							e.cameras = [GP.CameraMain];
-							entries.push(e);
-					}
-			
-				}
+				LoadCollectibles(objectLayer);
 			}
 		}
 	}
 	
-	private function loadObject(o:TiledObject, g:TiledObjectLayer)
+	
+	function LoadExits(objectLayer:TiledObjectLayer):Void 
 	{
-		//trace("load object of type " + o.type);
-		var x:Int = o.x;
-		var y:Int = o.y;
-		//
-		//// objects in tiled are aligned bottom-left (top-left in flixel)
-		if (o.gid != -1)
-			y -= g.map.getGidOwner(o.gid).tileHeight;
-
-			
-		switch (o.type.toLowerCase())
+		for (o in objectLayer.objects)
 		{
+			var x:Int = o.x;
+			var y:Int = o.y;
+			//// objects in tiled are aligned bottom-left (top-left in flixel)
+			if (o.gid != -1)
+				y -= objectLayer.map.getGidOwner(o.gid).tileHeight;
+			switch (o.type.toLowerCase())
+			{
 			case "exit":
-				trace("exit");
+				//trace("exit");
+				var e : Exit = new Exit();
+				e.setPosition(x, y);
+				e.makeGraphic(o.width, o.height, FlxColor.YELLOW);
+				e.alpha = 0.2;
+				e.targetLevel = o.properties.get("level");
+				e.type = o.properties.get("type");
+				e.script = o.properties.get("script");
+				e.entryID= Std.parseInt(o.properties.get("EntryID"));
+				e.createConditions(o.properties.get("conditions"));
+				exits.push(e);
+			case "entry":
+				//trace("entry");
+				var e : Entry = new Entry();
+				e.setPosition(x, y);
+				e.entryID = Std.parseInt(o.properties.get("ID"));
+				e.makeGraphic(o.width, o.height, FlxColor.GREEN);
+				e.alpha = 0.2;
+				entries.push(e);
+			}
 		}
 	}
+	
+	
+	function LoadCollectibles(objectLayer:TiledObjectLayer) 
+	{
+		for (o in objectLayer.objects)
+		{
+			var x:Int = o.x;
+			var y:Int = o.y;
+			//
+			//// objects in tiled are aligned bottom-left (top-left in flixel)
+			if (o.gid != -1)
+				y -= objectLayer.map.getGidOwner(o.gid).tileHeight;
+			if ( o.type.toLowerCase() == "collectible")
+			{
+				//trace("collectible");
+				var n : String = o.name;
+				var c : Collectible = new Collectible(n);
+				
+				c.setPosition(x, y);
+				c.createConditions(o.properties.get("conditions"));
+				collectibles.push(c);
+			}
+		}
+	}
+	
 	public function getEntryPoint(tID: Int) : FlxPoint
 	{
 		var p : FlxPoint = new FlxPoint();

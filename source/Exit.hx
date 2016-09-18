@@ -18,7 +18,7 @@ class Exit extends ConditionalObject
 	public function new() 
 	{
 		super();
-		
+		cameras = [GP.CameraMain];
 	}
 	
 	

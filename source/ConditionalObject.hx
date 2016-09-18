@@ -22,7 +22,7 @@ class ConditionalObject extends FlxSprite
 	{
 		for (s in conditions)
 		{
-			var smv : Bool = StoryManager.get(s);
+			var smv : Bool = StoryManager.getBool(s);
 			if ( smv == false)
 			{
 				return false;
