@@ -76,7 +76,8 @@ class SpeechBubble extends FlxSprite
 		}
 		else if (i == "left")
 		{
-				_icon.loadGraphic(AssetPaths.icon_left__png, false, 16, 16);
+				_icon.loadGraphic(AssetPaths.icon_left__png, true, 16, 16);
+				_icon.animation.add("idle", [2,0,1], 8);
 				_icon.animation.play("idle");
 		}
 		else if (i == "fish")

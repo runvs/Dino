@@ -1,35 +1,38 @@
 {
 	"level" : "assets/data/intro2.tmx",
-	"follow" : "dino",
+	"follow" : "dinobag",
 	"positions":
 	[
 		{"name": "origin",   "x": 0,  "y": 0},
-		{"name": "dinoStart",   "x": 480,  "y": 142},
+		{"name": "dinoStart",   "x": 416,  "y": 142},
 		{"name": "dinoEnd",     "x": 416, "y": 142},
 		{"name": "dinoEnd2",     "x": 417, "y": 142}
 	],
 	"actors":
 	[
-		{"name": "dino", "position": "dinoStart"},
+		{"name": "dinobag", "position": "dinoStart"},
 		{"name": "overlay", "position": "origin"}
 	],
     "actions": 
 	[
 		{ "time": 0.0,  "actor": "overlay", "type" : "fade", "p1":"0", "p2":"0.5"},
-		{ "time": 1.0,  "actor": "dino", "type": "animate", "p1": "walk", "p2" : "true"},
-		{ "time": 1.0,  "actor": "dino", "type": "move", "p1": "dinoEnd", "p2": "3.5" },
+		{ "time": 0.0,  "actor": "dinobag", "type": "animate", "p1": "sleep", "p2" : "true"},
 		
-		{ "time": 4.5,  "actor": "dino", "type": "animate", "p1": "idle", "p2" : "true"},
-		{ "time": 5.0,  "actor": "dino", "type": "move", "p1": "dinoEnd2", "p2": "0.01" },
-		{ "time": 5.5,  "actor": "dino", "type": "move", "p1": "dinoEnd", "p2": "0.01" },
-		{ "time": 6.0,  "actor": "dino", "type": "move", "p1": "dinoEnd2", "p2": "0.01" },
-		{ "time": 6.5,  "actor": "dino", "type": "move", "p1": "dinoEnd", "p2": "0.01" },
 		
-		{ "time": 7,  "actor": "dino", "type": "speak", "p1":"house", "p2": "1.75"},
-		{ "time": 9,  "actor": "dino", "type": "speak", "p1":"question", "p2": "1.75"},
-		{ "time": 11,  "actor": "dino", "type": "speak", "p1":"left", "p2": "1.75"},
+		{ "time": 3.0,  "actor": "dinobag", "type": "animate", "p1": "wakeup", "p2" : "true"},
 		
-		{ "time": 12,  "actor": "overlay", "type" : "fade", "p1":"1.0", "p2":"0.75"},
-		{ "time": 12.75, "actor": "global", "type" : "end", "p1" : "play", "p2":"assets/data/intro2.tmx"}
+		
+		{ "time": 9.5,  "actor": "dinobag", "type": "animate", "p1": "idle", "p2" : "true"},
+		{ "time": 10.0,  "actor": "dinobag", "type": "move", "p1": "dinoEnd2", "p2": "0.01" },
+		{ "time": 10.5,  "actor": "dinobag", "type": "move", "p1": "dinoEnd", "p2": "0.01" },
+		{ "time": 11.0,  "actor": "dinobag", "type": "move", "p1": "dinoEnd2", "p2": "0.01" },
+		{ "time": 11.5,  "actor": "dinobag", "type": "move", "p1": "dinoEnd", "p2": "0.01" },
+		
+		{ "time": 12,  "actor": "dinobag", "type": "speak", "p1":"house", "p2": "1.75"},
+		{ "time": 14,  "actor": "dinobag", "type": "speak", "p1":"question", "p2": "1.75"},
+		{ "time": 16,  "actor": "dinobag", "type": "speak", "p1":"left", "p2": "1.75"},
+		
+		{ "time": 17,  "actor": "overlay", "type" : "fade", "p1":"1.0", "p2":"0.75"},
+		{ "time": 17.75, "actor": "global", "type" : "end", "p1" : "play", "p2":"assets/data/intro2.tmx"}
     ]
 }
