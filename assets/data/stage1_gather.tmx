@@ -44,7 +44,7 @@
  </layer>
  <objectgroup name="global">
   <properties>
-   <property name="actor" value="dinobag"/>
+   <property name="actor" value="dino"/>
    <property name="background" value="background_morning.png"/>
    <property name="backgroundSizeX" value="800"/>
    <property name="backgroundSizeY" value="600"/>

@@ -65,7 +65,7 @@ class PlayState extends BasicState
 			{
 				if (e.type == "enter")
 				{
-					trace("overlap");
+					//trace("overlap");
 					d.isOnExit = true;
 					if (d.transport)
 					{

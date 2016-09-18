@@ -25,7 +25,7 @@ class Dino extends FlxSprite
 	var _stepsTimer :Float = 0;
 	
 	public var isOnExit : Bool = false;
-	private var exitBar : HudBar;
+	private var _exitBar : HudBar;
 	public var transport : Bool = false;
 	
 	public var tracer : FlxSprite;
@@ -49,11 +49,11 @@ class Dino extends FlxSprite
 		
 		_stepsDirt = new MyParticleSystem();
 		_stepsDirt.cameras = [GP.CameraMain];
-		exitBar = new HudBar(0, 0, 16, 4, false);
-		exitBar.cameras = [GP.CameraMain];
-		exitBar.scrollFactor.set(1, 1);
-		exitBar._background.color = FlxColor.TRANSPARENT;
-		exitBar.health = 0;
+		
+		_exitBar = new HudBar(0, 0, 16, 4, false);
+		_exitBar.scrollFactor.set(1, 1);
+		_exitBar._background.color = FlxColor.TRANSPARENT;
+		_exitBar.health = 0;
 		
 		tracer = new FlxSprite();
 		//doverlay.makeGraphic(120, 90, FlxColor.TRANSPARENT);
@@ -75,10 +75,10 @@ class Dino extends FlxSprite
 		tracer.setPosition(x * GP.CameraMain.zoom, y * GP.CameraMain.zoom);
 		_stepsDirt.update(elapsed);
 		_stepsTimer -= elapsed;
-		exitBar.setPosition(x, y - 2);
-		exitBar.update(elapsed);
-		transport = exitBar.health >= 1;
-		if (exitBar.health <= 0) exitBar.health = 0;
+		_exitBar.setBarPosition(x, y - 2);
+		_exitBar.update(elapsed);
+		transport = _exitBar.health >= 1;
+		if (_exitBar.health <= 0) _exitBar.health = 0;
 	}
 	
 	function handleAnimations() 
@@ -167,11 +167,11 @@ class Dino extends FlxSprite
 		
 		if (isOnExit && vy < -0.1)
 		{
-			exitBar.health += FlxG.elapsed * 1;
+			_exitBar.health += FlxG.elapsed * 1;
 		}
 		else
 		{
-			exitBar.health -= FlxG.elapsed;
+			_exitBar.health -= FlxG.elapsed;
 		}
 	
 		var ay : Float = GP.WorldGravity;
@@ -231,7 +231,7 @@ class Dino extends FlxSprite
 	{
 		_stepsDirt.draw();
 		super.draw();
-		//exitBar.draw();
+		_exitBar.draw();
 	}
 	
 	public function teleport(x:Float, y:Float)
@@ -240,7 +240,6 @@ class Dino extends FlxSprite
 		this.velocity.set();
 		this.transport = false;
 		isOnExit = false;
-		exitBar.health = 0;
-		
+		_exitBar.health = 0;
 	}
 }

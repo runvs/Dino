@@ -26,9 +26,18 @@ class GatherState extends PlayState
 			if (!c.checkConditions()) continue;
 			if (FlxG.overlap(d, c))
 			{
-				//c.
+				
 			}
 		}
 	}
 	
+	override public function internalDraw() 
+	{
+		for (c in _level.collectibles)
+		{
+			c.draw();
+		}
+		
+		super.internalDraw();
+	}
 }

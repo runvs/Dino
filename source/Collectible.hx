@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
+import flixel.util.FlxColor;
 
 /**
  * ...
@@ -18,6 +19,9 @@ class Collectible extends ConditionalObject
 		super();
 		name = n;
 		_storyManagerID = "has_" + name;
+		this.makeGraphic(16, 16, FlxColor.BLUE);
+		this.alpha = 0.3;
+		cameras = [GP.CameraMain];
 	}
 	
 	public function collectMe()

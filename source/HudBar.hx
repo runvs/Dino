@@ -24,13 +24,13 @@ class HudBar extends FlxSprite
 		makeGraphic(Std.int(w), Std.int(h), FlxColor.WHITE);
 		this.origin.set(0, 0);
 		this.scrollFactor.set();
-		
+		cameras = [GP.CameraMain];
 		
 		_background = new FlxSprite(x-2,y-2);
 		_background.makeGraphic(Std.int(w) + 4, Std.int(h) + 4, FlxColor.GRAY);
 		_background.alpha = 0.75;
 		_background.scrollFactor.set();
-		
+		_background.cameras = [GP.CameraMain];
 	}
 	
 	override public function update(elapsed):Void
@@ -48,6 +48,12 @@ class HudBar extends FlxSprite
 		{
 			scale.set(val, 1);
 		}
+	}
+	
+	public function setBarPosition (X : Float, Y: Float )
+	{
+		this.setPosition(X, Y);
+		_background.setPosition(X, Y);
 	}
 	
 	public override function draw() : Void 
