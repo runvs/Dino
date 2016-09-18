@@ -27,7 +27,9 @@ class PlayState extends BasicState
 		super.create();
 		LoadLevel();
 		
-		d = new Dino();
+		
+		var hasBag : Bool = _level.actor == "dinobag";
+		d = new Dino(hasBag);
 		d.setPosition(_level.getEntryPoint(1).x, _level.getEntryPoint(1).y);
 		d.update(0.1);// to update d.tracer
 		GP.CamerasFollow(d, d.tracer);

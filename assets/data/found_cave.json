@@ -1,6 +1,6 @@
 {
 	"level" : "assets/data/intro2.tmx",
-	"follow" : "dino",
+	"follow" : "dinobag",
 	"positions":
 	[
 		{"name": "origin",   "x": 0,  "y": 0},
@@ -8,15 +8,15 @@
 	],
 	"actors":
 	[
-		{"name": "dino", "position": "dinoStart"},
+		{"name": "dinobag", "position": "dinoStart"},
 		{"name": "overlay", "position": "origin"}
 	],
     "actions": 
 	[
 		{ "time": 0.0,  "actor": "overlay", "type" : "fade", "p1":"0", "p2":"0.5"},
 		
-		{ "time": 0.5,   "actor": "dino", "type": "speak", "p1":"house", "p2": "2.0"},
-		{ "time": 3.0,   "actor": "dino", "type": "speak", "p1":"heart", "p2": "2.0"},
+		{ "time": 0.5,   "actor": "dinobag", "type": "speak", "p1":"house", "p2": "2.0"},
+		{ "time": 3.0,   "actor": "dinobag", "type": "speak", "p1":"heart", "p2": "2.0"},
 		
 		{ "time": 5.1,  "actor": "overlay", "type" : "fade", "p1":"1.0", "p2":"0.5"},
 		{ "time": 5.8, "actor": "global", "type" : "end", "p1" : "menu", "p2":""}

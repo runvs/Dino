@@ -34,6 +34,7 @@ class TiledLevel extends TiledMap
 	private var _tileSet:TiledTileSet;
 	
 	public var levelPath : String = "";
+	public var actor : String = "";
 	
 	// background image that will stay where it is (aka skybox). 
 	public var bg : FlxSprite;
@@ -149,6 +150,18 @@ class TiledLevel extends TiledMap
 			if (layer.type != TiledLayerType.OBJECT) continue;
 			if (layer.name != "global") continue;
 			//trace("global layer found");
+			
+			var actorname : String = layer.properties.get("actor");
+			if (actorname == null || actorname == "")
+			{
+				trace("No Actor set in level. using default dino guy");
+				actor = "dino";
+			}
+			else
+			{
+				actor = actorname;
+			}
+			
 			var bgName : String = layer.properties.get("background");
 			if (bgName == null)
 			{

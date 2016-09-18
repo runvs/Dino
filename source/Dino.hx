@@ -30,20 +30,17 @@ class Dino extends FlxSprite
 	
 	public var tracer : FlxSprite;
 	
-	public function new() 
+	private var _hasBag : Bool = false;
+	
+	public function new(hasBag : Bool) 
 	{
 		super();
+		_hasBag = hasBag;
 		
-		this.loadGraphic(AssetPaths.dino__png, true, 24, 18);
-		this.animation.add("idle", [5,5,5,4,5,5,5,5,5,6,7,8,9], 4);
-		this.animation.add("walk", [0, 1, 2, 3], 4);
-		this.animation.add("jumpUp", [15, 16, 17, 18], 4, false);
-		this.animation.add("jumpDown", [19], 6, true);
-		this.animation.play("idle");
+		loadSprite();
+		
 		
 		this.cameras = [GP.CameraMain];
-		setFacingFlip(FlxObject.LEFT, false, false);
-		setFacingFlip(FlxObject.RIGHT, true, false);
 		
 		_attackCooldown = 0;
 		_jumpTimer = 0;
@@ -104,7 +101,7 @@ class Dino extends FlxSprite
 		}
 		else
 		{
-			if (velocity.y > 0)
+			if (velocity.y > 0 && !_hasBag)
 			this.animation.play("jumpDown", false);
 		}
 	}
@@ -183,7 +180,7 @@ class Dino extends FlxSprite
 		if (MyInput.AttackButtonJustPressed ) 
 			attack();
 			
-		if (_jumpTimer <= 0)
+		if (_jumpTimer <= 0 && !_hasBag)
 		{
 			if (MyInput.JumpButtonJustPressed && _isOnGround)
 			{
@@ -201,6 +198,32 @@ class Dino extends FlxSprite
 		{
 			trace("attack");
 			_attackCooldown = 0.5;
+		}
+	}
+	
+	function loadSprite():Void 
+	{
+		if (_hasBag)
+		{
+			this.loadGraphic(AssetPaths.dino_bag__png, true, 24, 18);
+			this.animation.add("idle", [5,5,5,4,5,5,5,5,5,6,7,8,9], 4);
+			this.animation.add("walk", [0, 1, 2, 3], 4);
+			this.animation.add("sleep", [10, 11, 12, 13], 4, true);
+			this.animation.add("wakeup", [14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37], 5, false);
+			this.animation.play("idle");
+			setFacingFlip(FlxObject.LEFT, false, false);
+			setFacingFlip(FlxObject.RIGHT, true, false);
+		}
+		else
+		{
+			this.loadGraphic(AssetPaths.dino__png, true, 24, 18);
+			this.animation.add("idle", [5,5,5,4,5,5,5,5,5,6,7,8,9], 4);
+			this.animation.add("walk", [0, 1, 2, 3], 4);
+			this.animation.add("jumpUp", [15, 16, 17, 18], 4, false);
+			this.animation.add("jumpDown", [19], 6, true);
+			this.animation.play("idle");
+			setFacingFlip(FlxObject.LEFT, false, false);
+			setFacingFlip(FlxObject.RIGHT, true, false);
 		}
 	}
 	
