@@ -13,9 +13,12 @@
 	],
     "actions": 
 	[
-		{ "time": 0.0,  "actor": "overlay", "type" : "fade", "p1":"0", "p2":"0.5"},
+		{"time" : 0.0, "actor": "overlay", "type" : "fade", "p1":"0", "p2":"0.5"},
+		{ "time": 0.0,  "actor": "dinobag", "type": "animate", "p1": "idle2", "p2" : "true"},
 		
 		{ "time": 0.5,   "actor": "dinobag", "type": "speak", "p1":"house", "p2": "2.0"},
+		{ "time": 2.5,  "actor": "dinobag", "type": "animate", "p1": "dance", "p2" : "true"},
+		
 		{ "time": 3.0,   "actor": "dinobag", "type": "speak", "p1":"heart", "p2": "2.0"},
 		
 		{ "time": 5.1,  "actor": "overlay", "type" : "fade", "p1":"1.0", "p2":"0.5"},
