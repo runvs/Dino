@@ -24,5 +24,4 @@ class StoryManager
 		
 		_valuesBool.set(k, v);
 	}
-	
 }

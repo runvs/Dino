@@ -24,6 +24,7 @@ class Dino extends FlxSprite
 	var _stepsDirt : MyParticleSystem;
 	var _stepsTimer :Float = 0;
 	
+	public var isOnCollectible : Bool = false;
 	public var isOnExit : Bool = false;
 	private var _exitBar : HudBar;
 	public var transport : Bool = false;
@@ -52,11 +53,11 @@ class Dino extends FlxSprite
 		
 		_exitBar = new HudBar(0, 0, 16, 4, false);
 		_exitBar.scrollFactor.set(1, 1);
-		_exitBar._background.color = FlxColor.TRANSPARENT;
+		_exitBar._background.color = FlxColor.GRAY;
+		_exitBar._background.alpha = 0.4;
 		_exitBar.health = 0;
 		
 		tracer = new FlxSprite();
-		//doverlay.makeGraphic(120, 90, FlxColor.TRANSPARENT);
 		tracer.makeGraphic(120, 90, FlxColor.RED);
 		tracer.alpha = 0.5;
 		tracer.cameras = [GP.CameraOverlay];
