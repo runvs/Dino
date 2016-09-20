@@ -1,0 +1,37 @@
+{
+    "stages": 
+	[
+		{
+			"name" 			: "Intro", 
+			"stage" 		: 0, "episode" : 0, 
+			"type" 			: "cut", 
+			"level"			: "assets/data/scene_test.json",
+			"requirements" 	: [],
+			"storysettings" : []
+		},
+		{
+			"name" 			: "Intro", 
+			"stage" 		: 0, "episode" : 1, 
+			"type" 			: "play", 
+			"level"			: "assets/data/intro.tmx",
+			"requirements" 	: [],
+			"storysettings" : []
+		},
+		{
+			"name" 			: "Intro", 
+			"stage" 		: 0, "episode" : 2, 
+			"type" 			: "cut", 
+			"level"			: "assets/data/found_cave.json",
+			"requirements" 	: [],
+			"storysettings" : []
+		},
+		{
+			"name" 			: "Nest", 
+			"stage" 		: 1, "episode" : 0, 
+			"type" 			: "gather", 
+			"level"			: "assets/data/stage1_gather.tmx",
+			"requirements" 	: ["episode0complete"],
+			"storysettings" : []
+		}
+    ]
+}

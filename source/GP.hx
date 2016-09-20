@@ -25,6 +25,12 @@ class GP
 	public static var WorldGravity (default, null) : Float = 175;
 	public static var WorldTileSizeInPixel (default, null) : Int = 16;
 	
+	public static var MenuItemsOffsetX (default, null) : Float = 16;
+	public static var MenuItemsOffsetY (default, null) : Float = 16;
+	public static var MenuItemsPadding (default, null) : Float = 4;
+	public static var MenuItemsSize (default, null) : Float = 16;
+	
+	public static var CameraZoom (default, null) : Float = 5;
 	public static var CameraUnderlay (default, default) : FlxCamera;
 	public static var CameraMain (default, default) : FlxCamera;// = ;
 	public static var CameraOverlay (default, default) : FlxCamera;// = new FlxCamera(0, 0, 800, 600, 1);
@@ -35,7 +41,7 @@ class GP
 		CameraUnderlay = new FlxCamera(0, 0, 800, 600, 1);
 		
 		
-		CameraMain = new FlxCamera(0, 0, Std.int(FlxG.width / 5), Std.int(FlxG.height / 5), 5);
+		CameraMain = new FlxCamera(0, 0, Std.int(FlxG.width / CameraZoom), Std.int(FlxG.height / CameraZoom), CameraZoom);
 		CameraMain.pixelPerfectRender = true;
 		CameraMain.bgColor = FlxColor.TRANSPARENT;
 		
