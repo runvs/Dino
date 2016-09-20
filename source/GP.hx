@@ -27,8 +27,8 @@ class GP
 	
 	public static var MenuItemsOffsetX (default, null) : Float = 16;
 	public static var MenuItemsOffsetY (default, null) : Float = 16;
-	public static var MenuItemsPadding (default, null) : Float = 4;
-	public static var MenuItemsSize (default, null) : Float = 16;
+	public static var MenuItemsPadding (default, null) : Float = 2;
+	public static var MenuItemsSize (default, null) : Float = 24;
 	
 	public static var CameraZoom (default, null) : Float = 5;
 	public static var CameraUnderlay (default, default) : FlxCamera;

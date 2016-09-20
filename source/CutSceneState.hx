@@ -167,7 +167,7 @@ class CutSceneState extends BasicState
 			}
 			else if (a.type == "end")
 			{
-				action = new CutSceneActionEnd(a.actor, a.p1, a.p2);
+				action = new CutSceneActionEnd(a.actor, a.p1);
 			}
 			else
 			{

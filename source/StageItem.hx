@@ -11,7 +11,7 @@ import flixel.text.FlxText;
  */
 class StageItem extends FlxSpriteGroup
 {	
-	private var _name : String; 
+	public var name : String; 
 	public var stage (default, null) : Int = 0;
 	public var episode (default, null): Int = 0;
 	private var _type : String = "";
@@ -24,7 +24,7 @@ class StageItem extends FlxSpriteGroup
 	{
 		super();
 		
-		_name = n;
+		name = n;
 		stage = s;
 		episode = e;
 		_type = t;
@@ -35,7 +35,7 @@ class StageItem extends FlxSpriteGroup
 		_nameText = new FlxText(
 		GP.MenuItemsOffsetX + episode * (GP.MenuItemsSize + GP.MenuItemsPadding), 
 		GP.MenuItemsOffsetY + (GP.MenuItemsSize + GP.MenuItemsPadding) * stage, 
-		GP.MenuItemsSize, _name, 8);
+		GP.MenuItemsSize, name, 2);
 		_nameText.cameras = [GP.CameraMain];
 		add(_nameText);
 	}
@@ -72,7 +72,7 @@ class StageItem extends FlxSpriteGroup
 		}
 		else
 		{
-			throw "Error: Unknown type in StageItem: " + _type;
+			throw "ERROR: Unknown Type in StageItem: " + _type;
 		}
 	}
 

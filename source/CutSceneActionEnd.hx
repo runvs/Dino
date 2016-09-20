@@ -7,42 +7,20 @@ import flixel.FlxG;
  */
 class CutSceneActionEnd extends CutSceneAction
 {
-
-	var what : String;
-	var next : String;
-	
-	public function new(a: String, w: String, n :String) 
+	var _name : String = "";
+	public function new(a: String, n :String) 
 	{
 		super(a);
-		what = w;
-		next = n;
+		_name = n;
+		//_stage = new StageItem("", 0, 0, w, n);
 	}
 	
 	public override function perform(scene : CutSceneState)
 	{
 		super.perform(scene);
-		trace("end action perform! " + next);
+		trace("end action perform! " + _name);
 		
-		if ( what == "play")
-		{
-			FlxG.switchState(new PlayState(next));
-		}
-		else if (what == "cut")
-		{
-			FlxG.switchState(new CutSceneState(next));
-		}
-		else if (what == "menu")
-		{
-			FlxG.switchState(new EndState());
-		}
-		else if (what == "gather")
-		{
-			FlxG.switchState(new GatherState(next));
-		}
-		else
-		{
-			throw "ERROR: Unknown String in CutSceneActionEnd: " + what;
-		}
+		StageInfo.getStage(_name).startStage();
 	}
 	
 }

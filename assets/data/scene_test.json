@@ -33,6 +33,6 @@
 		{ "time": 16.5,  "actor": "dinobag", "type": "speak", "p1":"left", "p2": "1.75"},
 		
 		{ "time": 17.5,  "actor": "overlay", "type" : "fade", "p1":"1.0", "p2":"0.75"},
-		{ "time": 18.25, "actor": "global", "type" : "end", "p1" : "play", "p2":"assets/data/intro.tmx"}
+		{ "time": 18.25, "actor": "global", "type" : "end", "p1":"s0_e1_play"}
     ]
 }

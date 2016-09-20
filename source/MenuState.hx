@@ -16,9 +16,6 @@ using Lambda;
 
 class MenuState extends FlxState
 {
-	var _stageDataFileName : String = "assets/data/stages.json";
-	
-	var _maxStageNumber : Int;
 	var _stages : Array< Array<StageItem> >;
 
 	var _selectionSprite : FlxSprite;
@@ -32,13 +29,8 @@ class MenuState extends FlxState
 	{
 		super.create();
 		FlxG.mouse.visible = false;
-		
-		
-		// TODO Check if camera list has to be cleared
 		GP.CamerasCreate();
-		var data : Stages;
-		data = Json.parse(Assets.getText(_stageDataFileName));
-		
+		StageInfo.loadStages();
 		
 		
 		
@@ -48,47 +40,30 @@ class MenuState extends FlxState
 		add(commitText);
 		
 		
-		var allStages : Array<StageItem> = new Array<StageItem>();
+		var allStages : Array<StageItem> = StageInfo.AllStages;
 		
-		
-		_maxStageNumber = -1;
-		for ( i in 0...data.stages.length)
-		{
-			var s : StageItem = new StageItem(
-			data.stages[i].name, 
-			Std.int(data.stages[i].stage), Std.int(data.stages[i].episode), 
-			data.stages[i].type, data.stages[i].level);
-			
-			s.setRequirements(data.stages[i].requirements);
-			s.setStorySettings(data.stages[i].storysettings);
-			
-			allStages.push(s);
-			
-			if (s.stage >= _maxStageNumber)
-				_maxStageNumber = s.stage;
-			
-		}
-		trace("I have added " + allStages.length + " stages");
-		
+		//trace("creating stage layers");
 		_stages = new Array < Array < StageItem > > ();
-		for (i in 0..._maxStageNumber+1)
+		for (i in 0...StageInfo.StageNumberMax+1)
 		{
 			_stages.push(new Array < StageItem>() );
 		}
 		
+		//trace("pushing stages to correct layer");
 		for ( i in 0... allStages.length)
 		{
 			var s : StageItem = allStages[i];
 			_stages[s.stage].push(s);
 		}
 		
+		//trace("sorting stages");
 		for ( i in 0 ... _stages.length)
 		{
 			ArraySort.sort(_stages[i], StageItem.compareEpisodeNumber);
+			//trace(_stages[i].length);
 		}
 		
-		
-		
+		//trace("creating selection sprite");
 		_selectionSprite = new FlxSprite(GP.MenuItemsOffsetX, GP.MenuItemsOffsetY);
 		_selectionSprite.makeGraphic(Std.int(GP.MenuItemsSize), Std.int(GP.MenuItemsSize));
 		_selectionSprite.alpha = 0.3;
@@ -98,22 +73,45 @@ class MenuState extends FlxState
 
 	override public function update(elapsed:Float):Void
 	{
+		//trace("update");
 		MyInput.update();
+		
 		super.update(elapsed);
 		
 		if (_inputTimer >= 0) _inputTimer -= elapsed;
 		
+		//trace("selection");
 		UpdateSelection();
 		
+		//trace("setposition");
 		_selectionSprite.setPosition(
 		GP.MenuItemsOffsetX + (GP.MenuItemsPadding + GP.MenuItemsSize) * _currentSelectionX,
 		GP.MenuItemsOffsetY + (GP.MenuItemsPadding + GP.MenuItemsSize) * _currentSelectionY
 		);
 		
+		//trace("Input");
 		if (MyInput.AttackButtonJustPressed || MyInput.JumpButtonJustPressed )
 		{
 			_stages[_currentSelectionY][_currentSelectionX].startStage();
 		}
+		//trace("end");
+	}
+	
+	override public function draw()
+	{
+		//trace("draw");
+		for (i in 0 ... _stages.length)
+		{
+			for (j in 0 ... _stages[i].length)
+			{
+				//trace(_stages[i]);
+				//trace(_stages[i][j]);
+				_stages[i][j].draw();
+			}
+		}
+		
+		//trace("superdraw");
+		super.draw();
 	}
 	
 	function UpdateSelection() 
@@ -250,20 +248,4 @@ class MenuState extends FlxState
 		_currentSelectionX = targetEpisode;
 		_currentSelectionY = targetStage;
 	}
-}
-
-typedef Stages = 
-{
-	var stages : Array<StageData>;
-}
-
-typedef StageData =
-{
-	var name : String;
-	var stage: Float;
-	var episode : Float;
-	var type : String;	// cut, play, gather, ...
-	var level : String;	// json file for cutscenes, level name for play or gather
-	var requirements : Array<String>;
-	var storysettings : Array<String>;
 }

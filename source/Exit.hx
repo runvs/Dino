@@ -10,15 +10,18 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 class Exit extends ConditionalObject
 {
 
-	public var targetLevel : String = "";
-	public var script : String = "";
-	public var entryID : Int = -1;
+	public var targetStage : String = "";
 	public var type : String = "";
-	
+
 	public function new() 
 	{
 		super();
 		cameras = [GP.CameraMain];
+	}
+	
+	public function perform()
+	{
+		StageInfo.getStage(targetStage).startStage();
 	}
 	
 	
