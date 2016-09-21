@@ -8,6 +8,7 @@ class Teleport extends LevelLeaver
 {
 
 	public var targetLevel : String = "";
+	public var entryID : Int = 1;
 	
 	public function new() 
 	{
@@ -16,8 +17,8 @@ class Teleport extends LevelLeaver
 	
 	public override function perform(stage : BasicState)
 	{
-		
-		stage.LoadLevel(targetLevel);
+		stage.LoadLevel("assets/data/" + targetLevel);
+		stage.jumpToEntryPoint(entryID);
 	}
 	
 }

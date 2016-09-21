@@ -57,6 +57,9 @@ class TiledLevel extends TiledMap
 	public var entries : Array<Entry>;
 	public var collectibles : Array<Collectible>;
 	
+	public var drawStars : Bool = false;
+	public var drawMoon : Bool = false;
+	
 	
 	public function new(tiledLevel:Dynamic)
 	{
@@ -67,6 +70,10 @@ class TiledLevel extends TiledMap
 		foregroundTiles = new FlxGroup();
 		foregroundTiles2 = new FlxGroup();
 		topTiles = new FlxGroup();
+		foregroundTiles.cameras = [GP.CameraMain];
+		foregroundTiles2.cameras = [GP.CameraMain];
+		topTiles.cameras = [GP.CameraMain];
+		
 		collisionMap = new FlxSpriteGroup();
 		
 		exits = new Array<LevelLeaver>();
@@ -132,12 +139,18 @@ class TiledLevel extends TiledMap
 						if (tileLayer.name == "tiles")
 						{
 							foregroundTiles.add(s);
+							CreateCollisionTile(i, j, tileType);
 						}
 						else if (tileLayer.name == "tiles2")
 						{
 							foregroundTiles2.add(s);
+							CreateCollisionTile(i, j, tileType);
 						}
-						CreateCollisionTile(i, j, tileType);
+						else if (tileLayer.name == "top")
+						{
+							topTiles.add(s);
+						}
+						
 					}
 				}
 			}
@@ -175,10 +188,48 @@ class TiledLevel extends TiledMap
 			var bgsx : Int = Std.parseInt(layer.properties.get("backgroundSizeX"));
 			var bgsy : Int = Std.parseInt(layer.properties.get("backgroundSizeY"));
 			//trace("create sprite");
+		
+			
+			
+			
+			var bgscale : Float = 1;
+			var bgOffsetX : Float = 0;
+			var bgOffsetY : Float = 0;
+						
+			var s : String = layer.properties.get("backgroundScale");
+			if (s != null)
+			{
+				bgscale = Std.parseFloat(s);
+			}
+
+			s = layer.properties.get("backgroundOffsetX");
+			if (s != null)
+			{
+				bgOffsetX= Std.parseFloat(s);
+			}
+			s = layer.properties.get("backgroundOffsetY");
+			if (s != null)
+			{
+				bgOffsetY = Std.parseFloat(s);
+				trace(bgOffsetY);
+			}
+			
 			bg = new FlxSprite();
-			bg.loadGraphic("assets/images/"+bgName, false, bgsx, bgsy);
+			bg.loadGraphic("assets/images/" + bgName, false, bgsx, bgsy);
+			bg.offset.set(bgOffsetX, bgOffsetY);
+			bg.origin.set();
+			bg.scale.set(bgscale, bgscale);
 			bg.cameras = [GP.CameraUnderlay];
 			bg.scrollFactor.set(0, 0);
+			
+			if (layer.properties.get("stars") == "true")
+			{
+				drawStars = true;
+			}
+			if (layer.properties.get("moon") == "true")
+			{
+				drawMoon = true;
+			}
 		}
 		
 	}

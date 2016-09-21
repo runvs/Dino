@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="4" tilewidth="16" tileheight="16" nextobjectid="99">
+ <tileset firstgid="1" name="tileset.png" tilewidth="16" tileheight="16" tilecount="128" columns="8">
+  <image source="../images/tileset.png" width="128" height="256"/>
+ </tileset>
+ <layer name="tiles" width="12" height="4">
+  <properties>
+   <property name="tileset" value="tileset.png"/>
+  </properties>
+  <data encoding="base64">
+   CgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAKAAAACgAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKAAAACgAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKAAAACgAAAAsAAAAMAAAADQAAAA4AAAALAAAADAAAAA0AAAAOAAAACwAAAAwAAAAKAAAA
+  </data>
+ </layer>
+ <layer name="tiles2" width="12" height="4">
+  <properties>
+   <property name="tileset" value="tileset.png"/>
+  </properties>
+  <data encoding="base64">
+   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  </data>
+ </layer>
+ <objectgroup name="exits">
+  <object id="89" name="entryE" type="entry" x="144" y="16" width="16" height="32">
+   <properties>
+    <property name="ID" value="1"/>
+   </properties>
+  </object>
+  <object id="94" name="exitCave" type="teleport" x="168" y="24" width="16" height="24">
+   <properties>
+    <property name="level" value="stage1_gather.tmx"/>
+    <property name="type" value="enter"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer name="top" width="12" height="4">
+  <properties>
+   <property name="tileset" value="tileset.png"/>
+  </properties>
+  <data encoding="base64">
+   AAAAAGEAAABSAAAAUwAAAFQAAABVAAAAVgAAAFwAAABdAAAAXgAAAF8AAAAAAAAAAAAAAGkAAABaAAAAAAAAAAAAAAAAAAAAAAAAAGQAAABlAAAAZgAAAGcAAAAAAAAAAAAAAHEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  </data>
+ </layer>
+ <objectgroup name="global">
+  <properties>
+   <property name="actor" value="dinobag"/>
+   <property name="background" value="background_cave.png"/>
+   <property name="backgroundOffsetX" value="0"/>
+   <property name="backgroundOffsetY" value="-280"/>
+   <property name="backgroundScale" value="5"/>
+   <property name="backgroundSizeX" value="160"/>
+   <property name="backgroundSizeY" value="64"/>
+   <property name="moon" value="false"/>
+   <property name="stars" value="false"/>
+  </properties>
+ </objectgroup>
+</map>

@@ -20,6 +20,7 @@ class BasicState extends FlxState
 	var _flakes : Flakes;
 	var _stars : StarField;
 	
+	
 	public var _moonSprite : FlxSprite;
 	
 	var inTransition : Bool = false;
@@ -77,7 +78,7 @@ class BasicState extends FlxState
 		
 		GP.CameraOverlay.setScrollBounds( 
 		-1 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.width - 1) * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
-		-10 * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, (_level.height)  * GP.WorldTileSizeInPixel* GP.CameraMain.zoom);
+		-10 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.height)  * GP.WorldTileSizeInPixel * GP.CameraMain.zoom);
 	}
 	
 	// should be overwritten by child classes
@@ -119,8 +120,14 @@ class BasicState extends FlxState
 		_level.bg.draw();
 		
 		
-		_stars.draw();
-		_moonSprite.draw();
+		if (_level.drawStars)
+		{
+			_stars.draw();
+		}
+		if (_level.drawMoon)
+		{
+			_moonSprite.draw();
+		}
 		
 		//_flakes.draw();
 		
@@ -130,8 +137,15 @@ class BasicState extends FlxState
 		super.draw();
 		internalDraw();
 		
+		_level.topTiles.draw();
+		
 		_vignette.draw();
 		_overlay.draw();
+	}
+	
+	public function jumpToEntryPoint(id : Int)
+	{
+		
 	}
 	
 }

@@ -30,10 +30,11 @@ class PlayState extends BasicState
 		
 		var hasBag : Bool = _level.actor == "dinobag";
 		d = new Dino(hasBag);
-		d.setPosition(_level.getEntryPoint(1).x, _level.getEntryPoint(1).y);
-		d.update(0.1);// to update d.tracer
-		GP.CamerasFollow(d, d.tracer);
+		jumpToEntryPoint(1);
+		
 	}
+	
+	
 	
 	override public function internalUpdate(elapsed:Float):Void
 	{	
@@ -93,5 +94,12 @@ class PlayState extends BasicState
 		{
 			//e.draw();
 		}
+	}
+	
+	override public function jumpToEntryPoint (id : Int )
+	{
+		d.teleport(_level.getEntryPoint(1).x, _level.getEntryPoint(1).y);
+		d.update(0.1);// to update d.tracer
+		GP.CamerasFollow(d, d.tracer);
 	}
 }
