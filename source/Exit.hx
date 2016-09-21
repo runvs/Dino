@@ -7,11 +7,10 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
  * ...
  * @author 
  */
-class Exit extends ConditionalObject
+class Exit extends LevelLeaver
 {
 
 	public var targetStage : String = "";
-	public var type : String = "";
 
 	public function new() 
 	{
@@ -19,7 +18,7 @@ class Exit extends ConditionalObject
 		cameras = [GP.CameraMain];
 	}
 	
-	public function perform()
+	public override function perform(stage : BasicState)
 	{
 		StageInfo.getStage(targetStage).startStage();
 	}

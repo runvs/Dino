@@ -52,7 +52,7 @@ class CutSceneState extends BasicState
 		if (data.level != null)
 		{
 			_levelName = data.level;
-			LoadLevel();
+			LoadLevel(_levelName);
 		}
 		for (i in 0...data.positions.length)
 		{

@@ -53,7 +53,7 @@ class TiledLevel extends TiledMap
 	public var collisionMap : FlxSpriteGroup;
 	
 	
-	public var exits : Array<Exit>;
+	public var exits : Array<LevelLeaver>;
 	public var entries : Array<Entry>;
 	public var collectibles : Array<Collectible>;
 	
@@ -69,7 +69,7 @@ class TiledLevel extends TiledMap
 		topTiles = new FlxGroup();
 		collisionMap = new FlxSpriteGroup();
 		
-		exits = new Array<Exit>();
+		exits = new Array<LevelLeaver>();
 		entries = new Array<Entry>();
 		collectibles = new Array<Collectible>();
 		
@@ -258,6 +258,16 @@ class TiledLevel extends TiledMap
 				e.type = o.properties.get("type");
 				e.createConditions(o.properties.get("conditions"));
 				exits.push(e);
+			case "teleport":
+				//trace("exit");
+				var t : Teleport = new Teleport();
+				t.setPosition(x, y);
+				t.makeGraphic(o.width, o.height, FlxColor.YELLOW);
+				t.alpha = 0.2;
+				t.targetLevel= o.properties.get("level");
+				t.type = o.properties.get("type");
+				t.createConditions(o.properties.get("conditions"));
+				exits.push(t);
 			case "entry":
 				//trace("entry");
 				var e : Entry = new Entry();

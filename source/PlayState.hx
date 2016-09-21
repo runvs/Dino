@@ -25,7 +25,7 @@ class PlayState extends BasicState
 	override public function create():Void
 	{
 		super.create();
-		LoadLevel();
+		LoadLevel(_levelName);
 		
 		
 		var hasBag : Bool = _level.actor == "dinobag";
@@ -53,6 +53,7 @@ class PlayState extends BasicState
 		}
 	}
 	
+	
 	function CheckExits() 
 	{
 		d.isOnExit = false;
@@ -67,13 +68,13 @@ class PlayState extends BasicState
 					d.isOnExit = true;
 					if (d.transport)
 					{
-						e.perform();
+						e.perform(this);
 					}
 					break;
 				}
 				else if (e.type == "touch")
 				{
-					e.perform();
+					e.perform(this);
 				}
 			}
 		}

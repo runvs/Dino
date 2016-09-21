@@ -60,8 +60,9 @@ class BasicState extends FlxState
 		
 	}
 	
-	public function LoadLevel()
+	public function LoadLevel(l : String)
 	{
+		_levelName = l;
 		//trace("BasicState LoadLevel");
 		_level = new TiledLevel(_levelName);
 	
