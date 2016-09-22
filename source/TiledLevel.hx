@@ -75,7 +75,6 @@ class TiledLevel extends TiledMap
 		topTiles.cameras = [GP.CameraMain];
 		
 		collisionMap = new FlxSpriteGroup();
-		
 		exits = new Array<LevelLeaver>();
 		entries = new Array<Entry>();
 		collectibles = new Array<Collectible>();
@@ -117,40 +116,27 @@ class TiledLevel extends TiledMap
 			{
 				for (j in 0...tilemap.heightInTiles)
 				{			
-					if (tileLayer.name == "top")
+					var tileType : Int = tilemap.getTile(i, j);
+					var s : FlxSprite = new FlxSprite(i * 16, j * 16);
+					s.immovable = true;
+					s.loadGraphic(AssetPaths.tileset__png, true, 16, 16);
+					s.animation.add("idle", [tileType-1]);
+					s.animation.play("idle");
+					s.cameras = [GP.CameraMain];
+					if (tileLayer.name == "tiles")
 					{
-						var tileType : Int = tilemap.getTile(i, j);
-						var s : FlxSprite = new FlxSprite(i * 16, j * 16);
-						s.immovable = true;
-						s.loadGraphic(AssetPaths.tileset__png, true, 16, 16);
-						s.animation.add("idle", [tileType-1]);
-						s.animation.play("idle");
-						topTiles.add(s);
+						foregroundTiles.add(s);
+						CreateCollisionTile(i, j, tileType);
 					}
-					else
+					else if (tileLayer.name == "tiles2")
 					{
-						var tileType : Int = tilemap.getTile(i, j);
-						var s : FlxSprite = new FlxSprite(i * 16, j * 16);
-						s.immovable = true;
-						s.loadGraphic(AssetPaths.tileset__png, true, 16, 16);
-						s.animation.add("idle", [tileType-1]);
-						s.animation.play("idle");
-						s.cameras = [GP.CameraMain];
-						if (tileLayer.name == "tiles")
-						{
-							foregroundTiles.add(s);
-							CreateCollisionTile(i, j, tileType);
-						}
-						else if (tileLayer.name == "tiles2")
-						{
-							foregroundTiles2.add(s);
-							CreateCollisionTile(i, j, tileType);
-						}
-						else if (tileLayer.name == "top")
-						{
-							topTiles.add(s);
-						}
-						
+						foregroundTiles2.add(s);
+						CreateCollisionTile(i, j, tileType);
+					}
+					else if (tileLayer.name == "top")
+					{
+						topTiles.add(s);
+						//foregroundTiles.add(s);
 					}
 				}
 			}

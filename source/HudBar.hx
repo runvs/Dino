@@ -58,7 +58,10 @@ class HudBar extends FlxSprite
 	
 	public override function draw() : Void 
 	{
-		_background.draw();
+		if (health != 0)
+		{
+			_background.draw();
+		}
 		super.draw();
 	}
 	

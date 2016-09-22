@@ -45,7 +45,7 @@
    <property name="actor" value="dinobag"/>
    <property name="background" value="background_cave.png"/>
    <property name="backgroundOffsetX" value="0"/>
-   <property name="backgroundOffsetY" value="-120"/>
+   <property name="backgroundOffsetY" value="-200"/>
    <property name="backgroundScale" value="5"/>
    <property name="backgroundSizeX" value="160"/>
    <property name="backgroundSizeY" value="64"/>

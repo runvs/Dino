@@ -52,6 +52,7 @@ class Dino extends FlxSprite
 		_stepsDirt.cameras = [GP.CameraMain];
 		
 		_exitBar = new HudBar(0, 0, 16, 4, false);
+		_exitBar.scrollFactor.set(1, 1);
 		_exitBar._background.color = FlxColor.GRAY;
 		_exitBar._background.alpha = 0.4;
 		_exitBar.health = 0;
@@ -76,8 +77,7 @@ class Dino extends FlxSprite
 		_stepsDirt.update(elapsed);
 		_stepsTimer -= elapsed;
 	
-		trace(y);
-		_exitBar.setBarPosition(x, this.y -2 );
+		_exitBar.setBarPosition(x, this.y -2);
 		_exitBar.update(elapsed);
 		
 		transport = _exitBar.health >= 1;
