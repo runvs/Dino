@@ -137,7 +137,7 @@ class BasicState extends FlxState
 		super.draw();
 		internalDraw();
 		
-		_level.topTiles.draw();
+		//_level.topTiles.draw();
 		
 		_vignette.draw();
 		_overlay.draw();
