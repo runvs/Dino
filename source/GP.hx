@@ -3,6 +3,7 @@ import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.math.FlxPoint;
+import flixel.math.FlxRect;
 import flixel.util.FlxColor;
 
 /**
@@ -60,11 +61,15 @@ class GP
 	{
 		GP.CameraUnderlay.focusOn(new FlxPoint(tracer.x, tracer.y));
 		GP.CameraUnderlay.follow(tracer, FlxCameraFollowStyle.LOCKON , 0.20);
+		trace("underlay: " + GP.CameraUnderlay.deadzone);
 		
 		GP.CameraMain.focusOn(new FlxPoint(tracerMain.x, tracerMain.y));
 		GP.CameraMain.follow(tracerMain, FlxCameraFollowStyle.LOCKON, 0.20);
+		trace("main: " + GP.CameraMain.deadzone);
 		
 		GP.CameraOverlay.focusOn(new FlxPoint(tracer.x, tracer.y));
 		GP.CameraOverlay.follow(tracer, FlxCameraFollowStyle.LOCKON , 0.20);
+		//GP.CameraOverlay.deadzone = new FlxRect(GP.CameraOverlay.deadzone.x, GP.CameraOverlay.deadzone.y, GP.CameraOverlay.deadzone.width, GP.CameraOverlay.deadzone.height);
+		trace("overlay: " + GP.CameraOverlay.deadzone);
 	}
 }

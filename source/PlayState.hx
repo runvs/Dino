@@ -94,6 +94,7 @@ class PlayState extends BasicState
 		{
 			//e.draw();
 		}
+		//d.tracer.draw();
 	}
 	
 	override public function jumpToEntryPoint (id : Int )
