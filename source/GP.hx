@@ -49,8 +49,6 @@ class GP
 		CameraOverlay.bgColor = FlxColor.TRANSPARENT;
 		//trace(CameraMain.pixelPerfectRender);
 		
-		
-		
 		// check if camera List has to be cleared
 		FlxG.cameras.reset(GP.CameraUnderlay);
 		FlxG.cameras.add(GP.CameraMain);

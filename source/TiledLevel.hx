@@ -46,6 +46,8 @@ class TiledLevel extends TiledMap
 	// All Tiles that can be drawn on top of the foreground tiles
 	public var topTiles:FlxGroup;
 	
+	public var overlayObjects : FlxGroup;
+	
 	// the actual collision map. 
 	// Since some tiles need a special collision box, 
 	// the images are not used but a separate collider.
@@ -70,9 +72,11 @@ class TiledLevel extends TiledMap
 		foregroundTiles = new FlxGroup();
 		foregroundTiles2 = new FlxGroup();
 		topTiles = new FlxGroup();
+		overlayObjects = new FlxGroup();
 		foregroundTiles.cameras = [GP.CameraMain];
 		foregroundTiles2.cameras = [GP.CameraMain];
 		topTiles.cameras = [GP.CameraMain];
+		overlayObjects.cameras = [GP.CameraOverlay];
 		
 		collisionMap = new FlxSpriteGroup();
 		exits = new Array<LevelLeaver>();
@@ -197,7 +201,7 @@ class TiledLevel extends TiledMap
 			if (s != null)
 			{
 				bgOffsetY = Std.parseFloat(s);
-				trace(bgOffsetY);
+				//trace(bgOffsetY);
 			}
 			
 			bg = new FlxSprite();
@@ -269,6 +273,31 @@ class TiledLevel extends TiledMap
 			else if (objectLayer.name == "collectibles")
 			{
 				LoadCollectibles(objectLayer);
+			}
+			else if (objectLayer.name == "objects")
+			{
+				LoadOther(objectLayer);
+			}
+		}
+	}
+	
+	function LoadOther(objectLayer:TiledObjectLayer) 
+	{
+		trace("load others");
+		for (o in objectLayer.objects)
+		{
+			var x:Int = o.x;
+			var y:Int = o.y;
+			//// objects in tiled are aligned bottom-left (top-left in flixel)
+			if (o.gid != -1)
+				y -= objectLayer.map.getGidOwner(o.gid).tileHeight;
+			switch (o.type.toLowerCase())
+			{
+			case "campfire":
+				trace("campfire");
+				var c : CampFire = new CampFire(x, y);
+				topTiles.add(c);
+				
 			}
 		}
 	}

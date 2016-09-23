@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="5" tilewidth="16" tileheight="16" nextobjectid="99">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="5" tilewidth="16" tileheight="16" nextobjectid="101">
  <tileset firstgid="1" name="tileset.png" tilewidth="16" tileheight="16" tilecount="128" columns="8">
   <image source="../images/tileset.png" width="128" height="256"/>
  </tileset>
@@ -52,5 +52,8 @@
    <property name="moon" value="false"/>
    <property name="stars" value="false"/>
   </properties>
+ </objectgroup>
+ <objectgroup name="objects">
+  <object id="99" name="campfire" type="campfire" x="96" y="32" width="16" height="16"/>
  </objectgroup>
 </map>

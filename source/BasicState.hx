@@ -78,7 +78,7 @@ class BasicState extends FlxState
 		
 		GP.CameraOverlay.setScrollBounds( 
 		-1 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.width - 1) * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
-		-10 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.height)  * GP.WorldTileSizeInPixel * GP.CameraMain.zoom);
+		-10 * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, (_level.height)  * GP.WorldTileSizeInPixel* GP.CameraMain.zoom);
 	}
 	
 	// should be overwritten by child classes
@@ -97,6 +97,7 @@ class BasicState extends FlxState
 		_level.bg.update(elapsed);
 		_level.foregroundTiles.update(elapsed);
 		_level.foregroundTiles2.update(elapsed);
+		_level.topTiles.update(elapsed);
 		
 		if (!inTransition)
 		{
