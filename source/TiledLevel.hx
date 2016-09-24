@@ -347,7 +347,7 @@ class TiledLevel extends TiledMap
 				y -= objectLayer.map.getGidOwner(o.gid).tileHeight;
 			if ( o.type.toLowerCase() == "collectible")
 			{
-				//trace("collectible");
+				trace("collectible");
 				var n : String = o.name;
 				var c : Collectible = new Collectible(n);
 				

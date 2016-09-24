@@ -51,7 +51,10 @@ class GatherState extends PlayState
 	public override function internalUpdate(elapsed:Float)
 	{
 		super.internalUpdate(elapsed);
-		
+		for (c in _level.collectibles)
+		{
+			c.update(elapsed);
+		}
 		CheckCollectibles();
 	}
 	
