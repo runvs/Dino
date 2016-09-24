@@ -23,7 +23,8 @@ class StageInfo
 			var s : StageItem = new StageItem(
 			data.stages[i].name, 
 			Std.int(data.stages[i].stage), Std.int(data.stages[i].episode), 
-			data.stages[i].type, data.stages[i].level);
+			data.stages[i].type, data.stages[i].actor,
+			data.stages[i].level);
 			
 			s.setRequirements(data.stages[i].requirements);
 			s.setStorySettings(data.stages[i].storysettings);
@@ -63,6 +64,7 @@ typedef StageData =
 	var stage: Float;
 	var episode : Float;
 	var type : String;	// cut, play, gather, ...
+	var actor : String;	// dino, dinobag, baby
 	var level : String;	// json file for cutscenes, level name for play or gather
 	var requirements : Array<String>;
 	var storysettings : Array<String>;

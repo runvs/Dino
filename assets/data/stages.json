@@ -12,7 +12,8 @@
 		{
 			"name" 			: "s0_e1_play", 
 			"stage" 		: 0, "episode" : 1, 
-			"type" 			: "play", 
+			"type" 			: "play",
+			"actor"			: "dinobag",
 			"level"			: "assets/data/intro.tmx",
 			"requirements" 	: [],
 			"storysettings" : []
@@ -29,6 +30,15 @@
 		{
 			"name" 			: "s1_e0_play", 
 			"stage" 		: 1, "episode" : 0, 
+			"type" 			: "gather", 
+			"actor"			: "dino",
+			"level"			: "assets/data/stage1_cave.tmx",
+			"requirements" 	: ["episode0complete"],
+			"storysettings" : []
+		},
+		{
+			"name" 			: "s1_e1_play", 
+			"stage" 		: 1, "episode" : 1, 
 			"type" 			: "gather", 
 			"level"			: "assets/data/stage1_gather.tmx",
 			"requirements" 	: ["episode0complete"],

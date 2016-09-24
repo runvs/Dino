@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="12" tilewidth="16" tileheight="16" nextobjectid="98">
- <tileset firstgid="1" name="tileset.png" tilewidth="16" tileheight="16" tilecount="80" columns="8">
-  <image source="../images/tileset.png" width="128" height="160"/>
+ <tileset firstgid="1" name="tileset.png" tilewidth="16" tileheight="16" tilecount="128" columns="8">
+  <image source="../images/tileset.png" width="128" height="256"/>
  </tileset>
  <layer name="tiles" width="30" height="12">
   <properties>
@@ -42,7 +42,6 @@
  </layer>
  <objectgroup name="global">
   <properties>
-   <property name="actor" value="dinobag"/>
    <property name="background" value="background_morning.png"/>
    <property name="backgroundSizeX" value="800"/>
    <property name="backgroundSizeY" value="600"/>

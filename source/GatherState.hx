@@ -8,9 +8,9 @@ import flixel.FlxG;
 class GatherState extends PlayState
 {
 
-	public function new(n:String) 
+	public function new(n:String, a : String) 
 	{
-		super(n);
+		super(n,a);
 	}
 	
 	public override function create() : Void

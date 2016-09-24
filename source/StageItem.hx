@@ -15,12 +15,13 @@ class StageItem extends FlxSpriteGroup
 	public var stage (default, null) : Int = 0;
 	public var episode (default, null): Int = 0;
 	private var _type : String = "";
+	private var actor : String = "";
 	private var _level : String = "";
 	
 	private var _nameText : FlxText;
 	
 	
-	public function new(n: String, s : Int, e : Int, t : String, l : String) 
+	public function new(n: String, s : Int, e : Int, t : String, a:String, l : String) 
 	{
 		super();
 		
@@ -28,6 +29,7 @@ class StageItem extends FlxSpriteGroup
 		stage = s;
 		episode = e;
 		_type = t;
+		actor = a;
 		_level = l;
 		
 		this.cameras = [GP.CameraMain ];
@@ -60,7 +62,7 @@ class StageItem extends FlxSpriteGroup
 	{
 		if (_type == "play")
 		{
-			FlxG.switchState(new PlayState(_level));
+			FlxG.switchState(new PlayState(_level, actor));
 		}
 		else if (_type == "cut")
 		{
@@ -68,7 +70,7 @@ class StageItem extends FlxSpriteGroup
 		}
 		else if (_type == "gather")
 		{
-			FlxG.switchState(new GatherState(_level));
+			FlxG.switchState(new GatherState(_level, actor));
 		}
 		else
 		{

@@ -15,11 +15,12 @@ import flixel.util.FlxColor;
 class PlayState extends BasicState
 {
 	var d : Dino;
-	
-	public function new ( n : String )
+	var _actorName : String;
+	public function new ( n : String, a : String )
 	{
 		super();
 		_levelName =  n;
+		_actorName = a;
 	}
 	
 	override public function create():Void
@@ -28,7 +29,7 @@ class PlayState extends BasicState
 		LoadLevel(_levelName);
 		
 		
-		var hasBag : Bool = _level.actor == "dinobag";
+		var hasBag : Bool = _actorName == "dinobag";
 		d = new Dino(hasBag);
 		jumpToEntryPoint(1);
 		

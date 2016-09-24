@@ -27,7 +27,7 @@
   </object>
   <object id="94" name="exitCave" type="teleport" x="72" y="136" width="24" height="24">
    <properties>
-    <property name="EntryID" value="1"/>
+    <property name="EntryID" value="2"/>
     <property name="level" value="stage1_cave.tmx"/>
     <property name="type" value="enter"/>
    </properties>
@@ -43,7 +43,6 @@
  </layer>
  <objectgroup name="global">
   <properties>
-   <property name="actor" value="dino"/>
    <property name="background" value="background_morning.png"/>
    <property name="backgroundScale" value="1"/>
    <property name="backgroundSizeX" value="800"/>
