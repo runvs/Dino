@@ -29,6 +29,9 @@ class StageInfo
 			s.setRequirements(data.stages[i].requirements);
 			s.setStorySettings(data.stages[i].storysettings);
 			
+			if (data.stages[i].type == "gather")
+				s.SetGatherItems(data.stages[i].gather);
+			
 			AllStages.push(s);
 			
 			if (s.stage >= StageNumberMax)
@@ -68,4 +71,5 @@ typedef StageData =
 	var level : String;	// json file for cutscenes, level name for play or gather
 	var requirements : Array<String>;
 	var storysettings : Array<String>;
+	var gather : Array<String>;
 }

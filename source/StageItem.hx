@@ -20,6 +20,8 @@ class StageItem extends FlxSpriteGroup
 	
 	private var _nameText : FlxText;
 	
+	private var _gather : Array<String>;
+	
 	
 	public function new(n: String, s : Int, e : Int, t : String, a:String, l : String) 
 	{
@@ -31,6 +33,7 @@ class StageItem extends FlxSpriteGroup
 		_type = t;
 		actor = a;
 		_level = l;
+		_gather = new Array<String>();
 		
 		this.cameras = [GP.CameraMain ];
 		
@@ -40,6 +43,12 @@ class StageItem extends FlxSpriteGroup
 		GP.MenuItemsSize, name, 2);
 		_nameText.cameras = [GP.CameraMain];
 		add(_nameText);
+	}
+	
+	public function SetGatherItems (arr: Array<String>)
+	{
+		if (arr != null)
+			_gather = arr;
 	}
 	
 	override public function update(elapsed:Float):Void 
@@ -70,7 +79,9 @@ class StageItem extends FlxSpriteGroup
 		}
 		else if (_type == "gather")
 		{
-			FlxG.switchState(new GatherState(_level, actor));
+			var gs : GatherState = new GatherState(_level, actor);
+			gs.createCollectibleList(_gather);
+			FlxG.switchState(gs);
 		}
 		else
 		{

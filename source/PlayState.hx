@@ -28,7 +28,6 @@ class PlayState extends BasicState
 		super.create();
 		LoadLevel(_levelName);
 		
-		
 		var hasBag : Bool = _actorName == "dinobag";
 		d = new Dino(hasBag);
 		jumpToEntryPoint(1);
@@ -95,7 +94,9 @@ class PlayState extends BasicState
 		{
 			//e.draw();
 		}
-		//d.tracer.draw();
+		d.tracer.draw();
+		
+		
 	}
 	
 	override public function jumpToEntryPoint (id : Int )

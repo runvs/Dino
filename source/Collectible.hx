@@ -26,7 +26,7 @@ class Collectible extends ConditionalObject
 		name = n;
 		_storyManagerID = "has_" + name;
 		
-		LoadSprites();
+		LoadSprites(this, name);
 		
 		
 	}
@@ -47,36 +47,34 @@ class Collectible extends ConditionalObject
 		if (!_started)
 		{
 			_started = true;
-			y += 3
+			y += 3;
 			FlxTween.tween(this, { y:y - 8 }, 1.75, { type:FlxTween.PINGPONG, ease : FlxEase.sineInOut } );
 		}
 		
 	}
 	
 	
-	function LoadSprites():Void 
+	
+	public static function LoadSprites(spr : FlxSprite, name : String):Void 
 	{
 		if (name == "leaf")
 		{
-			trace("add leaf");
-			this.loadGraphic(AssetPaths.item_leaf__png, false, 16, 16);
+			spr.loadGraphic(AssetPaths.item_leaf__png, false, 16, 16);
 		}
 		else if (name == "stone")
 		{
-			trace("add stone");
-			this.loadGraphic(AssetPaths.item_stone__png, false, 16, 16);
+			spr.loadGraphic(AssetPaths.item_stone__png, false, 16, 16);
 		}
 		else if (name == "branch")
 		{
-			trace("add branch");
-			this.loadGraphic(AssetPaths.item_branch__png, false, 16, 16);
+			spr.loadGraphic(AssetPaths.item_branch__png, false, 16, 16);
 		}
 		else
 		{
-			this.makeGraphic(16, 16, FlxColor.BLUE);
-			this.alpha = 0.3;
+			spr.makeGraphic(16, 16, FlxColor.BLUE);
+			spr.alpha = 0.5;
 		}
-		cameras = [GP.CameraMain];
+		spr.cameras = [GP.CameraMain];
 	}
 	
 	
