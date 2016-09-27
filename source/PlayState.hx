@@ -94,7 +94,7 @@ class PlayState extends BasicState
 		{
 			//e.draw();
 		}
-		d.tracer.draw();
+		//d.tracer.draw();
 		
 		
 	}

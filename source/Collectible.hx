@@ -36,6 +36,7 @@ class Collectible extends ConditionalObject
 		if (alive)
 		{
 			this.alive = false;
+			trace("collecting "+_storyManagerID );
 			StoryManager.setBool(_storyManagerID, true);
 		}
 	}
@@ -53,21 +54,19 @@ class Collectible extends ConditionalObject
 		
 	}
 	
-	
-	
 	public static function LoadSprites(spr : FlxSprite, name : String):Void 
 	{
 		if (name == "leaf")
 		{
-			spr.loadGraphic(AssetPaths.item_leaf__png, false, 16, 16);
+			spr.loadGraphic(AssetPaths.item_leaf__png, false, 16, 16, true);
 		}
 		else if (name == "stone")
 		{
-			spr.loadGraphic(AssetPaths.item_stone__png, false, 16, 16);
+			spr.loadGraphic(AssetPaths.item_stone__png, false, 16, 16, true);
 		}
 		else if (name == "branch")
 		{
-			spr.loadGraphic(AssetPaths.item_branch__png, false, 16, 16);
+			spr.loadGraphic(AssetPaths.item_branch__png, false, 16, 16, true);
 		}
 		else
 		{
