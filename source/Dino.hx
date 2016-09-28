@@ -21,20 +21,23 @@ class Dino extends PlayableCharacter
 		// setting default movement variables
 		this.drag.set(GP.DinoMovementDragX, GP.DinoMovementDragY);
 		this.maxVelocity.set(GP.DinoMovementMaxVelocityX, GP.DinoMovementMaxVelocityY);
-		
 	}
 	
 	private override function loadSprite ()
 	{
 		super.loadSprite();
-		this.loadGraphic(AssetPaths.dino__png, true, 24, 18);
-		this.animation.add("idle", [5,5,5,4,5,5,5,5,5,6,7,8,9], 4);
-		this.animation.add("walk", [0, 1, 2, 3], 4);
-		this.animation.add("jumpUp", [15, 16, 17, 18], 4, false);
-		this.animation.add("jumpDown", [19], 6, true);
-		this.animation.play("idle");
-		setFacingFlip(FlxObject.LEFT, false, false);
-		setFacingFlip(FlxObject.RIGHT, true, false);
+		_sprite.loadGraphic(AssetPaths.dino__png, true, 24, 18);
+		_sprite.animation.add("idle", [5,5,5,4,5,5,5,5,5,6,7,8,9], 4);
+		_sprite.animation.add("walk", [0, 1, 2, 3], 4);
+		_sprite.animation.add("jumpUp", [15, 16, 17, 18], 4, false);
+		_sprite.animation.add("jumpDown", [19], 6, true);
+		_sprite.animation.play("idle");
+		_sprite.setFacingFlip(FlxObject.LEFT, false, false);
+		_sprite.setFacingFlip(FlxObject.RIGHT, true, false);
+		_sprite.offset.set(8, 4);
+		
+		this.makeGraphic(8, 12, FlxColor.WHITE, true);
+		this.alpha = 0.0;
 	}
 	
 	
@@ -46,7 +49,7 @@ class Dino extends PlayableCharacter
 			if (MyInput.JumpButtonJustPressed && _isOnGround)
 			{
 				_jumpTimer = 0.25;
-				this.animation.play("jumpUp", true);
+				_sprite.animation.play("jumpUp", true);
 				this.velocity.set(velocity.x, GP.DinoMovementJumpStrength);
 				SpawnStepsDirt();
 			}
@@ -59,7 +62,7 @@ class Dino extends PlayableCharacter
 		if(Math.abs(velocity.y) > 0.05)
 		{
 			if (velocity.y > 0 )
-			this.animation.play("jumpDown", false);
+			_sprite.animation.play("jumpDown", false);
 		}
 	}
 }

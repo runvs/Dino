@@ -33,7 +33,7 @@ class PlayableCharacter extends FlxSprite
 	
 	// tracer for Cameramovement (with another position)
 	public var tracer : FlxSprite;
-	
+	private var _sprite : FlxSprite;
 	
 	public function new() 
 	{
@@ -41,7 +41,7 @@ class PlayableCharacter extends FlxSprite
 		
 		loadSprite();
 		this.cameras = [GP.CameraMain];
-		
+		_sprite.cameras = [GP.CameraMain];
 		_jumpTimer = 0;
 		
 		
@@ -69,6 +69,10 @@ class PlayableCharacter extends FlxSprite
 		tracer.setPosition(x * GP.CameraMain.zoom, y * GP.CameraMain.zoom);
 		_stepsDirt.update(elapsed);
 		_stepsTimer -= elapsed;
+		
+		_sprite.setPosition(x, y);
+		_sprite.facing = this.facing;
+		_sprite.update(elapsed);
 	
 		_exitBar.setBarPosition(x, this.y -2);
 		_exitBar.update(elapsed);
@@ -83,7 +87,7 @@ class PlayableCharacter extends FlxSprite
 		{
 			if (Math.abs(velocity.x) != 0 )
 			{
-				this.animation.play("walk");
+				_sprite.animation.play("walk");
 				if (_stepsTimer <= 0 && touchedGround)
 				{
 					SpawnStepsDirt();
@@ -91,7 +95,7 @@ class PlayableCharacter extends FlxSprite
 			}
 			else 
 			{
-				this.animation.play("idle", false);
+				_sprite.animation.play("idle", false);
 			}
 		}
 	}
@@ -165,15 +169,16 @@ class PlayableCharacter extends FlxSprite
 	{
 		// tracer stuff
 		tracer = new FlxSprite();
-		
 		tracer.makeGraphic(120, 90, FlxColor.RED);
 		tracer.alpha = 0.5;
 		tracer.cameras = [GP.CameraOverlay];
+		_sprite = new FlxSprite();
 	}
 	
 	public override function draw()
 	{
 		_stepsDirt.draw();
+		_sprite.draw();
 		super.draw();
 		_exitBar.draw();
 	}
