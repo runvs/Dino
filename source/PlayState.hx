@@ -14,7 +14,7 @@ import flixel.util.FlxColor;
 
 class PlayState extends BasicState
 {
-	var d : Dino;
+	var d : PlayableCharacter;
 	var _actorName : String;
 	public function new ( n : String, a : String )
 	{
@@ -29,7 +29,14 @@ class PlayState extends BasicState
 		LoadLevel(_levelName);
 		
 		var hasBag : Bool = _actorName == "dinobag";
-		d = new Dino(hasBag);
+		if (hasBag)
+		{
+			d = new DinoBag();
+		}
+		else
+		{
+			d = new Dino();
+		}
 		jumpToEntryPoint(1);
 		
 	}
