@@ -74,6 +74,7 @@ class Collectible extends ConditionalObject
 			spr.alpha = 0.5;
 		}
 		spr.cameras = [GP.CameraMain];
+		spr.scale.set(0.5, 0.5);
 	}
 	
 	
