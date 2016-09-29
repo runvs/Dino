@@ -4,8 +4,10 @@
 	"positions":
 	[
 		{"name": "origin",   "x": 0,  "y": 0},
-		{"name": "entry",   "x": 144,  "y": 16},
-		{"name": "back",   "x": 48,  "y": 16}
+		{"name": "entry",   "x": 144,  "y": 32},
+		{"name": "right",   "x": 112,  "y": 32},
+		{"name": "back",   "x": 80,  "y": 32},
+		{"name": "back2",   "x": 81,  "y": 32}
 	],
 	"actors":
 	[
@@ -15,14 +17,24 @@
     "actions": 
 	[
 		{"time" : 0.0, "actor": "overlay", "type" : "fade", "p1":"0", "p2":"0.5"},
-		{ "time": 0.0,  "actor": "dinobag", "type": "animate", "p1": "idle2", "p2" : "true"},
 		
-		{ "time": 0.5,   "actor": "dinobag", "type": "speak", "p1":"house", "p2": "1.0"},
-		{ "time": 2.0,   "actor": "dinobag", "type": "speak", "p1":"heart", "p2": "1.0"},
+		{ "time" : 0.3,  "actor": "dinobag", "type": "animate", "p1": "walk", "p2" : "true"},
+		{ "time" : 0.3, "actor" : "dinobag", "type" : "move", "p1" : "right", "p2" : "2.0"},
 		
-		{ "time" : 3.5, "actor" : "dinobag", "type" : "move", "p1" : "back", "p2" : "3.0"},
+		{ "time" : 2.2,  "actor": "dinobag", "type": "animate", "p1": "idle", "p2" : "true"},
+		{ "time" : 2.5,   "actor": "dinobag", "type": "speak", "p1":"house", "p2": "1.0"},
+		{ "time" : 3.5,   "actor": "dinobag", "type": "speak", "p1":"heart", "p2": "1.0"},
 		
-		{ "time": 7.0,  "actor": "overlay", "type" : "fade", "p1":"1.0", "p2":"0.5"},
-		{ "time": 7.7, "actor": "global", "type" : "end", "p1":"s1_e0_play"}
+		{ "time" : 5.0,  "actor": "dinobag", "type": "animate", "p1": "walk", "p2" : "true"},
+		{ "time" : 5.0, "actor" : "dinobag", "type" : "move", "p1" : "back", "p2" : "2.0"},
+		{ "time" : 7.4, "actor" : "dinobag", "type" : "move", "p1" : "back2", "p2" : "0.2"},
+		
+		{ "time" : 7.2,  "actor": "dinobag", "type": "animate", "p1": "idle", "p2" : "true"},
+		{ "time" : 7.5,   "actor": "dinobag", "type": "speak", "p1":"leaf", "p2": "1.0"},
+		{ "time" : 8.5,   "actor": "dinobag", "type": "speak", "p1":"branch", "p2": "1.0"},
+		{ "time" : 9.5,   "actor": "dinobag", "type": "speak", "p1":"stone", "p2": "1.0"},		
+		
+		{ "time": 11.0,  "actor": "overlay", "type" : "fade", "p1":"1.0", "p2":"0.5"},
+		{ "time": 11.7, "actor": "global", "type" : "end", "p1":"s1_e1_play"}
     ]
 }

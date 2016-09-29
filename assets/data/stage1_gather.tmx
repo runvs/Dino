@@ -27,7 +27,7 @@
   </object>
   <object id="94" name="exitCave" type="teleport" x="72" y="136" width="24" height="24">
    <properties>
-    <property name="EntryID" value="2"/>
+    <property name="entryID" value="2"/>
     <property name="level" value="stage1_cave.tmx"/>
     <property name="type" value="enter"/>
    </properties>

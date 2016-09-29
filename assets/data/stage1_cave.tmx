@@ -20,7 +20,7 @@
   </data>
  </layer>
  <objectgroup name="exits">
-  <object id="89" name="entryE" type="entry" x="48" y="16" width="16" height="32">
+  <object id="89" name="entryE" type="entry" x="80" y="16" width="16" height="32">
    <properties>
     <property name="ID" value="1"/>
    </properties>

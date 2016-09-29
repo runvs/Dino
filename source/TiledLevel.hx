@@ -319,7 +319,9 @@ class TiledLevel extends TiledMap
 				t.makeGraphic(o.width, o.height, FlxColor.YELLOW);
 				t.alpha = 0.2;
 				t.targetLevel= o.properties.get("level");
+				
 				t.type = o.properties.get("type");
+				t.entryID= o.properties.get("entryID");
 				t.createConditions(o.properties.get("conditions"));
 				exits.push(t);
 			case "entry":

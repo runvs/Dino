@@ -80,11 +80,27 @@ class SpeechBubble extends FlxSprite
 				_icon.animation.add("idle", [2,0,1], 8);
 				_icon.animation.play("idle");
 		}
-		else if (i == "fish")
-		{
-				_icon.loadGraphic(AssetPaths.icon_house__png, false, 16, 16);
-		}
 		else if (i == "apple")
+		{
+				_icon.loadGraphic(AssetPaths.item_apple__png, false, 16, 16);
+				_icon.scale.set(0.5, 0.5);
+		}
+		else if (i == "branch")
+		{
+				_icon.loadGraphic(AssetPaths.item_branch__png, false, 16, 16);
+				_icon.scale.set(0.5, 0.5);
+		}
+		else if (i == "leaf")
+		{
+				_icon.loadGraphic(AssetPaths.item_leaf__png, false, 16, 16);
+				_icon.scale.set(0.5, 0.5);
+		}
+		else if (i == "stone")
+		{
+				_icon.loadGraphic(AssetPaths.item_stone__png, false, 16, 16);
+				_icon.scale.set(0.5, 0.5);
+		}
+		else if (i == "fish")
 		{
 				_icon.loadGraphic(AssetPaths.icon_house__png, false, 16, 16);
 		}

@@ -22,6 +22,6 @@
 		{ "time": 3.0,   "actor": "dinobag", "type": "speak", "p1":"heart", "p2": "2.0"},
 		
 		{ "time": 5.1,  "actor": "overlay", "type" : "fade", "p1":"1.0", "p2":"0.5"},
-		{ "time": 5.8, "actor": "global", "type" : "end", "p1":"s1_e0_play"}
+		{ "time": 5.8, "actor": "global", "type" : "end", "p1":"s1_e0_intro"}
     ]
 }
