@@ -1,0 +1,28 @@
+{
+	"level" : "assets/data/stage1_cave.tmx",
+	"follow" : "dinobag",
+	"positions":
+	[
+		{"name": "origin",   "x": 0,  "y": 0},
+		{"name": "entry",   "x": 144,  "y": 16},
+		{"name": "back",   "x": 48,  "y": 16}
+	],
+	"actors":
+	[
+		{"name": "dinobag", "position": "entry"},
+		{"name": "overlay", "position": "origin"}
+	],
+    "actions": 
+	[
+		{"time" : 0.0, "actor": "overlay", "type" : "fade", "p1":"0", "p2":"0.5"},
+		{ "time": 0.0,  "actor": "dinobag", "type": "animate", "p1": "idle2", "p2" : "true"},
+		
+		{ "time": 0.5,   "actor": "dinobag", "type": "speak", "p1":"house", "p2": "1.0"},
+		{ "time": 2.0,   "actor": "dinobag", "type": "speak", "p1":"heart", "p2": "1.0"},
+		
+		{ "time" : 3.5, "actor" : "dinobag", "type" : "move", "p1" : "back", "p2" : "3.0"},
+		
+		{ "time": 7.0,  "actor": "overlay", "type" : "fade", "p1":"1.0", "p2":"0.5"},
+		{ "time": 7.7, "actor": "global", "type" : "end", "p1":"s1_e0_play"}
+    ]
+}

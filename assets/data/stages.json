@@ -5,7 +5,7 @@
 			"name" 			: "s0_e0_intro", 
 			"stage" 		: 0, "episode" : 0, 
 			"type" 			: "cut", 
-			"level"			: "assets/data/scene_test.json",
+			"level"			: "assets/data/stage0_intro.json",
 			"requirements" 	: [],
 			"storysettings" : []
 		},
@@ -22,14 +22,25 @@
 			"name" 			: "s0_e2_outro", 
 			"stage" 		: 0, "episode" : 2, 
 			"type" 			: "cut", 
-			"level"			: "assets/data/found_cave.json",
+			"level"			: "assets/data/stage0_found_cave.json",
 			"requirements" 	: [],
 			"storysettings" : []
 		},
 		
+		
+		
+		
 		{
-			"name" 			: "s1_e0_play", 
-			"stage" 		: 1, "episode" : 0, 
+			"name" 			: "s1_e0_intro", 
+			"stage" 		: 1, "episode" : 0,
+			"type" 			: "cut", 
+			"level"			: "assets/data/stage1_intro.json",
+			"requirements" 	: ["episode0complete"],
+			"storysettings" : []
+		},
+		{
+			"name" 			: "s1_e1_play", 
+			"stage" 		: 1, "episode" : 1, 
 			"type" 			: "gather", 
 			"actor"			: "dino",
 			"level"			: "assets/data/stage1_cave.tmx",

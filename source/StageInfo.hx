@@ -13,6 +13,8 @@ class StageInfo
 	
 	public static function loadStages(path : String = "assets/data/stages.json")
 	{
+		CheckJsons();
+		
 		trace("load stages");
 		AllStages = new Array<StageItem>();
 		var data : Stages;
@@ -52,6 +54,14 @@ class StageInfo
 		}
 		
 		throw "ERROR: Could not find a Stage with name " + n;
+	}
+	
+	static private function CheckJsons():Void 
+	{
+		Validator.validateJson("assets/data/stages.json");
+		Validator.validateJson("assets/data/stage0_intro.json");
+		Validator.validateJson("assets/data/stage0_found_cave.json");
+		Validator.validateJson("assets/data/stage1_intro.json");
 	}
 }
 
