@@ -45,6 +45,8 @@
    <property name="background" value="background_morning.png"/>
    <property name="backgroundSizeX" value="800"/>
    <property name="backgroundSizeY" value="600"/>
+   <property name="moon" value="true"/>
+   <property name="stars" value="true"/>
   </properties>
  </objectgroup>
 </map>

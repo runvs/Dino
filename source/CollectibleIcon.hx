@@ -51,17 +51,15 @@ class CollectibleIcon extends FlxSprite
 		
 		_collectedIcon.setPosition(x, y);
 		//trace("checking " + "has_" + name);
-		if (StoryManager.getBool("has_" + name))
+		if (!collected && StoryManager.getBool("has_" + name))
 		{
-			trace("!! COLLECTED");
+			//trace("!! COLLECTED");
 			collected = true;
 		}
 	}
 	
 	public override function draw ()
 	{
-		//trace("draw");
-		//trace(this.getScreenPosition());
 		super.draw();
 		
 		
