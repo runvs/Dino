@@ -29,6 +29,9 @@
 
 	<set name="BUILD_DIR" value="export" />
 	<classpath name="source" />
+	<classpath name="source/CutScene" />
+	<classpath name="source/RunvsTools" />
+	<classpath name="source/PlayableCharacter" />
 	<assets path="assets" />
 
 	<!-- _______________________________ Libraries ______________________________ -->

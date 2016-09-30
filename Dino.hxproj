@@ -20,6 +20,9 @@
     <class path="C:\HaxeToolkit\haxe\lib\lime\2,9,1" />
     <class path="C:\HaxeToolkit\haxe\lib\flixel-addons\2,0,0" />
     <class path="source" />
+    <class path="source\CutScene" />
+    <class path="source\RunvsTools" />
+    <class path="source\PlayableCharacter" />
     <class path="C:\HaxeToolkit\haxe\lib\openfl\3,6,1\extern" />
     <class path="export\windows\cpp\haxe" />
   </classpaths>

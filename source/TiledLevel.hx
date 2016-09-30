@@ -321,7 +321,7 @@ class TiledLevel extends TiledMap
 				t.targetLevel= o.properties.get("level");
 				
 				t.type = o.properties.get("type");
-				t.entryID= o.properties.get("entryID");
+				t.entryID= Std.parseInt(o.properties.get("entryID"));
 				t.createConditions(o.properties.get("conditions"));
 				exits.push(t);
 			case "entry":
