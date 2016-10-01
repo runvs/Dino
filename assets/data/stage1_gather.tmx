@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="12" tilewidth="16" tileheight="16" nextobjectid="104">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="12" tilewidth="16" tileheight="16" nextobjectid="105">
  <tileset firstgid="1" name="tileset.png" tilewidth="16" tileheight="16" tilecount="128" columns="8">
   <image source="../images/tileset.png" width="128" height="256"/>
  </tileset>
@@ -30,6 +30,13 @@
     <property name="entryID" value="2"/>
     <property name="level" value="stage1_cave.tmx"/>
     <property name="type" value="enter"/>
+   </properties>
+  </object>
+  <object id="104" name="exit_cutscene" type="exit" x="80" y="136" width="24" height="24">
+   <properties>
+    <property name="conditions" value="has_leaf, has_branch, has_stone"/>
+    <property name="name" value="s1_e2_build"/>
+    <property name="type" value="touch"/>
    </properties>
   </object>
  </objectgroup>

@@ -36,13 +36,15 @@ class ConditionalObject extends FlxSprite
 		if (s == null) return; 	// nothing to do here
 		if (s == "") return;
 		
+		//trace("creating conditions");
 		var split : Array<String> = s.split(",");
 		for (i in 0... split.length)
 		{
+			
 			var c : String = split[i];
 			c = StringTools.ltrim(c);
 			c = StringTools.rtrim(c);
-			
+			//trace("    " + c.toLowerCase());
 			conditions.push(c.toLowerCase());
 		}
 	}
