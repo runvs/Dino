@@ -27,7 +27,7 @@
   </object>
   <object id="94" name="exitCave" type="teleport" x="168" y="24" width="16" height="24">
    <properties>
-    <property name="level" value="stage1_gather.tmx"/>
+    <property name="level" value="stage1_gather_full.tmx"/>
     <property name="type" value="enter"/>
    </properties>
   </object>
