@@ -69,16 +69,18 @@ class BasicState extends FlxState
 	
 		GP.CameraUnderlay.setScrollBounds( 
 		5 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.width - 5) * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
-		-10 * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, (_level.height - 3)  * GP.WorldTileSizeInPixel* GP.CameraMain.zoom);
+		-1 * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, (_level.height - 3)  * GP.WorldTileSizeInPixel* GP.CameraMain.zoom);
 		
 		GP.CameraMain.setScrollBounds(
 		5 * GP.WorldTileSizeInPixel, (_level.width - 5) * GP.WorldTileSizeInPixel, 
-		-10 * GP.WorldTileSizeInPixel, (_level.height- 3) * GP.WorldTileSizeInPixel);
+		-1 * GP.WorldTileSizeInPixel, (_level.height- 3) * GP.WorldTileSizeInPixel);
 		
 		trace(GP.CameraMain.minScrollX + " " +  GP.CameraMain.maxScrollX);
 		GP.CameraOverlay.setScrollBounds( 
 		5 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.width - 5) * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
-		-10 * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, (_level.height - 3)  * GP.WorldTileSizeInPixel* GP.CameraMain.zoom);
+		-10 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.height - 3)  * GP.WorldTileSizeInPixel * GP.CameraMain.zoom);
+		
+		FlxG.worldBounds.set(0, 0, _level.width * GP.WorldTileSizeInPixel, _level.height * GP.WorldTileSizeInPixel);
 	}
 	
 	// should be overwritten by child classes
@@ -139,6 +141,9 @@ class BasicState extends FlxState
 		internalDraw();
 		
 		_level.topTiles.draw();
+
+		
+		//_level.collisionMap.draw();
 		
 		_vignette.draw();
 		_overlay.draw();

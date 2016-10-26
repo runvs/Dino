@@ -69,6 +69,7 @@ class StageItem extends FlxSpriteGroup
 	
 	public function startStage()
 	{
+		MyInput.reset();
 		if (_type == "play")
 		{
 			FlxG.switchState(new PlayState(_level, actor));

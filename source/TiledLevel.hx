@@ -231,8 +231,10 @@ class TiledLevel extends TiledMap
 		{
 			//trace("addinc collision sprite at " + Std.string(x) + " " + Std.string(y) );
 			var c : FlxSprite = new FlxSprite(x * 16, y * 16);
-			c.makeGraphic(16, 16);
+			c.makeGraphic(16, 16, FlxColor.RED);
+			c.alpha = 0.35;
 			c.immovable = true;
+		c.cameras = [GP.CameraMain];
 			collisionMap.add(c);
 		}
 		

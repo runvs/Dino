@@ -92,6 +92,7 @@ class MenuState extends FlxState
 		//trace("Input");
 		if (MyInput.AttackButtonJustPressed || MyInput.JumpButtonJustPressed )
 		{
+			MyInput.reset();
 			_stages[_currentSelectionY][_currentSelectionX].startStage();
 		}
 		//trace("end");

@@ -20,6 +20,12 @@ class MyInput
 	public static var InventoryButtonJustPressed : Bool;
 	
 	public static var GamePadConnected 			 : Bool;
+
+	public static function reset()
+	{
+		xVal = yVal =0;
+		DashButtonJustPressed = JumpButtonJustPressed = AttackButtonJustPressed = SpecialButtonPressed = InventoryButtonJustPressed = false;
+	}
 	
 	public static function update ()
 	{
