@@ -20,8 +20,8 @@ class MenuState extends FlxState
 
 	var _selectionSprite : FlxSprite;
 	
-	var _currentSelectionX : Int;
-	var _currentSelectionY : Int;
+	var _currentSelectionX : Int = 0;
+	var _currentSelectionY : Int = 0;
 	
 	var _inputTimer : Float = 0;
 	

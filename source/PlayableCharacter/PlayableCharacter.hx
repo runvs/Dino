@@ -50,7 +50,7 @@ class PlayableCharacter extends FlxSprite
 		_stepsDirt.cameras = [GP.CameraMain];
 		
 		// exitbar stuff
-		_exitBar = new HudBar(0, 0, 16, 4, false);
+		_exitBar = new HudBar(0, 0, 8, 4, false);
 		_exitBar.scrollFactor.set(1, 1);
 		_exitBar._background.color = FlxColor.GRAY;
 		_exitBar._background.alpha = 0.4;
@@ -153,7 +153,7 @@ class PlayableCharacter extends FlxSprite
 		
 		if (isOnExit && vy < -0.1)
 		{
-			_exitBar.health += FlxG.elapsed * 1;
+			_exitBar.health += FlxG.elapsed * 1.5;
 		}
 		else
 		{

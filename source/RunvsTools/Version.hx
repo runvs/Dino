@@ -9,8 +9,10 @@ import haxe.macro.Expr;
 class Version
 {
 	
+	// macro function for getting the build date
 	public static macro function getBuildDate() : Expr
 	{
+		// display is a 
 		#if !display
 			var d : Date = Date.now();
 			var date : String = d.toString();

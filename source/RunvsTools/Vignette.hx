@@ -28,8 +28,18 @@ class Vignette extends FlxSprite
 				var dx = this.width / 2 - i;
 				var dy = this.height / 2 - j;
 				var dist = dx * dx + dy * dy;
-				var a = Math.pow(dist / distmax/distmax / rangescale/rangescale, exponent);
-				this.pixels.setPixel32(i, j, FlxColor.fromRGBFloat(0,0,0, a));
+				var a = Math.pow(dist / distmax / distmax / rangescale / rangescale, exponent);
+				a = Math.min(a, 1);
+				if ( i == j)
+				{
+					//trace((dist / distmax / distmax / rangescale / rangescale) + " " + a);
+				}
+				#if !neko
+				this.pixels.setPixel32(i, j, FlxColor.fromRGBFloat(0, 0, 0, a));
+				#else
+				a = a * 255;
+				this.pixels.setPixel32(i, j, FlxColor.fromRGB(0,0,0,Std.int(a)));
+				#end
 			}
 		}
 		this.cameras = [_cam];
