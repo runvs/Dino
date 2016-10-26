@@ -68,16 +68,16 @@ class BasicState extends FlxState
 		_level = new TiledLevel(_levelName);
 	
 		GP.CameraUnderlay.setScrollBounds( 
-		1 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.width - 5) * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
+		5 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.width - 5) * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
 		-10 * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, (_level.height - 3)  * GP.WorldTileSizeInPixel* GP.CameraMain.zoom);
 		
 		GP.CameraMain.setScrollBounds(
-		1 * GP.WorldTileSizeInPixel, (_level.width - 5) * GP.WorldTileSizeInPixel, 
+		5 * GP.WorldTileSizeInPixel, (_level.width - 5) * GP.WorldTileSizeInPixel, 
 		-10 * GP.WorldTileSizeInPixel, (_level.height- 3) * GP.WorldTileSizeInPixel);
 		
 		trace(GP.CameraMain.minScrollX + " " +  GP.CameraMain.maxScrollX);
 		GP.CameraOverlay.setScrollBounds( 
-		1 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.width - 5) * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
+		5 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.width - 5) * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
 		-10 * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, (_level.height - 3)  * GP.WorldTileSizeInPixel* GP.CameraMain.zoom);
 	}
 	
