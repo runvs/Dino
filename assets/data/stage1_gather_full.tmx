@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="16" tileheight="16" nextobjectid="105">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="16" tileheight="16" nextobjectid="107">
  <tileset firstgid="1" name="tileset.png" tilewidth="16" tileheight="16" tilecount="128" columns="8">
   <image source="../images/tileset.png" width="128" height="256"/>
  </tileset>
@@ -39,6 +39,7 @@
     <property name="type" value="touch"/>
    </properties>
   </object>
+  <object id="105" name="Exit Pond" x="848" y="176" width="32" height="32"/>
  </objectgroup>
  <layer name="top" width="55" height="27">
   <properties>

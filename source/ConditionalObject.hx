@@ -10,7 +10,8 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 class ConditionalObject extends FlxSprite
 {
 
-	public var conditions: Array<String>;
+	public var conditions: Array<String>; 
+	public var name :String;
 	
 	public function new() 
 	{

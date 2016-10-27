@@ -8,32 +8,9 @@ import flixel.util.FlxColor;
  */
 class SpriteFunctions
 {
-	//static public function shadeSprite (s:FlxSprite)
-	//{
-		//trace("shadesprite");
-		//s.pixels.lock();
-		//for (i in 0... Std.int(s.width))
-		//{
-			//for (j in 0... Std.int(s.height))
-			//{
-				//var ci : Int = s.pixels.getPixel32(i, j);
-				//var c : FlxColor = FlxColor.fromInt(ci);
-				//if (c.alpha == 0)
-				//{
-					//s.pixels.setPixel32(i, j, FlxColor.fromRGBFloat(0,0,0, 0));
-				//}
-				//else 
-				//{
-					//s.pixels.setPixel32(i, j, FlxColor.fromRGBFloat(1,1,1, 1));
-				//}
-			//}
-		//}
-		//s.pixels.unlock();
-	//}
-	
 	static public function shadeSpriteWithBorder (s:FlxSprite, centerColor:FlxColor = FlxColor.WHITE, borderColor : FlxColor = FlxColor.GRAY)
 	{
-		trace("shadesprite");
+		//trace("shadesprite");
 		s.pixels.lock();
 		for (i in 0... Std.int(s.width))
 		{

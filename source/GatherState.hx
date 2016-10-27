@@ -11,9 +11,12 @@ import flixel.util.FlxColor;
 class GatherState extends PlayState
 {
 
+	// Collectibles are shown in the hud. this array is a list of those icons
+	private var _collectiblesIcons : Array<CollectibleIcon>;
 	
-	private var _collectiblesRequired : Array<CollectibleIcon>;
 	private var _collectiblesList : Array<String>;
+	private var _indicator : TargetIndicator;
+	private var _gatherID : Int;
 	
 	public function new(n:String, a : String) 
 	{
@@ -24,8 +27,11 @@ class GatherState extends PlayState
 	public override function create() : Void
 	{
 		super.create();
+		_gatherID = 0;
 		
 		createCollectibleListIntern();
+		_indicator = new TargetIndicator(this.d);
+		SetTarget();
 	}
 	
 	public function createCollectibleList(c : Array<String> )
@@ -33,16 +39,78 @@ class GatherState extends PlayState
 		_collectiblesList = c;
 		
 	}
+
+	public override function LoadLevel(l : String)
+	{
+		super.LoadLevel(l);
+		SetTarget();
+	}
 	
 	private function createCollectibleListIntern ()
 	{
-		_collectiblesRequired = new Array<CollectibleIcon>();
+		_collectiblesIcons = new Array<CollectibleIcon>();
 		for (i in 0 ... _collectiblesList.length)
 		{
 			var s : CollectibleIcon  = new CollectibleIcon(_collectiblesList[i]);
 			s.setPosition(4 + i * 20, 4);
 			//s.alpha = 0.3;
-			_collectiblesRequired.push(s);
+			_collectiblesIcons.push(s);
+		}
+	}
+	
+	private function SetTarget():Void 
+	{
+		trace("settarget " + _gatherID);
+		if (_gatherID >= 0 && _gatherID < _collectiblesList.length)
+		{
+			var cName : String = _collectiblesList[_gatherID];
+			trace ("Name: " + cName);
+			var condObject : ConditionalObject = _level.getConditionalObjectByName(cName);
+			_indicator.SetTarget(condObject);
+			
+			if (condObject != null)
+			{
+				trace("found condObject");
+				if (Std.is(condObject, Collectible))
+				{
+					var coll : Collectible = cast condObject;
+					trace("checking " + coll._storyManagerID);
+					if (StoryManager.getBool(coll._storyManagerID))
+					{
+						trace("increase gatherID");
+						_gatherID += 1;
+						SetTarget();
+					}
+				}
+			}
+		}
+		else
+		{
+			_indicator.SetTarget(null);
+		}
+		
+	}
+	
+	function ClearCollectibles():Void 
+	{
+		for (i in 0..._level.collectibles.length)
+		{
+			var c : Collectible = _level.collectibles[i];
+			if (!c.alive)
+			{
+				_level.collectibles.remove(c);
+			}
+			if (i == _level.collectibles.length - 1) break;
+		}
+	
+	}
+	
+	function UpdateIcons():Void 
+	{
+		for (i in 0..._collectiblesIcons.length)
+		{
+			var s : CollectibleIcon = _collectiblesIcons[i];
+			s.update(FlxG.elapsed);
 		}
 	}
 	
@@ -58,37 +126,27 @@ class GatherState extends PlayState
 				if (MyInput.AttackButtonJustPressed)
 				{
 					c.collectMe();
+					SetTarget();
 				}
 			}
 		}
-		
-		for (i in 0..._level.collectibles.length)
-		{
-			var c : Collectible = _level.collectibles[i];
-			if (!c.alive)
-			{
-				_level.collectibles.remove(c);
-			}
-			if (i == _level.collectibles.length - 1) break;
-		}
-		
-		
 	}
 	
 	public override function internalUpdate(elapsed:Float)
 	{
 		super.internalUpdate(elapsed);
+		
 		for (c in _level.collectibles)
 		{
 			c.update(elapsed);
 		}
-		CheckCollectibles();
-		for (i in 0..._collectiblesRequired.length)
-		{
-			var s : CollectibleIcon = _collectiblesRequired[i];
-			s.update(elapsed);
-		}
 		
+		CheckCollectibles();
+		ClearCollectibles();	
+		UpdateIcons();
+		
+		
+		_indicator.update(elapsed);
 	}
 	
 	override public function internalDraw() 
@@ -98,14 +156,15 @@ class GatherState extends PlayState
 			c.draw();
 		}
 				//_collectiblesRequired.draw();
-		for (i in 0..._collectiblesRequired.length)
+		for (i in 0..._collectiblesIcons.length)
 		{
-			var s : CollectibleIcon = _collectiblesRequired[i];
+			var s : CollectibleIcon = _collectiblesIcons[i];
 			s.draw();
 		}
 		
 		super.internalDraw();
-		
+		//d.tracer.draw();
+		_indicator.draw();
 
 	}
 }

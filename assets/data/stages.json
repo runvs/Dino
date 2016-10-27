@@ -46,7 +46,7 @@
 			"level"			: "assets/data/stage1_cave.tmx",
 			"requirements" 	: ["stage0complete"],
 			"storysettings" : [],
-			"gather"		: ["stone", "leaf", "branch"]
+			"gather"		: ["branch", "leaf", "stone"]
 		},
 		{
 			"name" 			: "s1_e2_build", 

@@ -361,6 +361,44 @@ class TiledLevel extends TiledMap
 			}
 		}
 	}
+
+	public function getCollectibleByName (name : String) : Collectible
+	{
+		for (i in 0 ... this.collectibles.length)
+		{
+			var c : Collectible = this.collectibles[i];
+			//if (!c.alive) continue;
+			if ( c.name == name)
+			{
+				return c;
+			}
+		}
+		return null;
+	}
+	
+	public function getConditionalObjectByName(name : String) : ConditionalObject
+	{
+		for (i in 0 ... this.collectibles.length)
+		{
+			var c : ConditionalObject = this.collectibles[i];
+			//if (!c.alive) continue;
+			if ( c.name == name)
+			{
+				return c;
+			}
+		}
+	
+		for (i in 0 ... exits.length)
+		{
+			var e : LevelLeaver = exits[i];
+			if (!e.alive) continue;
+			if (e.name == name)
+			{
+				return e;
+			}
+		}
+		return null;
+	}
 	
 	public function getEntryPoint(tID: Int) : FlxPoint
 	{

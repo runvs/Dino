@@ -12,13 +12,11 @@ import flixel.util.FlxColor;
  */
 class Collectible extends ConditionalObject
 {
-	
-	public var name : String;
-	private var _storyManagerID : String;
+	public var _storyManagerID (default, null) : String;
 	
 	private var _icon : FlxSprite;
 	
-	private var _started : Bool = false;
+	public var _started : Bool = false;
 	
 	public function new(n:String) 
 	{
