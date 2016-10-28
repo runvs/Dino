@@ -25,8 +25,11 @@ class PlayState extends BasicState
 	
 	override public function create():Void
 	{
+		trace("Playstate create");
+		
 		super.create();
 		LoadLevel(_levelName);
+		trace("Playstate create mid");
 		
 		var hasBag : Bool = _actorName == "dinobag";
 		if (hasBag)
@@ -37,7 +40,9 @@ class PlayState extends BasicState
 		{
 			d = new Dino();
 		}
+		
 		jumpToEntryPoint(1);
+		trace("Playstate create end");
 		
 	}
 	

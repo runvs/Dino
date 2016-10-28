@@ -54,7 +54,7 @@ class TargetIndicator extends FlxSprite
 	}
 	public function SetTarget (ta : ConditionalObject)
 	{
-		if (ta != null)
+		//if (ta != null)
 		{
 			_target = ta;
 		}

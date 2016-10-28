@@ -33,10 +33,11 @@ class BasicState extends FlxState
 	
 	public override function create()  
 	{
-		//trace("BasicState Create");
+		trace("BasicState Create");
 		super.create();
 		GP.CamerasCreate();
 				
+		trace ("Basicstate create moon");
 		_moonSprite = new FlxSprite(100, -100);
 		_moonSprite.loadGraphic(AssetPaths.moon__png, false, 450, 450);
 		_moonSprite.cameras = [GP.CameraUnderlay];
@@ -45,11 +46,13 @@ class BasicState extends FlxState
 		_moonSprite.alpha = 1.0;
 		_moonSprite.scale.set(0.5, 0.5);
 		
+		trace ("Basicstate create flakes n stars");
 		_flakes = new Flakes(GP.CameraMain, 10);
 		
 		_stars = new StarField(GP.CameraUnderlay, 10);
 		_stars.scrollFactor.set(0.1, 0);
 		
+		trace ("Basicstate create vignette");
 		_vignette = new Vignette(GP.CameraOverlay);
 		_overlay = new FlxSprite(0, 0);
 		_overlay.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
@@ -57,8 +60,7 @@ class BasicState extends FlxState
 		_overlay.alpha = 1.0;
 		FlxTween.tween(_overlay, { alpha:0.0 }, 0.5);
 		
-		
-		
+		trace("Basicstate create end");
 	}
 	
 	public function LoadLevel(l : String)
@@ -82,9 +84,9 @@ class BasicState extends FlxState
 		1.5* GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.width-0.5) * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
 		-1 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.height)  * GP.WorldTileSizeInPixel * GP.CameraMain.zoom);
 				
-		trace(GP.CameraUnderlay.minScrollX + " " + GP.CameraUnderlay.maxScrollX + " " + GP.CameraUnderlay.minScrollY + " " + GP.CameraUnderlay.maxScrollY);
-		trace(GP.CameraMain.minScrollX + " " + GP.CameraMain.maxScrollX + " " + GP.CameraMain.minScrollY + " " + GP.CameraMain.maxScrollY);
-		trace(GP.CameraOverlay.minScrollX + " " + GP.CameraOverlay.maxScrollX + " " + GP.CameraOverlay.minScrollY + " " + GP.CameraOverlay.maxScrollY);
+		//trace(GP.CameraUnderlay.minScrollX + " " + GP.CameraUnderlay.maxScrollX + " " + GP.CameraUnderlay.minScrollY + " " + GP.CameraUnderlay.maxScrollY);
+		//trace(GP.CameraMain.minScrollX + " " + GP.CameraMain.maxScrollX + " " + GP.CameraMain.minScrollY + " " + GP.CameraMain.maxScrollY);
+		//trace(GP.CameraOverlay.minScrollX + " " + GP.CameraOverlay.maxScrollX + " " + GP.CameraOverlay.minScrollY + " " + GP.CameraOverlay.maxScrollY);
 		
 	}
 	
@@ -97,6 +99,7 @@ class BasicState extends FlxState
 	
 	public override function update(elapsed: Float) : Void 
 	{
+		//trace("basicstate update");
 		super.update(elapsed);
 		_flakes.update(elapsed);
 		_stars.update(elapsed);
@@ -113,7 +116,7 @@ class BasicState extends FlxState
 			
 			internalUpdate(elapsed);
 		}
-		
+		//trace("basicstate update end");
 	}
 	
 	// should be overwritten by child classes

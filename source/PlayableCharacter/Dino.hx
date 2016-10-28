@@ -36,7 +36,7 @@ class Dino extends PlayableCharacter
 		_sprite.setFacingFlip(FlxObject.RIGHT, true, false);
 		_sprite.offset.set(8, 4);
 		
-		this.makeGraphic(8, 12, FlxColor.WHITE, true);
+		this.makeGraphic(8, 13, FlxColor.WHITE, true);
 		this.alpha = 0.0;
 	}
 	

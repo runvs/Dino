@@ -26,12 +26,15 @@ class GatherState extends PlayState
 
 	public override function create() : Void
 	{
+		trace("gatherstate create");
 		super.create();
 		_gatherID = 0;
 		
 		createCollectibleListIntern();
 		_indicator = new TargetIndicator(this.d);
+		trace("gatherstate create mid");
 		SetTarget();
+		trace("create done");
 	}
 	
 	public function createCollectibleList(c : Array<String> )
@@ -44,6 +47,7 @@ class GatherState extends PlayState
 	{
 		super.LoadLevel(l);
 		SetTarget();
+		trace("loadlevel done");
 	}
 	
 	private function createCollectibleListIntern ()
@@ -60,6 +64,7 @@ class GatherState extends PlayState
 	
 	private function SetTarget():Void 
 	{
+		if (_indicator == null) return;
 		trace("settarget " + _gatherID);
 		if (_gatherID >= 0 && _gatherID < _collectiblesList.length)
 		{
