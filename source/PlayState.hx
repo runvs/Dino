@@ -64,6 +64,25 @@ class PlayState extends BasicState
 		{
 			e.update(elapsed);
 		}
+		
+		for (h in _level.hurtingTiles)
+		{
+			if (FlxG.overlap(d, h))
+			{
+				trace("overlap");
+				if (FlxG.pixelPerfectOverlap(d, h, 0))
+				{
+					trace("pp overlap");
+					RestartMap();
+				}
+			}
+		}
+	}
+	
+	function RestartMap() 
+	{
+		LoadLevel(_levelName);
+		jumpToEntryPoint(1);
 	}
 	
 	

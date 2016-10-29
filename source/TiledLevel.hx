@@ -237,10 +237,14 @@ class TiledLevel extends TiledMap
 		else if (tileType == TileIDHurtingBottom + 1)
 		{
 			trace("load hurting Bot");
+			var h : HurtingSprite = new HurtingSpriteBot(x * GP.WorldTileSizeInPixel, y * GP.WorldTileSizeInPixel);
+			hurtingTiles.push(h);
 		}
 		else if (tileType == TileIDHurtingTopFalling + 1)
 		{
 			trace("load hurting Falling");
+			var h : HurtingSprite = new HurtingSpriteTopFalling(x * GP.WorldTileSizeInPixel, y * GP.WorldTileSizeInPixel);
+			hurtingTiles.push(h);
 		}
 		else
 		{
