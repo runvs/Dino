@@ -108,6 +108,10 @@ class BasicState extends FlxState
 		_level.foregroundTiles.update(elapsed);
 		_level.foregroundTiles2.update(elapsed);
 		_level.topTiles.update(elapsed);
+		for (h in _level.hurtingTiles)
+		{
+			h.update(elapsed);
+		}
 		
 		if (!inTransition)
 		{
@@ -144,6 +148,11 @@ class BasicState extends FlxState
 		
 		_level.foregroundTiles.draw();
 		_level.foregroundTiles2.draw();
+		
+		for (h in _level.hurtingTiles)
+		{
+			//h.draw();
+		}
 		
 		super.draw();
 		internalDraw();

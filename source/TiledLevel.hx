@@ -52,6 +52,7 @@ class TiledLevel extends TiledMap
 	// the images are not used but a separate collider.
 	// Those colloders will be stored in this collisionMap
 	public var collisionMap : FlxSpriteGroup;
+	public var hurtingTiles : Array<HurtingSprite>;
 	
 	
 	public var exits : Array<LevelLeaver>;
@@ -61,6 +62,10 @@ class TiledLevel extends TiledMap
 	public var drawStars : Bool = false;
 	public var drawMoon : Bool = false;
 	
+	
+	public static var TileIDHurtingBottom 		(default, null) 	: Int = 38;
+	public static var TileIDHurtingTop    		(default, null)		: Int = 39;
+	public static var TileIDHurtingTopFalling 	(default, null)		: Int = 55;
 	
 	public function new(tiledLevel:Dynamic)
 	{
@@ -81,6 +86,7 @@ class TiledLevel extends TiledMap
 		exits = new Array<LevelLeaver>();
 		entries = new Array<Entry>();
 		collectibles = new Array<Collectible>();
+		hurtingTiles = new Array<HurtingSprite>();
 		
 		// Load Tile Maps
 		for (layer in layers)
@@ -120,16 +126,22 @@ class TiledLevel extends TiledMap
 				for (j in 0...tilemap.heightInTiles)
 				{			
 					var tileType : Int = tilemap.getTile(i, j);
-					var s : FlxSprite = new FlxSprite(i * 16, j * 16);
+					var s : FlxSprite = new FlxSprite(i * GP.WorldTileSizeInPixel, j * GP.WorldTileSizeInPixel);
 					s.immovable = true;
-					s.loadGraphic(AssetPaths.tileset__png, true, 16, 16);
+					s.loadGraphic(AssetPaths.tileset__png, true, GP.WorldTileSizeInPixel, GP.WorldTileSizeInPixel);
 					s.animation.add("idle", [tileType-1]);
 					s.animation.play("idle");
 					s.cameras = [GP.CameraMain];
 					if (tileLayer.name == "tiles")
 					{
+						
+						if (CreateSpecialTile(i, j, tileType))
+						{
+							continue;
+						}
 						foregroundTiles.add(s);
 						CreateCollisionTile(i, j, tileType);
+						
 					}
 					else if (tileLayer.name == "tiles2")
 					{
@@ -213,6 +225,31 @@ class TiledLevel extends TiledMap
 	}
 	
 	
+	function CreateSpecialTile(x: Int , y: Int, tileType:Int) : Bool
+	{
+		if (tileType == TileIDHurtingTop + 1)
+		{
+			trace("load hurting Top");
+			var h : HurtingSprite = new HurtingSpriteTop(x * GP.WorldTileSizeInPixel, y * GP.WorldTileSizeInPixel);
+			hurtingTiles.push(h);
+			
+		}
+		else if (tileType == TileIDHurtingBottom + 1)
+		{
+			trace("load hurting Bot");
+		}
+		else if (tileType == TileIDHurtingTopFalling + 1)
+		{
+			trace("load hurting Falling");
+		}
+		else
+		{
+			// nothing to do here
+			return false;
+		}
+		return true;
+	}
+	
 	
 	function CreateCollisionTile(x : Int, y : Int, type : Int) 
 	{
@@ -230,21 +267,15 @@ class TiledLevel extends TiledMap
 		else if (rowIndex == 1)
 		{
 			//trace("addinc collision sprite at " + Std.string(x) + " " + Std.string(y) );
-			var c : FlxSprite = new FlxSprite(x * 16, y * 16);
+			var c : FlxSprite = new FlxSprite(x * GP.WorldTileSizeInPixel, y * GP.WorldTileSizeInPixel);
 			c.makeGraphic(16, 16, FlxColor.RED);
 			c.alpha = 0.35;
 			c.immovable = true;
-		c.cameras = [GP.CameraMain];
+			c.cameras = [GP.CameraMain];
 			collisionMap.add(c);
 		}
 		
 	}
-	
-	private function loadSpecialTile(x:Int, y:Int, type : Int)
-	{
-		if (type == 0) return;
-	}
-	
 	
 	public function loadObjects()
 	{
