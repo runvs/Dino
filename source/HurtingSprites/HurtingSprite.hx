@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxSprite;
+import flixel.math.FlxPoint;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 
 /**
@@ -9,10 +10,17 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
  */
 class HurtingSprite extends FlxSprite
 {
-
+	private var _playerPosition : FlxPoint;
+	
 	public function new(?X:Float=0, ?Y:Float=0) 
 	{
 		super(X, Y);
+		_playerPosition = new FlxPoint();
+	}
+	
+	public function setPlayerPosition(px : Float, py : Float)
+	{
+		_playerPosition.set(px, py);
 	}
 	
 	private function LoadHurtingGraphic(tileType:Int)

@@ -22,6 +22,10 @@ class GP
 	
 	public static var DinoMovementJumpStrength (default, null) : Float = -245;
 	
+	public static var LevelHurtingFallingXMarginFactor (default, null) : Float = 1.5;
+	public static var LevelHurtingFallingVelocity (default, null) : Float = 80;
+	public static var LevelHurtingFallingDelay  (default, null) : Float = 0.5;
+	public static var LevelHurtingFallingWiggleDeadTime (default, null) : Float = 1.25;
 	
 	public static var WorldGravity (default, null) : Float = 175;
 	public static var WorldTileSizeInPixel (default, null) : Int = 16;
@@ -31,7 +35,7 @@ class GP
 	public static var MenuItemsPadding (default, null) : Float = 2;
 	public static var MenuItemsSize (default, null) : Float = 24;
 	
-	public static var CameraZoom (default, null) : Float = 5;
+	public static var CameraZoom (default, null) : Float = 4;
 	public static var CameraUnderlay (default, default) : FlxCamera;
 	public static var CameraMain (default, default) : FlxCamera;// = ;
 	public static var CameraOverlay (default, default) : FlxCamera;// = new FlxCamera(0, 0, 800, 600, 1);

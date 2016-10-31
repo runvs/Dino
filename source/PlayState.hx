@@ -25,11 +25,11 @@ class PlayState extends BasicState
 	
 	override public function create():Void
 	{
-		trace("Playstate create");
+		//trace("Playstate create");
 		
 		super.create();
 		LoadLevel(_levelName);
-		trace("Playstate create mid");
+		//trace("Playstate create mid");
 		
 		var hasBag : Bool = _actorName == "dinobag";
 		if (hasBag)
@@ -42,8 +42,7 @@ class PlayState extends BasicState
 		}
 		
 		jumpToEntryPoint(1);
-		trace("Playstate create end");
-		
+		//trace("Playstate create end");
 	}
 	
 	
@@ -67,12 +66,15 @@ class PlayState extends BasicState
 		
 		for (h in _level.hurtingTiles)
 		{
+			if (!h.alive) continue;
+			h.setPlayerPosition(d.x, d.y);
+			
 			if (FlxG.overlap(d, h))
 			{
-				trace("overlap");
+				//trace("overlap");
 				if (FlxG.pixelPerfectOverlap(d, h, 0))
 				{
-					trace("pp overlap");
+					//trace("pp overlap");
 					RestartMap();
 				}
 			}

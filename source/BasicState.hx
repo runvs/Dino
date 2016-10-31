@@ -151,7 +151,7 @@ class BasicState extends FlxState
 		
 		for (h in _level.hurtingTiles)
 		{
-			//h.draw();
+			h.draw();
 		}
 		
 		super.draw();
