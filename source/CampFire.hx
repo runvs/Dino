@@ -29,7 +29,7 @@ class CampFire extends FlxSprite
 		this.animation.play("idle");
 		this.cameras = [GP.CameraMain];
 		
-		_glow = new GlowOverlay((x+this.width/2) * 5, (y+this.height/2) * 5, GP.CameraOverlay, 240, 1, 0.5);
+		_glow = new GlowOverlay((x+this.width) * GP.CameraMain.zoom , (y+this.height) * GP.CameraMain.zoom, GP.CameraOverlay, 240, 1, 0.5);
 		_glow.alpha = 0.25;
 		_glow.color = FlxColor.fromRGB(173, 132, 56);
 		

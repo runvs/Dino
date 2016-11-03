@@ -73,15 +73,15 @@ class BasicState extends FlxState
 		FlxG.worldBounds.set(0, 0, _level.width * GP.WorldTileSizeInPixel, _level.height * GP.WorldTileSizeInPixel);
 		
 		GP.CameraUnderlay.setScrollBounds(
-		1.5* GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.width-0.5) * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
+		1.85* GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.width+0.25) * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
 		-1 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.height)  * GP.WorldTileSizeInPixel * GP.CameraMain.zoom);
 		
 		GP.CameraMain.setScrollBounds(
-		5 * GP.WorldTileSizeInPixel, (_level.width - 5) * GP.WorldTileSizeInPixel, 
-		-1 * GP.WorldTileSizeInPixel, (_level.height- 3) * GP.WorldTileSizeInPixel);
+		6 * GP.WorldTileSizeInPixel, (_level.width - 5) * GP.WorldTileSizeInPixel, 
+		-1 * GP.WorldTileSizeInPixel, (_level.height- 4) * GP.WorldTileSizeInPixel);
 		
 		GP.CameraOverlay.setScrollBounds(
-		1.5* GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.width-0.5) * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
+		1.95* GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.width+0.25) * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
 		-1 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.height)  * GP.WorldTileSizeInPixel * GP.CameraMain.zoom);
 				
 		//trace(GP.CameraUnderlay.minScrollX + " " + GP.CameraUnderlay.maxScrollX + " " + GP.CameraUnderlay.minScrollY + " " + GP.CameraUnderlay.maxScrollY);
