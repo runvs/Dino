@@ -1,48 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="5" tilewidth="16" tileheight="16" nextobjectid="103">
- <tileset firstgid="1" name="tileset.png" tilewidth="16" tileheight="16" tilecount="128" columns="8">
-  <image source="../images/tileset.png" width="128" height="256"/>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="14" height="6" tilewidth="16" tileheight="16" nextobjectid="103">
+ <tileset firstgid="1" name="tileset_new.png" tilewidth="16" tileheight="16" tilecount="432" columns="24">
+  <image source="../images/tileset_new.png" width="384" height="288"/>
  </tileset>
- <layer name="tiles" width="12" height="5">
+ <layer name="tiles" width="14" height="6">
   <properties>
-   <property name="tileset" value="tileset.png"/>
+   <property name="tileset" value="tileset_new.png"/>
   </properties>
   <data encoding="base64">
-   CgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAKAAAACgAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKAAAACgAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKAAAACgAAAAsAAAAMAAAADQAAAA4AAAALAAAADAAAAA0AAAAOAAAACwAAAAwAAAAKAAAACgAAAAoAAAAKAAAACgAAAAoAAAAKAAAACgAAAAoAAAAKAAAACgAAAAoAAAAKAAAA
+   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMQAAADEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxAAAAMQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADEAAAAxAAAASQAAAEkAAABJAAAASQAAAEkAAABJAAAASQAAAEkAAABJAAAASQAAAEkAAABJAAAAMQAAADEAAAAxAAAAMQAAADEAAAAxAAAAMQAAADEAAAAxAAAAMQAAADEAAAAxAAAAMQAAADEAAAAxAAAA
   </data>
  </layer>
- <layer name="tiles2" width="12" height="5">
+ <layer name="tiles2" width="14" height="6" visible="0">
   <properties>
-   <property name="tileset" value="tileset.png"/>
+   <property name="tileset" value="tileset_new.png"/>
   </properties>
   <data encoding="base64">
-   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
   </data>
  </layer>
  <objectgroup name="exits">
-  <object id="89" name="entryE" type="entry" x="80" y="16" width="16" height="32">
-   <properties>
-    <property name="ID" value="1"/>
-   </properties>
-  </object>
-  <object id="94" name="exitCave" type="teleport" x="168" y="24" width="16" height="24">
+  <object id="94" name="exitCave" type="teleport" x="192" y="40" width="16" height="24">
    <properties>
     <property name="level" value="stage1_gather_full.tmx"/>
     <property name="type" value="enter"/>
    </properties>
   </object>
-  <object id="101" name="entryE" type="entry" x="144" y="16" width="16" height="32">
+  <object id="101" name="entryE" type="entry" x="172" y="32" width="16" height="32">
    <properties>
-    <property name="ID" value="2"/>
+    <property name="ID" value="1"/>
    </properties>
   </object>
  </objectgroup>
- <layer name="top" width="12" height="5">
+ <layer name="top" width="14" height="6">
   <properties>
-   <property name="tileset" value="tileset.png"/>
+   <property name="tileset" value="tileset_new.png"/>
   </properties>
   <data encoding="base64">
-   AAAAAGEAAABSAAAAUwAAAFQAAABVAAAAVgAAAFwAAABdAAAAXgAAAF8AAAAAAAAAAAAAAGkAAABaAAAAAAAAAAAAAAAAAAAAAAAAAGQAAABlAAAAZgAAAGcAAAAAAAAAAAAAAHEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+   AAAAAFkBAAAqAQAAKwEAAAAAAAAAAAAALAEAAC0BAAAAAAAALAEAAC0BAABGAQAARwEAAAAAAAAAAAAAcQEAAEIBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABfAQAAAAAAAAAAAACJAQAAigEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKEBAACiAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiQEAAKIBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAChAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
   </data>
  </layer>
  <objectgroup name="global">
@@ -58,6 +53,6 @@
   </properties>
  </objectgroup>
  <objectgroup name="objects">
-  <object id="99" name="campfire" type="campfire" x="96" y="32" width="16" height="16"/>
+  <object id="99" name="campfire" type="campfire" x="96" y="48" width="16" height="16"/>
  </objectgroup>
 </map>
