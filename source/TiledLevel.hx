@@ -21,6 +21,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxCollision;
 import flixel.util.FlxColor;
 import haxe.io.Path;
+import lime.project.WindowData;
 
 /**
  * @author Samuel Batista
@@ -63,9 +64,9 @@ class TiledLevel extends TiledMap
 	public var drawMoon : Bool = false;
 	
 	
-	public static var TileIDHurtingBottom 		(default, null) 	: Int = 38;
-	public static var TileIDHurtingTop    		(default, null)		: Int = 39;
-	public static var TileIDHurtingTopFalling 	(default, null)		: Int = 55;
+	public static var TileIDHurtingBottom 		(default, null) 	: Int = 144;
+	public static var TileIDHurtingTop    		(default, null)		: Int = 145;
+	public static var TileIDHurtingTopFalling 	(default, null)		: Int = 148;
 	
 	public function new(tiledLevel:Dynamic)
 	{
@@ -96,7 +97,7 @@ class TiledLevel extends TiledMap
 		
 			
 			var tileSheetName:String = tileLayer.properties.get("tileset");
-			
+			trace("tileSheetName: " + tileSheetName);
 			if (tileSheetName == null)
 				throw "'tileset' property not defined for the '" + tileLayer.name + "' layer. Please add the property to the layer.";
 				
@@ -121,6 +122,7 @@ class TiledLevel extends TiledMap
 			tilemap.loadMapFromArray(tileLayer.tileArray, width, height, processedPath,
 				_tileSet.tileWidth, _tileSet.tileHeight, OFF, _tileSet.firstGID, 1, 1);
 				
+			var tileSheetPath : String = "assets/images/" + tileSheetName ;
 			for (i in 0...tilemap.widthInTiles)
 			{
 				for (j in 0...tilemap.heightInTiles)
@@ -128,7 +130,7 @@ class TiledLevel extends TiledMap
 					var tileType : Int = tilemap.getTile(i, j);
 					var s : FlxSprite = new FlxSprite(i * GP.WorldTileSizeInPixel, j * GP.WorldTileSizeInPixel);
 					s.immovable = true;
-					s.loadGraphic(AssetPaths.tileset__png, true, GP.WorldTileSizeInPixel, GP.WorldTileSizeInPixel);
+					s.loadGraphic(tileSheetPath, true, GP.WorldTileSizeInPixel, GP.WorldTileSizeInPixel);
 					s.animation.add("idle", [tileType-1]);
 					s.animation.play("idle");
 					s.cameras = [GP.CameraMain];
@@ -260,16 +262,14 @@ class TiledLevel extends TiledMap
 		var cols : Int = _tileSet.numCols;
 		var rows : Int = _tileSet.numRows;
 		
-		var rowIndex :Int = Std.int((type-1) / rows);
+		var rowIndex : Int = Std.int((type-1) / rows);
+		
 		//trace(Std.string(cols) + " " + Std.string(rows));
 		
-		if (rowIndex == 0)
-		{	
-			// no collision for tiles in row 0
-			return;
-		}
-		else if (rowIndex == 1)
+		
+		if (rowIndex >= 0 && rowIndex <= 6)
 		{
+			if (rowIndex == 0 && type == 0) return;
 			//trace("addinc collision sprite at " + Std.string(x) + " " + Std.string(y) );
 			var c : FlxSprite = new FlxSprite(x * GP.WorldTileSizeInPixel, y * GP.WorldTileSizeInPixel);
 			c.makeGraphic(16, 16, FlxColor.RED);
@@ -277,6 +277,13 @@ class TiledLevel extends TiledMap
 			c.immovable = true;
 			c.cameras = [GP.CameraMain];
 			collisionMap.add(c);
+		}
+		else if (rowIndex == 0) // special collisions for row zero
+		{	
+			
+			//else 
+			// no collision for tiles in row 0
+			return;
 		}
 		
 	}

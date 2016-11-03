@@ -25,8 +25,9 @@ class HurtingSprite extends FlxSprite
 	
 	private function LoadHurtingGraphic(tileType:Int)
 	{
+		
 		this.immovable = true;
-		this.loadGraphic(AssetPaths.tileset__png, true, GP.WorldTileSizeInPixel, GP.WorldTileSizeInPixel);
+		this.loadGraphic(AssetPaths.tileset_new__png, true, GP.WorldTileSizeInPixel, GP.WorldTileSizeInPixel);
 		this.animation.add("idle", [tileType]);
 		this.animation.play("idle");
 		this.cameras = [GP.CameraMain];
