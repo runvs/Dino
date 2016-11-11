@@ -73,7 +73,7 @@ class BasicState extends FlxState
 		FlxG.worldBounds.set(0, 0, _level.width * GP.WorldTileSizeInPixel, _level.height * GP.WorldTileSizeInPixel);
 		
 		GP.CameraUnderlay.setScrollBounds(
-		1.85* GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.width+0.25) * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
+		1.85* GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.width-0.45) * GP.WorldTileSizeInPixel* GP.CameraMain.zoom, 
 		-1 * GP.WorldTileSizeInPixel * GP.CameraMain.zoom, (_level.height)  * GP.WorldTileSizeInPixel * GP.CameraMain.zoom);
 		
 		GP.CameraMain.setScrollBounds(

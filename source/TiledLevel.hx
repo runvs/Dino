@@ -66,7 +66,7 @@ class TiledLevel extends TiledMap
 	
 	public static var TileIDHurtingBottom 		(default, null) 	: Int = 144;
 	public static var TileIDHurtingTop    		(default, null)		: Int = 145;
-	public static var TileIDHurtingTopFalling 	(default, null)		: Int = 148;
+	public static var TileIDHurtingTopFalling 	(default, null)		: Int = 149;
 	
 	public function new(tiledLevel:Dynamic)
 	{
