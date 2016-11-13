@@ -44,10 +44,10 @@
   <properties>
    <property name="background" value="background_cave.png"/>
    <property name="backgroundOffsetX" value="0"/>
-   <property name="backgroundOffsetY" value="-200"/>
+   <property name="backgroundOffsetY" value="0"/>
    <property name="backgroundScale" value="5"/>
    <property name="backgroundSizeX" value="160"/>
-   <property name="backgroundSizeY" value="64"/>
+   <property name="backgroundSizeY" value="128"/>
    <property name="moon" value="false"/>
    <property name="stars" value="false"/>
   </properties>
