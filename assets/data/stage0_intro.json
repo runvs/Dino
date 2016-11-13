@@ -1,5 +1,5 @@
 {
-	"level" : "assets/data/intro.tmx",
+	"level" : "assets/data/stage0.tmx",
 	"follow" : "dinobag",
 	"positions":
 	[

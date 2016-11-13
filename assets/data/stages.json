@@ -14,7 +14,7 @@
 			"stage" 		: 0, "episode" : 1, 
 			"type" 			: "play",
 			"actor"			: "dinobag",
-			"level"			: "assets/data/intro.tmx",
+			"level"			: "assets/data/stage0.tmx",
 			"requirements" 	: [],
 			"storysettings" : []
 		},
