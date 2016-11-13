@@ -4,10 +4,10 @@
 	"positions":
 	[
 		{"name": "origin",   "x": 0,  "y": 0},
-		{"name": "entry",   "x": 144,  "y": 48},
-		{"name": "right",   "x": 112,  "y": 48},
-		{"name": "back",   "x": 80,  "y": 48},
-		{"name": "back2",   "x": 81,  "y": 48}
+		{"name": "entry",   "x": 144,  "y": 176},
+		{"name": "right",   "x": 112,  "y": 176},
+		{"name": "back",   "x": 80,  "y": 176},
+		{"name": "back2",   "x": 81,  "y": 176}
 	],
 	"actors":
 	[
