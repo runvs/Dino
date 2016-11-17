@@ -65,6 +65,7 @@ class TiledLevel extends TiledMap
 	
 	public var drawStars : Bool = false;
 	public var drawMoon : Bool = false;
+	public var drawFlocks : Bool = false;
 	
 	
 	public static var TileIDHurtingBottom 		(default, null) 	: Int = 144;
@@ -218,13 +219,16 @@ class TiledLevel extends TiledMap
 			bg.cameras = [GP.CameraUnderlay];
 			bg.scrollFactor.set(0, 0);
 			
-			if (layer.properties.get("stars") == "true")
+			if (layer.properties.get("stars") != null && layer.properties.get("stars") == "true")
 			{
 				drawStars = true;
 			}
-			if (layer.properties.get("moon") == "true")
-			{
+			if (layer.properties.get("moon") != null && layer.properties.get("moon") == "true")			{
 				drawMoon = true;
+			}
+			if (layer.properties.get("flocks") != null && layer.properties.get("flocks") == "true")
+			{
+				drawFlocks = true;
 			}
 		}
 		

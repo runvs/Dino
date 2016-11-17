@@ -23,7 +23,7 @@ class EnemyWalkLR extends BasicEnemy
 	
 	public override function update(elapsed:Float)
 	{
-		trace(this.x);
+		//trace(this.x);
 		super.update(elapsed);
 		
 		if (walkingRight)

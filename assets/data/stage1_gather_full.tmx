@@ -66,6 +66,7 @@
    <property name="backgroundScale" value="1"/>
    <property name="backgroundSizeX" value="800"/>
    <property name="backgroundSizeY" value="600"/>
+   <property name="flocks" value="true"/>
    <property name="moon" value="false"/>
    <property name="stars" value="false"/>
   </properties>

@@ -47,7 +47,7 @@ class BasicState extends FlxState
 		_moonSprite.scale.set(0.5, 0.5);
 		
 		trace ("Basicstate create flakes n stars");
-		_flakes = new Flakes(GP.CameraMain, 10);
+		_flakes = new Flakes(GP.CameraMain, 10, 40);
 		
 		_stars = new StarField(GP.CameraUnderlay, 10);
 		_stars.scrollFactor.set(0.1, 0);
@@ -143,8 +143,10 @@ class BasicState extends FlxState
 		{
 			_moonSprite.draw();
 		}
-		
-		//_flakes.draw();
+		if (_level.drawFlocks)
+		{
+			_flakes.draw();
+		}
 		
 		_level.foregroundTiles.draw();
 		_level.foregroundTiles2.draw();

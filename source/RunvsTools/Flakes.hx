@@ -22,16 +22,16 @@ class Flakes extends ScreenWrappingSpriteGroup
 	var _timer : Float = 0;
 	
 	
-	public function new(cam:FlxCamera, padding:Float=10) 
+	public function new(cam:FlxCamera, padding:Float=10, N : Int = 25) 
 	{
 		super(cam, padding);
 		_individualVelocity = new Array<FlxPoint>();
 		this.scrollFactor.set(1.1, 1.1);
-		for (i in 0 ... 15)
+		for (i in 0 ... N)
 		{
 			var s : FlxSprite = new FlxSprite( FlxG.random.float(-_padding, FlxG.width/_cam.zoom + _padding), FlxG.random.float(_padding, FlxG.height/_cam.zoom + _padding));
 			s.cameras = [_cam];
-			s.makeGraphic(1, 1, FlxColor.fromRGB(175, 175, 175, 175));
+			s.makeGraphic(1, 1, FlxColor.fromRGB(175, 175, 175, 200));
 			s.scrollFactor.set(1.1, 1.1);
 			add(s);
 			
