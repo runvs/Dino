@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="16" tileheight="16" nextobjectid="109">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="16" tileheight="16" nextobjectid="113">
  <tileset firstgid="1" name="tileset_new.png" tilewidth="16" tileheight="16" tilecount="432" columns="24">
   <image source="../images/tileset_new.png" width="384" height="288"/>
  </tileset>
@@ -73,6 +73,18 @@
  <objectgroup name="collectibles">
   <object id="98" name="leaf" type="collectible" x="656" y="368" width="16" height="16"/>
   <object id="102" name="branch" type="collectible" x="320" y="384" width="16" height="16"/>
-  <object id="103" name="stone" type="collectible" x="688" y="160" width="16" height="16"/>
+  <object id="103" name="stone" type="collectible" x="600" y="144" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="enemies">
+  <object id="109" name="enemy1" type="walkerLR" x="600" y="368" width="16" height="16">
+   <properties>
+    <property name="distance" value="10"/>
+   </properties>
+  </object>
+  <object id="112" name="enemy2" type="walkerLR" x="672" y="160" width="16" height="16">
+   <properties>
+    <property name="distance" value="2"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -33,6 +33,7 @@
 	<classpath name="source/RunvsTools" />
 	<classpath name="source/PlayableCharacter" />
 	<classpath name="source/HurtingSprites" />
+	<classpath name="source/Enemies" />
 	<assets path="assets" />
 
 	<!-- _______________________________ Libraries ______________________________ -->

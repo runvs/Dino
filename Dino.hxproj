@@ -24,6 +24,7 @@
     <class path="source\RunvsTools" />
     <class path="source\PlayableCharacter" />
     <class path="source\HurtingSprites" />
+    <class path="source\Enemies" />
     <class path="C:\HaxeToolkit\haxe\lib\openfl\3,6,1\extern" />
     <class path="export\windows\cpp\haxe" />
   </classpaths>

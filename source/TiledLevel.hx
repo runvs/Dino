@@ -1,5 +1,6 @@
 package;
 
+
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
@@ -59,6 +60,8 @@ class TiledLevel extends TiledMap
 	public var exits : Array<LevelLeaver>;
 	public var entries : Array<Entry>;
 	public var collectibles : Array<Collectible>;
+	public var enemies: Array<BasicEnemy>;
+	
 	
 	public var drawStars : Bool = false;
 	public var drawMoon : Bool = false;
@@ -88,6 +91,7 @@ class TiledLevel extends TiledMap
 		entries = new Array<Entry>();
 		collectibles = new Array<Collectible>();
 		hurtingTiles = new Array<HurtingSprite>();
+		enemies = new Array<BasicEnemy>();
 		
 		// Load Tile Maps
 		for (layer in layers)
@@ -309,6 +313,32 @@ class TiledLevel extends TiledMap
 			else if (objectLayer.name == "objects")
 			{
 				LoadOther(objectLayer);
+			}
+			else if (objectLayer.name == "enemies")
+			{
+				LoadEnemies(objectLayer);
+			}
+		}
+	}
+	
+	function LoadEnemies(objectLayer:TiledObjectLayer) 
+	{
+		trace("load enemies");
+		for (o in objectLayer.objects)
+		{
+			var x:Int = o.x;
+			var y:Int = o.y;
+			//// objects in tiled are aligned bottom-left (top-left in flixel)
+			if (o.gid != -1)
+				y -= objectLayer.map.getGidOwner(o.gid).tileHeight;
+			switch (o.type.toLowerCase())
+			{
+			case "walkerlr":
+				trace("walkerLR");
+				var e : EnemyWalkLR = new EnemyWalkLR(x, y);
+				var distance : Float = Std.parseFloat(o.properties.get("distance")) * GP.WorldTileSizeInPixel; 
+				e.distance = distance;
+				enemies.push(e);				
 			}
 		}
 	}

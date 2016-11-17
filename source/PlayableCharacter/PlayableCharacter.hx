@@ -33,7 +33,7 @@ class PlayableCharacter extends FlxSprite
 	
 	// tracer for Cameramovement (with another position)
 	public var tracer : FlxSprite;
-	private var _sprite : FlxSprite;
+	public var _sprite : FlxSprite;
 	
 	public function new() 
 	{

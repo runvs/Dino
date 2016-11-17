@@ -40,6 +40,8 @@ class GP
 	public static var CameraMain (default, default) : FlxCamera;// = ;
 	public static var CameraOverlay (default, default) : FlxCamera;// = new FlxCamera(0, 0, 800, 600, 1);
 	
+	public static var EnemyWalkLRSpeed (default, null) : Float = 15;
+	
 	public static function CamerasCreate()
 	{
 		trace("setting cameras");

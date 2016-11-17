@@ -29,6 +29,12 @@ class PlayState extends BasicState
 		
 		super.create();
 		LoadLevel(_levelName);
+		for (e in _level.enemies)
+		{
+			e.setState(this);
+		}
+		
+		
 		//trace("Playstate create mid");
 		
 		var hasBag : Bool = _actorName == "dinobag";
@@ -63,6 +69,20 @@ class PlayState extends BasicState
 		{
 			e.update(elapsed);
 		}
+		for (e in _level.enemies)
+		{
+			if (!e.alive) continue;
+			
+			if (FlxG.overlap(d, e))
+			{
+				if (FlxG.pixelPerfectOverlap(d._sprite, e._sprite))
+				{
+					RestartMap();
+				}
+			}
+			
+			e.update(elapsed);
+		}
 		
 		for (h in _level.hurtingTiles)
 		{
@@ -72,13 +92,39 @@ class PlayState extends BasicState
 			if (FlxG.overlap(d, h))
 			{
 				//trace("overlap");
-				if (FlxG.pixelPerfectOverlap(d, h, 0))
+				if (FlxG.pixelPerfectOverlap(d._sprite, h, 0))
 				{
 					//trace("pp overlap");
 					RestartMap();
 				}
 			}
 		}
+	}
+	
+	
+	
+
+	
+	override public function internalDraw ()
+	{
+		//trace("PlayState internal draw");
+		d.draw();
+		
+		for (e in _level.exits)
+		{
+			//e.draw();
+		}
+		for (e in _level.entries)
+		{
+			//e.draw();
+		}
+		for (e in _level.enemies)
+		{
+			e.draw();
+		}
+		//d.tracer.draw();
+		
+		
 	}
 	
 	function RestartMap() 
@@ -114,23 +160,6 @@ class PlayState extends BasicState
 		}
 	}
 	
-	override public function internalDraw ()
-	{
-		//trace("PlayState internal draw");
-		d.draw();
-		
-		for (e in _level.exits)
-		{
-			//e.draw();
-		}
-		for (e in _level.entries)
-		{
-			//e.draw();
-		}
-		//d.tracer.draw();
-		
-		
-	}
 	
 	override public function jumpToEntryPoint (id : Int )
 	{
