@@ -23,15 +23,17 @@ class CutSceneActionFade extends CutSceneAction
 		super.perform(scene);
 		trace("fade action perform!");
 		
-		var ac : CutSceneActor = scene.getActor(this.actor);
-		
-		if (ac != null)
+		if (actor == "overlay" )
 		{
+			FlxTween.tween(scene._overlay2, { alpha:targetAlpha }, duration);
+		}
+		else
+		{	
+			var ac : CutSceneActor = scene.getActor(this.actor);
 			
-			FlxTween.tween(ac, { alpha:targetAlpha }, duration);
-			if (ac.name == "overlay" && targetAlpha == 1)
+			if (ac != null)
 			{
-				FlxTween.tween(scene._moonSprite, { alpha:0 }, duration);
+				FlxTween.tween(ac, { alpha:targetAlpha }, duration);	
 			}
 		}
 	}

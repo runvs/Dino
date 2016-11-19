@@ -4,6 +4,7 @@ package ;
 //import CutSceneAction;
 import flixel.FlxCamera;
 import flixel.FlxG;
+import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.group.FlxSpriteGroup;
 import flixel.util.FlxColor;
@@ -26,10 +27,18 @@ class CutSceneState extends BasicState
 	
 	var _name: String;
 	
+	// this overlay is for fading in cutscenes
+	public var _overlay2 : FlxSprite;
+	
 	override public function new (n:String)
 	{
 		super(); 	
 		_name = n;
+		
+		_overlay2 = new FlxSprite(0, 0);
+		_overlay2.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		_overlay2.scrollFactor.set();
+		_overlay2.alpha = 0.0;		
 	}
 	
 	override public function create():Void
@@ -104,6 +113,10 @@ class CutSceneState extends BasicState
 		clearBubbles();
 	}
 	
+	public override function internalDrawTop() : Void
+	{
+		_overlay2.draw();
+	}
 	override public function internalDraw () :  Void 
 	{
 		for (s in _speechbubbles)

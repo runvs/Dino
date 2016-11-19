@@ -58,6 +58,7 @@ class CutSceneActor extends FlxSprite
 			case "overlay":
 				//trace("load overlay");
 				this.makeGraphic(FlxG.width, FlxG.height, FlxColor.WHITE);
+				this.alpha = 0;
 				this.scrollFactor.set();
 				this.color.setRGB(0, 0, 0);
 				this.cameras = [GP.CameraOverlay];
@@ -66,7 +67,7 @@ class CutSceneActor extends FlxSprite
 				this.makeGraphic(1, 1, FlxColor.TRANSPARENT);
 				
 			default:
-				throw "Actor " + name + "not known";
+				throw "Actor " + name + " not known";
 				
 		}
 		this.cameras = [GP.CameraMain];

@@ -24,7 +24,7 @@ class BasicState extends FlxState
 	public var _moonSprite : FlxSprite;
 	
 	var inTransition : Bool = false;
-	var _overlay :FlxSprite;
+	private var _overlay :FlxSprite;
 	
 	public function new() 
 	{
@@ -54,6 +54,7 @@ class BasicState extends FlxState
 		
 		trace ("Basicstate create vignette");
 		_vignette = new Vignette(GP.CameraOverlay);
+		
 		_overlay = new FlxSprite(0, 0);
 		_overlay.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		_overlay.scrollFactor.set();
@@ -129,6 +130,12 @@ class BasicState extends FlxState
 		//trace("BasicState internal draw");
 	}
 	
+	// should be overwritten by child classes
+	public function internalDrawTop() : Void
+	{
+		
+	}
+	
 	public override function draw() : Void 
 	{
 		//trace("BasicState draw");
@@ -166,6 +173,7 @@ class BasicState extends FlxState
 		
 		_vignette.draw();
 		_overlay.draw();
+		internalDrawTop();
 	}
 	
 	public function jumpToEntryPoint(id : Int)
