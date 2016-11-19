@@ -42,12 +42,12 @@
  </layer>
  <objectgroup name="global">
   <properties>
-   <property name="background" value="background_day.png"/>
+   <property name="background" value="background_morning.png"/>
    <property name="backgroundScale" value="1"/>
    <property name="backgroundSizeX" value="800"/>
    <property name="backgroundSizeY" value="600"/>
-   <property name="moon" value="false"/>
-   <property name="stars" value="false"/>
+   <property name="moon" value="true"/>
+   <property name="stars" value="true"/>
   </properties>
  </objectgroup>
  <objectgroup name="collectibles">
