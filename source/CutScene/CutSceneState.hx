@@ -32,7 +32,9 @@ class CutSceneState extends BasicState
 	
 	override public function new (n:String)
 	{
+		trace("CutSceneState new pre super(), number of cameras: " + FlxG.cameras.list.length);
 		super(); 	
+		trace("CutSceneState new post super(), number of cameras: " + FlxG.cameras.list.length);
 		_name = n;
 		
 		_overlay2 = new FlxSprite(0, 0);
@@ -43,8 +45,9 @@ class CutSceneState extends BasicState
 	
 	override public function create():Void
 	{
+		trace("CutSceneState create pre super(), number of cameras: " + FlxG.cameras.list.length);
 		super.create();
-		
+		trace("CutSceneState create post super(), number of cameras: " + FlxG.cameras.list.length);
 		_actions = new Array<CutSceneAction>();
 		_actors = new Array<CutSceneActor>();
 		_speechbubbles = new Array<SpeechBubble>();

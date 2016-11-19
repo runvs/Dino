@@ -70,6 +70,7 @@ class StageItem extends FlxSpriteGroup
 	public function startStage()
 	{
 		MyInput.reset();
+		trace("StartStage, number of cameras: " + FlxG.cameras.list.length);
 		if (_type == "play")
 		{
 			FlxG.switchState(new PlayState(_level, actor));

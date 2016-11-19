@@ -30,6 +30,7 @@ class MenuState extends FlxState
 		super.create();
 		FlxG.mouse.visible = false;
 		GP.CamerasCreate();
+		GP.WorldLoadMaps();
 		StageInfo.loadStages();
 		
 		
@@ -69,6 +70,7 @@ class MenuState extends FlxState
 		_selectionSprite.alpha = 0.3;
 		_selectionSprite.cameras = [GP.CameraMain];
 		add(_selectionSprite);
+		trace("MenuState, number of cameras: " + FlxG.cameras.list.length);
 	}
 
 	override public function update(elapsed:Float):Void
@@ -83,7 +85,7 @@ class MenuState extends FlxState
 		//trace("selection");
 		UpdateSelection();
 		
-		//trace("setposition");
+		//trace("setposition");4
 		_selectionSprite.setPosition(
 		GP.MenuItemsOffsetX + (GP.MenuItemsPadding + GP.MenuItemsSize) * _currentSelectionX,
 		GP.MenuItemsOffsetY + (GP.MenuItemsPadding + GP.MenuItemsSize) * _currentSelectionY
@@ -92,8 +94,10 @@ class MenuState extends FlxState
 		//trace("Input");
 		if (MyInput.AttackButtonJustPressed || MyInput.JumpButtonJustPressed )
 		{
+			trace("MenuState, number of cameras: " + FlxG.cameras.list.length);
 			MyInput.reset();
 			_stages[_currentSelectionY][_currentSelectionX].startStage();
+			
 		}
 		//trace("end");
 	}

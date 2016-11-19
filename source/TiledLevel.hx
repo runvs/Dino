@@ -47,7 +47,7 @@ class TiledLevel extends TiledMap
 	// All Tiles that can be drawn on top of the foreground tiles
 	public var topTiles:FlxGroup;
 	
-	public var overlayObjects : FlxGroup;
+	//public var overlayObjects : FlxGroup;
 	
 	// the actual collision map. 
 	// Since some tiles need a special collision box, 
@@ -81,11 +81,9 @@ class TiledLevel extends TiledMap
 		foregroundTiles = new FlxGroup();
 		foregroundTiles2 = new FlxGroup();
 		topTiles = new FlxGroup();
-		overlayObjects = new FlxGroup();
 		foregroundTiles.cameras = [GP.CameraMain];
 		foregroundTiles2.cameras = [GP.CameraMain];
 		topTiles.cameras = [GP.CameraMain];
-		overlayObjects.cameras = [GP.CameraOverlay];
 		
 		collisionMap = new FlxSpriteGroup();
 		exits = new Array<LevelLeaver>();
@@ -239,20 +237,20 @@ class TiledLevel extends TiledMap
 	{
 		if (tileType == TileIDHurtingTop + 1)
 		{
-			trace("load hurting Top");
+			//trace("load hurting Top");
 			var h : HurtingSprite = new HurtingSpriteTop(x * GP.WorldTileSizeInPixel, y * GP.WorldTileSizeInPixel);
 			hurtingTiles.push(h);
 			
 		}
 		else if (tileType == TileIDHurtingBottom + 1)
 		{
-			trace("load hurting Bot");
+			//trace("load hurting Bot");
 			var h : HurtingSprite = new HurtingSpriteBot(x * GP.WorldTileSizeInPixel, y * GP.WorldTileSizeInPixel);
 			hurtingTiles.push(h);
 		}
 		else if (tileType == TileIDHurtingTopFalling + 1)
 		{
-			trace("load hurting Falling");
+			//trace("load hurting Falling");
 			var h : HurtingSprite = new HurtingSpriteTopFalling(x * GP.WorldTileSizeInPixel, y * GP.WorldTileSizeInPixel);
 			hurtingTiles.push(h);
 		}
@@ -262,6 +260,49 @@ class TiledLevel extends TiledMap
 			return false;
 		}
 		return true;
+	}
+	
+	public function resetCameras()
+	{
+		for (c in collisionMap)
+		{
+			c.cameras = [GP.CameraMain];
+		}
+		bg.cameras = [GP.CameraUnderlay];
+	
+		for (t in foregroundTiles) 
+		{
+			t.cameras = [GP.CameraMain];
+		}
+		for (t in foregroundTiles2)
+		{
+			t.cameras = [GP.CameraMain];
+		}
+		for (t in topTiles)
+		{
+			t.cameras = [GP.CameraMain];
+		}
+		for (h in hurtingTiles)
+		{
+			h.cameras = [GP.CameraMain];
+		}
+		for (e in exits)
+		{
+			e.cameras = [GP.CameraMain];
+		}
+		for (e in entries)
+		{
+			e.cameras = [GP.CameraMain];
+		}
+		
+		for (c in collectibles)
+		{
+			c.cameras = [GP.CameraMain];
+		}
+		for (e in enemies)
+		{
+			e.cameras = [GP.CameraMain];
+		}
 	}
 	
 	

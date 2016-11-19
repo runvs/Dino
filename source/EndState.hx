@@ -15,7 +15,7 @@ class EndState extends FlxState
 		
 		
 		// TODO Check if camera list has to be cleared
-		GP.CamerasCreate();
+		//GP.CamerasCreate();
 		
 		
 	}

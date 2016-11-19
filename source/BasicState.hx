@@ -34,9 +34,11 @@ class BasicState extends FlxState
 	public override function create()  
 	{
 		trace("BasicState Create");
+		trace("BasicState pre super.create(), number of cameras: " + FlxG.cameras .list.length);
 		super.create();
 		GP.CamerasCreate();
 				
+		trace("BasicState, number of cameras: " + FlxG.cameras .list.length);
 		trace ("Basicstate create moon");
 		_moonSprite = new FlxSprite(100, -100);
 		_moonSprite.loadGraphic(AssetPaths.moon__png, false, 450, 450);
@@ -68,9 +70,9 @@ class BasicState extends FlxState
 	{
 		_levelName = l;
 		//trace("BasicState LoadLevel");
-		_level = new TiledLevel(_levelName);
-	
-		
+		//_level = new TiledLevel(_levelName);
+		_level = GP.WorldMapPool.getLevel(_levelName);
+		_level.resetCameras();
 		FlxG.worldBounds.set(0, 0, _level.width * GP.WorldTileSizeInPixel, _level.height * GP.WorldTileSizeInPixel);
 		
 		GP.CameraUnderlay.setScrollBounds(

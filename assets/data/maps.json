@@ -1,0 +1,9 @@
+{
+	"maps":
+	[
+		"assets/data/stage0.tmx",
+		"assets/data/stage1_cave.tmx",
+		"assets/data/stage1_caveToPond.tmx",
+		"assets/data/stage1_gather_full.tmx"
+	]
+}

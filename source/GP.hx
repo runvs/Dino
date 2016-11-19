@@ -1,4 +1,5 @@
 package;
+
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -42,6 +43,14 @@ class GP
 	
 	public static var EnemyWalkLRSpeed (default, null) : Float = 15;
 	
+	public static var WorldMapPool (default, null) : MapPool;
+	
+	public static function WorldLoadMaps() : Void 
+	{
+		WorldMapPool = new MapPool();
+	}
+	
+	
 	public static function CamerasCreate()
 	{
 		trace("setting cameras");
@@ -60,7 +69,7 @@ class GP
 		FlxG.cameras.reset(GP.CameraUnderlay);
 		FlxG.cameras.add(GP.CameraMain);
 		FlxG.cameras.add(GP.CameraOverlay);
-		
+		trace("GP.CreateCameras, number of cameras: " + FlxG.cameras.list.length);
 	}
 	
 	public static function CamerasFollow(tracerMain : FlxObject, tracer : FlxObject)
