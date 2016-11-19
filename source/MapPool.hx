@@ -17,9 +17,6 @@ class MapPool
 		_pool = new StringMap<TiledLevel>();
 		
 		var list : Array<String> = FileList.getFileList("assets/data/", "tmx");
-		
-		
-		
 		for ( s in list)
 		{
 			trace(s);
