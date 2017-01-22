@@ -18,8 +18,7 @@ class FishState extends BasicState
 	private var _targets : FlxTypedGroup<FishTarget>;
 	private var _player : FishPlayer;
 	
-	private var Score : Int ;
-	
+	private var _caughtFishList : FlxSpriteGroup;
 	
 	public function new() 
 	{
@@ -32,7 +31,9 @@ class FishState extends BasicState
 		super.create();
 		LoadLevel(_levelName);
 		
-		Score = 0;
+		_caughtFishList = new FlxSpriteGroup();
+		_caughtFishList.scrollFactor.set();
+		_caughtFishList.cameras = [GP.CameraMain];
 		
 		///////////////////////////////////////
 		//// Creating Playing Background //////
@@ -114,7 +115,15 @@ class FishState extends BasicState
 			if (t.timer >= t.maxTimer)
 			{
 				t.resetToNewPosition();
-				Score += 1;
+				
+				var s : FlxSprite = new FlxSprite(4 + _caughtFishList.length * 18, 4);
+				s.scrollFactor.set();
+				s.cameras = [GP.CameraMain];
+				s.loadGraphic(AssetPaths.item_fish__png, true, 16, 16);
+				s.animation.add("idle", [t._fishtype]);
+				s.animation.play("idle");
+				
+				_caughtFishList.add(s);
 			}
 		}
 	}
@@ -125,6 +134,7 @@ class FishState extends BasicState
 		_walls.draw();
 		_targets.draw();
 		_player.draw();
+		_caughtFishList.draw();
 	}
 	
 	override public function internalDraw ()

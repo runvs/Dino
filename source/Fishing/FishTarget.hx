@@ -28,6 +28,9 @@ class FishTarget extends FlxSprite
 
 	private var _playBG : FlxSprite;
 	private var _wallWidth : Float;
+
+	// what type of fish this is (needed for list of caught fish in FishState)
+	public var _fishtype : Int = 0;
 	
 	public function new( playBG : FlxSprite, wallWidth : Float) 
 	{
