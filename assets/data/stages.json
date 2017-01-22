@@ -55,6 +55,14 @@
 			"level"			: "assets/data/stage1_build.json",
 			"requirements" 	: ["stage0complete"],
 			"storysettings" : []
+		},
+		{
+			"name"			: "s2_e0_fishing",
+			"stage"			: 2, "episode" : 0,
+			"type"			: "fishing",
+			"level"			: "assets/data/fishing.tmx",
+			"requirements" 	: [],
+			"storysettings" : []
 		}
     ]
 }

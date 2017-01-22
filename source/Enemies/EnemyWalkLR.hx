@@ -9,8 +9,8 @@ class EnemyWalkLR extends BasicEnemy
 {
 	
 	public var distance : Float = 0;
-	private var startingPos : Float = 0;
-	private var walkingRight : Bool = true;
+	private var _startingPos : Float = 0;
+	private var _walkingRight : Bool = true;
 	
 	public function new(X: Float, Y: Float) 
 	{
@@ -18,7 +18,7 @@ class EnemyWalkLR extends BasicEnemy
 		this.makeGraphic(GP.WorldTileSizeInPixel, GP.WorldTileSizeInPixel, FlxColor.RED);
 		_sprite.makeGraphic(GP.WorldTileSizeInPixel, GP.WorldTileSizeInPixel, FlxColor.RED);
 		
-		startingPos = X;
+		_startingPos = X;
 	}
 	
 	public override function update(elapsed:Float)
@@ -26,22 +26,22 @@ class EnemyWalkLR extends BasicEnemy
 		//trace(this.x);
 		super.update(elapsed);
 		
-		if (walkingRight)
+		if (_walkingRight)
 		{
 			this.velocity.x = GP.EnemyWalkLRSpeed;
-			if (this.x - startingPos > distance)
+			if (this.x - _startingPos > distance)
 			{
-				walkingRight = false;
-				this.x = startingPos + distance;
+				_walkingRight = false;
+				this.x = _startingPos + distance;
 			}
 		}
 		else
 		{
 			this.velocity.x = -GP.EnemyWalkLRSpeed;
-			if (this.x - startingPos < 0)
+			if (this.x - _startingPos < 0)
 			{
-				walkingRight = true;
-				this.x = startingPos;
+				_walkingRight = true;
+				this.x = _startingPos;
 			}
 		}
 		

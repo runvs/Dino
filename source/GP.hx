@@ -44,6 +44,11 @@ class GP
 	public static var EnemyWalkLRSpeed (default, null) : Float = 15;
 	
 	public static var WorldMapPool (default, null) : MapPool;
+	static public var EnemyBoarRange (default, null) : Float = 80;
+	static public var EnemyBoarChargeCoolDown (default, null) : Float = 10;
+	static public var EnemyBoarChargeAcceleration (default, null) : Float = 15;
+	
+	static public var FishingTimerMax (default, null) : Float = 2.5;
 	
 	public static function WorldLoadMaps() : Void 
 	{

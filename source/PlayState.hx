@@ -16,6 +16,7 @@ class PlayState extends BasicState
 {
 	var d : PlayableCharacter;
 	var _actorName : String;
+	
 	public function new ( n : String, a : String )
 	{
 		super();
@@ -166,5 +167,10 @@ class PlayState extends BasicState
 		d.teleport(_level.getEntryPoint(1).x, _level.getEntryPoint(1).y);
 		d.update(0.1);// to update d.tracer
 		GP.CamerasFollow(d, d.tracer);
+	}
+	
+	public function getDinoPosition () : FlxPoint
+	{
+		return new FlxPoint(d.x, d.y);
 	}
 }

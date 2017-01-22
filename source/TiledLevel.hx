@@ -384,6 +384,13 @@ class TiledLevel extends TiledMap
 				var distance : Float = Std.parseFloat(o.properties.get("distance")) * GP.WorldTileSizeInPixel; 
 				e.distance = distance;
 				enemies.push(e);				
+			
+			case "boar":
+				trace("boar");
+				var e : EnemyBoar = new EnemyBoar(x, y);
+				var distance : Float = Std.parseFloat(o.properties.get("distance")) * GP.WorldTileSizeInPixel; 
+				e.distance = distance;
+				enemies.push(e);				
 			}
 		}
 	}
