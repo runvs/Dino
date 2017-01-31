@@ -26,6 +26,11 @@ class FishState extends BasicState
 		_levelName = "assets/data/fishing.tmx";
 	}
 	
+	public function getScore()
+	{
+		return _caughtFishList.length;
+	}
+	
 	override public function create():Void
 	{
 		super.create();
@@ -114,16 +119,15 @@ class FishState extends BasicState
 			
 			if (t.timer >= t.maxTimer)
 			{
-				t.resetToNewPosition();
-				
 				var s : FlxSprite = new FlxSprite(4 + _caughtFishList.length * 18, 4);
 				s.scrollFactor.set();
 				s.cameras = [GP.CameraMain];
 				s.loadGraphic(AssetPaths.item_fish__png, true, 16, 16);
 				s.animation.add("idle", [t._fishtype]);
 				s.animation.play("idle");
-				
 				_caughtFishList.add(s);
+				
+				t.resetToNewPosition();
 			}
 		}
 	}

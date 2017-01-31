@@ -22,7 +22,6 @@ class FishTarget extends FlxSprite
 	
 	private var _darkOverlay : FlxSprite;
 	
-	
 	private var _jumpTimer : Float = 0;
 	private var _jumpTimerMax : Float;
 
@@ -31,6 +30,7 @@ class FishTarget extends FlxSprite
 
 	// what type of fish this is (needed for list of caught fish in FishState)
 	public var _fishtype : Int = 0;
+	private static var _fishTypeMax : Int = 1;
 	
 	public function new( playBG : FlxSprite, wallWidth : Float) 
 	{
@@ -38,11 +38,17 @@ class FishTarget extends FlxSprite
 		_playBG = playBG;
 		_wallWidth = wallWidth;
 		
+		
+		
+		
+		this.loadGraphic(AssetPaths.item_fish__png, true, 16, 16);
+		for (i in 0 ... _fishTypeMax +1)
+		{
+			this.animation.add(Std.string(i), [i]);
+		}
 		resetToNewPosition();
 		
-		//makeGraphic(32, 32, FlxColor.TRANSPARENT, true);
-		//this.drawCircle(16, 16, 16, Palette.primary4());
-		this.loadGraphic(AssetPaths.item_fish__png, false, 16, 16);
+		
 		this.scrollFactor.set();
 		this.cameras = [GP.CameraMain];
 		
@@ -51,7 +57,6 @@ class FishTarget extends FlxSprite
 		_darkOverlay.makeGraphic(16, 16, FlxColor.BLACK, true);
 		_darkOverlay.scrollFactor.set();
 		_darkOverlay.cameras = [GP.CameraMain];
-		
 		
 		_overlay = new FlxSprite();
 		_overlay.makeGraphic(16, 16, FlxColor.WHITE, true);
@@ -63,7 +68,6 @@ class FishTarget extends FlxSprite
 	public override function update (elapsed : Float)
 	{
 		super.update(elapsed);
-		
 		
 		_jumpTimer += elapsed;
 		if (_jumpTimer >= _jumpTimerMax)
@@ -88,10 +92,7 @@ class FishTarget extends FlxSprite
 		
 		v = _jumpTimer / _jumpTimerMax;
 		_darkOverlay.scale.set(v, v);
-		_darkOverlay.setPosition(x, y);
-		
-		
-		
+		_darkOverlay.setPosition(x, y);	
 	}
 	
 	public function resetToNewPosition() 
@@ -103,6 +104,8 @@ class FishTarget extends FlxSprite
 		this.overlap = false;
 		this._jumpTimer = 0;
 		_jumpTimerMax = FlxG.random.floatNormal(10, 1.5);
+		_fishtype = FlxG.random.int(0, _fishTypeMax);
+		this.animation.play(Std.string(_fishtype));
 	}
 	
 	public override function draw()
@@ -111,5 +114,4 @@ class FishTarget extends FlxSprite
 		_darkOverlay.draw();
 		_overlay.draw();
 	}
-	
 }

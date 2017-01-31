@@ -48,7 +48,7 @@ class GP
 	static public var EnemyBoarChargeCoolDown (default, null) : Float = 10;
 	static public var EnemyBoarChargeAcceleration (default, null) : Float = 15;
 	
-	static public var FishingTimerMax (default, null) : Float = 2.5;
+	static public var FishingTimerMax (default, null) : Float = 3.0;
 	
 	public static function WorldLoadMaps() : Void 
 	{
