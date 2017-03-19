@@ -45,7 +45,7 @@ class GP
 	
 	public static var WorldMapPool (default, null) : MapPool;
 	static public var EnemyBoarRange (default, null) : Float = 80;
-	static public var EnemyBoarChargeCoolDown (default, null) : Float = 10;
+	static public var EnemyBoarChargeCoolDown (default, null) : Float = 5;
 	static public var EnemyBoarChargeAcceleration (default, null) : Float = 15;
 	
 	static public var FishingTimerMax (default, null) : Float = 3.0;

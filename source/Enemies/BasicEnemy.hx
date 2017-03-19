@@ -31,6 +31,7 @@ class BasicEnemy extends FlxSprite
 	public override function update(elapsed:Float)
 	{
 		super.update(elapsed);
+		_sprite.update(elapsed);
 		_sprite.x = this.x;
 		_sprite.y = this.y;
 	}
