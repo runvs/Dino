@@ -109,7 +109,7 @@ class PlayableCharacter extends FlxSprite
 			s.alpha = 1;
 			var T : Float = 0.45;
 			s.setPosition(x + this.width/2 + FlxG.random.floatNormal(0,1) , y + height );
-			s.velocity.set( FlxG.random.floatNormal(0, 4), - 40+ FlxG.random.floatNormal(0, 1));
+			s.velocity.set( FlxG.random.floatNormal(0, 8), - 40+ FlxG.random.floatNormal(0, 5));
 			s.acceleration.set(0, 175);
 			var t : FlxTimer = new FlxTimer();
 			t.start(T, function (t) { s.alive = false; s.alpha = 0; } );
