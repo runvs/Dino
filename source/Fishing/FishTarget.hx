@@ -93,10 +93,17 @@ class FishTarget extends FlxSprite
 		v = _jumpTimer / _jumpTimerMax;
 		_darkOverlay.scale.set(v, v);
 		_darkOverlay.setPosition(x, y);	
+		
+		CollideWithWalls();
 	}
 	
 	public function resetToNewPosition() 
 	{
+		
+		var vx : Float = FlxG.random.floatNormal(0, 8);
+		var vy : Float = FlxG.random.floatNormal(0, 8);
+		this.velocity.set( vx, vy);
+		
 		this.setPosition(FlxG.random.float(_playBG.x + _wallWidth , _playBG.x + _playBG.width - _wallWidth - this.width), 
 						 FlxG.random.float(_playBG.y + _wallWidth , _playBG.y + _playBG.height - _wallWidth - this.height));
 		this.timer = 0;
@@ -113,5 +120,31 @@ class FishTarget extends FlxSprite
 		super.draw();
 		_darkOverlay.draw();
 		_overlay.draw();
+	}
+	
+	function CollideWithWalls():Void 
+	{
+		if (this.x < _playBG.x + _wallWidth )
+		{
+			this.x = _playBG.x + _wallWidth;
+			this.velocity.x = - this.velocity.x;
+		}
+		
+		if (this.y < _playBG.y + _wallWidth )
+		{
+			this.y = _playBG.y + _wallWidth;
+			this.velocity.y = - this.velocity.y;
+		}
+		
+		if (this.x > _playBG.x + _playBG.width - this.width - _wallWidth)
+		{
+			this.x > _playBG.x + _playBG.width - this.width - _wallWidth;
+			this.velocity.x = - this.velocity.x;
+		}
+		if (this.y > _playBG.y + _playBG.height- this.height - _wallWidth)
+		{
+			this.y > _playBG.y + _playBG.height - this.height - _wallWidth;
+			this.velocity.y = - this.velocity.y;
+		}
 	}
 }

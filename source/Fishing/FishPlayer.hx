@@ -23,11 +23,12 @@ private var _state : FishState;
 		
 		_state = s;
 		
-		makeGraphic(16,16, FlxColor.BLUE);
+		//makeGraphic(16,16, FlxColor.BLUE);
+		this.loadGraphic(AssetPaths.angelhaken__png, false, 16, 16);
 		this.scrollFactor.set();
 		this.cameras = [GP.CameraMain];
 		
-		this.acceleration.set ( -10, 0);
+		this.acceleration.set ( -7, 0);
 		this.drag.set(50, 50);
 		
 		this.maxVelocity.set(200, 200);
