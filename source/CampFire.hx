@@ -10,7 +10,7 @@ import flixel.util.FlxColor;
  * ...
  * @author 
  */
-class CampFire extends FlxSprite
+class CampFire extends ConditionalObject
 {
 
 	var _glow : GlowOverlay ;
@@ -20,10 +20,11 @@ class CampFire extends FlxSprite
 	var tparticles : Float = 0;
 	
 	
-	
 	public function new(?X:Float=0, ?Y:Float=0) 
 	{
-		super(X, Y+2);
+		super();
+		x = X;
+		y = Y + 2;
 		this.loadGraphic(AssetPaths.campfire__png, true, 16, 16);
 		this.animation.add("idle", [1, 2, 1, 3, 2, 1, 2, 3, 4, 3, 2, 1], 6, true);
 		this.animation.play("idle");
@@ -40,24 +41,30 @@ class CampFire extends FlxSprite
 	public override function update (elapsed : Float)
 	{
 		super.update(elapsed);
-		_glow.update(elapsed);
-		t += elapsed;
-		tparticles -= elapsed;
-		_glow.alpha = 0.075 + 0.1 * Math.abs(Math.cos(Math.sin(t * 2) + Math.sin(t * 0.7) + t * 2)) + 0.035 * Math.abs(Math.cos(1.5 * t)); 
-		
-		_particles.update(elapsed);
-		if (tparticles <= 0)
+		if (checkConditions())
 		{
-			tparticles += FlxG.random.float(0.2, 0.9);
-			spawnFireCracles();
+			_glow.update(elapsed);
+			t += elapsed;
+			tparticles -= elapsed;
+			_glow.alpha = 0.075 + 0.1 * Math.abs(Math.cos(Math.sin(t * 2) + Math.sin(t * 0.7) + t * 2)) + 0.035 * Math.abs(Math.cos(1.5 * t)); 
+			
+			_particles.update(elapsed);
+			if (tparticles <= 0)
+			{
+				tparticles += FlxG.random.float(0.2, 0.9);
+				spawnFireCracles();
+			}
 		}
 	}
 	
 	public override function draw()
 	{
-		_particles.draw();
-		super.draw();
-		_glow.draw();
+		if (checkConditions())
+		{
+			_particles.draw();
+			super.draw();
+			_glow.draw();
+		}
 	}
 	
 	function spawnFireCracles():Void 

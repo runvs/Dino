@@ -1,28 +1,32 @@
 {
 	"level" : "assets/data/stage1_cave.tmx",
-	"follow" : "dinobag",
+	"follow" : "dino",
 	"positions":
 	[
 		{"name": "origin",   "x": 0,  "y": 0},
-		{"name": "entry",   "x": 144,  "y": 160},
-		{"name": "right",   "x": 112,  "y": 160},
-		{"name": "back",   "x": 80,  "y": 160},
-		{"name": "back2",   "x": 81,  "y": 160}
+		{"name": "entry",   "x": 144,  "y": 174},
+		{"name": "right",   "x": 112,  "y": 174},
+		{"name": "back",   "x": 80,  "y": 174},
+		{"name": "back2",   "x": 81,  "y": 174}
 	],
 	"actors":
 	[
-		{"name": "dinobag", "position": "entry"},
+		{"name": "dino", "position": "entry"},
 		{"name": "overlay", "position": "origin"}
 	],
     "actions": 
 	[
 		{"time" : 0.0, "actor": "overlay", "type" : "fade", "p1":"0", "p2":"0.5"},
 		
-		{ "time" : 0.3,  "actor": "dinobag", "type": "animate", "p1": "walk", "p2" : "true"},
-		{ "time" : 0.3, "actor" : "dinobag", "type" : "move", "p1" : "right", "p2" : "2.0"},
+		{ "time" : 0.3,  "actor": "dino", "type": "animate", "p1": "walk", "p2" : "true"},
+		{ "time" : 0.3,  "actor": "dino", "type" : "move", "p1" : "right", "p2" : "2.0"},
+		
+		{ "time" : 2.2,  "actor": "dino", "type": "animate", "p1": "fire", "p2" : "true"},
 		
 		
-		{ "time": 4.0,  "actor": "overlay", "type" : "fade", "p1":"1.0", "p2":"0.5"},
-		{ "time": 4.7, "actor": "global", "type" : "end", "p1":"s1_e1_play"}
+		
+		{ "time": 11.0,  "actor": "overlay", "type" : "fade", "p1":"1.0", "p2":"0.5"},
+		{ "time" : 11.69,  "actor": "global", "type": "switch", "p1": "fire_burning", "p2" : "true"},
+		{ "time": 11.7,  "actor": "global", "type" : "end", "p1":"s1_e1_play"}
     ]
 }

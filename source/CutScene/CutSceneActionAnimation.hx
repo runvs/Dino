@@ -20,7 +20,7 @@ class CutSceneActionAnimation extends CutSceneAction
 	public override function perform(scene : CutSceneState)
 	{
 		super.perform(scene);
-		trace("animation action perform!");
+		trace("animation action perform: " + animation + "!");
 		var ac : CutSceneActor = scene.getActor(this.actor);
 		if (ac != null)
 		{

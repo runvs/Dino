@@ -414,6 +414,7 @@ class TiledLevel extends TiledMap
 			case "campfire":
 				trace("campfire");
 				var c : CampFire = new CampFire(x, y);
+				c.createConditions(o.properties.get("conditions"));
 				topTiles.add(c);
 				
 			}

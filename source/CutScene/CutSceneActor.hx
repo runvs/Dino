@@ -34,13 +34,15 @@ class CutSceneActor extends FlxSprite
 		switch (name)
 		{
 			case "dino":
-				//trace("load dino");
+				trace("load actor dino");
+				trace(AssetPaths.dino__png);
 				this.loadGraphic(AssetPaths.dino__png, true, 24, 18);
 				this.animation.add("idle", [5,5,5,4,5,5,5,5,5,6,7,8,9], 4);
 				this.animation.add("walk", [0, 1, 2, 3], 4);
 				this.animation.add("jumpUp", [15, 16, 17], 4, false);
 				this.animation.add("jumpDown", [18, 19, 20], 4, false);
-				this.animation.play("idle");
+				this.animation.add("fire", [for (value in 28...71) value], 5, false);
+				this.animation.play("idle", true);
 				setFacingFlip(FlxObject.LEFT, false, false);
 				setFacingFlip(FlxObject.RIGHT, true, false);
 				

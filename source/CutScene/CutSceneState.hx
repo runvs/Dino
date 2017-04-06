@@ -177,6 +177,12 @@ class CutSceneState extends BasicState
 				var duration : Float = Std.parseFloat(a.p2);
 				action = new CutSceneActionFade(a.actor, ta, duration);
 			}
+			else if (a.type == "switch")
+			{
+				var id : String = a.p1;
+				var v : Bool = (a.p2 == "true"? true : false);
+				action = new CutSceneActionSwitch(a.actor, id, v);
+			}
 			else if (a.type == "sound")
 			{
 				throw "Action Sound not implemented yet";
