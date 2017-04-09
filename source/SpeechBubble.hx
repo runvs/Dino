@@ -130,4 +130,8 @@ class SpeechBubble extends FlxSprite
 	}
 	
 	
+	public function setIconAlpha (v : Float)
+	{
+		_icon.alpha = v;
+	}
 }

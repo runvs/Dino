@@ -4,6 +4,7 @@ import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxSpriteGroup;
 import flixel.util.FlxColor;
+import flixel.util.FlxTimer;
 
 /**
  * ...
@@ -18,7 +19,12 @@ class FishState extends BasicState
 	private var _targets : FlxTypedGroup<FishTarget>;
 	private var _player : FishPlayer;
 	
+	private var _dino : FlxSprite;
+	private var _dinoAnimTimer : Float = 10;
+	private var _speech : SpeechBubble;
+	
 	private var _caughtFishList : FlxSpriteGroup;
+	
 	
 	public function new() 
 	{
@@ -98,6 +104,27 @@ class FishState extends BasicState
 		///////////////////////////////////////
 		_player = new FishPlayer(this);
 		_player.setPosition(300, 300);
+		
+		///////////////////////////////////////
+		///// Create Dino anim ////////////////
+		///////////////////////////////////////
+		
+		_dino = new FlxSprite(18, 110);
+		_dino.loadGraphic(AssetPaths.dino_angeln__png, true, 24, 18);
+		_dino.animation.add("pick", [for (v in 0...5) v], 5, false);
+		_dino.animation.add("throw", [for (v in 6...15) v], 5, false);
+		_dino.animation.add("fish1", [for (v in 15...18) v], 3, true);
+		_dino.animation.add("fish2", [for (v in 19...26) v], 4, true);
+		_dino.animation.play("throw");
+		
+		var ti : FlxTimer = new FlxTimer();
+		ti.start(2, function (t) { _dino.animation.play("fish1", true); } );
+		
+		_dino.cameras = [GP.CameraMain];
+		
+		_speech = new SpeechBubble(_dino, "heart", 0.5);
+		_speech.alpha = 0;
+		_speech.setIconAlpha(0);
 	}
 	
 	override public function internalUpdate(elapsed:Float):Void
@@ -105,6 +132,20 @@ class FishState extends BasicState
 		_walls.update(elapsed);
 		_targets.update(elapsed);
 		_player.update(elapsed);
+		_dino.update(elapsed);
+		_speech.update(elapsed);
+		
+		_dinoAnimTimer -= elapsed;
+		
+		if (_dinoAnimTimer <= 0)
+		{
+			_dino.animation.play("fish2", true);
+			var ti2 : FlxTimer = new FlxTimer();
+			while(_dinoAnimTimer <= 0)_dinoAnimTimer = FlxG.random.floatNormal(10, 2);
+			
+			ti2.start(2, function(t) { _dino.animation.play("fish1", true); } );
+		}
+		
 		
 		for (t in _targets)
 		{
@@ -119,15 +160,9 @@ class FishState extends BasicState
 			
 			if (t.timer >= t.maxTimer)
 			{
-				var s : FlxSprite = new FlxSprite(4 + _caughtFishList.length * 18, 4);
-				s.scrollFactor.set();
-				s.cameras = [GP.CameraMain];
-				s.loadGraphic(AssetPaths.item_fish__png, true, 16, 16);
-				s.animation.add("idle", [t._fishtype]);
-				s.animation.play("idle");
-				_caughtFishList.add(s);
-				
+				addFishToChaughtList(t);
 				t.resetToNewPosition();
+				_speech = new SpeechBubble(_dino, "heart", 1.25);
 			}
 		}
 	}
@@ -143,7 +178,19 @@ class FishState extends BasicState
 	
 	override public function internalDraw ()
 	{
-		
+		_dino.draw();
+		_speech.draw();
+	}
+	
+	function addFishToChaughtList(t: FishTarget):Void 
+	{
+		var s : FlxSprite = new FlxSprite(4 + _caughtFishList.length * 18, 4);
+		s.scrollFactor.set();
+		s.cameras = [GP.CameraMain];
+		s.loadGraphic(AssetPaths.item_fish__png, true, 16, 16);
+		s.animation.add("idle", [t._fishtype]);
+		s.animation.play("idle");
+		_caughtFishList.add(s);
 	}
 	
 }
