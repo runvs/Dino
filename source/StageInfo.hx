@@ -62,6 +62,7 @@ class StageInfo
 		Validator.validateJson("assets/data/stage0_intro.json");
 		Validator.validateJson("assets/data/stage0_found_cave.json");
 		Validator.validateJson("assets/data/stage1_intro.json");
+		Validator.validateJson("assets/data/stage2_fishing_intro.json");
 	}
 }
 

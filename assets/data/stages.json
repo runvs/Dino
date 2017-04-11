@@ -54,15 +54,25 @@
 			"type" 			: "cut", 
 			"level"			: "assets/data/stage1_build.json",
 			"requirements" 	: ["stage0complete"],
-			"storysettings" : []
+			"storysettings" : ["fire_burning"]
+		},
+		
+		
+		{
+			"name"			: "s2_e0_fishing_intro",
+			"stage"			: 2, "episode" : 0,
+			"type"			: "cut",
+			"level"			: "assets/data/stage2_fishing_intro.json",
+			"requirements" 	: [],
+			"storysettings" : ["fire_burning"]
 		},
 		{
-			"name"			: "s2_e0_fishing",
-			"stage"			: 2, "episode" : 0,
+			"name"			: "s2_e1_fishing",
+			"stage"			: 2, "episode" : 1,
 			"type"			: "fishing",
 			"level"			: "assets/data/fishing.tmx",
 			"requirements" 	: [],
-			"storysettings" : []
+			"storysettings" : ["fire_burning"]
 		}
     ]
 }

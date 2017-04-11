@@ -102,19 +102,23 @@ class SpeechBubble extends FlxSprite
 		}
 		else if (i == "fish")
 		{
-				_icon.loadGraphic(AssetPaths.icon_house__png, false, 16, 16);
+				_icon.loadGraphic(AssetPaths.item_apple__png, false, 16, 16);
+				_icon.scale.set(0.5, 0.5);
 		}
 		else if (i == "flower")
 		{
-				_icon.loadGraphic(AssetPaths.icon_house__png, false, 16, 16);
+				_icon.loadGraphic(AssetPaths.item_apple__png, false, 16, 16);
+				_icon.scale.set(0.5, 0.5);
 		}
 		else if (i == "egg")
 		{
-				_icon.loadGraphic(AssetPaths.icon_house__png, false, 16, 16);
+				_icon.loadGraphic(AssetPaths.item_apple__png, false, 16, 16);
+				_icon.scale.set(0.5, 0.5);
 		}
 		else if (i == "excamation")
 		{
-				_icon.loadGraphic(AssetPaths.icon_house__png, false, 16, 16);
+				_icon.loadGraphic(AssetPaths.item_apple__png, false, 16, 16);
+				_icon.scale.set(0.5, 0.5);
 		}
 		else if (i == "question")
 		{

@@ -64,7 +64,10 @@ class StageItem extends FlxSpriteGroup
 	
 	public function setStorySettings(storysettings:Array<String>) 
 	{
-		
+		for (s in storysettings)
+		{
+			StoryManager.setBool(s, true);
+		}
 	}
 	
 	public function startStage()
