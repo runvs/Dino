@@ -103,10 +103,10 @@ class SpeechBubble extends FlxSprite
 		else if (i == "fish")
 		{
 				_icon.loadGraphic(AssetPaths.item_fish__png, true, 16, 16);
-				_icon.scale.set(0.5, 0.5);
+				_icon.scale.set(0.75, 0.75);
 				_icon.animation.add("idle", [0], 1, true);
 				_icon.animation.play("idle");
-				_icon.offset.set(2, 2);
+				_icon.offset.set(-1, 4);
 		}
 		else if (i == "flower")
 		{
