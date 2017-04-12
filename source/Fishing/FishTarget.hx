@@ -18,9 +18,7 @@ class FishTarget extends FlxSprite
 	
 	public var overlap : Bool = false;
 	
-	private var _overlay : FlxSprite;
-	
-	private var _darkOverlay : FlxSprite;
+
 	
 	private var _jumpTimer : Float = 0;
 	private var _jumpTimerMax : Float;
@@ -51,18 +49,6 @@ class FishTarget extends FlxSprite
 		
 		this.scrollFactor.set();
 		this.cameras = [GP.CameraMain];
-		
-		_darkOverlay = new FlxSprite();
-		
-		_darkOverlay.makeGraphic(16, 16, FlxColor.BLACK, true);
-		_darkOverlay.scrollFactor.set();
-		_darkOverlay.cameras = [GP.CameraMain];
-		
-		_overlay = new FlxSprite();
-		_overlay.makeGraphic(16, 16, FlxColor.WHITE, true);
-		_overlay.alpha = 0;
-		_overlay.scrollFactor.set();
-		_overlay.cameras = [GP.CameraMain];
 	}
 	
 	public override function update (elapsed : Float)
@@ -86,13 +72,18 @@ class FishTarget extends FlxSprite
 		}
 		
 		var v : Float = timer / maxTimer;
-		_overlay.alpha =v ;
-		_overlay.scale.set(v, v);
-		_overlay.setPosition(x, y);
+		var aval = 0.2 + 0.8 * Math.pow(v, 1.5);
+		this.alpha = aval;
 		
 		v = _jumpTimer / _jumpTimerMax;
-		_darkOverlay.scale.set(v, v);
-		_darkOverlay.setPosition(x, y);	
+		
+		var sval = 0.15 + 0.85 * (v < 0.5 ? v * 2 : (1 - v)*2);
+		if (sval < 0) sval = 0;
+		if (sval > 1.0) sval = 1.0;
+		trace( _jumpTimer + " " + _jumpTimerMax + " " + v + " " + sval);
+		this.scale.set(sval, sval);
+		
+			
 		
 		CollideWithWalls();
 	}
@@ -113,13 +104,13 @@ class FishTarget extends FlxSprite
 		_jumpTimerMax = FlxG.random.floatNormal(10, 1.5);
 		_fishtype = FlxG.random.int(0, _fishTypeMax);
 		this.animation.play(Std.string(_fishtype));
+		this.scale.set(0.15, 0.15);
+		this.alpha = 0.2;
 	}
 	
 	public override function draw()
 	{
 		super.draw();
-		_darkOverlay.draw();
-		_overlay.draw();
 	}
 	
 	function CollideWithWalls():Void 

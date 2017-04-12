@@ -50,7 +50,7 @@ class FishState extends BasicState
 		//// Creating Playing Background //////
 		///////////////////////////////////////
 		playbg = new FlxSprite(25, 15);
-		playbg.makeGraphic(150, 80, FlxColor.BLACK);
+		playbg.makeGraphic(150, 80, FlxColor.fromRGB(47,55,64));
 		playbg.scrollFactor.set();
 		playbg.cameras = [GP.CameraMain];
 		
@@ -96,7 +96,7 @@ class FishState extends BasicState
 		_targets._cameras = [GP.CameraMain];
 		
 		_targets.add(new FishTarget(playbg, wallWidth));
-		_targets.add(new FishTarget(playbg, wallWidth));
+		//_targets.add(new FishTarget(playbg, wallWidth));
 		
 		
 		///////////////////////////////////////
