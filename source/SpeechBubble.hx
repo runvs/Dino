@@ -19,6 +19,7 @@ class SpeechBubble extends FlxSprite
 	private var _icon : FlxSprite;
 	
 	private var _age  : Float = 0;
+	private var _isInFadeOut : Bool = false;
 	
 	public function new(p: FlxSprite, i : String, d : Float) 
 	{
@@ -55,10 +56,18 @@ class SpeechBubble extends FlxSprite
 		_timer -= elapsed;
 		if (_timer <= 0)
 		{
-			this.alpha = 0;
-			_icon.alpha = 0;
-			this.alive = false;
+			if (!_isInFadeOut)
+			{
+				_isInFadeOut = true;
+				FlxTween.tween(this, { alpha:0 }, 0.3);
+				FlxTween.tween(this.scale, { x:1.5, y:1.5 }, 0.2, {startDelay:0.1 } );
+				FlxTween.tween(this._icon, { alpha:0 }, 0.1);
+			}
 			
+		}
+		if (_timer <= -0.34)
+		{
+			this.alive = false;
 		}
 		this.offset.y =  2*Math.sin(2.75 * _age);
 		_icon.offset.y = 2*Math.sin(2.75 * _age);
