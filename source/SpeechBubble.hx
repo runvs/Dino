@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
+import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 
 /**
@@ -24,13 +25,24 @@ class SpeechBubble extends FlxSprite
 		super();
 		_parent = p;
 		_timer = d;
-		this.loadGraphic(AssetPaths.speechbubble__png, false, 16, 16);
+		this.loadGraphic(AssetPaths.speechbubble__png, true, 16, 16);
+		
 		this.color = FlxColor.fromRGB(175, 175, 175, 175);
 		this.cameras = [GP.CameraMain];
-		
-		
 		LoadIcon(i);
 		
+		if (_timer > 0.42)
+		{
+			this.animation.add("pop", [0, 1, 2, 3], 16, false);
+			this.animation.play("pop",true);
+			_icon.alpha = 0;
+			FlxTween.tween(_icon, { alpha:1 }, 0.15, {startDelay:0.25 } );
+		}
+		else
+		{
+			this.animation.add("idle", [3]);
+			this.animation.play("idke", true);
+		}
 	}
 	
 	public override function update (elapsed : Float) : Void 

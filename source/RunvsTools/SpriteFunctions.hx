@@ -12,9 +12,9 @@ class SpriteFunctions
 	{
 		//trace("shadesprite");
 		s.pixels.lock();
-		for (i in 0... Std.int(s.width))
+		for (i in 0... Std.int(s.pixels.width))
 		{
-			for (j in 0... Std.int(s.height))
+			for (j in 0... Std.int(s.pixels.height))
 			{
 				var ci : Int = s.pixels.getPixel32(i, j);
 				var c : FlxColor = FlxColor.fromInt(ci);
@@ -69,5 +69,48 @@ class SpriteFunctions
 			}
 		}
 		s.pixels.unlock();
+	}
+	
+	public static function createHorizontalBar(spr:FlxSprite, w:Int, h: Int, pad:Int, col : FlxColor, shading : Float = 0.2)
+	{
+		var darkerColor : FlxColor = col.getDarkened(shading);
+		var brighterColor : FlxColor = col.getLightened(shading);
+		spr.makeGraphic(w, h, col, true);
+		spr.pixels.lock();
+		for (i  in 0 ... w)
+		{
+			for (jp in 0 ... pad)
+			{
+				var j = jp;
+ 				if (j > h) j = h;
+				
+				spr.pixels.setPixel32(i, j, brighterColor);
+				spr.pixels.setPixel32(i, h - j, darkerColor);
+				spr.pixels.setPixel32(i, h - j - 1, darkerColor);
+			}
+		}
+		spr.pixels.unlock();
+	}
+	
+	
+	public static function createVerticalBar(spr:FlxSprite, w:Int, h: Int, pad:Int, col : FlxColor, shading : Float = 0.2)
+	{
+		var darkerColor : FlxColor = col.getDarkened(shading);
+		var brighterColor : FlxColor = col.getLightened(shading);
+		spr.makeGraphic(w, h, col, true);
+		spr.pixels.lock();
+		for (i  in 0 ... h)
+		{
+			for (jp in 0 ... pad)
+			{
+				var j = jp;
+ 				if (j > w) j = h;
+				
+				spr.pixels.setPixel32(j, i, brighterColor);
+				spr.pixels.setPixel32(j, h - i, darkerColor);
+				spr.pixels.setPixel32(j, h - i - 1, darkerColor);
+			}
+		}
+		spr.pixels.unlock();
 	}
 }
