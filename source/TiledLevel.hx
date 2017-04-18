@@ -417,6 +417,14 @@ class TiledLevel extends TiledMap
 				c.createConditions(o.properties.get("conditions"));
 				topTiles.add(c);
 				
+			case "lightbeams":
+				trace("lightbeams");
+				var exitRight : Bool = o.properties.get("facing") == "right";
+				
+				var l : Lightbeams = new Lightbeams(x, y, exitRight);
+				l.createConditions(o.properties.get("conditions"));
+				topTiles.add(l);
+				
 			}
 		}
 	}
