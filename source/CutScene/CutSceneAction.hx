@@ -14,6 +14,8 @@ class CutSceneAction
 	
 	public var trigger : Bool = false;
 	
+	public var duration : Float = 0;
+	
 	
 	public function new (a : String)
 	{

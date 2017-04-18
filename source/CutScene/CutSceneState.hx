@@ -147,57 +147,89 @@ class CutSceneState extends BasicState
 	
 	function convertAction(a:ActionData) 
 	{
-		if (a.time < 0) 
+
+		var action : CutSceneAction = null;
+		
+		if (a.type == "animate")
+		{
+			var f : Bool = (a.p2 == "true"? true : false);
+			action = new CutSceneActionAnimation(a.actor, a.p1, f);
+		}
+		else if (a.type == "speak")
+		{
+			var d : Float = Std.parseFloat(a.p2);
+			action = new CutSceneActionSpeak(a.actor, a.p1, d);
+		}
+		else if (a.type == "move")
+		{
+			var d : Float = Std.parseFloat(a.p2);
+			action = new CutSceneActionMove(a.actor, a.p1, d);
+		}
+		else if (a.type == "wiggle")
+		{
+			throw "Action wiggle not implemented yet";
+		}
+		else if (a.type == "fade")
+		{
+			var ta : Float = Std.parseFloat(a.p1);
+			var duration : Float = Std.parseFloat(a.p2);
+			action = new CutSceneActionFade(a.actor, ta, duration);
+		}
+		else if (a.type == "switch")
+		{
+			var id : String = a.p1;
+			var v : Bool = (a.p2 == "true"? true : false);
+			action = new CutSceneActionSwitch(a.actor, id, v);
+		}
+		else if (a.type == "sound")
+		{
+			throw "Action Sound not implemented yet";
+		}
+		else if (a.type == "end")
+		{
+			action = new CutSceneActionEnd(a.actor, a.p1);
+		}
+		else
+		{
+			throw "Action Error: Type " + a.type + " not known!";
+		}
+		
+		//trace("\t\t\tdata: " + a.time);
+		if (a.time == "same")
+		{
+			if (_actions.length == 0) 
+				throw "Cannot create next action with no actions possible";
+				
+			var last : CutSceneAction = _actions[_actions.length - 1];
+			action.timer = last.timer;
+			
+		}
+		else if (a.time == "next")
+		{
+			//trace("using next keyword");
+			if (_actions.length == 0) 
+				throw "Cannot create next action with no actions possible";
+				
+			var last : CutSceneAction = _actions[_actions.length - 1];
+			//trace(last.timer + " " + last.duration);
+			action.timer = last.timer + last.duration + 0.1;
+		}
+		else if (StringTools.startsWith(a.time, "next"))
+		{
+			var x : String = a.time.substr(4);
+			var last : CutSceneAction = _actions[_actions.length - 1];
+			action.timer = last.timer + last.duration + Std.parseFloat(x);
+		}
+		else
+		{
+			action.timer = Std.parseFloat(a.time);
+		}
+		if (action.timer < 0) 
 			throw "Action Error: Time must not be negative!";
 		
-			var action : CutSceneAction = null;
-			
-			if (a.type == "animate")
-			{
-				var f : Bool = (a.p2 == "true"? true : false);
-				action = new CutSceneActionAnimation(a.actor, a.p1, f);
-			}
-			else if (a.type == "speak")
-			{
-				var d : Float = Std.parseFloat(a.p2);
-				action = new CutSceneActionSpeak(a.actor, a.p1, d);
-			}
-			else if (a.type == "move")
-			{
-				var d : Float = Std.parseFloat(a.p2);
-				action = new CutSceneActionMove(a.actor, a.p1, d);
-			}
-			else if (a.type == "wiggle")
-			{
-				throw "Action wiggle not implemented yet";
-			}
-			else if (a.type == "fade")
-			{
-				var ta : Float = Std.parseFloat(a.p1);
-				var duration : Float = Std.parseFloat(a.p2);
-				action = new CutSceneActionFade(a.actor, ta, duration);
-			}
-			else if (a.type == "switch")
-			{
-				var id : String = a.p1;
-				var v : Bool = (a.p2 == "true"? true : false);
-				action = new CutSceneActionSwitch(a.actor, id, v);
-			}
-			else if (a.type == "sound")
-			{
-				throw "Action Sound not implemented yet";
-			}
-			else if (a.type == "end")
-			{
-				action = new CutSceneActionEnd(a.actor, a.p1);
-			}
-			else
-			{
-				throw "Action Error: Type " + a.type + " not known!";
-			}
-			
-			action.timer = a.time;
-			_actions.push(action);
+		
+		//trace("\t\taction: " + action.timer);	
+		_actions.push(action);
 	}
 	
 	function clearBubbles() 
@@ -249,7 +281,7 @@ class CutSceneState extends BasicState
 typedef ActionData = 
 {
 	var actor : String;
-	var time : Float;
+	var time : String;
 	var type : String;
 	var p1 : String;
 	var p2 : String;

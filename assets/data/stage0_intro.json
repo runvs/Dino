@@ -15,24 +15,24 @@
 	],
     "actions": 
 	[
-		{ "time": 0.0,  "actor": "overlay", "type" : "fade", "p1":"0", "p2":"0.5"},
-		{ "time": 0.0,  "actor": "dinobag", "type": "animate", "p1": "sleep", "p2" : "true"},
-		
-		{ "time": 3.0,  "actor": "dinobag", "type": "animate", "p1": "wakeup", "p2" : "true"},
-		{ "time": 8.0,  "actor": "dinobag", "type": "animate", "p1": "walk", "p2" : "true"},
-		{ "time": 8.0,  "actor": "dinobag", "type": "move", "p1": "dinoEnd", "p2": "1.5" },
-		
-		{ "time": 9.75,  "actor": "dinobag", "type": "animate", "p1": "idle", "p2" : "true"},
-		{ "time": 10.0,  "actor": "dinobag", "type": "move", "p1": "dinoEnd2", "p2": "0.01" },
-		{ "time": 10.5,  "actor": "dinobag", "type": "move", "p1": "dinoEnd", "p2": "0.01" },
-		{ "time": 11.0,  "actor": "dinobag", "type": "move", "p1": "dinoEnd2", "p2": "0.01" },
-		{ "time": 11.5,  "actor": "dinobag", "type": "move", "p1": "dinoEnd", "p2": "0.01" },
-		
-		{ "time": 12.5,  "actor": "dinobag", "type": "speak", "p1":"house", "p2": "1.75"},
-		{ "time": 14.5,  "actor": "dinobag", "type": "speak", "p1":"question", "p2": "1.75"},
-		{ "time": 16.5,  "actor": "dinobag", "type": "speak", "p1":"left", "p2": "1.75"},
-		
-		{ "time": 17.5,  "actor": "overlay", "type" : "fade", "p1":"1.0", "p2":"0.75"},
-		{ "time": 18.5, "actor": "global", "type" : "end", "p1":"s0_e1_play"}
+		{ "time": "0.0 ",  "actor": "overlay", "type" : "fade", "p1":"0", "p2":"0.5"},
+		{ "time": "0.0 ",  "actor": "dinobag", "type": "animate", "p1": "sleep", "p2" : "true"},
+
+		{ "time": "3.0 ",  "actor": "dinobag", "type": "animate", "p1": "wakeup", "p2" : "true"},
+		{ "time": "8.0 ",  "actor": "dinobag", "type": "animate", "p1": "walk", "p2" : "true"},
+		{ "time": "8.0 ",  "actor": "dinobag", "type": "move", "p1": "dinoEnd", "p2": "1.5" },
+
+		{ "time": "9.75" ,  "actor": "dinobag", "type": "animate", "p1": "idle", "p2" : "true"},
+		{ "time": "10.0" ,  "actor": "dinobag", "type": "move", "p1": "dinoEnd2", "p2": "0.01" },
+		{ "time": "10.5" ,  "actor": "dinobag", "type": "move", "p1": "dinoEnd", "p2": "0.01" },
+		{ "time": "11.0" ,  "actor": "dinobag", "type": "move", "p1": "dinoEnd2", "p2": "0.01" },
+		{ "time": "11.5" ,  "actor": "dinobag", "type": "move", "p1": "dinoEnd", "p2": "0.01" },
+
+		{ "time": "12.5" ,  "actor": "dinobag", "type": "speak", "p1":"house", "p2": "1.75"},
+		{ "time": "14.5" ,  "actor": "dinobag", "type": "speak", "p1":"question", "p2": "1.75"},
+		{ "time": "16.5" ,  "actor": "dinobag", "type": "speak", "p1":"left", "p2": "1.75"},
+
+		{ "time": "17.5" ,  "actor": "overlay", "type" : "fade", "p1":"1.0", "p2":"0.75"},
+		{ "time": "18.5" , "actor": "global", "type" : "end", "p1":"s0_e1_play"}
     ]
 }

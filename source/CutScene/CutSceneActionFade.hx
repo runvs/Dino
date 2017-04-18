@@ -9,13 +9,13 @@ class CutSceneActionFade extends CutSceneAction
 {
 
 	var targetAlpha: Float;
-	var duration : Float;
 	
 	public function new(a: String, t :Float, d: Float) 
 	{
 		super(a);
 		targetAlpha = t;
 		duration = d;
+		timer = 0;
 	}
 	
 	public override function perform(scene : CutSceneState)

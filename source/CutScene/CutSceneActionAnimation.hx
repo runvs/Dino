@@ -15,6 +15,8 @@ class CutSceneActionAnimation extends CutSceneAction
 		super(a);
 		animation = anim;
 		force = f;
+		duration = 0;
+		timer = 0;
 	}
 	
 	public override function perform(scene : CutSceneState)

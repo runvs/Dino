@@ -15,6 +15,8 @@ class CutSceneActionSwitch extends CutSceneAction
 		super(a);
 		id = pid;
 		newValue = pv;
+		timer = 0;
+		duration = 0;
 		
 	}
 	

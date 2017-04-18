@@ -54,7 +54,7 @@
 			"type" 			: "cut", 
 			"level"			: "assets/data/stage1_build.json",
 			"requirements" 	: ["stage0complete"],
-			"storysettings" : ["fire_burning"]
+			"storysettings" : []
 		},
 		
 		

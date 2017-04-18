@@ -15,20 +15,19 @@
 	],
     "actions": 
 	[
-		{"time" : 0.0, "actor": "overlay", "type" : "fade", "p1":"0", "p2":"0.5"},
+		{"time"  : "0.0", "actor": "overlay", "type" : "fade", "p1":"0", "p2":"0.5"},
+
+		{ "time" : "0.5",  "actor": "dino", "type": "speak", "p1": "fish", "p2" : "2.0"},
 		
-		{ "time" : 0.5,  "actor": "dino", "type": "speak", "p1": "fish", "p2" : "2.0"},
+		{ "time" : "3.2",  "actor": "dino", "type": "move", "p1": "entryR", "p2" : "0.01"},
+		{ "time" : "3.7",  "actor": "dino", "type": "move", "p1": "entry", "p2" : "0.01"},
+		{ "time" : "4.2",  "actor": "dino", "type": "move", "p1": "entryR", "p2" : "0.01"},
+		{ "time" : "4.7",  "actor": "dino", "type": "move", "p1": "entry", "p2" : "0.01"},
+		{ "time" : "5.2",  "actor": "dino", "type": "move", "p1": "entryR", "p2" : "0.01"},
 		
-		
-		{ "time" : 3.2,  "actor": "dino", "type": "move", "p1": "entryR", "p2" : "0.01"},
-		{ "time" : 3.7,  "actor": "dino", "type": "move", "p1": "entry", "p2" : "0.01"},
-		{ "time" : 4.2,  "actor": "dino", "type": "move", "p1": "entryR", "p2" : "0.01"},
-		{ "time" : 4.7,  "actor": "dino", "type": "move", "p1": "entry", "p2" : "0.01"},
-		{ "time" : 5.2,  "actor": "dino", "type": "move", "p1": "entryR", "p2" : "0.01"},
-		
-		{ "time" : 5.5,  "actor": "dino", "type": "speak", "p1": "question", "p2" : "1.5"},
-		
-		{ "time": 7.0,  "actor": "overlay", "type" : "fade", "p1":"1.0", "p2":"0.85"},
-		{ "time": 7.9,  "actor": "global", "type" : "end", "p1":"s2_e1_fishing"}
+		{ "time" : "5.5",  "actor": "dino", "type": "speak", "p1": "question", "p2" : "1.5"},
+
+		{ "time" : "7.0",  "actor": "overlay", "type" : "fade", "p1":"1.0", "p2":"0.85"},
+		{ "time" : "7.9",  "actor": "global", "type" : "end", "p1":"s2_e1_fishing"}
     ]
 }

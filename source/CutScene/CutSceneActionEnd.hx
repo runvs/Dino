@@ -13,6 +13,8 @@ class CutSceneActionEnd extends CutSceneAction
 		super(a);
 		_name = n;
 		//_stage = new StageItem("", 0, 0, w, n);
+		duration = 0;
+		timer = 0;
 	}
 	
 	public override function perform(scene : CutSceneState)

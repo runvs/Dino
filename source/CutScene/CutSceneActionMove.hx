@@ -10,13 +10,13 @@ class CutSceneActionMove extends CutSceneAction
 {
 
 	var target : String;
-	var duration : Float;
 	
 	public function new(a: String, t :String, d: Float) 
 	{
 		super(a);
 		target = t;
 		duration = d;
+		timer = 0;
 	}
 	
 	public override function perform(scene : CutSceneState)

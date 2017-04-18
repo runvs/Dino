@@ -8,13 +8,13 @@ class CutSceneActionSpeak extends CutSceneAction
 {
 
 	var icon : String;
-	var duration : Float;
 	
 	public function new(a: String, i :String, d: Float) 
 	{
 		super(a);
 		icon = i;
-		duration = d;
+		duration = d + 0.15;
+		timer = 0;
 	}
 	
 	public override function perform(scene : CutSceneState)

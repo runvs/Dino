@@ -4,7 +4,8 @@
 	"positions":
 	[
 		{"name": "origin",   "x": 0,  "y": 0},
-		{"name": "entry",   "x": 144,  "y": 176},
+		{"name": "entry",   "x": 190,  "y": 176},
+		{"name": "origentry",   "x": 144,  "y": 176},
 		{"name": "right",   "x": 112,  "y": 176},
 		{"name": "back",   "x": 80,  "y": 176},
 		{"name": "back2",   "x": 81,  "y": 176}
@@ -16,25 +17,25 @@
 	],
     "actions": 
 	[
-		{"time" : 0.0, "actor": "overlay", "type" : "fade", "p1":"0", "p2":"0.5"},
-		
-		{ "time" : 0.3,  "actor": "dinobag", "type": "animate", "p1": "walk", "p2" : "true"},
-		{ "time" : 0.3, "actor" : "dinobag", "type" : "move", "p1" : "right", "p2" : "2.0"},
-		
-		{ "time" : 2.2,  "actor": "dinobag", "type": "animate", "p1": "idle", "p2" : "true"},
-		{ "time" : 2.5,   "actor": "dinobag", "type": "speak", "p1":"house", "p2": "1.0"},
-		{ "time" : 3.5,   "actor": "dinobag", "type": "speak", "p1":"heart", "p2": "1.0"},
-		
-		{ "time" : 5.0,  "actor": "dinobag", "type": "animate", "p1": "walk", "p2" : "true"},
-		{ "time" : 5.0, "actor" : "dinobag", "type" : "move", "p1" : "back", "p2" : "2.0"},
-		{ "time" : 7.4, "actor" : "dinobag", "type" : "move", "p1" : "back2", "p2" : "0.2"},
-		
-		{ "time" : 7.2,  "actor": "dinobag", "type": "animate", "p1": "idle", "p2" : "true"},
-		{ "time" : 7.5,   "actor": "dinobag", "type": "speak", "p1":"leaf", "p2": "1.0"},
-		{ "time" : 8.5,   "actor": "dinobag", "type": "speak", "p1":"branch", "p2": "1.0"},
-		{ "time" : 9.5,   "actor": "dinobag", "type": "speak", "p1":"stone", "p2": "1.0"},		
-		
-		{ "time": 11.0,  "actor": "overlay", "type" : "fade", "p1":"1.0", "p2":"0.5"},
-		{ "time": 11.7, "actor": "global", "type" : "end", "p1":"s1_e1_play"}
+		{ "time" :"0.0", "actor": "overlay", "type" : "fade", "p1":"0", "p2":"0.5"},
+
+		{ "time" :"0.3",  "actor": "dinobag", "type": "animate", "p1": "walk", "p2" : "true"},
+		{ "time" :"0.3", "actor" : "dinobag", "type" : "move", "p1" : "right", "p2" : "2.0"},
+
+		{ "time" :"next",  "actor": "dinobag", "type": "animate", "p1": "idle", "p2" : "true"},
+		{ "time" :"next0.3",   "actor": "dinobag", "type": "speak", "p1":"house", "p2": "1.0"},
+		{ "time" :"next",   "actor": "dinobag", "type": "speak", "p1":"heart", "p2": "1.0"},
+
+		{ "time" :"next0.5",  "actor": "dinobag", "type": "animate", "p1": "walk", "p2" : "true"},
+		{ "time" :"same", "actor" : "dinobag", "type" : "move", "p1" : "back", "p2" : "2.0"},
+		{ "time" :"next", "actor" : "dinobag", "type" : "move", "p1" : "back2", "p2" : "0.2"},
+
+		{ "time" :"same",  "actor": "dinobag", "type": "animate", "p1": "idle", "p2" : "true"},
+		{ "time" :"same",   "actor": "dinobag", "type": "speak", "p1":"leaf", "p2": "1.4"},
+		{ "time" :"next0.2",   "actor": "dinobag", "type": "speak", "p1":"branch", "p2": "1.4"},
+		{ "time" :"next0.2",   "actor": "dinobag", "type": "speak", "p1":"stone", "p2": "1.4"},		
+
+		{ "time" :"next0.7",  "actor": "overlay", "type" : "fade", "p1":"1.0", "p2":"0.5"},
+		{ "time" :"next0.1", "actor": "global", "type" : "end", "p1":"s1_e1_play"}
     ]
 }
