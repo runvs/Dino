@@ -3,6 +3,7 @@ package;
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.util.FlxColor;
+import openfl.display.BlendMode;
 
 /**
  * ...
@@ -21,21 +22,24 @@ class FlashSprite extends FlxSprite
 		super(X, Y, SimpleGraphic);
 		_flashOverlay = new FlxSprite();
 		_flashOverlay.alpha = 0;
+		_flashOverlay.blend = BlendMode.MULTIPLY;
 	}
 	override public function loadGraphic(Graphic:FlxGraphicAsset, Animated:Bool = false, Width:Int = 0, Height:Int = 0, Unique:Bool = false, ?Key:String):FlxSprite 
 	{
 		_flashOverlay.loadGraphic(Graphic, Animated, Width, Height, true, Key);
 		SpriteFunctions.shadeSpriteWithBorder(_flashOverlay, FlxColor.WHITE, FlxColor.WHITE);
-		return super.loadGraphic(Graphic, Animated, Width, Height, Unique, Key);
+		return super.loadGraphic(Graphic, Animated, Width, Height, true, Key);
 	}
 	
 	override public function update(elapsed:Float):Void 
 	{
 		super.update(elapsed);
+		_flashOverlay.update(elapsed);
+		_flashOverlay.offset = this.offset;
 		if (_flashTimer >= 0)
 		{
-			_flashOverlay.animation = this.animation;
-			_flashOverlay.update(elapsed);
+			_flashOverlay.animation.frameIndex = this.animation.frameIndex;
+			
 			
 			_flashOverlay.setPosition(x, y);
 			_flashOverlay.angle = this.angle;

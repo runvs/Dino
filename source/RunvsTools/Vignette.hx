@@ -16,7 +16,6 @@ class Vignette extends FlxSprite
 	public function new(c:FlxCamera, maxAlpha : Float = 0.45, rangescale : Float = 0.9, exponent : Float = 2) 
 	{
 		super();
-		
 		_cam = c;
 		
 		this.makeGraphic(_cam.width, _cam.height, FlxColor.BLACK, true);
@@ -30,9 +29,8 @@ class Vignette extends FlxSprite
 				var dist = dx * dx + dy * dy;
 				var a = Math.pow(dist / distmax / distmax / rangescale / rangescale, exponent);
 				a = Math.min(a, 1);
-				if ( i == j)
+				if (i == j)
 				{
-					//trace((dist / distmax / distmax / rangescale / rangescale) + " " + a);
 				}
 				#if !neko
 				this.pixels.setPixel32(i, j, FlxColor.fromRGBFloat(0, 0, 0, a));
@@ -46,5 +44,4 @@ class Vignette extends FlxSprite
 		this.scrollFactor.set();
 		this.alpha = maxAlpha;
 	}
-	
 }
