@@ -73,7 +73,7 @@
  </objectgroup>
  <objectgroup name="collectibles">
   <object id="98" name="leaf" type="collectible" x="1040" y="368" width="16" height="16"/>
-  <object id="102" name="branch" type="collectible" x="704" y="368" width="16" height="16"/>
+  <object id="102" name="branch" type="collectible" x="184" y="372" width="16" height="16"/>
   <object id="103" name="stone" type="collectible" x="544" y="144" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="enemies" opacity="0.97">
