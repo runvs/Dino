@@ -53,10 +53,15 @@ class GatherState extends PlayState
 	private function createCollectibleListIntern ()
 	{
 		_collectiblesIcons = new Array<CollectibleIcon>();
-		for (i in 0 ... _collectiblesList.length)
+		var N : Int = _collectiblesList.length;
+		
+		var nhalf : Float = N / 2.0;
+		var xleft : Float = FlxG.width / 2.0/ GP.CameraMain.zoom - 20 * nhalf;
+		
+		for (i in 0 ... N)
 		{
 			var s : CollectibleIcon  = new CollectibleIcon(_collectiblesList[i]);
-			s.setPosition(4 + i * 20, 4);
+			s.setPosition(xleft + i * 22,  FlxG.height / GP.CameraMain.zoom  - 16 - 4 );
 			//s.alpha = 0.3;
 			_collectiblesIcons.push(s);
 		}

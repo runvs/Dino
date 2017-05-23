@@ -270,6 +270,7 @@ class TiledLevel extends TiledMap
 		}
 		bg.cameras = [GP.CameraUnderlay];
 	
+		
 		for (t in foregroundTiles) 
 		{
 			t.cameras = [GP.CameraMain];
@@ -281,6 +282,12 @@ class TiledLevel extends TiledMap
 		for (t in topTiles)
 		{
 			t.cameras = [GP.CameraMain];
+			if (Std.is(t, CampFire))
+			{
+				var c : CampFire = cast t;
+				c.resetCamera();
+			}
+		
 		}
 		for (h in hurtingTiles)
 		{
@@ -298,6 +305,7 @@ class TiledLevel extends TiledMap
 		for (c in collectibles)
 		{
 			c.cameras = [GP.CameraMain];
+			c.resetCamera();
 		}
 		for (e in enemies)
 		{

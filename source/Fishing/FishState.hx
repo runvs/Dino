@@ -25,11 +25,15 @@ class FishState extends BasicState
 	
 	private var _caughtFishList : FlxSpriteGroup;
 	
+	private var _caughtFishNumber : Int = 0;
+	
+	private var _nextStageName : String = "s2_e0_fishing_intro";
 	
 	public function new() 
 	{
 		super();
 		_levelName = "assets/data/fishing.tmx";
+		_caughtFishNumber = 0;
 	}
 	
 	public function getScore()
@@ -161,9 +165,23 @@ class FishState extends BasicState
 			if (t.timer >= t.maxTimer)
 			{
 				addFishToChaughtList(t);
+				if (t._fishtype == 0)
+				{
+					_caughtFishNumber += 1;
+					trace("correct fish caught");
+				}
+				else
+				{
+					trace("wrong fish!");
+				}
 				t.resetToNewPosition();
 				_speech = new SpeechBubble(_dino, "heart", 1.25);
 			}
+		}
+	
+		if (_caughtFishNumber >= 4)
+		{
+			StageInfo.getStage(_nextStageName).startStage();
 		}
 	}
 	

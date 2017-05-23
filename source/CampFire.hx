@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
@@ -61,6 +62,7 @@ class CampFire extends ConditionalObject
 	{
 		if (checkConditions())
 		{
+			//trace("draw campfire");
 			_particles.draw();
 			super.draw();
 			_glow.draw();
@@ -74,7 +76,7 @@ class CampFire extends ConditionalObject
 			s.alive = true;
 			s.alpha = 1;
 			var T : Float = FlxG.random.float(0.75, 1.0);
-			s.setPosition(FlxG.random.float(this.x + 4, this.x + 12) , y + height );
+			s.setPosition(FlxG.random.float(this.x + 4, this.x + 12) , y + height - 2 );
 			//trace(s.x + " " + s.y);
 			s.alpha = 0.95;
 			FlxTween.tween(s, { alpha:0 }, T/4*3, { startDelay:  T/4, onComplete: function(t:FlxTween) : Void { s.alive = false; } } );
@@ -88,6 +90,16 @@ class CampFire extends ConditionalObject
 			s.cameras = [GP.CameraMain];
 		});
 		
+	}
+	
+	public function resetCamera ()
+	{
+		_glow.cameras = [GP.CameraOverlay];
+		_particles.cameras = [GP.CameraMain];
+		for (p in _particles)
+		{
+			p.cameras = [GP.CameraMain];
+		}
 	}
 	
 }

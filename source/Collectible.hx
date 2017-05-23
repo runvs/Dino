@@ -1,10 +1,12 @@
 package;
 
+import flixel.FlxCamera;
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
+import openfl.display.BlendMode;
 
 /**
  * ...
@@ -14,9 +16,10 @@ class Collectible extends ConditionalObject
 {
 	public var _storyManagerID (default, null) : String;
 	
-	private var _icon : FlxSprite;
-	
 	public var _started : Bool = false;
+	
+	private var _glow : GlowOverlay;
+	
 	
 	public function new(n:String) 
 	{
@@ -26,6 +29,9 @@ class Collectible extends ConditionalObject
 		
 		LoadSprites(this, name);
 		
+		_glow = new GlowOverlay(x, y, GP.CameraMain, Std.int(32), 0.7, 1.5);
+		_glow.alpha = 0.2;
+		_glow.blend = BlendMode.LIGHTEN;
 		
 	}
 	
@@ -43,12 +49,25 @@ class Collectible extends ConditionalObject
 	{
 		super.update(elapsed);
 		
+		_glow.setPosition(( x + 8) ,(y + 8) );
+		_glow.update(elapsed);
+		
 		if (!_started)
 		{
 			_started = true;
 			y += 3;
 			FlxTween.tween(this, { y:y - 8 }, 1.75, { type:FlxTween.PINGPONG, ease : FlxEase.sineInOut } );
 		}
+		
+	}
+	
+	override public function draw():Void 
+	{
+		//trace("draw");
+
+		_glow.draw(); 
+		super.draw();
+
 		
 	}
 	
@@ -75,6 +94,11 @@ class Collectible extends ConditionalObject
 		spr.scale.set(0.5, 0.5);
 	}
 	
+	
+	public function resetCamera()
+	{
+		_glow.cameras = [GP.CameraMain];
+	}
 	
 	
 }
