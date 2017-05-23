@@ -56,11 +56,11 @@ class ScreenWrappingSpriteGroup extends FlxSpriteGroup
 		var p : FlxPoint = new FlxPoint();
 		var pret : FlxPoint = s.getScreenPosition(p, _cam);
 		
-		if (pret.x < -s.width - _padding) s.x += _cam.width + s.width + _padding;
-		if (pret.x > FlxG.width + _padding) s.x -= _cam.width + s.width + _padding;
+		if (pret.x < -s.width - _padding) s.x += _cam.width + s.width * s.scale.x + _padding;
+		if (pret.x > FlxG.width + _padding) s.x -= _cam.width + s.width * s.scale.x + _padding;
 		
-		if (pret.y < -s.height - _padding) s.y += _cam.height+ -_padding + s.height ;
-		if (pret.y > FlxG.height+ _padding) s.y -= _cam.height + _padding + s.height;
+		if (pret.y < -s.height - _padding) s.y += _cam.height+ -_padding + s.height * s.scale.y ;
+		if (pret.y > FlxG.height+ _padding) s.y -= _cam.height + _padding + s.height * s.scale.y;
 	}
 	
 }

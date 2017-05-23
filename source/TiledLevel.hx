@@ -40,6 +40,8 @@ class TiledLevel extends TiledMap
 	// background image that will stay where it is (aka skybox). 
 	public var bg : FlxSprite;
 	
+	public var clouds : CloudLayer;
+	
 	// All Tiles that should be drawn in the same layer as the player
 	public var foregroundTiles:FlxGroup;
 	public var foregroundTiles2:FlxGroup;
@@ -91,6 +93,8 @@ class TiledLevel extends TiledMap
 		collectibles = new Array<Collectible>();
 		hurtingTiles = new Array<HurtingSprite>();
 		enemies = new Array<BasicEnemy>();
+		
+		clouds = new CloudLayer();
 		
 		// Load Tile Maps
 		for (layer in layers)
@@ -269,7 +273,7 @@ class TiledLevel extends TiledMap
 			c.cameras = [GP.CameraMain];
 		}
 		bg.cameras = [GP.CameraUnderlay];
-	
+		clouds.resetCamera();
 		
 		for (t in foregroundTiles) 
 		{
@@ -500,7 +504,7 @@ class TiledLevel extends TiledMap
 				var n : String = o.name;
 				var c : Collectible = new Collectible(n);
 				
-				c.setPosition(x, y);
+				c.setPosition(x, y );
 				c.createConditions(o.properties.get("conditions"));
 				collectibles.push(c);
 			}
