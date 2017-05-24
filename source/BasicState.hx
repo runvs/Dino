@@ -144,7 +144,10 @@ class BasicState extends FlxState
 		//trace("BasicState draw");
 		_level.bg.draw();
 
-		_level.clouds.draw();
+		if (_level.cloudName != "none")
+		{
+			_level.clouds.draw();
+		}
 		
 		
 		if (_level.drawStars)

@@ -10,10 +10,16 @@ import flixel.FlxSprite;
  */
 class CloudLayer extends ScreenWrappingSpriteGroup
 {
+	
+	public var cloudName : String = "none";
 
-	public function new() 
+	public function new(n : String) 
 	{
 		super(GP.CameraUnderlay, 64 * GP.CameraMain.zoom);
+		cloudName = n;
+		if (cloudName == "none") return;
+		trace("loading clouds: " + cloudName); 
+		
 		for (i in 0 ... 5)
 		{
 			var x : Int = FlxG.random.int(-64, FlxG.width + 64 );
@@ -22,7 +28,7 @@ class CloudLayer extends ScreenWrappingSpriteGroup
 			var f : Float = FlxG.random.float (0.8, 1.25);
 			
 			var v : Int = FlxG.random.int(1, 3);
-			var name : String  = "assets/images/cloud" + Std.string(v) + ".png";
+			var name : String  = "assets/images/cloud_" + cloudName + Std.string(v) + ".png";
 			var s : FlxSprite = new FlxSprite(x,y);
 			s.loadGraphic(name, false, 64, 32);
 			s.velocity.x = FlxG.random.floatNormal(5, 0.25) * f; 

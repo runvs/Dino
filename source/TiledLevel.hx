@@ -68,6 +68,7 @@ class TiledLevel extends TiledMap
 	public var drawStars : Bool = false;
 	public var drawMoon : Bool = false;
 	public var drawFlocks : Bool = false;
+	public var cloudName : String = "none";
 	
 	
 	public static var TileIDHurtingBottom 		(default, null) 	: Int = 144;
@@ -94,7 +95,7 @@ class TiledLevel extends TiledMap
 		hurtingTiles = new Array<HurtingSprite>();
 		enemies = new Array<BasicEnemy>();
 		
-		clouds = new CloudLayer();
+		
 		
 		// Load Tile Maps
 		for (layer in layers)
@@ -167,6 +168,8 @@ class TiledLevel extends TiledMap
 		}
 		loadObjects();
 		loadBackground();		
+		
+		clouds = new CloudLayer(cloudName);
 	}
 	
 	function loadBackground() 
@@ -231,6 +234,10 @@ class TiledLevel extends TiledMap
 			if (layer.properties.get("flocks") != null && layer.properties.get("flocks") == "true")
 			{
 				drawFlocks = true;
+			}
+			if (layer.properties.get("clouds") != null)
+			{
+				cloudName = layer.properties.get("clouds");
 			}
 		}
 		
