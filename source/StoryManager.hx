@@ -22,6 +22,17 @@ class StoryManager
 		if (k == null)
 			throw "ERROR in StoryManager.set: Key is null";
 		
+		//if (v == true)
+			//trace("setting " + k + " to true");
 		_valuesBool.set(k, v);
+	}
+	
+	public static function reset()
+	{
+		trace("resetting all story values");
+		for (k in _valuesBool.keys())
+		{
+			_valuesBool.set(k, false);
+		}
 	}
 }

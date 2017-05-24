@@ -21,6 +21,7 @@ class StageItem extends FlxSpriteGroup
 	private var _nameText : FlxText;
 	
 	private var _gather : Array<String>;
+	private var _storysettings:Array<String>;
 	
 	
 	public function new(n: String, s : Int, e : Int, t : String, a:String, l : String) 
@@ -62,12 +63,13 @@ class StageItem extends FlxSpriteGroup
 		
 	}
 	
-	public function setStorySettings(storysettings:Array<String>) 
+	public function setStorySettings(s:Array<String>) 
 	{
-		for (s in storysettings)
-		{
-			StoryManager.setBool(s, true);
-		}
+		if ( s == null) 
+		throw "ERROR: Storysettings may not be null!";
+		
+		_storysettings = s;
+		
 	}
 	
 	public function startStage()
@@ -96,6 +98,11 @@ class StageItem extends FlxSpriteGroup
 		else
 		{
 			throw "ERROR: Unknown Type in StageItem: " + _type;
+		}
+		
+		for (s in _storysettings)
+		{
+			StoryManager.setBool(s, true);
 		}
 	}
 

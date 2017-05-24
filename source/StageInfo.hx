@@ -27,6 +27,7 @@ class StageInfo
 			Std.int(data.stages[i].stage), Std.int(data.stages[i].episode), 
 			data.stages[i].type, data.stages[i].actor,
 			data.stages[i].level);
+			trace(s.name);
 			
 			s.setRequirements(data.stages[i].requirements);
 			s.setStorySettings(data.stages[i].storysettings);

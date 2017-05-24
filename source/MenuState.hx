@@ -32,7 +32,7 @@ class MenuState extends FlxState
 		GP.CamerasCreate();
 		GP.WorldLoadMaps();
 		StageInfo.loadStages();
-		
+		StoryManager.reset();
 		
 		
 		var commitText : FlxText = new FlxText(5, 560, 0, Version.getGitCommitHash() + " built on " + Version.getBuildDate() + "\n" + Version.getGitCommitMessage(), 8);
