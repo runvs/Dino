@@ -41,6 +41,11 @@ class TiledLevel extends TiledMap
 	public var bg : FlxSprite;
 	
 	public var clouds : CloudLayer;
+	public var cloudName : String = "none";
+	
+	public var parallaxName : String = "mountain";
+	public var parallax : ParallaxLayer;
+	
 	
 	// All Tiles that should be drawn in the same layer as the player
 	public var foregroundTiles:FlxGroup;
@@ -68,7 +73,8 @@ class TiledLevel extends TiledMap
 	public var drawStars : Bool = false;
 	public var drawMoon : Bool = false;
 	public var drawFlocks : Bool = false;
-	public var cloudName : String = "none";
+	
+	
 	
 	
 	public static var TileIDHurtingBottom 		(default, null) 	: Int = 144;
@@ -170,6 +176,7 @@ class TiledLevel extends TiledMap
 		loadBackground();		
 		
 		clouds = new CloudLayer(cloudName);
+		parallax = new ParallaxLayer(parallaxName);
 	}
 	
 	function loadBackground() 
@@ -281,7 +288,7 @@ class TiledLevel extends TiledMap
 		}
 		bg.cameras = [GP.CameraUnderlay];
 		clouds.resetCamera();
-		
+		parallax.resetCamera();
 		for (t in foregroundTiles) 
 		{
 			t.cameras = [GP.CameraMain];

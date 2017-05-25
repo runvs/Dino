@@ -109,6 +109,7 @@ class BasicState extends FlxState
 		_level.collisionMap.update(elapsed);
 		_level.bg.update(elapsed);
 		_level.clouds.update(elapsed);
+		_level.parallax.update(elapsed);
 		_level.foregroundTiles.update(elapsed);
 		_level.foregroundTiles2.update(elapsed);
 		_level.topTiles.update(elapsed);
@@ -144,6 +145,11 @@ class BasicState extends FlxState
 		//trace("BasicState draw");
 		_level.bg.draw();
 
+		if (_level.parallaxName != "none")
+		{
+			_level.parallax.draw();
+		}
+		
 		if (_level.cloudName != "none")
 		{
 			_level.clouds.draw();

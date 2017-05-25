@@ -52,11 +52,4 @@ class CloudLayer extends ScreenWrappingSpriteGroup
 			this.members[i].cameras = [GP.CameraUnderlay];
 		}
 	}
-	
-	function CreateClouds():Void 
-	{
-		
-	
-	}
-	
 }
