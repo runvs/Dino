@@ -31,8 +31,7 @@ class CloudLayer extends ScreenWrappingSpriteGroup
 			var name : String  = "assets/images/cloud_" + cloudName + Std.string(v) + ".png";
 			var s : FlxSprite = new FlxSprite(x,y);
 			s.loadGraphic(name, false, 64, 32);
-			s.velocity.x = FlxG.random.floatNormal(5, 0.25) * f; 
-			
+			s.velocity.x = FlxG.random.floatNormal(4, 0.25) * f; 
 			if (s.velocity.x < 1) s.velocity.x = 1;
 			s.velocity.y = 0;
 			s.alpha = FlxG.random.float(0.45, 0.95) / f;
