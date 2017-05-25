@@ -14,6 +14,8 @@ class GatherState extends PlayState
 	// Collectibles are shown in the hud. this array is a list of those icons
 	private var _collectiblesIcons : Array<CollectibleIcon>;
 	
+	private var _inventoryBackground : FlxSprite;
+	
 	private var _collectiblesList : Array<String>;
 	private var _indicator : TargetIndicator;
 	private var _gatherID : Int;
@@ -29,6 +31,9 @@ class GatherState extends PlayState
 		trace("gatherstate create");
 		super.create();
 		_gatherID = 0;
+		
+		_inventoryBackground = new FlxSprite();
+		
 		
 		createCollectibleListIntern();
 		_indicator = new TargetIndicator(this.d);
@@ -61,10 +66,16 @@ class GatherState extends PlayState
 		for (i in 0 ... N)
 		{
 			var s : CollectibleIcon  = new CollectibleIcon(_collectiblesList[i]);
-			s.setPosition(xleft + i * 22,  FlxG.height / GP.CameraMain.zoom  - 16 - 4 );
+			s.setPosition(xleft + i * 22,  FlxG.height / GP.CameraMain.zoom  - 16 );
 			//s.alpha = 0.3;
 			_collectiblesIcons.push(s);
 		}
+		
+		_inventoryBackground.makeGraphic(N * 22 + 4, 20, FlxColor.fromRGB(102,57,49));
+		_inventoryBackground.cameras = [GP.CameraMain];
+		_inventoryBackground.scrollFactor.set(0, 0);
+		_inventoryBackground.setPosition(xleft - 4, FlxG.height / GP.CameraMain.zoom - 16);
+		
 	}
 	
 	private function SetTarget():Void 
@@ -151,6 +162,8 @@ class GatherState extends PlayState
 			c.update(elapsed);
 		}
 		
+		_inventoryBackground.update(elapsed);
+		
 		CheckCollectibles();
 		ClearCollectibles();	
 		UpdateIcons();
@@ -161,11 +174,14 @@ class GatherState extends PlayState
 	
 	override public function internalDraw() 
 	{
+		
 		for (c in _level.collectibles)
 		{
 			c.draw();
 		}
-				//_collectiblesRequired.draw();
+		
+		_inventoryBackground.draw();
+		//_collectiblesRequired.draw();
 		for (i in 0..._collectiblesIcons.length)
 		{
 			var s : CollectibleIcon = _collectiblesIcons[i];
