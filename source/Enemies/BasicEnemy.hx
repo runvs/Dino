@@ -16,6 +16,8 @@ class BasicEnemy extends FlxSprite
 	{
 		super(X, Y);
 		_sprite = new FlxSprite(X, Y);
+		cameras = [GP.CameraMain];
+		_sprite.cameras = [GP.CameraMain];
 	}
 	
 	public function setState (state : PlayState)
@@ -34,5 +36,11 @@ class BasicEnemy extends FlxSprite
 		_sprite.update(elapsed);
 		_sprite.x = this.x;
 		_sprite.y = this.y;
+	}
+	
+	public function resetCamera()
+	{
+		this.cameras = [GP.CameraMain];
+		this._sprite.cameras = [GP.CameraMain];
 	}
 }

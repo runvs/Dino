@@ -323,6 +323,10 @@ class TiledLevel extends TiledMap
 		{
 			e.cameras = [GP.CameraMain];
 		}
+		for (e in enemies)
+		{
+			e.resetCamera();
+		}
 		
 		for (c in collectibles)
 		{
