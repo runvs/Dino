@@ -13,7 +13,7 @@ class ParallaxLayer extends ScreenWrappingSpriteGroup
 	
 	public var parallaxName : String = "none";
 
-	public function new(n : String) 
+	public function new(n : String, count : Float = 2) 
 	{
 		super(GP.CameraUnderlay, 64 * GP.CameraMain.zoom);
 		parallaxName = n;
@@ -21,20 +21,24 @@ class ParallaxLayer extends ScreenWrappingSpriteGroup
 		trace("loading parallax: " + parallaxName); 
 		
 		
-		for (i in 0 ... 2)
+		//var N :Int = count;
+		var dx : Float = 256 * GP.CameraMain.zoom;
+		var N : Int = 4;
+		for (i in 0 ... N)
 		{
-			var x : Int = FlxG.random.int(-64, FlxG.width + 64 );
-			var y : Int = FlxG.random.int(0, FlxG.height );
-		
 			var v : Int = FlxG.random.int(1, 1);
 			var name : String  = "assets/images/parallax_" + parallaxName + Std.string(v) + ".png";
 			
-			var s : FlxSprite = new FlxSprite(x,y);
-			s.loadGraphic(name, false, 128,64);
+			var s : FlxSprite = new FlxSprite(0,0);
+			s.loadGraphic(name, false, 256, 128);
+			var x : Float = i * dx/count ;// + FlxG.random.float(0, dx / 2 );
+			var y : Float = FlxG.height - s.height;
+			s.setPosition(x, y);
+			
 			s.scale.set(GP.CameraMain.zoom, GP.CameraMain.zoom);
 			add(s);
 		}
-		this.scrollFactor.set(0.1, 0);
+		this.scrollFactor.set(0.15, 0);
 		
 		
 	}

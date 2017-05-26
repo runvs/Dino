@@ -39,7 +39,7 @@ class CloudLayer extends ScreenWrappingSpriteGroup
 			//s.scrollFactor.set(0.15/f, 0.05/f);
 			add(s);
 		}
-		this.scrollFactor.set(0.15, 0.05);
+		this.scrollFactor.set(0.25, 0.05);
 		
 	}
 	

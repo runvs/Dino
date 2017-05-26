@@ -46,7 +46,9 @@
    <property name="backgroundScale" value="1"/>
    <property name="backgroundSizeX" value="800"/>
    <property name="backgroundSizeY" value="600"/>
+   <property name="clouds" value="morning"/>
    <property name="moon" value="true"/>
+   <property name="parallax" value="mountain"/>
    <property name="stars" value="true"/>
   </properties>
  </objectgroup>

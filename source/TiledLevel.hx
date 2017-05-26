@@ -43,7 +43,7 @@ class TiledLevel extends TiledMap
 	public var clouds : CloudLayer;
 	public var cloudName : String = "none";
 	
-	public var parallaxName : String = "mountain";
+	public var parallaxName : String = "none";
 	public var parallax : ParallaxLayer;
 	
 	
@@ -245,6 +245,10 @@ class TiledLevel extends TiledMap
 			if (layer.properties.get("clouds") != null)
 			{
 				cloudName = layer.properties.get("clouds");
+			}
+			if (layer.properties.get("parallax") != null)
+			{
+				parallaxName = layer.properties.get("parallax");
 			}
 		}
 		
