@@ -21,7 +21,7 @@ class EnemyBoar extends BasicEnemy
 									// 2 = attention
 									
 	private var _chargeTimer : Float = 0;
-	private var _chargeLeft : Bool = true;
+	private var _chargeRight : Bool = true;
 	
 	private var _stepsDirt : MyParticleSystem;
 	var _stepsTimer:Float = 0;
@@ -57,70 +57,26 @@ class EnemyBoar extends BasicEnemy
 			_chargeTimer -= elapsed;
 		}
 		
-		_stepsDirt.update(elapsed);
-		_stepsTimer -= elapsed;
-		if (_stepsTimer <= 0)
-		{
-			SpawnStepsDirt();
-		}
+		updateStepsDirt(elapsed);
 		
 		
 		if (_mode == 0)
 		{
-			this.acceleration.set();
-			if (_walkingRight)
-			{
-				_sprite.facing = FlxObject.RIGHT;
-				this.velocity.x = GP.EnemyWalkLRSpeed;
-				if (this.x - _startingPos > distance)
-				{
-					_walkingRight = false;
-					this.x = _startingPos + distance;
-				}
-			}
-			else
-			{
-				_sprite.facing = FlxObject.LEFT;
-				this.velocity.x = -GP.EnemyWalkLRSpeed;
-				if (this.x - _startingPos < 0)
-				{
-					_walkingRight = true;
-					this.x = _startingPos;
-				}
-			}
+			this.maxVelocity.set( 55, 100);
+			doBoarPatrol(elapsed);
 			
 			// check if player is in range
 			var dinoX : Float = _state.getDinoPosition().x;
 			if (Math.abs(dinoX - this.x) < GP.EnemyBoarRange)
 			{
-				if (_chargeTimer <= 0)
-				{
-					_mode = 1;
-					_chargeTimer = GP.EnemyBoarChargeCoolDown;
-					_chargeLeft = (dinoX < this.x);
-					_sprite.facing = _chargeLeft ? FlxObject.LEFT : FlxObject.RIGHT;
-					_sprite.animation.play("attention", true);
-					var t : FlxTimer = new FlxTimer();
-					t.start(0.5, function(t) 
-					{ 
-						_sprite.animation.play("charge", true); 
-						this.velocity.x += _chargeLeft? -10 : 10;
-					} );
-					//_sprite.animation.play
-				}
-					
+				SwitchToChargeMode(dinoX);
 			}
 		}
 		else if (_mode == 1)
 		{
-			if (_chargeLeft)
-			{
-				this.acceleration.x = -GP.EnemyBoarChargeAcceleration;
-			}
-			else
-			{
-				this.acceleration.x = GP.EnemyBoarChargeAcceleration;
-			}
+			this.maxVelocity.set( 115, 100);
+			var ba = GP.EnemyBoarChargeAcceleration;
+			this.acceleration.x = (_chargeRight ? ba : - ba);
 			
 			//  get out of charge mode if we have reached the end of the enemies walking line.
 			if (this.x - _startingPos > distance)
@@ -171,7 +127,7 @@ class EnemyBoar extends BasicEnemy
 			}
 			else
 			{
-				if (!_chargeLeft)
+				if (_chargeRight)
 				{
 					s.setPosition(x + FlxG.random.floatNormal(0, 1) , y + 14 );
 				}
@@ -194,5 +150,59 @@ class EnemyBoar extends BasicEnemy
 			else
 				s.makeGraphic(1, 1, FlxColor.fromRGB(45,74,44));
 		});
+	}
+	
+	function updateStepsDirt(elapsed):Void 
+	{
+		_stepsDirt.update(elapsed);
+		_stepsTimer -= elapsed;
+		if (_stepsTimer <= 0)
+		{
+			SpawnStepsDirt();
+		}
+	}
+	
+	function doBoarPatrol(elapsed):Void 
+	{
+		this.acceleration.set();
+		if (_walkingRight)
+		{
+			_sprite.facing = FlxObject.RIGHT;
+			this.velocity.x = GP.EnemyWalkLRSpeed;
+			if (this.x - _startingPos > distance)
+			{
+				_walkingRight = false;
+				this.x = _startingPos + distance;
+			}
+		}
+		else
+		{
+			_sprite.facing = FlxObject.LEFT;
+			this.velocity.x = -GP.EnemyWalkLRSpeed;
+			if (this.x - _startingPos < 0)
+			{
+				_walkingRight = true;
+				this.x = _startingPos;
+			}
+		}
+	}
+	
+	function SwitchToChargeMode(dinoX:Float):Void 
+	{
+		if (_chargeTimer <= 0)
+		{
+			_mode = 1;
+			_chargeTimer = GP.EnemyBoarChargeCoolDown;
+			_chargeRight = !(dinoX < this.x);
+			_sprite.facing = _chargeRight ? FlxObject.RIGHT: FlxObject.LEFT;
+			_sprite.animation.play("attention", true);
+			var t : FlxTimer = new FlxTimer();
+			t.start(0.5, function(t) 
+			{ 
+				_sprite.animation.play("charge", true); 
+				this.velocity.x += _chargeRight? 20 : -20;
+			} );
+			//_sprite.animation.play
+		}
 	}
 }
