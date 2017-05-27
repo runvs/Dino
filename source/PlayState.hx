@@ -30,10 +30,7 @@ class PlayState extends BasicState
 		
 		super.create();
 		LoadLevel(_levelName);
-		for (e in _level.enemies)
-		{
-			e.setState(this);
-		}
+		
 		
 		
 		//trace("Playstate create mid");
@@ -172,5 +169,14 @@ class PlayState extends BasicState
 	public function getDinoPosition () : FlxPoint
 	{
 		return new FlxPoint(d.x, d.y);
+	}
+	
+	override public function LoadLevel(l:String) 
+	{
+		super.LoadLevel(l);
+		for (e in _level.enemies)
+		{
+			e.setState(this);
+		}
 	}
 }

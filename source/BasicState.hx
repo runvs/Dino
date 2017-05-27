@@ -73,6 +73,8 @@ class BasicState extends FlxState
 		//_level = new TiledLevel(_levelName);
 		_level = GP.WorldMapPool.getLevel(_levelName);
 		_level.resetCameras();
+		
+		
 		FlxG.worldBounds.set(0, 0, _level.width * GP.WorldTileSizeInPixel, _level.height * GP.WorldTileSizeInPixel);
 		
 		GP.CameraUnderlay.setScrollBounds(
@@ -91,6 +93,7 @@ class BasicState extends FlxState
 		//trace(GP.CameraMain.minScrollX + " " + GP.CameraMain.maxScrollX + " " + GP.CameraMain.minScrollY + " " + GP.CameraMain.maxScrollY);
 		//trace(GP.CameraOverlay.minScrollX + " " + GP.CameraOverlay.maxScrollX + " " + GP.CameraOverlay.minScrollY + " " + GP.CameraOverlay.maxScrollY);
 		
+
 	}
 	
 	// should be overwritten by child classes

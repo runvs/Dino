@@ -66,6 +66,7 @@ class EnemyBoar extends BasicEnemy
 			doBoarPatrol(elapsed);
 			
 			// check if player is in range
+			if (_state == null) throw "ERROD: State null in EnemyBoar";
 			var dinoX : Float = _state.getDinoPosition().x;
 			if (Math.abs(dinoX - this.x) < GP.EnemyBoarRange)
 			{

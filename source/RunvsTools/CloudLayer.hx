@@ -38,7 +38,7 @@ class CloudLayer extends ScreenWrappingSpriteGroup
 			if (s.velocity.x < 1) s.velocity.x = 1;
 			s.velocity.y = 0;
 			s.alpha = FlxG.random.float(0.5, 0.8) / f;
-			s.scale.set(GP.CameraMain.zoom*f*1.25, GP.CameraMain.zoom*f*1.25);
+			s.scale.set(GP.CameraMain.zoom+1, GP.CameraMain.zoom+1);
 			//s.scrollFactor.set(0.15/f, 0.05/f);
 			s.blend = BlendMode.LIGHTEN;
 			add(s);
