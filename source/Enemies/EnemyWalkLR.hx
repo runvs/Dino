@@ -28,7 +28,6 @@ class EnemyWalkLR extends BasicEnemy
 		_sprite.loadGraphic(AssetPaths.Enemy_FOX__png, true, 20, 16);
 		_sprite.animation.add("walk", [0, 1, 2, 3], 7);
 		_sprite.animation.play("walk");
-		//_sprite.offset.set(0, -6);
 		_sprite.setFacingFlip(FlxObject.LEFT, true, false);
 		_sprite.setFacingFlip(FlxObject.RIGHT, false, false);
 		_startingPos = X;
