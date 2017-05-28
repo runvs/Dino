@@ -115,4 +115,9 @@ class EnemyWalkLR extends BasicEnemy
 		super.draw();
 	}
 	
+	public function setStart(s:Float)
+	{
+		this.x += s * GP.WorldTileSizeInPixel;
+	}
+	
 }

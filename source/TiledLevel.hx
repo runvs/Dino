@@ -417,6 +417,10 @@ class TiledLevel extends TiledMap
 				var e : EnemyWalkLR = new EnemyWalkLR(x, y);
 				var distance : Float = Std.parseFloat(o.properties.get("distance")) * GP.WorldTileSizeInPixel; 
 				e.distance = distance;
+				
+				if (o.properties.get("start") != null) 
+				e.setStart(Std.parseFloat(o.properties.get("start")));
+				
 				enemies.push(e);				
 			
 			case "boar":
@@ -424,6 +428,10 @@ class TiledLevel extends TiledMap
 				var e : EnemyBoar = new EnemyBoar(x, y);
 				var distance : Float = Std.parseFloat(o.properties.get("distance")) * GP.WorldTileSizeInPixel; 
 				e.distance = distance;
+				
+				if (o.properties.get("start") != null) 
+				e.setStart(Std.parseFloat(o.properties.get("start")));
+				
 				enemies.push(e);				
 			default:
 				trace ("unknown enemy type " + o.type.toLowerCase() );

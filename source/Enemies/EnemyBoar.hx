@@ -67,10 +67,15 @@ class EnemyBoar extends BasicEnemy
 			
 			// check if player is in range
 			if (_state == null) throw "ERROD: State null in EnemyBoar";
-			var dinoX : Float = _state.getDinoPosition().x;
-			if (Math.abs(dinoX - this.x) < GP.EnemyBoarRange)
+			var dinoY : Float = _state.getDinoPosition().y;
+			var dy : Float = dinoY - this.y;
+			if (Math.abs(dy) < 3 * GP.WorldTileSizeInPixel)
 			{
-				SwitchToChargeMode(dinoX);
+				var dinoX : Float = _state.getDinoPosition().x;
+				if (Math.abs(dinoX - this.x) < GP.EnemyBoarRange)
+				{
+					SwitchToChargeMode(dinoX);
+				}
 			}
 		}
 		else if (_mode == 1)
@@ -205,5 +210,10 @@ class EnemyBoar extends BasicEnemy
 			} );
 			//_sprite.animation.play
 		}
+	}
+	
+	public function setStart(s:Float)
+	{
+		this.x += s * GP.WorldTileSizeInPixel;
 	}
 }
