@@ -536,6 +536,14 @@ class TiledLevel extends TiledMap
 				
 				c.setPosition(x, y );
 				c.createConditions(o.properties.get("conditions"));
+				
+				
+				if (o.properties.get("teleportToLevel") != null && o.properties.get("teleportToID") != null)
+				{
+					trace("collectible teleport: " + o.properties.get("teleportToLevel") + " " + o.properties.get("teleportToID") );
+					c.setTeleport(o.properties.get("teleportToLevel"), Std.parseInt(o.properties.get("teleportToID")));
+				}
+				
 				collectibles.push(c);
 			}
 		}
@@ -582,16 +590,18 @@ class TiledLevel extends TiledMap
 	public function getEntryPoint(tID: Int) : FlxPoint
 	{
 		var p : FlxPoint = new FlxPoint();
-		
+		var found : Bool = false;
 		for (e in entries)
 		{
 			if (e.entryID == tID)
 			{
 				p.x = e.x;
 				p.y = e.y + 16;
+				found = true;
 				break;
 			}
 		}
+		if (!found) throw "ERROR: No entry point with ID: " + tID;
 		return p;
 	}
 }

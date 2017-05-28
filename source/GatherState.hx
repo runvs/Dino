@@ -146,7 +146,7 @@ class GatherState extends PlayState
 				d.isOnCollectible = true;
 				if (MyInput.AttackButtonJustPressed)
 				{
-					c.collectMe();
+					c.collectMe(this);
 					SetTarget();
 				}
 			}

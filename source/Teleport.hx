@@ -10,6 +10,7 @@ class Teleport extends LevelLeaver
 	public var targetLevel : String = "";
 	public var entryID : Int = 1;
 	
+	
 	public function new() 
 	{
 		super();

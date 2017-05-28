@@ -77,6 +77,11 @@
   </properties>
  </objectgroup>
  <objectgroup name="collectibles">
-  <object id="118" name="stone" type="collectible" x="80" y="368" width="16" height="16"/>
+  <object id="118" name="stone" type="collectible" x="308" y="176" width="16" height="16">
+   <properties>
+    <property name="teleportToID" value="3"/>
+    <property name="teleportToLevel" value="stage1_gather_full.tmx"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

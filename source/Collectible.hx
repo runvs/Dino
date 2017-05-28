@@ -20,6 +20,8 @@ class Collectible extends ConditionalObject
 	
 	private var _glow : GlowOverlay;
 	
+	private var _teleport : Teleport = null;
+	
 	
 	public function new(n:String) 
 	{
@@ -35,13 +37,26 @@ class Collectible extends ConditionalObject
 		
 	}
 	
-	public function collectMe()
+	
+	public function setTeleport(level:String, entryID: Int)
+	{
+		_teleport = new Teleport();
+		_teleport.targetLevel = level;
+		_teleport.entryID = entryID;
+	}
+	
+	public function collectMe(stage:BasicState)
 	{
 		if (alive)
 		{
 			this.alive = false;
 			trace("collecting "+_storyManagerID );
 			StoryManager.setBool(_storyManagerID, true);
+			
+			if (_teleport != null)
+			{
+				_teleport.perform(stage);
+			}
 		}
 	}
 	
