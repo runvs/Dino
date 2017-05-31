@@ -16,12 +16,12 @@ class GP
 	public static var DinoMovementDragX (default, null) : Float = 250;
 	public static var DinoMovementDragY (default, null) : Float = 80;
 	
-	public static var DinoMovementMaxVelocityX (default, null) : Float = 50;
-	public static var DinoMovementMaxVelocityY (default, null) : Float = 110;
+	public static var DinoMovementMaxVelocityX (default, null) : Float = 55;
+	public static var DinoMovementMaxVelocityY (default, null) : Float = 125;
 	
-	public static var DinoMovementAccelerationFactor (default, null) : Float = 300;
+	public static var DinoMovementAccelerationFactor (default, null) : Float = 250;
 	
-	public static var DinoMovementJumpStrength (default, null) : Float = -245;
+	public static var DinoMovementJumpStrength (default, null) : Float = -240;
 	
 	public static var LevelHurtingFallingXMarginFactor (default, null) : Float = 1.5;
 	public static var LevelHurtingFallingVelocity (default, null) : Float = 80;
