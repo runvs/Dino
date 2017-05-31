@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="2017.05.26" orientation="orthogonal" renderorder="right-down" width="70" height="27" tilewidth="16" tileheight="16" nextobjectid="124">
+<map version="2017.05.26" orientation="orthogonal" renderorder="right-down" width="70" height="27" tilewidth="16" tileheight="16" nextobjectid="127">
  <tileset firstgid="1" name="tileset_new.png" tilewidth="16" tileheight="16" tilecount="432" columns="24">
   <image source="../images/tileset_new.png" width="384" height="288"/>
  </tileset>
@@ -84,6 +84,7 @@
    <property name="parallax" value="mountain"/>
    <property name="stars" value="false"/>
   </properties>
+  <object id="124" name="grass" type="grass" x="100" y="392" width="364" height="8"/>
  </objectgroup>
  <objectgroup name="collectibles">
   <object id="102" name="branch" type="collectible" x="192" y="384" width="16" height="16"/>

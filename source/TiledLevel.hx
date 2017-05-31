@@ -1,28 +1,18 @@
 package;
 
 
-import flixel.FlxG;
-import flixel.FlxObject;
 import flixel.FlxSprite;
-import flixel.addons.editors.tiled.TiledImageLayer;
-import flixel.addons.editors.tiled.TiledImageTile;
 import flixel.addons.editors.tiled.TiledLayer.TiledLayerType;
 import flixel.addons.editors.tiled.TiledMap;
-import flixel.addons.editors.tiled.TiledObject;
 import flixel.addons.editors.tiled.TiledObjectLayer;
 import flixel.addons.editors.tiled.TiledTileLayer;
 import flixel.addons.editors.tiled.TiledTileSet;
 import flixel.group.FlxGroup;
 import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxPoint;
-import flixel.system.FlxSound;
 import flixel.tile.FlxTilemap;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxCollision;
 import flixel.util.FlxColor;
 import haxe.io.Path;
-import lime.project.WindowData;
 
 /**
  * @author Samuel Batista
@@ -68,12 +58,15 @@ class TiledLevel extends TiledMap
 	public var entries : Array<Entry>;
 	public var collectibles : Array<Collectible>;
 	public var enemies: Array<BasicEnemy>;
+	public var grass : Array<GrassArea>;
 	
 	
 	public var drawStars : Bool = false;
 	public var drawMoon : Bool = false;
 	public var drawFlocks : Bool = false;
 	
+	
+	public var wind : WindSystem;
 	
 	
 	
@@ -100,8 +93,8 @@ class TiledLevel extends TiledMap
 		collectibles = new Array<Collectible>();
 		hurtingTiles = new Array<HurtingSprite>();
 		enemies = new Array<BasicEnemy>();
-		
-		
+		grass = new Array<GrassArea>();
+		wind = new WindSystem();
 		
 		// Load Tile Maps
 		for (layer in layers)
@@ -293,6 +286,10 @@ class TiledLevel extends TiledMap
 		bg.cameras = [GP.CameraUnderlay];
 		clouds.resetCamera();
 		parallax.resetCamera();
+		for (g in grass)
+		{
+			g.resetCamera();
+		}
 		for (t in foregroundTiles) 
 		{
 			t.cameras = [GP.CameraMain];
@@ -397,6 +394,10 @@ class TiledLevel extends TiledMap
 			{
 				LoadEnemies(objectLayer);
 			}
+			else if (objectLayer.name == "global")
+			{
+				LoadGrassAreas(objectLayer);
+			}
 		}
 	}
 	
@@ -439,6 +440,31 @@ class TiledLevel extends TiledMap
 			
 		}
 		trace("load enemies finished. Loaded N=" + Std.string(enemies.length) + " enemies");
+	}
+	
+	function LoadGrassAreas(objectLayer:TiledObjectLayer)
+	{
+		trace("load grass");
+		for (o in objectLayer.objects)
+		{
+			var x:Int = o.x;
+			var y:Int = o.y;
+			var w:Int = o.width;
+			var h : Int = o.height;
+			
+			////// objects in tiled are aligned bottom-left (top-left in flixel)
+			//if (o.gid != -1)
+				//y -= objectLayer.map.getGidOwner(o.gid).tileHeight;
+				//
+			switch(o.type.toLowerCase())
+			{
+				case "grass":
+					trace("grass");
+					var ga : GrassArea = new GrassArea(x, y+h, w);
+					grass.push(ga);
+					wind.addGrassArea(ga);
+			}
+		}
 	}
 	
 	function LoadOther(objectLayer:TiledObjectLayer) 

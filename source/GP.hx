@@ -31,6 +31,9 @@ class GP
 	public static var WorldGravity (default, null) : Float = 175;
 	public static var WorldTileSizeInPixel (default, null) : Int = 16;
 	
+	public static var WorldWindUpdateTime (default, null) : Float = 0.125;
+	static public var WorldWindSpeedInPixelsPerSecond (default, null) : Float = 60;
+	
 	public static var MenuItemsOffsetX (default, null) : Float = 16;
 	public static var MenuItemsOffsetY (default, null) : Float = 16;
 	public static var MenuItemsPadding (default, null) : Float = 2;

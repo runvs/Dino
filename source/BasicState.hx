@@ -116,6 +116,13 @@ class BasicState extends FlxState
 		_level.foregroundTiles.update(elapsed);
 		_level.foregroundTiles2.update(elapsed);
 		_level.topTiles.update(elapsed);
+		_level.wind.update(elapsed);
+		
+		for (g in _level.grass)
+		{
+			g.update(elapsed);
+		}
+		
 		for (h in _level.hurtingTiles)
 		{
 			h.update(elapsed);
@@ -179,7 +186,11 @@ class BasicState extends FlxState
 		{
 			h.draw();
 		}
-		
+
+		for (g in _level.grass)
+		{
+			g.draw();
+		}
 		super.draw();
 		internalDraw();
 		
