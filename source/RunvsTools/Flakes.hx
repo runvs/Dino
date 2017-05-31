@@ -31,7 +31,7 @@ class Flakes extends ScreenWrappingSpriteGroup
 		{
 			var s : FlxSprite = new FlxSprite( FlxG.random.float(-_padding, _cam.width + _padding), FlxG.random.float(-_padding, _cam.height + _padding));
 			s.cameras = [_cam];
-			s.makeGraphic(1, 1, FlxColor.fromRGB(175, 175, 175, 200));
+			s.makeGraphic(Std.int(GP.CameraMain.zoom), Std.int(GP.CameraMain.zoom), FlxColor.fromRGB(175, 175, 175, 150));
 			s.scrollFactor.set(1.1, 1.1);
 			add(s);
 			
@@ -51,7 +51,7 @@ class Flakes extends ScreenWrappingSpriteGroup
 			var s = members[i];
 			var vx : Float = _globalVelocityX + 4* Math.sin( _timer * _individualVelocity[i].x + _individualVelocity[i].y);
 			var vy : Float = _globalVelocityY + 2 * Math.sin( _timer * _individualVelocity[i].x + Math.PI / 4 + _individualVelocity[i].y);
-			s.velocity.set(vx, vy);
+			s.velocity.set(vx*4.0, vy*4.0);
 		}
 		
 	}
