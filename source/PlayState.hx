@@ -54,9 +54,12 @@ class PlayState extends BasicState
 	override public function internalUpdate(elapsed:Float):Void
 	{	
 		//trace("PlayState internal Update");
+		_level.wind.setDinoPosition(d);
 		d.update(elapsed);
 		FlxG.collide(d, _level.collisionMap);
 		d.touchedGround = d.isTouching(FlxObject.DOWN);
+		
+		
 		
 		CheckExits();
 		for (e in _level.exits)

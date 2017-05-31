@@ -187,11 +187,12 @@ class BasicState extends FlxState
 			h.draw();
 		}
 
+		
+		super.draw();
 		for (g in _level.grass)
 		{
 			g.draw();
 		}
-		super.draw();
 		internalDraw();
 		
 		_level.topTiles.draw();

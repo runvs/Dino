@@ -8,11 +8,11 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
  * ...
  * @author 
  */
-class Grass extends FlxSprite implements IBlowable
+class Grass extends Blowable
 {
 	
 	var timer : Float = -1;
-	var blown : Bool = false;
+	public var blown : Bool = false;
 
 	public function new(?X:Float=0, ?Y:Float=0) 
 	{
@@ -30,17 +30,14 @@ class Grass extends FlxSprite implements IBlowable
 		cameras = [GP.CameraMain];
 	}
 
-	public function blow() : Void
+	public override function blow() : Void
 	{
-		animation.play("blow", true);
-		timer = 0.5;
-		blown = true;
-		
-	}
-	
-	public function getX() : Float 
-	{
-		return this.x;
+		if (timer <= 0)
+		{
+			animation.play("blow", true);
+			timer = 0.5;
+			blown = true;
+		}
 	}
 	
 	override public function update(elapsed:Float):Void 
