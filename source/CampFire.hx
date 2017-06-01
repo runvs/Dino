@@ -74,7 +74,6 @@ class CampFire extends ConditionalObject
 		_particles.Spawn(2, function(s:FlxSprite) 
 		{
 			s.alive = true;
-			s.alpha = 1;
 			var T : Float = FlxG.random.float(0.75, 1.0);
 			s.setPosition(FlxG.random.float(this.x + 4, this.x + 12) , y + height - 2 );
 			//trace(s.x + " " + s.y);

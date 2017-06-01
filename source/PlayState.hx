@@ -113,7 +113,7 @@ class PlayState extends BasicState
 		
 		for (e in _level.exits)
 		{
-			//e.draw();
+			e.draw();
 		}
 		for (e in _level.entries)
 		{

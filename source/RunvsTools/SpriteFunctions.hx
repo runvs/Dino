@@ -1,5 +1,8 @@
 package;
+import flixel.FlxG;
 import flixel.FlxSprite;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 
 /**
@@ -112,5 +115,46 @@ class SpriteFunctions
 			}
 		}
 		spr.pixels.unlock();
+	}
+	
+	public static function createUpGlowArea(spr:FlxSprite, w:Int, h : Int, ease : EaseFunction)
+	{
+		spr.makeGraphic(w, h, FlxColor.TRANSPARENT, true);
+		spr.pixels.lock();
+		for (j in 0 ... w)
+		{
+			var maxh : Float = h;
+			
+			if (j < w / 4)
+			{
+				maxh *= j / (w / 4);
+			}
+			else if (j > w / 4.0*3.0)
+			{
+				
+				maxh *= (1.0 - (4 * j - 3 * w) / w);
+			}
+			else
+			{
+				maxh *= FlxG.random.float(0.95, 1);
+			}
+			
+			for (i  in 0 ... h)
+			{
+				if (i < h - maxh)
+					continue;
+				
+				var fi : Float = h-i;
+				var d : Float = (maxh);
+				
+				var v : Float = (1 - (fi / d)) * FlxG.random.float(0.90, 1);
+				
+				var c :FlxColor = FlxColor.fromRGBFloat(1, 1, 1, ease(v));
+				
+				spr.pixels.setPixel32(j, i, c);
+			}
+		}
+		spr.pixels.unlock();
+		
 	}
 }

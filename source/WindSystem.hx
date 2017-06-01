@@ -14,7 +14,10 @@ class WindSystem
 	private var left : Float = 0;
 	private var right : Float = 0;
 	
-	private var currentX : Float;
+	
+	private var currents : Array<Float>;
+	
+	
 	private var d : PlayableCharacter = null;
 	private var dinoOldX : Float = 0;
 	private var dinoOldY : Float = 0;
@@ -22,6 +25,8 @@ class WindSystem
 	public function new() 
 	{
 		blows = new Array<Blowable>();
+		currents = new Array<Float>();
+		
 	}
 
 	public function addGrassArea(ga:GrassArea)
@@ -53,13 +58,18 @@ class WindSystem
 			if (b.x < left) left = b.x;
 			if (b.x > right) right = b.x;
 		}
-		currentX = right;
+		var N : Int = 2;
+		for (i in 0...N-1)
+		{
+			var c : Float = left + (right - left) * i / (N-1);
+			currents.push(c);
+		}
+		
 	}
 	
 	public function update ( elapsed : Float)
 	{
 		timer -= elapsed;
-		
 		
 		if (timer <= 0)
 		{
@@ -86,11 +96,13 @@ class WindSystem
 		}
 		for (b in blows)
 		{
-			if (b.x < currentX && b.x > currentX - GP.WorldWindUpdateTime * GP.WorldWindSpeedInPixelsPerSecond)
+			for (currentX in currents)
 			{
-				b.blow();
+				if (b.x < currentX && b.x > currentX - GP.WorldWindUpdateTime * GP.WorldWindSpeedInPixelsPerSecond)
+				{
+					b.blow();
+				}	
 			}
-			
 			if (dinoHasMoved)
 			{
 				if(FlxG.overlap(d, b))
@@ -100,9 +112,12 @@ class WindSystem
 				}
 			}
 		}
-		currentX -= GP.WorldWindUpdateTime * GP.WorldWindSpeedInPixelsPerSecond;
-		if (currentX < left) currentX = right;
-		
+		for (i in 0...currents.length)
+		{
+			currents[i] -= GP.WorldWindUpdateTime * GP.WorldWindSpeedInPixelsPerSecond;
+			
+			if (currents[i] < left) currents[i] = right;
+		}
 		
 		
 	}

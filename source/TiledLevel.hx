@@ -511,22 +511,17 @@ class TiledLevel extends TiledMap
 			{
 			case "exit":
 				//trace("exit");
-				var e : Exit = new Exit();
+				var e : Exit = new Exit(o.width, o.height);
 				e.setPosition(x, y);
-				e.makeGraphic(o.width, o.height, FlxColor.YELLOW);
-				e.alpha = 0.2;
 				e.targetStage = o.properties.get("name");
 				e.type = o.properties.get("type");
 				e.createConditions(o.properties.get("conditions"));
 				exits.push(e);
 			case "teleport":
 				//trace("exit");
-				var t : Teleport = new Teleport();
+				var t : Teleport = new Teleport(o.width, o.height);
 				t.setPosition(x, y);
-				t.makeGraphic(o.width, o.height, FlxColor.YELLOW);
-				t.alpha = 0.2;
 				t.targetLevel= o.properties.get("level");
-				
 				t.type = o.properties.get("type");
 				t.entryID= Std.parseInt(o.properties.get("entryID"));
 				t.createConditions(o.properties.get("conditions"));

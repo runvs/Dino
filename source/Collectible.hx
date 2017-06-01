@@ -40,7 +40,7 @@ class Collectible extends ConditionalObject
 	
 	public function setTeleport(level:String, entryID: Int)
 	{
-		_teleport = new Teleport();
+		_teleport = new Teleport(0,0);
 		_teleport.targetLevel = level;
 		_teleport.entryID = entryID;
 	}

@@ -12,9 +12,9 @@ class Exit extends LevelLeaver
 
 	public var targetStage : String = "";
 
-	public function new() 
+	public function new(w:Int, h:Int) 
 	{
-		super();
+		super(w,h);
 		cameras = [GP.CameraMain];
 	}
 	

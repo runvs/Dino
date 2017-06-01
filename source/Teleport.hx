@@ -11,9 +11,9 @@ class Teleport extends LevelLeaver
 	public var entryID : Int = 1;
 	
 	
-	public function new() 
+	public function new(w: Int, h: Int) 
 	{
-		super();
+		super(w, h);
 	}
 	
 	public override function perform(stage : BasicState)
