@@ -24,7 +24,7 @@ class BasicState extends FlxState
 	public var _moonSprite : FlxSprite;
 	
 	var inTransition : Bool = false;
-	private var _overlay :FlxSprite;
+	public var _overlay :FlxSprite;
 	
 	public function new() 
 	{
@@ -71,6 +71,7 @@ class BasicState extends FlxState
 		_levelName = l;
 		//trace("BasicState LoadLevel");
 		//_level = new TiledLevel(_levelName);
+		
 		_level = GP.WorldMapPool.getLevel(_levelName);
 		_level.resetCameras();
 		
@@ -117,6 +118,8 @@ class BasicState extends FlxState
 		_level.foregroundTiles2.update(elapsed);
 		_level.topTiles.update(elapsed);
 		_level.wind.update(elapsed);
+	
+		trace(_overlay.alpha);
 		
 		for (g in _level.grass)
 		{

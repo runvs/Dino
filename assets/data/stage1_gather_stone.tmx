@@ -71,6 +71,7 @@
    <property name="backgroundSizeX" value="800"/>
    <property name="backgroundSizeY" value="600"/>
    <property name="clouds" value="normal"/>
+   <property name="flocks" value="true"/>
    <property name="moon" value="false"/>
    <property name="parallax" value="mountain"/>
    <property name="stars" value="false"/>

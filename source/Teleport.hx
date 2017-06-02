@@ -16,7 +16,7 @@ class Teleport extends LevelLeaver
 		super(w, h);
 	}
 	
-	public override function perform(stage : BasicState)
+	private override function doPerform(stage : BasicState)
 	{
 		stage.LoadLevel("assets/data/" + targetLevel);
 		stage.jumpToEntryPoint(entryID);

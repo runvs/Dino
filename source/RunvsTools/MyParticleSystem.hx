@@ -21,10 +21,16 @@ class MyParticleSystem extends FlxSpriteGroup
 	
 	// index, which particle is the next active one (used for recycling particles)
 	private var _idx : Int;
-	public function new() 
+	public function new( size :Int = 100) 
 	{
+		if (size < 1)
+		{
+			throw ("ERROR: particle System Size !>= 1");
+		}
 		super();
-		mySize = 100;
+		
+		mySize = size;
+		
 		_idx = 0;
 	}
 

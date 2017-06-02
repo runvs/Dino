@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxCamera;
+import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.tweens.FlxEase;
@@ -19,6 +20,8 @@ class Collectible extends ConditionalObject
 	public var _started : Bool = false;
 	
 	private var _glow : GlowOverlay;
+	private var _particles : MyParticleSystem;
+	private var _particleTimer : Float = 0;
 	
 	private var _teleport : Teleport = null;
 	
@@ -35,6 +38,7 @@ class Collectible extends ConditionalObject
 		_glow.alpha = 0.2;
 		_glow.blend = BlendMode.LIGHTEN;
 		
+		_particles = new MyParticleSystem(30);
 	}
 	
 	
@@ -67,6 +71,14 @@ class Collectible extends ConditionalObject
 		_glow.setPosition(( x + 8) ,(y + 8) );
 		_glow.update(elapsed);
 		
+		_particles.update(elapsed);
+		_particleTimer -= elapsed;
+		if (_particleTimer <= 0)
+		{
+			_particleTimer += 0.15;
+			spawnParticles();
+		}
+		
 		if (!_started)
 		{
 			_started = true;
@@ -80,9 +92,13 @@ class Collectible extends ConditionalObject
 	{
 		//trace("draw");
 
-		_glow.draw(); 
-		super.draw();
-
+		if (checkConditions())
+		{
+			_particles.draw();
+			
+			_glow.draw(); 
+			super.draw();
+		}
 		
 	}
 	
@@ -113,7 +129,32 @@ class Collectible extends ConditionalObject
 	public function resetCamera()
 	{
 		_glow.cameras = [GP.CameraMain];
+		//_particles.cameras = [GP.CameraMain];
 	}
 	
+	function spawnParticles():Void 
+	{
+		//trace("spawnparticles");
+		_particles.Spawn(1, function(s:FlxSprite) 
+		{
+			s.alive = true;
+			var T : Float = FlxG.random.float(0.55, 0.65);
+			s.setPosition(x + this.width/2, y + this.height /2 );
+			//trace(s.x + " " + s.y);
+			s.alpha = FlxG.random.float(0.45, 0.60);
+			var v : Float = FlxG.random.float(0, Math.PI * 2);
+			var t : Float = FlxG.random.float(9, 14);
+			s.velocity.set( Math.cos(v) * t , Math.sin(v) * t);
+			
+			FlxTween.tween(s, { alpha:0 }, T/3, { startDelay:  T/3.0*2.0, onComplete: function(t:FlxTween) : Void { s.alive = false; } } );
+			
+		},
+		function (s:FlxSprite)
+		{	
+			s.makeGraphic(1, 1, FlxColor.WHITE);
+			s.cameras = [GP.CameraMain];
+		});
+		
+	}
 	
 }

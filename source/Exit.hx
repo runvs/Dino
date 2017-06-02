@@ -18,7 +18,7 @@ class Exit extends LevelLeaver
 		cameras = [GP.CameraMain];
 	}
 	
-	public override function perform(stage : BasicState)
+	private override function doPerform(stage : BasicState)
 	{
 		StageInfo.getStage(targetStage).startStage();
 	}

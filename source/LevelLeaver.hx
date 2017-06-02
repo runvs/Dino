@@ -25,7 +25,7 @@ class LevelLeaver extends ConditionalObject
 			this.alpha = 0;
 		this.color = FlxColor.fromRGB(150, 144, 72);
 		
-		_particles = new MyParticleSystem();
+		_particles = new MyParticleSystem(10);
 	}
 	
 	override public function draw():Void 
@@ -70,4 +70,18 @@ class LevelLeaver extends ConditionalObject
 		}
 	}
 	
+	public function perform (state : BasicState)
+	{
+		
+		FlxTween.tween(state._overlay, { alpha : 1 }, 0.75);
+		
+		var t : FlxTimer = new FlxTimer();
+		t.start(0.8, function(t) { state._overlay.alpha = 0; doPerform(state);  } );
+		
+	}
+	
+	private function doPerform(state : BasicState)
+	{
+		// nothing to do in base class
+	}
 }

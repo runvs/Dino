@@ -50,9 +50,6 @@ class ConditionalObject extends FlxSprite
 		}
 	}
 	
-	public function perform (state : BasicState)
-	{
-		// nothing to do in base class
-	}
+	
 	
 }
