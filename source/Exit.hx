@@ -20,7 +20,9 @@ class Exit extends LevelLeaver
 	
 	private override function doPerform(stage : BasicState)
 	{
+
 		StageInfo.getStage(targetStage).startStage();
+				
 	}
 	
 	

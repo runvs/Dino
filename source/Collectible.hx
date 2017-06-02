@@ -7,7 +7,6 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
-import openfl.display.BlendMode;
 
 /**
  * ...
@@ -36,7 +35,6 @@ class Collectible extends ConditionalObject
 		
 		_glow = new GlowOverlay(x, y, GP.CameraMain, Std.int(32), 0.7, 1.5);
 		_glow.alpha = 0.2;
-		_glow.blend = BlendMode.LIGHTEN;
 		
 		_particles = new MyParticleSystem(30);
 	}

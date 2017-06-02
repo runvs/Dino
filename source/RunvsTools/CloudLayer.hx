@@ -3,7 +3,6 @@ package;
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import openfl.display.BlendMode;
 
 /**
  * ...
@@ -40,7 +39,6 @@ class CloudLayer extends ScreenWrappingSpriteGroup
 			s.alpha = FlxG.random.float(0.5, 0.8) / f;
 			s.scale.set(GP.CameraMain.zoom+1, GP.CameraMain.zoom+1);
 			//s.scrollFactor.set(0.15/f, 0.05/f);
-			s.blend = BlendMode.LIGHTEN;
 			add(s);
 		}
 		this.scrollFactor.set(0.25, 0.05);

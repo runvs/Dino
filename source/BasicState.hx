@@ -20,11 +20,15 @@ class BasicState extends FlxState
 	var _flakes : Flakes;
 	var _stars : StarField;
 	
+	var _fade2BlackTween : FlxTween = null;
+	
 	
 	public var _moonSprite : FlxSprite;
 	
 	var inTransition : Bool = false;
-	public var _overlay :FlxSprite;
+	private var _overlay :FlxSprite;
+	
+	
 	
 	public function new() 
 	{
@@ -58,10 +62,14 @@ class BasicState extends FlxState
 		_vignette = new Vignette(GP.CameraOverlay);
 		
 		_overlay = new FlxSprite(0, 0);
-		_overlay.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		_overlay.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK, true);
+		
 		_overlay.scrollFactor.set();
 		_overlay.alpha = 1.0;
-		FlxTween.tween(_overlay, { alpha:0.0 }, 0.5);
+		_overlay.cameras = [GP.CameraOverlay ];
+		_fade2BlackTween = FlxTween.tween(_overlay, { alpha:0.0 }, 0.5);
+		
+		_overlay.alpha = 0;
 		
 		trace("Basicstate create end");
 	}
@@ -94,7 +102,7 @@ class BasicState extends FlxState
 		//trace(GP.CameraMain.minScrollX + " " + GP.CameraMain.maxScrollX + " " + GP.CameraMain.minScrollY + " " + GP.CameraMain.maxScrollY);
 		//trace(GP.CameraOverlay.minScrollX + " " + GP.CameraOverlay.maxScrollX + " " + GP.CameraOverlay.minScrollY + " " + GP.CameraOverlay.maxScrollY);
 		
-
+		ResetFade2Black();
 	}
 	
 	// should be overwritten by child classes
@@ -119,7 +127,7 @@ class BasicState extends FlxState
 		_level.topTiles.update(elapsed);
 		_level.wind.update(elapsed);
 	
-		trace(_overlay.alpha);
+		//trace(_overlay.alpha);
 		
 		for (g in _level.grass)
 		{
@@ -204,13 +212,36 @@ class BasicState extends FlxState
 		//_level.collisionMap.draw();
 		
 		_vignette.draw();
-		_overlay.draw();
+		
 		internalDrawTop();
+		
+		_overlay.draw();
+	}
+	
+	public function Fade2Black()
+	{
+		if (_fade2BlackTween != null)
+		{
+			_fade2BlackTween.cancel();
+		}
+		
+		//_overlay.alpha = 1;
+		_fade2BlackTween = FlxTween.tween(_overlay,{ alpha : 1 }, 0.25);
+	}
+	public function ResetFade2Black()
+	{
+		if (_fade2BlackTween != null)
+		{
+			_fade2BlackTween.cancel();
+		}
+		_overlay.alpha = 1;
+		_fade2BlackTween = FlxTween.tween(_overlay, { alpha : 0 }, 0.25, {startDelay:0.1});
+		//_overlay.alpha = 0;
 	}
 	
 	public function jumpToEntryPoint(id : Int)
 	{
-		
+		ResetFade2Black();
 	}
 	
 }

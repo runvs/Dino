@@ -73,10 +73,9 @@ class LevelLeaver extends ConditionalObject
 	public function perform (state : BasicState)
 	{
 		
-		FlxTween.tween(state._overlay, { alpha : 1 }, 0.75);
-		
+		state.Fade2Black();
 		var t : FlxTimer = new FlxTimer();
-		t.start(0.8, function(t) { state._overlay.alpha = 0; doPerform(state);  } );
+		t.start(1.0, function(t) { doPerform(state);  } );
 		
 	}
 	

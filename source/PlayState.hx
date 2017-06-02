@@ -164,6 +164,7 @@ class PlayState extends BasicState
 	
 	override public function jumpToEntryPoint (id : Int )
 	{
+		super.jumpToEntryPoint(id);
 		d.teleport(_level.getEntryPoint(id).x, _level.getEntryPoint(id).y);
 		d.update(0.1);// to update d.tracer
 		GP.CamerasFollow(d, d.tracer);
