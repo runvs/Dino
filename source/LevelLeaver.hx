@@ -16,16 +16,23 @@ class LevelLeaver extends ConditionalObject
 	private var _particles : MyParticleSystem;
 	private var _particleTimer : Float = 0;
 	
-	public function new(w : Int, h : Int) 
+	private var _parts : Int = 0;
+	
+	public function new(w : Int, h : Int, l : Float, r : Float) 
 	{
 		super();
-		SpriteFunctions.createUpGlowArea(this, w, h, function(t) { return t; } );
+		SpriteFunctions.createUpGlowArea(this, w, h, function(t) { return t; } , l, r);
+		this.color = FlxColor.fromRGB(150, 144, 72);
 		this.alpha = 0.75;
+		
 		if (w == 0 && h == 0)
 			this.alpha = 0;
-		this.color = FlxColor.fromRGB(150, 144, 72);
 		
-		_particles = new MyParticleSystem(10);
+		_parts = Std.int(w / 10);
+		if (_parts == 0) _parts = 1;
+		
+		
+		_particles = new MyParticleSystem(w+1);
 	}
 	
 	override public function draw():Void 
@@ -40,7 +47,7 @@ class LevelLeaver extends ConditionalObject
 	function spawnParticles():Void 
 	{
 		//trace("spawnparticles");
-		_particles.Spawn(2, function(s:FlxSprite) 
+		_particles.Spawn(_parts, function(s:FlxSprite) 
 		{
 			s.alive = true;
 			var T : Float = FlxG.random.float(0.55, 0.85);

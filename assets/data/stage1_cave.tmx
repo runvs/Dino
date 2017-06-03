@@ -20,10 +20,12 @@
   </data>
  </layer>
  <objectgroup name="exits">
-  <object id="94" name="exitCave" type="teleport" x="240" y="168" width="16" height="24">
+  <object id="94" name="exitCave" type="teleport" x="224" y="168" width="32" height="24">
    <properties>
     <property name="entryID" value="1"/>
+    <property name="left" value="1"/>
     <property name="level" value="stage1_gather_full.tmx"/>
+    <property name="right" value="0"/>
     <property name="type" value="enter"/>
    </properties>
   </object>

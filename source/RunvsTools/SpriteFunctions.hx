@@ -117,7 +117,7 @@ class SpriteFunctions
 		spr.pixels.unlock();
 	}
 	
-	public static function createUpGlowArea(spr:FlxSprite, w:Int, h : Int, ease : EaseFunction)
+	public static function createUpGlowArea(spr:FlxSprite, w:Int, h : Int, ease : EaseFunction, l : Float = (1.0/4.0), r : Float = (3.0/4.0) )
 	{
 		spr.makeGraphic(w, h, FlxColor.TRANSPARENT, true);
 		spr.pixels.lock();
@@ -125,14 +125,14 @@ class SpriteFunctions
 		{
 			var maxh : Float = h;
 			
-			if (j < w / 4)
+			if (j < w*l)
 			{
-				maxh *= j / (w / 4);
+				maxh *= j / (w *l);
 			}
-			else if (j > w / 4.0*3.0)
+			else if (j > w *r)
 			{
-				
-				maxh *= (1.0 - (4 * j - 3 * w) / w);
+				var k : Float = (j - w*r)  / ((1.0-r) * w); 
+				maxh *= (1.0 - k);
 			}
 			else
 			{

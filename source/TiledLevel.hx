@@ -511,7 +511,9 @@ class TiledLevel extends TiledMap
 			{
 			case "exit":
 				//trace("exit");
-				var e : Exit = new Exit(o.width, o.height);
+				var l : Float = (o.properties.get("left")!= null ? Std.parseFloat(o.properties.get("left")) : 1.0 / 4.0 );
+				var r : Float = (o.properties.get("right")!= null ?  Std.parseFloat(o.properties.get("right")) : 3.0 / 4.0);
+				var e : Exit = new Exit(o.width, o.height, l, r);
 				e.setPosition(x, y);
 				e.targetStage = o.properties.get("name");
 				e.type = o.properties.get("type");
@@ -519,7 +521,9 @@ class TiledLevel extends TiledMap
 				exits.push(e);
 			case "teleport":
 				//trace("exit");
-				var t : Teleport = new Teleport(o.width, o.height);
+				var l : Float = (o.properties.get("left")!= null ? Std.parseFloat(o.properties.get("left")) : 1.0 / 4.0 );
+				var r : Float = (o.properties.get("right")!= null ?  Std.parseFloat(o.properties.get("right")) : 3.0 / 4.0);
+				var t : Teleport = new Teleport(o.width, o.height, l, r);
 				t.setPosition(x, y);
 				t.targetLevel= o.properties.get("level");
 				t.type = o.properties.get("type");

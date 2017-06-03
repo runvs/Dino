@@ -42,7 +42,7 @@ class Collectible extends ConditionalObject
 	
 	public function setTeleport(level:String, entryID: Int)
 	{
-		_teleport = new Teleport(0,0);
+		_teleport = new Teleport(0,0,0,0);
 		_teleport.targetLevel = level;
 		_teleport.entryID = entryID;
 	}
@@ -80,8 +80,8 @@ class Collectible extends ConditionalObject
 		if (!_started)
 		{
 			_started = true;
-			y += 3;
-			FlxTween.tween(this, { y:y - 8 }, 1.75, { type:FlxTween.PINGPONG, ease : FlxEase.sineInOut } );
+			y += 1;
+			FlxTween.tween(this, { y:y - 4 }, 1.75, { type:FlxTween.PINGPONG, ease : FlxEase.sineInOut } );
 		}
 		
 	}
