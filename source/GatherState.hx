@@ -180,17 +180,26 @@ class GatherState extends PlayState
 			c.draw();
 		}
 		
-		_inventoryBackground.draw();
+		
+		
+		super.internalDraw();
+		
+		
+		//d.tracer.draw();
+		
+
+	}
+	
+		public override function internalDrawTop() : Void
+	{
+	_inventoryBackground.draw();
 		//_collectiblesRequired.draw();
 		for (i in 0..._collectiblesIcons.length)
 		{
 			var s : CollectibleIcon = _collectiblesIcons[i];
 			s.draw();
+			
 		}
-		
-		super.internalDraw();
-		//d.tracer.draw();
 		_indicator.draw();
-
 	}
 }
