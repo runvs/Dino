@@ -13,6 +13,7 @@ class HurtingSpriteTopFalling extends HurtingSprite
 	private var _wiggleActiveTimer : Float = 0;
 	private var _falling : Bool = false;
 	private var _FallingTimer : FlxTimer;
+	private var _activated : Bool = false;
 	
 	public function new(?X:Float=0, ?Y:Float=0) 
 	{
@@ -20,7 +21,8 @@ class HurtingSpriteTopFalling extends HurtingSprite
 		LoadHurtingGraphic(TiledLevel.TileIDHurtingTopFalling);
 		_wiggleTimer = new FlxTimer();
 		_FallingTimer = new FlxTimer();
-		_wiggleTimer.start(GP.LevelHurtingFallingWiggleDeadTime, doWiggle, 0);
+		
+		
 	}
 	
 	public override function update(elapsed:Float)
@@ -28,6 +30,11 @@ class HurtingSpriteTopFalling extends HurtingSprite
 		super.update(elapsed);
 		updateWiggle(elapsed);
 		checkPlayerPosForWiggle();
+		if (!_activated)
+		{
+			_activated = true;
+			_wiggleTimer.start(GP.LevelHurtingFallingWiggleDeadTime, doWiggle, 0);
+		}
 	}
 	
 	function startFalling() 
@@ -41,8 +48,13 @@ class HurtingSpriteTopFalling extends HurtingSprite
 	
 	
 	
+	public function wiggle() 
+	{
+		_wiggleActiveTimer = 0.35;
+	}
 	private function doWiggle(t) : Void
 	{
+		trace("wiggle timer");
 		wiggle();
 	}
 	
@@ -51,7 +63,7 @@ class HurtingSpriteTopFalling extends HurtingSprite
 		if (_wiggleActiveTimer > 0 || _falling)
 		{
 			_wiggleActiveTimer -= elapsed;
-			offset.set(FlxG.random.floatNormal(0, 1), 0);
+			offset.set(FlxG.random.floatNormal(0, 0.75), 0);
 		}
 		else
 		{
@@ -74,12 +86,4 @@ class HurtingSpriteTopFalling extends HurtingSprite
 		}
 	
 	}
-	
-	public function wiggle() 
-	{
-		_wiggleActiveTimer = 0.35;
-	}
-	
-	
-	
 }
