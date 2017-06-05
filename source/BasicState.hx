@@ -129,6 +129,15 @@ class BasicState extends FlxState
 	
 		//trace(_overlay.alpha);
 		
+		for (t in _level.trees)
+		{
+			t.update(elapsed);
+		}
+		for (t in _level.treesTop)
+		{
+			t.update(elapsed);
+		}
+		
 		for (g in _level.grass)
 		{
 			g.update(elapsed);
@@ -192,6 +201,10 @@ class BasicState extends FlxState
 		
 		_level.foregroundTiles.draw();
 		_level.foregroundTiles2.draw();
+		for (t in _level.trees)
+		{
+			t.draw();
+		}
 		
 		for (h in _level.hurtingTiles)
 		{
@@ -207,7 +220,10 @@ class BasicState extends FlxState
 		internalDraw();
 		
 		_level.topTiles.draw();
-
+		for (t in _level.treesTop)
+		{
+			t.draw();
+		}
 		
 		//_level.collisionMap.draw();
 		

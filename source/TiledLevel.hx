@@ -59,6 +59,8 @@ class TiledLevel extends TiledMap
 	public var collectibles : Array<Collectible>;
 	public var enemies: Array<BasicEnemy>;
 	public var grass : Array<GrassArea>;
+	public var trees : Array<Tree>;
+	public var treesTop : Array<Tree>;
 	
 	
 	public var drawStars : Bool = false;
@@ -94,6 +96,8 @@ class TiledLevel extends TiledMap
 		hurtingTiles = new Array<HurtingSprite>();
 		enemies = new Array<BasicEnemy>();
 		grass = new Array<GrassArea>();
+		trees = new Array<Tree>();
+		treesTop = new Array<Tree>();
 		wind = new WindSystem();
 		
 		// Load Tile Maps
@@ -213,7 +217,6 @@ class TiledLevel extends TiledMap
 			if (s != null)
 			{
 				bgOffsetY = Std.parseFloat(s);
-				//trace(bgOffsetY);
 			}
 			
 			bg = new FlxSprite();
@@ -297,6 +300,14 @@ class TiledLevel extends TiledMap
 		for (t in foregroundTiles2)
 		{
 			t.cameras = [GP.CameraMain];
+		}
+		for (t in trees)
+		{
+			t.resetCamera();
+		}
+		for (t in treesTop)
+		{
+			t.resetCamera();
 		}
 		for (t in topTiles)
 		{
@@ -394,9 +405,9 @@ class TiledLevel extends TiledMap
 			{
 				LoadEnemies(objectLayer);
 			}
-			else if (objectLayer.name == "global")
+			else if (objectLayer.name == "foliage")
 			{
-				LoadGrassAreas(objectLayer);
+				LoadFoliage(objectLayer);
 			}
 		}
 	}
@@ -442,9 +453,10 @@ class TiledLevel extends TiledMap
 		trace("load enemies finished. Loaded N=" + Std.string(enemies.length) + " enemies");
 	}
 	
-	function LoadGrassAreas(objectLayer:TiledObjectLayer)
+	function LoadFoliage(objectLayer:TiledObjectLayer)
 	{
-		trace("load grass");
+		trace("load foliage");
+		DeterministicRandom.reset();
 		for (o in objectLayer.objects)
 		{
 			var x:Int = o.x;
@@ -458,11 +470,31 @@ class TiledLevel extends TiledMap
 				//
 			switch(o.type.toLowerCase())
 			{
-				case "grass":
-					trace("grass");
+				case "grass":	// grass can only appear in grass areas
+					//trace("grass");s
 					var ga : GrassArea = new GrassArea(x, y+h, w);
 					grass.push(ga);
 					wind.addGrassArea(ga);
+				case "tree":
+					trace("tree");
+					var t : Tree = new Tree(x, y, w, h);
+					if (o.properties.get("front") != null)
+					{
+						t.front = (o.properties.get("front") == "true");
+					}
+					
+					if (t.front)
+					{
+						treesTop.push(t);
+					}
+					else
+					{
+						trees.push(t);
+					}
+					wind.add(t, true);
+				case  "treearea":
+					trace("tree area not implemented yet");
+				
 			}
 		}
 	}

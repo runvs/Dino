@@ -3,14 +3,8 @@ package;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
-import flixel.group.FlxSpriteGroup;
 import flixel.text.FlxText;
-import flixel.ui.FlxButton;
-import flixel.math.FlxMath;
-import flixel.util.FlxColor;
-import haxe.Json;
 import haxe.ds.ArraySort;
-import openfl.Assets;
 using Lambda;
 
 
@@ -39,6 +33,7 @@ class MenuState extends FlxState
 		commitText.cameras = [GP.CameraOverlay];
 		commitText.scrollFactor.set(0, 0);
 		add(commitText);
+
 		
 		
 		var allStages : Array<StageItem> = StageInfo.AllStages;
@@ -61,7 +56,6 @@ class MenuState extends FlxState
 		for ( i in 0 ... _stages.length)
 		{
 			ArraySort.sort(_stages[i], StageItem.compareEpisodeNumber);
-			//trace(_stages[i].length);
 		}
 		
 		//trace("creating selection sprite");
