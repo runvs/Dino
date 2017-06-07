@@ -6,6 +6,7 @@ import flixel.FlxSprite;
  */
 class Blowable extends FlxSprite
 {
+	public var blown : Bool = false;
  
 	public function blow() : Void
 	{

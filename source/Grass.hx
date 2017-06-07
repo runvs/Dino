@@ -12,7 +12,7 @@ class Grass extends Blowable
 {
 	
 	var timer : Float = -1;
-	public var blown : Bool = false;
+	
 
 	public function new(?X:Float=0, ?Y:Float=0) 
 	{

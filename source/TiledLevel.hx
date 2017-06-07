@@ -477,11 +477,20 @@ class TiledLevel extends TiledMap
 					wind.addGrassArea(ga);
 				case "tree":
 					trace("tree");
-					var t : Tree = new Tree(x, y, w, h);
+					var t : Tree;
+					if (o.properties.get("id") != null)
+					{
+						t = new Tree(x, y, w, h, Std.parseInt(o.properties.get("id")));
+					}
+					else
+					{
+						t = new Tree(x, y, w, h);
+					}
 					if (o.properties.get("front") != null)
 					{
 						t.front = (o.properties.get("front") == "true");
 					}
+					
 					
 					if (t.front)
 					{
