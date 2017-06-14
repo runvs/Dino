@@ -111,6 +111,7 @@ class PlayState extends BasicState
 		//trace("PlayState internal draw");
 		d.draw();
 		
+		
 		for (e in _level.exits)
 		{
 			e.draw();

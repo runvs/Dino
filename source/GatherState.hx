@@ -32,7 +32,7 @@ class GatherState extends PlayState
 		super.create();
 		_gatherID = 0;
 		
-		_inventoryBackground = new FlxSprite();
+		
 		
 		
 		createCollectibleListIntern();
@@ -61,20 +61,21 @@ class GatherState extends PlayState
 		var N : Int = _collectiblesList.length;
 		
 		var nhalf : Float = N / 2.0;
-		var xleft : Float = FlxG.width / 2.0/ GP.CameraMain.zoom - 20 * nhalf;
+		var xleft : Float = FlxG.width / 2.0 - 20 * nhalf * 4;
 		
 		for (i in 0 ... N)
 		{
 			var s : CollectibleIcon  = new CollectibleIcon(_collectiblesList[i]);
-			s.setPosition(xleft + i * 22,  FlxG.height / GP.CameraMain.zoom  - 16 );
+			s.setPosition(xleft + i * 22 * 4,  FlxG.height  - 16 *3);
 			//s.alpha = 0.3;
 			_collectiblesIcons.push(s);
 		}
-		
+		_inventoryBackground = new FlxSprite();
 		_inventoryBackground.makeGraphic(N * 22 + 4, 20, FlxColor.fromRGB(102,57,49));
 		_inventoryBackground.cameras = [GP.CameraMain];
 		_inventoryBackground.scrollFactor.set(0, 0);
-		_inventoryBackground.setPosition(xleft - 4, FlxG.height / GP.CameraMain.zoom - 16);
+		
+		_inventoryBackground.setPosition(FlxG.width/2/GP.CameraMain.zoom - 22 * nhalf, FlxG.height / GP.CameraMain.zoom - 16);
 		
 	}
 	

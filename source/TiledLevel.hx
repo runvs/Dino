@@ -61,7 +61,7 @@ class TiledLevel extends TiledMap
 	public var grass : Array<GrassArea>;
 	public var trees : Array<Tree>;
 	public var treesTop : Array<Tree>;
-	
+	public var doors : Array<Door>;
 	
 	public var drawStars : Bool = false;
 	public var drawMoon : Bool = false;
@@ -95,10 +95,13 @@ class TiledLevel extends TiledMap
 		collectibles = new Array<Collectible>();
 		hurtingTiles = new Array<HurtingSprite>();
 		enemies = new Array<BasicEnemy>();
+		
 		grass = new Array<GrassArea>();
 		trees = new Array<Tree>();
 		treesTop = new Array<Tree>();
 		wind = new WindSystem();
+		
+		doors = new Array<Door>();
 		
 		// Load Tile Maps
 		for (layer in layers)
@@ -345,6 +348,10 @@ class TiledLevel extends TiledMap
 		{
 			e.cameras = [GP.CameraMain];
 		}
+		for (d in doors)
+		{
+			d.resetCamera();
+		}
 	}
 	
 	
@@ -392,6 +399,7 @@ class TiledLevel extends TiledMap
 			if (objectLayer.name == "exits")
 			{	
 				LoadExits(objectLayer);
+				LoadDoors(objectLayer);
 			}
 			else if (objectLayer.name == "collectibles")
 			{
@@ -408,6 +416,28 @@ class TiledLevel extends TiledMap
 			else if (objectLayer.name == "foliage")
 			{
 				LoadFoliage(objectLayer);
+			}
+		}
+	}
+	
+	function LoadDoors(objectLayer:TiledObjectLayer) 
+	{
+		for (o in objectLayer.objects)
+		{
+			var x:Int = o.x;
+			var y:Int = o.y;
+			//// objects in tiled are aligned bottom-left (top-left in flixel)
+			if (o.gid != -1)
+				y -= objectLayer.map.getGidOwner(o.gid).tileHeight;
+			switch (o.type.toLowerCase())
+			{
+			case "door":
+				//trace("exit");
+				var d : Door = new Door(x,y);
+				var open : String = o.properties.get("open");
+				var close : String = o.properties.get("close");
+				d.setKeyWords(open, close);
+				doors.push(d);
 			}
 		}
 	}

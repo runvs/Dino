@@ -138,6 +138,12 @@ class BasicState extends FlxState
 			t.update(elapsed);
 		}
 		
+		
+		for (d in _level.doors)
+		{
+			d.update(elapsed);
+		}
+		
 		for (g in _level.grass)
 		{
 			g.update(elapsed);
@@ -217,6 +223,13 @@ class BasicState extends FlxState
 		{
 			g.draw();
 		}
+		
+		
+		for (d in _level.doors)
+		{
+			d.draw();
+		}
+		
 		internalDraw();
 		
 		_level.topTiles.draw();

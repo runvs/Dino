@@ -36,7 +36,7 @@
 			"type" 			: "cut", 
 			"level"			: "assets/data/stage1_intro.json",
 			"requirements" 	: ["stage0complete"],
-			"storysettings" : []
+			"storysettings" : ["doors_gather_open"]
 		},
 		{
 			"name" 			: "s1_e1_play", 
@@ -45,7 +45,7 @@
 			"actor"			: "dino",
 			"level"			: "assets/data/stage1_gather_full.tmx",
 			"requirements" 	: ["stage0complete"],
-			"storysettings" : [],
+			"storysettings" : ["doors_gather_open"],
 			"gather"		: ["branch", "leaf", "stone"]
 		},
 		{
@@ -54,7 +54,7 @@
 			"type" 			: "cut", 
 			"level"			: "assets/data/stage1_build.json",
 			"requirements" 	: ["stage0complete"],
-			"storysettings" : []
+			"storysettings" : ["doors_gather_close"]
 		},
 		
 		
@@ -64,7 +64,7 @@
 			"type"			: "cut",
 			"level"			: "assets/data/stage2_fishing_intro.json",
 			"requirements" 	: [],
-			"storysettings" : ["fire_burning"]
+			"storysettings" : ["fire_burning", "doors_gather_close"]
 		},
 		{
 			"name"			: "s2_e1_fishing",
@@ -72,7 +72,7 @@
 			"type"			: "fishing",
 			"level"			: "assets/data/fishing.tmx",
 			"requirements" 	: [],
-			"storysettings" : ["fire_burning"]
+			"storysettings" : ["fire_burning", "doors_gather_close"]
 		}
     ]
 }

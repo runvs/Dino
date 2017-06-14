@@ -19,7 +19,18 @@ class ParallaxLayer extends ScreenWrappingSpriteGroup
 		parallaxName = n;
 		if (parallaxName == "none") return;
 		trace("loading parallax: " + parallaxName); 
-		
+	
+		if (parallaxName == "test")
+		{
+			var s : FlxSprite = new FlxSprite(0, 0);
+			s.loadGraphic(AssetPaths.bg__png, false, 325, 150);
+			s.origin.set();
+			s.scale.set(GP.CameraMain.zoom, GP.CameraMain.zoom);
+			add(s);
+			
+			this.scrollFactor.set(0.15, 0);
+			return;
+		}
 		
 		//var N :Int = count;
 		var dx : Float = 256 * GP.CameraMain.zoom;
@@ -34,7 +45,6 @@ class ParallaxLayer extends ScreenWrappingSpriteGroup
 			var x : Float = i * dx/count ;// + FlxG.random.float(0, dx / 2 );
 			var y : Float = FlxG.height - s.height;
 			s.setPosition(x, y);
-			
 			s.scale.set(GP.CameraMain.zoom, GP.CameraMain.zoom);
 			add(s);
 		}

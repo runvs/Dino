@@ -73,7 +73,7 @@
    <property name="clouds" value="normal"/>
    <property name="flocks" value="true"/>
    <property name="moon" value="false"/>
-   <property name="parallax" value="mountain"/>
+   <property name="parallax" value="test"/>
    <property name="stars" value="false"/>
   </properties>
  </objectgroup>
