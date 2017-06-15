@@ -70,11 +70,16 @@ class TiledLevel extends TiledMap
 	
 	public var wind : WindSystem;
 	
-	
-	
 	public static var TileIDHurtingBottom 		(default, null) 	: Int = 144;
 	public static var TileIDHurtingTop    		(default, null)		: Int = 145;
+	public static var TileIDHurtingRight1   	(default, null)		: Int = 146;
+	public static var TileIDHurtingLeft1   		(default, null)		: Int = 147;
 	public static var TileIDHurtingTopFalling 	(default, null)		: Int = 149;
+	// bottom falling is not available
+	public static var TileIDHurtingRight2   	(default, null)		: Int = 150;
+	public static var TileIDHurtingLeft2   		(default, null)		: Int = 151;
+	
+	
 	
 	public function new(tiledLevel:Dynamic)
 	{
@@ -258,21 +263,38 @@ class TiledLevel extends TiledMap
 	{
 		if (tileType == TileIDHurtingTop + 1)
 		{
-			//trace("load hurting Top");
 			var h : HurtingSprite = new HurtingSpriteTop(x * GP.WorldTileSizeInPixel, y * GP.WorldTileSizeInPixel);
 			hurtingTiles.push(h);
 			
 		}
+		else if (tileType == TileIDHurtingRight1 + 1)
+		{
+			var h : HurtingSprite = new HurtingSpriteRight(x * GP.WorldTileSizeInPixel, y * GP.WorldTileSizeInPixel, false);
+			hurtingTiles.push(h);
+		}
+		else if (tileType == TileIDHurtingLeft1 + 1)
+		{
+			var h : HurtingSprite = new HurtingSpriteLeft(x * GP.WorldTileSizeInPixel, y * GP.WorldTileSizeInPixel, false);
+			hurtingTiles.push(h);
+		}
 		else if (tileType == TileIDHurtingBottom + 1)
 		{
-			//trace("load hurting Bot");
 			var h : HurtingSprite = new HurtingSpriteBot(x * GP.WorldTileSizeInPixel, y * GP.WorldTileSizeInPixel);
 			hurtingTiles.push(h);
 		}
 		else if (tileType == TileIDHurtingTopFalling + 1)
 		{
-			//trace("load hurting Falling");
 			var h : HurtingSprite = new HurtingSpriteTopFalling(x * GP.WorldTileSizeInPixel, y * GP.WorldTileSizeInPixel);
+			hurtingTiles.push(h);
+		}
+		else if (tileType == TileIDHurtingRight2 + 1)
+		{
+			var h : HurtingSprite = new HurtingSpriteRight(x * GP.WorldTileSizeInPixel, y * GP.WorldTileSizeInPixel, true);
+			hurtingTiles.push(h);
+		}
+		else if (tileType == TileIDHurtingLeft2 + 1)
+		{
+			var h : HurtingSprite = new HurtingSpriteLeft(x * GP.WorldTileSizeInPixel, y * GP.WorldTileSizeInPixel, true);
 			hurtingTiles.push(h);
 		}
 		else
