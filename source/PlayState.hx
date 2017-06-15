@@ -145,7 +145,7 @@ class PlayState extends BasicState
 		d.isOnExit = false;
 		for (e in _level.exits)
 		{
-			if (!e.checkConditions()) continue;
+			if (!e.canBeUsed()) continue;
 			if (FlxG.overlap(d, e))
 			{
 				if (e.type == "enter")

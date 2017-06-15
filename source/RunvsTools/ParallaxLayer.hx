@@ -20,7 +20,7 @@ class ParallaxLayer extends ScreenWrappingSpriteGroup
 		if (parallaxName == "none") return;
 		trace("loading parallax: " + parallaxName); 
 	
-		if (parallaxName == "test")
+		if (parallaxName == "mountain")
 		{
 			var s : FlxSprite = new FlxSprite(0, 0);
 			s.loadGraphic(AssetPaths.bg__png, false, 325, 150);
@@ -31,26 +31,6 @@ class ParallaxLayer extends ScreenWrappingSpriteGroup
 			this.scrollFactor.set(0.15, 0);
 			return;
 		}
-		
-		//var N :Int = count;
-		var dx : Float = 256 * GP.CameraMain.zoom;
-		var N : Int = 4;
-		for (i in 0 ... N)
-		{
-			var v : Int = FlxG.random.int(1, 1);
-			var name : String  = "assets/images/parallax_" + parallaxName + Std.string(v) + ".png";
-			
-			var s : FlxSprite = new FlxSprite(0,0);
-			s.loadGraphic(name, false, 256, 128);
-			var x : Float = i * dx/count ;// + FlxG.random.float(0, dx / 2 );
-			var y : Float = FlxG.height - s.height;
-			s.setPosition(x, y);
-			s.scale.set(GP.CameraMain.zoom, GP.CameraMain.zoom);
-			add(s);
-		}
-		this.scrollFactor.set(0.15, 0);
-		
-		
 	}
 	
 	public function resetCamera()

@@ -44,7 +44,7 @@ class BasicState extends FlxState
 				
 		trace("BasicState, number of cameras: " + FlxG.cameras .list.length);
 		trace ("Basicstate create moon");
-		_moonSprite = new FlxSprite(100, -100);
+		_moonSprite = new FlxSprite(400, -100);
 		_moonSprite.loadGraphic(AssetPaths.moon__png, false, 450, 450);
 		_moonSprite.cameras = [GP.CameraUnderlay];
 		_moonSprite.scrollFactor.set(0.1, 0);
@@ -181,6 +181,16 @@ class BasicState extends FlxState
 		//trace("BasicState draw");
 		_level.bg.draw();
 
+		if (_level.drawStars)
+		{
+			_stars.draw();
+		}
+		
+		if (_level.drawMoon)
+		{
+			_moonSprite.draw();
+		}
+		
 		if (_level.parallaxName != "none")
 		{
 			_level.parallax.draw();
@@ -192,14 +202,7 @@ class BasicState extends FlxState
 		}
 		
 		
-		if (_level.drawStars)
-		{
-			_stars.draw();
-		}
-		if (_level.drawMoon)
-		{
-			_moonSprite.draw();
-		}
+		
 		if (_level.drawFlocks)
 		{
 			_flakes.draw();

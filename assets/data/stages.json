@@ -54,7 +54,7 @@
 			"type" 			: "cut", 
 			"level"			: "assets/data/stage1_build.json",
 			"requirements" 	: ["stage0complete"],
-			"storysettings" : ["doors_gather_close"]
+			"storysettings" : ["has_leaf", "has_stone", "has_branch"]
 		},
 		
 		
@@ -64,15 +64,24 @@
 			"type"			: "cut",
 			"level"			: "assets/data/stage2_fishing_intro.json",
 			"requirements" 	: [],
-			"storysettings" : ["fire_burning", "doors_gather_close"]
+			"storysettings" : ["fire_burning", "has_leaf", "has_stone", "has_branch"]
 		},
 		{
-			"name"			: "s2_e1_fishing",
-			"stage"			: 2, "episode" : 1,
+			"name" 			: "s2_e1_gotoFishing", 
+			"stage" 		: 2, "episode" : 1, 
+			"type" 			: "play",
+			"actor"			: "dino",
+			"level"			: "assets/data/stage1_gather_full.tmx",
+			"requirements" 	: [],
+			"storysettings" : ["fire_burning", "has_leaf", "has_stone", "has_branch"]
+		},
+		{
+			"name"			: "s2_e2_fishing",
+			"stage"			: 2, "episode" : 2,
 			"type"			: "fishing",
 			"level"			: "assets/data/fishing.tmx",
 			"requirements" 	: [],
-			"storysettings" : ["fire_burning", "doors_gather_close"]
+			"storysettings" : ["fire_burning", "has_leaf", "has_stone", "has_branch"]
 		}
     ]
 }

@@ -350,7 +350,8 @@ class TiledLevel extends TiledMap
 		}
 		for (e in exits)
 		{
-			e.cameras = [GP.CameraMain];
+			e.resetCamera();
+			//e.cameras = [GP.CameraMain];
 		}
 		for (e in entries)
 		{
@@ -456,13 +457,31 @@ class TiledLevel extends TiledMap
 			case "door":
 				//trace("exit");
 				var n : String = o.properties.get("name");
-				var d : Door = new Door(x,y,n);
+				var d : Door = new Door(x, y, n);
+				
+				var teleportName : String = o.properties.get("teleportName");
+				
+				d.leaver = getTeleport(teleportName);
+				
 				var open : String = o.properties.get("open");
 				var close : String = o.properties.get("close");
 				d.setKeyWords(open, close);
+				
 				doors.push(d);
 			}
 		}
+	}
+	
+	private function getTeleport (n : String ) : LevelLeaver
+	{
+		for (e in exits)
+		{
+			if (e.LevelLeaverName == n)
+			{
+				return e;
+			}
+		}
+		return null;
 	}
 	
 	function LoadEnemies(objectLayer:TiledObjectLayer) 
@@ -614,10 +633,11 @@ class TiledLevel extends TiledMap
 				e.createConditions(o.properties.get("conditions"));
 				exits.push(e);
 			case "teleport":
-				//trace("exit");
+				//trace("teleport");
 				var l : Float = (o.properties.get("left")!= null ? Std.parseFloat(o.properties.get("left")) : 1.0 / 4.0 );
 				var r : Float = (o.properties.get("right")!= null ?  Std.parseFloat(o.properties.get("right")) : 3.0 / 4.0);
-				var t : Teleport = new Teleport(o.width, o.height, l, r);
+				var t : Teleport = new Teleport(o.width, o.height, l, r, o.name);
+				
 				t.setPosition(x, y);
 				t.targetLevel= o.properties.get("level");
 				t.type = o.properties.get("type");

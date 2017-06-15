@@ -19,11 +19,13 @@ class Door extends FlxSprite
 	
 	private var doorName : String = "";
 	
+	public var leaver : LevelLeaver = null;
 	
 	public function new(?X:Float=0, ?Y:Float=0, n : String) 
 	{
 		super(X, Y);
 		doorName = n;
+		leaver = new Teleport(24, 24, 0.25, 0.75);
 		var fileName = "assets/images/door_" + doorName +".png";
 		this.loadGraphic(fileName, true, 48, 48);
 		
@@ -50,8 +52,28 @@ class Door extends FlxSprite
 		super.update(elapsed);
 		
 		CheckStatus();
-		
 		//CheckDinoDistance();
+		SetTeleportStatus();
+	}
+	
+	function SetTeleportStatus() 
+	{
+		if (leaver == null) return;
+		
+		if (status != 1)
+		{
+			leaver.Disable();
+		}
+		else
+		{
+			leaver.Enable();
+		}
+	}
+	
+	
+	override public function draw():Void 
+	{
+		super.draw();
 	}
 	
 	public function setDinoPosition(d:PlayableCharacter)
@@ -89,6 +111,10 @@ class Door extends FlxSprite
 			if (StoryManager.getBool(openKeyWord) == true)
 			{
 				SwitchHiddenToOpen();
+			}
+			if (StoryManager.getBool(closeKeyWord) == true)
+			{
+				SwitchOpenToClose();
 			}
 		}
 		if ( status == 1)

@@ -54,7 +54,7 @@ class HurtingSpriteTopFalling extends HurtingSprite
 	}
 	private function doWiggle(t) : Void
 	{
-		trace("wiggle timer");
+		//trace("wiggle timer");
 		wiggle();
 	}
 	

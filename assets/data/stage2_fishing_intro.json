@@ -28,6 +28,6 @@
 		{ "time" : "5.5",  "actor": "dino", "type": "speak", "p1": "question", "p2" : "1.5"},
 
 		{ "time" : "7.0",  "actor": "overlay", "type" : "fade", "p1":"1.0", "p2":"0.85"},
-		{ "time" : "7.9",  "actor": "global", "type" : "end", "p1":"s2_e1_fishing"}
+		{ "time" : "7.9",  "actor": "global", "type" : "end", "p1":"s2_e1_gotoFishing"}
     ]
 }

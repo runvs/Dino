@@ -18,9 +18,14 @@ class LevelLeaver extends ConditionalObject
 	
 	private var _parts : Int = 0;
 	
-	public function new(w : Int, h : Int, l : Float, r : Float) 
+	public var LevelLeaverName (default, null) : String = "";
+	
+	private var leaverActive : Bool = true;
+	
+	public function new(w : Int, h : Int, l : Float, r : Float, n : String = "" ) 
 	{
 		super();
+		LevelLeaverName = n;
 		SpriteFunctions.createUpGlowArea(this, w, h, function(t) { return t; } , l, r);
 		this.color = FlxColor.fromRGB(150, 144, 72);
 		this.alpha = 0.75;
@@ -37,7 +42,7 @@ class LevelLeaver extends ConditionalObject
 	
 	override public function draw():Void 
 	{
-		if (checkConditions())
+		if (canBeUsed())
 		{
 			super.draw();
 			_particles.draw();
@@ -62,6 +67,7 @@ class LevelLeaver extends ConditionalObject
 			s.makeGraphic(1, 1, FlxColor.fromRGB(232, 224, 137));
 			s.cameras = [GP.CameraMain];
 		});
+		_particles.cameras = [GP.CameraMain];
 		
 	}
 	
@@ -86,8 +92,33 @@ class LevelLeaver extends ConditionalObject
 		
 	}
 	
+	public function Enable()
+	{
+		leaverActive = true;
+	}
+	public function Disable() 
+	{
+		leaverActive = false;
+	}
+	
+	public function resetCamera()
+	{
+		_particles.cameras = [GP.CameraMain];
+		for (p in _particles)
+		{
+			p.cameras = [GP.CameraMain];
+		}
+		this.cameras = [GP.CameraMain];
+		
+	}
+	
 	private function doPerform(state : BasicState)
 	{
 		// nothing to do in base class
+	}
+	
+	public function canBeUsed() : Bool
+	{
+		return checkConditions() && leaverActive;
 	}
 }
