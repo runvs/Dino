@@ -433,7 +433,8 @@ class TiledLevel extends TiledMap
 			{
 			case "door":
 				//trace("exit");
-				var d : Door = new Door(x,y);
+				var n : String = o.properties.get("name");
+				var d : Door = new Door(x,y,n);
 				var open : String = o.properties.get("open");
 				var close : String = o.properties.get("close");
 				d.setKeyWords(open, close);

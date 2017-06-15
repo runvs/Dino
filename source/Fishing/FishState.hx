@@ -53,6 +53,7 @@ class FishState extends BasicState
 		///////////////////////////////////////
 		//// Creating Playing Background //////
 		///////////////////////////////////////
+		
 		playbg = new FlxSprite(25, 15);
 		playbg.makeGraphic(150, 80, FlxColor.fromRGB(47,55,64));
 		playbg.scrollFactor.set();
@@ -113,7 +114,7 @@ class FishState extends BasicState
 		///// Create Dino anim ////////////////
 		///////////////////////////////////////
 		
-		_dino = new FlxSprite(18, 110);
+		_dino = new FlxSprite(18, 14);
 		_dino.loadGraphic(AssetPaths.dino_angeln__png, true, 24, 18);
 		_dino.animation.add("pick", [for (v in 0...5) v], 5, false);
 		_dino.animation.add("throw", [for (v in 6...15) v], 5, false);

@@ -70,6 +70,10 @@ class PlayState extends BasicState
 		{
 			e.update(elapsed);
 		}
+		for (d in _level.doors)
+		{
+			d.setDinoPosition(this.d);
+		}
 		for (e in _level.enemies)
 		{
 			if (!e.alive) continue;

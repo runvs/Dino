@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxSprite;
+import flixel.math.FlxPoint;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 
 /**
@@ -13,14 +14,26 @@ class Door extends FlxSprite
 	public var openKeyWord (default, null) : String = "";
 	public var closeKeyWord (default, null) : String  = "";
 	
-	public function new(?X:Float=0, ?Y:Float=0) 
+	private var dinoPos : FlxPoint = null;
+	private var isOpening: Bool = false;
+	
+	private var doorName : String = "";
+	
+	
+	public function new(?X:Float=0, ?Y:Float=0, n : String) 
 	{
 		super(X, Y);
+		doorName = n;
+		var fileName = "assets/images/door_" + doorName +".png";
+		this.loadGraphic(fileName, true, 48, 48);
 		
-		this.loadGraphic(AssetPaths.door_test__png, true, 48, 48);
+		var NumberOfAnims : Int = Math.floor(pixels.width / 48);
+		
 		this.animation.add("hidden", [0]);
-		this.animation.add("open", [1]);
-		this.animation.add("locked", [2]);
+		this.animation.add("open1", [1 * NumberOfAnims], 30);
+		this.animation.add("opening", [for (i in NumberOfAnims... (2 * NumberOfAnims)) i], 8, false);
+		this.animation.add("open2", [2 * NumberOfAnims - 1]);
+		this.animation.add("locked", [2*NumberOfAnims]);
 		this.cameras = [GP.CameraMain];
 	}
 	
@@ -37,6 +50,36 @@ class Door extends FlxSprite
 		super.update(elapsed);
 		
 		CheckStatus();
+		
+		//CheckDinoDistance();
+	}
+	
+	public function setDinoPosition(d:PlayableCharacter)
+	{
+		
+		dinoPos = new FlxPoint(d.x, d.y);
+		if (status == 1)
+		{
+			var dx : Float = dinoPos.x + 12 - (this.x + 24);
+			var dy : Float = dinoPos.y + 16 - (this.y + 48);
+			
+			//trace(dx + " " + dy);
+			if (Math.abs(dx) < 16 && Math.abs(dy) < 16)
+			{
+				if (!isOpening)
+				{
+					trace("door: " + doorName + " triggered");
+					isOpening = true;
+					this.animation.play("opening", false); 
+				}
+			}
+		}
+		
+	}
+	
+	function CheckDinoDistance() 
+	{
+		
 	}
 	
 	function CheckStatus() 
@@ -71,7 +114,8 @@ class Door extends FlxSprite
 		if (status == 0)
 		{
 			status = 1;
-			this.animation.play("open");
+			trace("unlock door");
+			this.animation.play("open1");
 		}
 	}
 	

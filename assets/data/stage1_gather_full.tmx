@@ -68,6 +68,7 @@
   <object id="187" name="door" type="door" x="220" y="352" width="48" height="48">
    <properties>
     <property name="close" value="has_stone"/>
+    <property name="name" value="test"/>
     <property name="open" value="doors_gather_open"/>
    </properties>
   </object>
