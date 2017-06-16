@@ -80,7 +80,7 @@ class FishTarget extends FlxSprite
 		var sval = 0.15 + 0.85 * (v < 0.5 ? v * 2 : (1 - v)*2);
 		if (sval < 0) sval = 0;
 		if (sval > 1.0) sval = 1.0;
-		trace( _jumpTimer + " " + _jumpTimerMax + " " + v + " " + sval);
+		//trace( _jumpTimer + " " + _jumpTimerMax + " " + v + " " + sval);
 		this.scale.set(sval, sval);
 		
 			

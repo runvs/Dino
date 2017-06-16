@@ -66,7 +66,7 @@ class FishState extends BasicState
 		_walls.scrollFactor.set();
 		_walls._cameras = [GP.CameraMain];
 		
-		var wallColor : FlxColor = FlxColor.WHITE;
+		var wallColor : FlxColor = FlxColor.fromRGB(47,55,64);
 		
 		var wl : FlxSprite = new FlxSprite(playbg.x, playbg.y);
 		wl.makeGraphic(wallWidth, Std.int(playbg.height), wallColor);
@@ -203,7 +203,7 @@ class FishState extends BasicState
 	
 	function addFishToChaughtList(t: FishTarget):Void 
 	{
-		var s : FlxSprite = new FlxSprite(4 + _caughtFishList.length * 18, 4);
+		var s : FlxSprite = new FlxSprite(4 + _caughtFishList.length * 18, FlxG.height/GP.CameraMain.zoom-24);
 		s.scrollFactor.set();
 		s.cameras = [GP.CameraMain];
 		s.loadGraphic(AssetPaths.item_fish__png, true, 16, 16);
