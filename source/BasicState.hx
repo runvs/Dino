@@ -19,6 +19,7 @@ class BasicState extends FlxState
 	var _vignette : Vignette;
 	var _flakes : Flakes;
 	var _stars : StarField;
+	var _droplets : Droplets;
 	
 	var _fade2BlackTween : FlxTween = null;
 	
@@ -57,6 +58,9 @@ class BasicState extends FlxState
 		
 		_stars = new StarField(GP.CameraUnderlay, 10);
 		_stars.scrollFactor.set(0.1, 0);
+		
+		_droplets = new Droplets();
+		
 		
 		trace ("Basicstate create vignette");
 		_vignette = new Vignette(GP.CameraOverlay);
@@ -138,6 +142,10 @@ class BasicState extends FlxState
 			t.update(elapsed);
 		}
 		
+		if (_level.drawDroplets)
+		{
+			_droplets.update(elapsed);
+		}
 		
 		for (d in _level.doors)
 		{
@@ -208,6 +216,10 @@ class BasicState extends FlxState
 			_flakes.draw();
 		}
 		
+		if (_level.drawDroplets)
+		{
+			_droplets.draw();
+		}
 		_level.foregroundTiles.draw();
 		_level.foregroundTiles2.draw();
 		for (t in _level.trees)

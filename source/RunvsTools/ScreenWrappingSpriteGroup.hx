@@ -16,7 +16,6 @@ class ScreenWrappingSpriteGroup extends FlxSpriteGroup
 {
 	
 	private var _cam : FlxCamera;
-
 	private var _padding : Float = 10;
 	
 	public function new( cam : FlxCamera, padding : Float = 10) 
@@ -51,16 +50,37 @@ class ScreenWrappingSpriteGroup extends FlxSpriteGroup
 		}
 	}
 	
+	public function wrapAndDo (s : FlxSprite, horizontal : Bool = false )
+	{
+		// nothing to do here
+	}
+	
 	function wrapSpriteCoordinates(s:FlxSprite)
 	{
 		var p : FlxPoint = new FlxPoint();
 		var pret : FlxPoint = s.getScreenPosition(p, _cam);
 		
-		if (pret.x < -s.width - _padding) s.x += _cam.width + s.width * s.scale.x + _padding;
-		if (pret.x > _cam.width + _padding) s.x -= _cam.width + s.width * s.scale.x + _padding;
+		if (pret.x < -s.width - _padding) 
+		{
+			s.x += _cam.width + s.width * s.scale.x + _padding;
+			wrapAndDo(s, true);
+		}
+		if (pret.x > _cam.width + _padding)
+		{
+			s.x -= _cam.width + s.width * s.scale.x + _padding;
+			wrapAndDo(s, true);
+		}
 		
-		if (pret.y < -s.height - _padding) s.y += _cam.height+ -_padding + s.height * s.scale.y ;
-		if (pret.y > _cam.height + _padding) s.y -= _cam.height + _padding + s.height * s.scale.y;
+		if (pret.y < -s.height - _padding)
+		{
+			s.y += _cam.height + -_padding + s.height * s.scale.y ;
+			wrapAndDo(s);
+		}
+		if (pret.y > _cam.height + _padding)
+		{
+			s.y -= _cam.height + _padding + s.height * s.scale.y;
+			wrapAndDo(s);
+		}
 	}
 	
 }

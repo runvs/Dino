@@ -62,6 +62,7 @@
    <property name="backgroundScale" value="5"/>
    <property name="backgroundSizeX" value="160"/>
    <property name="backgroundSizeY" value="128"/>
+   <property name="droplets" value="true"/>
    <property name="moon" value="false"/>
    <property name="stars" value="false"/>
   </properties>

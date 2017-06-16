@@ -71,7 +71,7 @@
 			"stage" 		: 2, "episode" : 1, 
 			"type" 			: "play",
 			"actor"			: "dino",
-			"level"			: "assets/data/stage1_gather_full.tmx",
+			"level"			: "assets/data/stage1_caveToPond.tmx",
 			"requirements" 	: [],
 			"storysettings" : ["fire_burning", "has_leaf", "has_stone", "has_branch"]
 		},

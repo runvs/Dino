@@ -66,7 +66,7 @@ class TiledLevel extends TiledMap
 	public var drawStars : Bool = false;
 	public var drawMoon : Bool = false;
 	public var drawFlocks : Bool = false;
-	
+	public var drawDroplets : Bool = false;
 	
 	public var wind : WindSystem;
 	
@@ -239,8 +239,13 @@ class TiledLevel extends TiledMap
 			{
 				drawStars = true;
 			}
-			if (layer.properties.get("moon") != null && layer.properties.get("moon") == "true")			{
+			if (layer.properties.get("moon") != null && layer.properties.get("moon") == "true")
+			{
 				drawMoon = true;
+			}
+			if (layer.properties.get("droplets") != null && layer.properties.get("droplets") == "true")
+			{
+				drawDroplets = true;
 			}
 			if (layer.properties.get("flocks") != null && layer.properties.get("flocks") == "true")
 			{
