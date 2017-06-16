@@ -41,28 +41,9 @@ private var _state : FishState;
 		
 		
 		// INPUT
+		this.acceleration.x = (MyInput.xVal - 0.5) * accelFactor ;
+		this.acceleration.y = MyInput.yVal * accelFactor;
 		
-		if (FlxG.keys.pressed.D)
-		{
-			this.acceleration.x = accelFactor;
-		}
-		else 
-		{
-			this.acceleration.x = -accelFactor;
-		}
-		
-		if (FlxG.keys.pressed.W)
-		{
-			this.acceleration.y = -accelFactor/2;
-		}
-		else if (FlxG.keys.pressed.S)
-		{
-			this.acceleration.y = accelFactor/2;
-		}
-		else 
-		{
-			this.acceleration.y = 0;
-		}
 		
 		
 		// COLLISION
