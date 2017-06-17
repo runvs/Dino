@@ -46,6 +46,7 @@ class Droplets extends ScreenWrappingSpriteGroup
 		{
 			s.velocity.set(0, fallingVelocityStart);
 			s.scale.set(1, 1);
+			s.x += FlxG.random.float(0, _cam.width);
 		}
 	}
 }
