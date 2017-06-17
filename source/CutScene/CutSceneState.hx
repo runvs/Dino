@@ -23,7 +23,7 @@ class CutSceneState extends BasicState
 	var _actors : Array<CutSceneActor>;
 	var _actions : Array<CutSceneAction>;
 	
-	var _speechbubbles : Array<SpeechBubble>;
+	var _speechbubbles : SpeechBubbleManager;
 	
 	var _name: String;
 	
@@ -50,7 +50,8 @@ class CutSceneState extends BasicState
 		trace("CutSceneState create post super(), number of cameras: " + FlxG.cameras.list.length);
 		_actions = new Array<CutSceneAction>();
 		_actors = new Array<CutSceneActor>();
-		_speechbubbles = new Array<SpeechBubble>();
+		//_speechbubbles = new Array<SpeechBubble>();
+		_speechbubbles = new SpeechBubbleManager();
 		_positions = new Array<CutScenePosition>();
 		
 		parseJsonData();
@@ -108,12 +109,7 @@ class CutSceneState extends BasicState
 		{
 			a.update(elapsed);
 		}
-		
-		for (s in _speechbubbles)
-		{
-			s.update(elapsed);
-		}
-		clearBubbles();
+		_speechbubbles.update(elapsed);
 	}
 	
 	public override function internalDrawTop() : Void
@@ -122,10 +118,7 @@ class CutSceneState extends BasicState
 	}
 	override public function internalDraw () :  Void 
 	{
-		for (s in _speechbubbles)
-		{
-			s.draw();
-		}
+		_speechbubbles.draw();
 		for (i in 0..._actors.length)
 		{
 			_actors[i].draw();
@@ -232,13 +225,6 @@ class CutSceneState extends BasicState
 		_actions.push(action);
 	}
 	
-	function clearBubbles() 
-	{
-		var newlist = new Array<SpeechBubble>();
-		for (s in _speechbubbles) { if (s.alive) newlist.push(s); }
-		_speechbubbles = newlist;
-	}
-
 	
 	public function getPosition (name :String) : CutScenePosition
 	{
@@ -271,7 +257,7 @@ class CutSceneState extends BasicState
 	
 	public function addSpeechBubble (s : SpeechBubble)
 	{
-		_speechbubbles.push(s);
+		_speechbubbles.addSpeechBubble(s);
 	}
 	
 }
