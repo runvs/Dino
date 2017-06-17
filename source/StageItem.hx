@@ -95,6 +95,10 @@ class StageItem extends FlxSpriteGroup
 			var fs : FishState = new FishState();
 			FlxG.switchState(fs);
 		}
+		else if (_type == "end")
+		{
+			FlxG.switchState(new EndState());
+		}
 		else
 		{
 			throw "ERROR: Unknown Type in StageItem: " + _type;

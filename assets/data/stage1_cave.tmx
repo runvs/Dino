@@ -56,7 +56,7 @@
   </properties>
  </objectgroup>
  <objectgroup name="objects">
-  <object id="99" name="campfire" type="campfire" x="144" y="176" width="16" height="16">
+  <object id="99" name="campfire" type="campfire" x="124" y="176" width="16" height="16">
    <properties>
     <property name="conditions" value="fire_burning"/>
    </properties>

@@ -23,15 +23,8 @@
 		{ "time" : "next",  "actor": "dino", "type": "animate", "p1": "fire", "p2" : "true"},
 		{ "time" : "next9.0",  "actor": "global", "type": "switch", "p1": "fire_burning", "p2" : "true"},		
 		
-		{ "time" : "next0.5",  "actor": "dino", "type": "animate", "p1": "walk", "p2" : "true"},
-		{ "time" : "same",  "actor": "dino", "type" : "move", "p1" : "entry", "p2" : "2.0"},
-		
-		{ "time" : "next",  "actor": "dino", "type": "animate", "p1": "fire", "p2" : "true"},
-		
-		{ "time" : "next9.0",  "actor": "global", "type": "switch", "p1": "fire_burning2", "p2" : "true"},
-		
 		{ "time" : "next",  "actor": "dino", "type": "animate", "p1": "idle", "p2" : "true"},
-		{ "time" :"same",   "actor": "dino", "type": "speak", "p1":"heart", "p2": "1.4"},
+		{ "time" : "next0.5",   "actor": "dino", "type": "speak", "p1":"heart", "p2": "1.4"},
 		
 		{ "time" : "next0.5",  "actor": "overlay", "type" : "fade", "p1":"1.0", "p2":"0.5"},
 		{ "time" : "next0.1",  "actor": "global", "type" : "end", "p1":"s2_e0_fishing_intro"}

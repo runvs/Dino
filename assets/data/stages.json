@@ -82,6 +82,14 @@
 			"level"			: "assets/data/fishing.tmx",
 			"requirements" 	: [],
 			"storysettings" : ["fire_burning", "has_leaf", "has_stone", "has_branch"]
+		},
+		{
+			"name"			: "s3_e0_end",
+			"stage"			: 3, "episode" : 0,
+			"type"			: "end",
+			"level"			: "",
+			"requirements" 	: [],
+			"storysettings" : ["fire_burning", "has_leaf", "has_stone", "has_branch"]
 		}
     ]
 }

@@ -42,19 +42,17 @@ class CampFire extends ConditionalObject
 	public override function update (elapsed : Float)
 	{
 		super.update(elapsed);
-		if (checkConditions())
+		
+		_glow.update(elapsed);
+		t += elapsed;
+		tparticles -= elapsed;
+		_glow.alpha = 0.075 + 0.1 * Math.abs(Math.cos(Math.sin(t * 2) + Math.sin(t * 0.7) + t * 2)) + 0.035 * Math.abs(Math.cos(1.5 * t)); 
+		
+		_particles.update(elapsed);
+		if (tparticles <= 0)
 		{
-			_glow.update(elapsed);
-			t += elapsed;
-			tparticles -= elapsed;
-			_glow.alpha = 0.075 + 0.1 * Math.abs(Math.cos(Math.sin(t * 2) + Math.sin(t * 0.7) + t * 2)) + 0.035 * Math.abs(Math.cos(1.5 * t)); 
-			
-			_particles.update(elapsed);
-			if (tparticles <= 0)
-			{
-				tparticles += FlxG.random.float(0.2, 0.9);
-				spawnFireCracles();
-			}
+			tparticles += FlxG.random.float(0.2, 0.9);
+			spawnFireCracles();
 		}
 	}
 	

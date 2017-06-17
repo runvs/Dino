@@ -24,11 +24,12 @@ class EndState extends FlxState
 	{
 		MyInput.update();
 		super.update(elapsed);
+		FlxG.switchState(new MenuState());
 		//FlxG.switchState(new PlayState(AssetPaths.level_E__tmx));
-		if ( MyInput.JumpButtonJustPressed)
-		{
-			FlxG.switchState(new CutSceneState(AssetPaths.scene_test__json));
-		}
+		//if ( MyInput.JumpButtonJustPressed)
+		//{
+			//FlxG.switchState(new CutSceneState(AssetPaths.scene_test__json));
+		//}
 	}
 	
 }

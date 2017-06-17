@@ -27,7 +27,7 @@ class FishState extends BasicState
 	
 	private var _caughtFishNumber : Int = 0;
 	
-	private var _nextStageName : String = "s2_e0_fishing_intro";
+	private var _nextStageName : String = "s3_e0_end";
 	
 	public function new() 
 	{

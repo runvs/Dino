@@ -13,10 +13,9 @@ class Droplets extends ScreenWrappingSpriteGroup
 {
 	private static var fallingVelocityStart : Float = 50;
 	
-	public function new(N : Int = 2) 
+	public function new(N : Int = 3) 
 	{
-		super(GP.CameraMain, 10);
-		
+		super(GP.CameraMain, 3);
 		for (i in 0 ... N)
 		{
 			var s : FlxSprite = new FlxSprite( FlxG.random.float(-_padding, _cam.width + _padding), FlxG.random.float(-_padding, _cam.height + _padding));
