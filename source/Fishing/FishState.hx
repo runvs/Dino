@@ -14,7 +14,7 @@ class FishState extends BasicState
 {
 	
 	public var playbg : FlxSprite;
-	public var wallWidth : Int = 5;
+	public var wallWidth : Int = 2;
 	private var _walls : FlxSpriteGroup;
 	private var _targets : FlxTypedGroup<FishTarget>;
 	private var _player : FishPlayer;
@@ -54,8 +54,8 @@ class FishState extends BasicState
 		//// Creating Playing Background //////
 		///////////////////////////////////////
 		
-		playbg = new FlxSprite(25, 15);
-		playbg.makeGraphic(150, 80, FlxColor.fromRGB(47,55,64));
+		playbg = new FlxSprite(45, 45);
+		playbg.makeGraphic(160, 80, FlxColor.fromRGB(47,55,64));
 		playbg.scrollFactor.set();
 		playbg.cameras = [GP.CameraMain];
 		
@@ -67,6 +67,7 @@ class FishState extends BasicState
 		_walls._cameras = [GP.CameraMain];
 		
 		var wallColor : FlxColor = FlxColor.fromRGB(47,55,64);
+		//var wallColor : FlxColor = FlxColor.WHITE;
 		
 		var wl : FlxSprite = new FlxSprite(playbg.x, playbg.y);
 		wl.makeGraphic(wallWidth, Std.int(playbg.height), wallColor);

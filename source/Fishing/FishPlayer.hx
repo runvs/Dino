@@ -36,6 +36,9 @@ private var _state : FishState;
 	
 	public override function update(elapsed: Float)
 	{
+		
+		super.update(elapsed);
+		
 		var accelFactor : Float = 120 / 1;
 		this.maxVelocity.set(200* 1, 200* 1);
 		
@@ -47,14 +50,14 @@ private var _state : FishState;
 		
 		
 		// COLLISION
-		if (this.x <= _state.playbg.x + _state.wallWidth )
+		if (this.x < _state.playbg.x + _state.wallWidth )
 		{
 			x = _state.playbg.x + _state.wallWidth;
 			this.velocity.x = - 0.5 * this.velocity.x;
 			
 			//FlxTween.color(_state.wl, 0.18, FlxColor.BLACK, FlxColor.WHITE, { type : FlxTween.PERSIST} );
 		}
-		if (this.y <= _state.playbg.y + _state.wallWidth ) 
+		if (this.y < _state.playbg.y + _state.wallWidth ) 
 		{
 			y = _state.playbg.y + _state.wallWidth;
 			this.velocity.y = - 0.5 * this.velocity.y;
@@ -74,7 +77,6 @@ private var _state : FishState;
 			//FlxTween.color(_state.wb, 0.18, FlxColor.BLACK, FlxColor.WHITE, { type : FlxTween.PERSIST} );
 		}
 		
-		super.update(elapsed);
 	}
 		
 }
