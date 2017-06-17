@@ -42,8 +42,29 @@ class SpeechBubbleManager extends FlxObject
 		_speechbubbles = newlist;
 	}
 	
+	public function getSpeechBubble(n : String) : SpeechBubble
+	{
+		for (s in _speechbubbles)
+		{
+			if (s.name == n) return s;
+		}
+		return null;
+	}
+	
+	
 	public function addSpeechBubble (s : SpeechBubble)
 	{
+		if (s == null) return;
+		// check if speechbubble is alread in the pool
+		
+		for (so in _speechbubbles)
+		{
+			if (s.name == so.name)
+			{
+				return;
+			}
+		}
+		
 		_speechbubbles.push(s);
 	}
 

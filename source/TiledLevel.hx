@@ -62,6 +62,7 @@ class TiledLevel extends TiledMap
 	public var trees : Array<Tree>;
 	public var treesTop : Array<Tree>;
 	public var doors : Array<Door>;
+	public var speechBubbleAreas : Array<SpeechBubbleArea>;
 	
 	public var drawStars : Bool = false;
 	public var drawMoon : Bool = false;
@@ -108,6 +109,7 @@ class TiledLevel extends TiledMap
 		
 		doors = new Array<Door>();
 		
+		speechBubbleAreas = new Array<SpeechBubbleArea>();
 		// Load Tile Maps
 		for (layer in layers)
 		{
@@ -380,6 +382,10 @@ class TiledLevel extends TiledMap
 		{
 			d.resetCamera();
 		}
+		for (sba in speechBubbleAreas)
+		{
+			sba.resetCamera();
+		}
 	}
 	
 	
@@ -444,6 +450,34 @@ class TiledLevel extends TiledMap
 			else if (objectLayer.name == "foliage")
 			{
 				LoadFoliage(objectLayer);
+			}
+			else if (objectLayer.name == "tutorial")
+			{
+				LoadTutorial(objectLayer);
+			}
+			else
+			{
+				trace ("WARNING: Unsupported object layer");
+			}
+		}
+	}
+	
+	function LoadTutorial(objectLayer:TiledObjectLayer) 
+	{
+		trace("load tutorial");
+		//DeterministicRandom.reset();
+		for (o in objectLayer.objects)
+		{
+			var x:Int = o.x;
+			var y:Int = o.y;
+			var w:Int = o.width;
+			var h : Int = o.height;
+			
+			switch(o.type.toLowerCase())
+			{
+				case "sba":	// short for speechbubblearea
+					var sba : SpeechBubbleArea = new SpeechBubbleArea(o.properties.get("icon"), x, y, w, h);
+					speechBubbleAreas.push(sba);
 			}
 		}
 	}

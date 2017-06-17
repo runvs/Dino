@@ -14,23 +14,36 @@ class SpeechBubble extends FlxSprite
 	
 	private var _parent : FlxSprite;
 
-	private var _timer : Float;
+	private var _timer : Float = 0;
 	
 	private var _icon : FlxSprite;
 	
 	private var _age  : Float = 0;
 	private var _isInFadeOut : Bool = false;
 	
-	public function new(p: FlxSprite, i : String, d : Float) 
+	public var name (default, null) : String;
+	
+	private var _endless : Bool = false;
+	
+	static private var DisappearTime : Float = -0.34;
+	var disappearing:Bool = false;
+	
+	public function new(p: FlxSprite, iconName : String, duration : Float) 
 	{
 		super();
 		_parent = p;
-		_timer = d;
-		this.loadGraphic(AssetPaths.speechbubble__png, true, 16, 16);
+		_timer = duration;
+		if (duration < 0)
+		{
+			_endless = true;
+			_timer = 9000;
+		}
 		
+		this.loadGraphic(AssetPaths.speechbubble__png, true, 16, 16);
 		this.color = FlxColor.fromRGB(175, 175, 175, 175);
 		this.cameras = [GP.CameraMain];
-		LoadIcon(i);
+		LoadIcon(iconName);
+		name = iconName;
 		
 		if (_timer > 0.42)
 		{
@@ -53,7 +66,11 @@ class SpeechBubble extends FlxSprite
 		this.setPosition(_parent.x + _parent.width/2, _parent.y- this.height/3*2);
 		_icon.update(elapsed);
 		_icon.setPosition(x, y);
-		_timer -= elapsed;
+		if (!_endless)
+		{
+			_timer -= elapsed;
+		}
+		
 		if (_timer <= 0)
 		{
 			if (!_isInFadeOut)
@@ -63,9 +80,9 @@ class SpeechBubble extends FlxSprite
 				FlxTween.tween(this.scale, { x:1.5, y:1.5 }, 0.2, {startDelay:0.1 } );
 				FlxTween.tween(this._icon, { alpha:0 }, 0.1);
 			}
-			
 		}
-		if (_timer <= -0.34)
+		
+		if (_timer <= DisappearTime)
 		{
 			this.alive = false;
 		}
@@ -161,5 +178,15 @@ class SpeechBubble extends FlxSprite
 	public function setIconAlpha (v : Float)
 	{
 		_icon.alpha = v;
+	}
+	
+	public function MakeBubbleDisappear()
+	{
+		if (!disappearing)
+		{
+			disappearing = true;
+			_endless = false;
+			_timer = 0;
+		}
 	}
 }

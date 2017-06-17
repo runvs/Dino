@@ -60,7 +60,7 @@ class PlayState extends BasicState
 		d.touchedGround = d.isTouching(FlxObject.DOWN);
 		
 		
-		
+		CheckSpeechBubbleAreas();
 		CheckExits();
 		for (e in _level.exits)
 		{
@@ -107,6 +107,32 @@ class PlayState extends BasicState
 	}
 	
 	
+	function CheckSpeechBubbleAreas() 
+	{
+		for (sba in _level.speechBubbleAreas)
+		{
+			if (FlxG.overlap(d, sba))
+			{
+				if (_speechbubbles.getSpeechBubble(sba._name) == null)
+				{
+					// no speechbubble present, so add it
+					var s : SpeechBubble = sba.getSpeechBubble(d);
+					_speechbubbles.addSpeechBubble(s);
+				}
+			}
+			else
+			{
+				var s : SpeechBubble = _speechbubbles.getSpeechBubble(sba._name);
+				if (s != null)
+				{
+					// there is one
+					s.MakeBubbleDisappear();
+				}
+			}
+		}
+	}
+	
+	
 	
 
 	
@@ -138,7 +164,6 @@ class PlayState extends BasicState
 		LoadLevel(_levelName);
 		jumpToEntryPoint(1);
 	}
-	
 	
 	function CheckExits() 
 	{

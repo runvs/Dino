@@ -23,6 +23,8 @@ class BasicState extends FlxState
 	
 	var _fade2BlackTween : FlxTween = null;
 	
+	var _speechbubbles : SpeechBubbleManager;
+	
 	
 	public var _moonSprite : FlxSprite;
 	
@@ -74,6 +76,8 @@ class BasicState extends FlxState
 		_fade2BlackTween = FlxTween.tween(_overlay, { alpha:0.0 }, 0.5);
 		
 		_overlay.alpha = 0;
+		
+		_speechbubbles = new SpeechBubbleManager();
 		
 		trace("Basicstate create end");
 	}
@@ -166,7 +170,7 @@ class BasicState extends FlxState
 		{
 			//trace("BasicState update");
 			MyInput.update();
-			
+			_speechbubbles.update(elapsed);
 			internalUpdate(elapsed);
 		}
 		//trace("basicstate update end");
@@ -244,7 +248,7 @@ class BasicState extends FlxState
 		{
 			d.draw();
 		}
-		
+		_speechbubbles.draw();
 		internalDraw();
 		
 		_level.topTiles.draw();
@@ -286,6 +290,11 @@ class BasicState extends FlxState
 	public function jumpToEntryPoint(id : Int)
 	{
 		ResetFade2Black();
+	}
+	
+	public function addSpeechBubble (s : SpeechBubble)
+	{
+		_speechbubbles.addSpeechBubble(s);
 	}
 	
 }
