@@ -109,6 +109,7 @@ class PlayState extends BasicState
 	
 	function CheckSpeechBubbleAreas() 
 	{
+		//trace(_speechbubbles.lengt());
 		for (sba in _level.speechBubbleAreas)
 		{
 			if (FlxG.overlap(d, sba))
@@ -120,21 +121,36 @@ class PlayState extends BasicState
 					_speechbubbles.addSpeechBubble(s);
 				}
 			}
-			else
+			//else
+			//{
+				//var s : SpeechBubble = _speechbubbles.getSpeechBubble(sba._name);
+				//if (s != null)
+				//{
+					//// there is one
+					//s.MakeBubbleDisappear();
+				//}
+			//}
+		}
+		
+		for (s in _speechbubbles._speechbubbles)
+		{
+			if (s.disappearing) continue;
+
+			var stayAlive : Bool = true;
+			
+			for (sba in _level.speechBubbleAreas)
 			{
-				var s : SpeechBubble = _speechbubbles.getSpeechBubble(sba._name);
-				if (s != null)
+				if (sba._name == s.name)
 				{
-					// there is one
-					s.MakeBubbleDisappear();
+					if (!FlxG.overlap(d, sba))
+					{
+						s.MakeBubbleDisappear();
+					}
 				}
 			}
 		}
 	}
 	
-	
-	
-
 	
 	override public function internalDraw ()
 	{

@@ -26,7 +26,7 @@ class SpeechBubble extends FlxSprite
 	private var _endless : Bool = false;
 	
 	static private var DisappearTime : Float = -0.34;
-	var disappearing:Bool = false;
+	public var disappearing (default, null) :Bool = false;
 	
 	public function new(p: FlxSprite, iconName : String, duration : Float) 
 	{
@@ -63,9 +63,9 @@ class SpeechBubble extends FlxSprite
 	{
 		super.update(elapsed);
 		_age += elapsed;
-		this.setPosition(_parent.x + _parent.width/2, _parent.y- this.height/3*2);
+		this.setPosition(_parent.x + _parent.width/2 + 4, _parent.y- this.height/3*2 - 2);
 		_icon.update(elapsed);
-		_icon.setPosition(x, y);
+		_icon.setPosition(x, y - 1);
 		if (!_endless)
 		{
 			_timer -= elapsed;
@@ -118,6 +118,12 @@ class SpeechBubble extends FlxSprite
 				_icon.animation.add("idle", [2,0,1], 8);
 				_icon.animation.play("idle");
 		}
+		else if (i == "up")
+		{
+				_icon.loadGraphic(AssetPaths.icon_up__png, true, 16, 16);
+				_icon.animation.add("idle", [2,0,1], 8);
+				_icon.animation.play("idle");
+		}
 		else if (i == "apple")
 		{
 				_icon.loadGraphic(AssetPaths.item_apple__png, false, 16, 16);
@@ -158,15 +164,22 @@ class SpeechBubble extends FlxSprite
 		}
 		else if (i == "excamation")
 		{
-				_icon.loadGraphic(AssetPaths.item_apple__png, false, 16, 16);
-				_icon.scale.set(0.5, 0.5);
+				_icon.loadGraphic(AssetPaths.item_apple__png, true, 16, 16);
+				_icon.animation.add("idle", [0, 1, 2, 3], 3);
+				_icon.animation.play("idle");
+				//_icon.scale.set(0.5, 0.5);
 		}
 		else if (i == "question")
 		{
 				_icon.loadGraphic(AssetPaths.icon_questionmark__png, true, 16, 16);
 				_icon.animation.add("idle", [0, 1], 3);
 				_icon.animation.play("idle");
-				
+		}
+		else if (i == "sleep")
+		{
+				_icon.loadGraphic(AssetPaths.icon_sleep__png, true, 16, 16);
+				_icon.animation.add("idle", [0, 1], 3);
+				_icon.animation.play("idle");
 		}
 		else
 		{

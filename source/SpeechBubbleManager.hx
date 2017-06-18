@@ -7,7 +7,7 @@ import flixel.FlxObject;
  */
 class SpeechBubbleManager extends FlxObject
 {
-	var _speechbubbles : Array<SpeechBubble>;
+	public var _speechbubbles : Array<SpeechBubble>;
 
 	public function new() 
 	{
@@ -66,6 +66,11 @@ class SpeechBubbleManager extends FlxObject
 		}
 		
 		_speechbubbles.push(s);
+	}
+	
+	public function lengt() 
+	{
+		return _speechbubbles.length;
 	}
 
 }

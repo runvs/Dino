@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="2017.05.26" orientation="orthogonal" renderorder="right-down" width="57" height="27" tilewidth="16" tileheight="16" nextobjectid="195">
+<map version="2017.05.26" orientation="orthogonal" renderorder="right-down" width="57" height="27" tilewidth="16" tileheight="16" nextobjectid="197">
  <tileset firstgid="1" name="tileset_new.png" tilewidth="16" tileheight="16" tilecount="432" columns="24">
   <image source="../images/tileset_new.png" width="384" height="288"/>
  </tileset>
@@ -303,14 +303,9 @@
   </object>
  </objectgroup>
  <objectgroup name="tutorial">
-  <object id="191" name="tutorial_enter" type="sba" x="300" y="376" width="24" height="24">
+  <object id="193" name="tutorial_enter" type="sba" x="232" y="372" width="32" height="28">
    <properties>
-    <property name="icon" value="left"/>
-   </properties>
-  </object>
-  <object id="193" name="tutorial_enter" type="sba" x="236" y="376" width="24" height="24">
-   <properties>
-    <property name="icon" value="left"/>
+    <property name="icon" value="up"/>
    </properties>
   </object>
   <object id="194" name="tutorial_jump" type="sba" x="440" y="376" width="24" height="24">
