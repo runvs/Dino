@@ -181,6 +181,30 @@ class SpeechBubble extends FlxSprite
 				_icon.animation.add("idle", [0, 1], 3);
 				_icon.animation.play("idle");
 		}
+		else if (i == "buttonLeft")
+		{
+				_icon.loadGraphic(AssetPaths.icon_buttonLeft__png, true, 16, 16);
+				_icon.animation.add("idle", [0, 1], 3);
+				_icon.animation.play("idle");
+		}
+		else if (i == "buttonUp")
+		{
+				_icon.loadGraphic(AssetPaths.icon_buttonUp__png, true, 16, 16);
+				_icon.animation.add("idle", [0, 1], 3);
+				_icon.animation.play("idle");
+		}
+		else if (i == "buttonJump")
+		{
+				_icon.loadGraphic(AssetPaths.icon_buttonJump__png, true, 16, 16);
+				_icon.animation.add("idle", [0, 1], 3);
+				_icon.animation.play("idle");
+		}
+		else if (i == "buttonPickUp")
+		{
+				_icon.loadGraphic(AssetPaths.icon_buttonPickUp__png, true, 16, 16);
+				_icon.animation.add("idle", [0, 1], 3);
+				_icon.animation.play("idle");
+		}
 		else
 		{
 			throw "Speechbubble of type: "  + i + " no known!";
