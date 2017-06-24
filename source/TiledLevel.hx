@@ -477,6 +477,7 @@ class TiledLevel extends TiledMap
 			{
 				case "sba":	// short for speechbubblearea
 					var sba : SpeechBubbleArea = new SpeechBubbleArea(o.properties.get("icon"), x, y, w, h);
+					sba.createConditions(o.properties.get("conditions"));
 					speechBubbleAreas.push(sba);
 			}
 		}
@@ -582,12 +583,13 @@ class TiledLevel extends TiledMap
 			switch(o.type.toLowerCase())
 			{
 				case "grass":	// grass can only appear in grass areas
-					//trace("grass");s
+					//trace("grass");
+
 					var ga : GrassArea = new GrassArea(x, y+h, w);
 					grass.push(ga);
 					wind.addGrassArea(ga);
 				case "tree":
-					trace("tree");
+					//trace("tree");
 					var t : Tree;
 					if (o.properties.get("id") != null)
 					{

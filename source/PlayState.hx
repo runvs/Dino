@@ -121,15 +121,7 @@ class PlayState extends BasicState
 					_speechbubbles.addSpeechBubble(s);
 				}
 			}
-			//else
-			//{
-				//var s : SpeechBubble = _speechbubbles.getSpeechBubble(sba._name);
-				//if (s != null)
-				//{
-					//// there is one
-					//s.MakeBubbleDisappear();
-				//}
-			//}
+
 		}
 		
 		for (s in _speechbubbles._speechbubbles)
@@ -142,7 +134,7 @@ class PlayState extends BasicState
 			{
 				if (sba._name == s.name)
 				{
-					if (!FlxG.overlap(d, sba))
+					if ( !FlxG.overlap(d, sba) || !sba.checkConditions())
 					{
 						s.MakeBubbleDisappear();
 					}

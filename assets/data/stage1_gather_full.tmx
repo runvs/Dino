@@ -305,6 +305,7 @@
  <objectgroup name="tutorial">
   <object id="193" name="tutorial_enter" type="sba" x="232" y="372" width="32" height="28">
    <properties>
+    <property name="conditions" value="!has_leaf"/>
     <property name="icon" value="buttonUp"/>
    </properties>
   </object>
@@ -313,23 +314,14 @@
     <property name="icon" value="left"/>
    </properties>
   </object>
-  <object id="197" name="tutorial_enter" type="sba" x="296" y="372" width="32" height="28">
-   <properties>
-    <property name="icon" value="buttonUp"/>
-   </properties>
-  </object>
-  <object id="198" name="tutorial_enterCave" type="sba" x="72" y="372" width="32" height="28">
-   <properties>
-    <property name="icon" value="buttonUp"/>
-   </properties>
-  </object>
   <object id="199" name="tutorial_enter" type="sba" x="416" y="372" width="48" height="28">
    <properties>
     <property name="icon" value="buttonJump"/>
    </properties>
   </object>
-  <object id="200" name="tutorial_enter" type="sba" x="188" y="376" width="24" height="24">
+  <object id="200" name="tutorial_pickup" type="sba" x="188" y="376" width="24" height="24">
    <properties>
+    <property name="conditions" value="!has_branch"/>
     <property name="icon" value="buttonPickUp"/>
    </properties>
   </object>
