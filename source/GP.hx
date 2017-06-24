@@ -32,7 +32,10 @@ class GP
 	public static var WorldTileSizeInPixel (default, null) : Int = 16;
 	
 	public static var WorldWindUpdateTime (default, null) : Float = 0.125;
-	static public var WorldWindSpeedInPixelsPerSecond (default, null) : Float = 60;
+	public static var WorldWindSpeedInPixelsPerSecond (default, null) : Float = 60;
+	
+	public static var WorldFlakesVisibleTime (default, null) : Float = 6;
+	public static var WorldFlakesInvisibleTime (default, null) : Float = 4;
 	
 	public static var MenuItemsOffsetX (default, null) : Float = 16;
 	public static var MenuItemsOffsetY (default, null) : Float = 16;
@@ -47,11 +50,11 @@ class GP
 	public static var EnemyWalkLRSpeed (default, null) : Float = 15;
 	
 	public static var WorldMapPool (default, null) : MapPool;
-	static public var EnemyBoarRange (default, null) : Float = 80;
-	static public var EnemyBoarChargeCoolDown (default, null) : Float = 5;
-	static public var EnemyBoarChargeAcceleration (default, null) : Float = 20;
+	public static var EnemyBoarRange (default, null) : Float = 80;
+	public static var EnemyBoarChargeCoolDown (default, null) : Float = 5;
+	public static var EnemyBoarChargeAcceleration (default, null) : Float = 20;
 	
-	static public var FishingTimerMax (default, null) : Float = 3.0;
+	public static var FishingTimerMax (default, null) : Float = 3.0;
 	
 	public static function WorldLoadMaps() : Void 
 	{
