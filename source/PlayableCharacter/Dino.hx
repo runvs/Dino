@@ -16,6 +16,8 @@ class Dino extends PlayableCharacter
 {	
 	
 	private var _leftGroundTimer : Float = 0;
+	private var _jumpbuttonPreholdTimer : Float = -1;
+	
 	public function new() 
 	{
 		super();
@@ -53,13 +55,20 @@ class Dino extends PlayableCharacter
 		{
 			_leftGroundTimer = 0;
 		}
+		
+		_jumpbuttonPreholdTimer -= elapsed;
 	}
 	
 	private override function handleInput() 
 	{
 		super.handleInput();
+		
+		if (MyInput.JumpButtonJustPressed)
+		{
+			_jumpbuttonPreholdTimer = GP.DinoMovementJumpPreHoldTimer;
+		}
 	
-		if (MyInput.JumpButtonJustPressed && _leftGroundTimer < GP.DinoMoveMentJumpLeftGroundTolerance )
+		if ( _jumpbuttonPreholdTimer >= 0 && _leftGroundTimer < GP.DinoMoveMentJumpLeftGroundTolerance )
 		{
 			_sprite.animation.play("jumpUp", true);
 			this.velocity.set(velocity.x, GP.DinoMovementJumpStrength);
