@@ -20,7 +20,7 @@ class Flakes extends ScreenWrappingSpriteGroup
 	
 	private var visibleTime : Float = GP.WorldFlakesVisibleTime;
 	private var invisibleTime : Float = GP.WorldFlakesInvisibleTime;
-	
+	private var zoom : Float = GP.CameraMain.zoom;
 	
 	private var _globalVelocityX : Float= 0;
 	private var _globalVelocityY : Float = 0;
@@ -38,7 +38,7 @@ class Flakes extends ScreenWrappingSpriteGroup
 		{
 			var s : FlxSprite = new FlxSprite( FlxG.random.float(-_padding, _cam.width + _padding), FlxG.random.float(-_padding, _cam.height + _padding));
 			s.cameras = [_cam];
-			s.makeGraphic(Std.int(GP.CameraMain.zoom), Std.int(GP.CameraMain.zoom), FlxColor.fromRGB(175, 175, 175, 150));
+			s.makeGraphic(Std.int(zoom), Std.int(zoom), FlxColor.fromRGB(175, 175, 175, 150));
 			s.scrollFactor.set(1.1, 1.1);
 			add(s);
 			_individualTimer.push(FlxG.random.float( - invisibleTime, visibleTime));
