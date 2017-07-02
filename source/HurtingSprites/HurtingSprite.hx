@@ -32,5 +32,4 @@ class HurtingSprite extends FlxSprite
 		this.animation.play("idle");
 		this.cameras = [GP.CameraMain];
 	}
-	
 }

@@ -86,11 +86,25 @@
 			"requirements" 	: [],
 			"storysettings" : ["fire_burning", "has_leaf", "has_stone", "has_branch"]
 		},
+		
+		
+		
+		
+		
 		{
 			"name"			: "s3_e0_end",
 			"stage"			: 3, "episode" : 0,
 			"type"			: "end",
 			"level"			: "",
+			"requirements" 	: [],
+			"storysettings" : ["fire_burning", "has_leaf", "has_stone", "has_branch"]
+		},
+		{
+			"name" 			: "s3_e1_gotoFishing", 
+			"stage" 		: 3, "episode" : 1, 
+			"type" 			: "play",
+			"actor"			: "dino",
+			"level"			: "assets/data/stage3_tiletest.tmx",
 			"requirements" 	: [],
 			"storysettings" : ["fire_burning", "has_leaf", "has_stone", "has_branch"]
 		}

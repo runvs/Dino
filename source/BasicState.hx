@@ -165,6 +165,10 @@ class BasicState extends FlxState
 		{
 			h.update(elapsed);
 		}
+		for (s in _level.movingTiles)
+		{
+			s.update(elapsed);
+		}
 		
 		if (!inTransition)
 		{
@@ -235,7 +239,10 @@ class BasicState extends FlxState
 		{
 			h.draw();
 		}
-
+		for (s in _level.movingTiles)
+		{
+			s.draw();
+		}
 		
 		super.draw();
 		for (g in _level.grass)

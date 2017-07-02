@@ -52,7 +52,7 @@ class TiledLevel extends TiledMap
 	// Those colloders will be stored in this collisionMap
 	public var collisionMap : FlxSpriteGroup;
 	public var hurtingTiles : Array<HurtingSprite>;
-	
+	public var movingTiles : Array<MovingTile>;
 	
 	public var exits : Array<LevelLeaver>;
 	public var entries : Array<Entry>;
@@ -100,6 +100,7 @@ class TiledLevel extends TiledMap
 		entries = new Array<Entry>();
 		collectibles = new Array<Collectible>();
 		hurtingTiles = new Array<HurtingSprite>();
+		movingTiles = new Array<MovingTile>();
 		enemies = new Array<BasicEnemy>();
 		
 		grass = new Array<GrassArea>();
@@ -157,7 +158,6 @@ class TiledLevel extends TiledMap
 					s.cameras = [GP.CameraMain];
 					if (tileLayer.name == "tiles")
 					{
-						
 						if (CreateSpecialTile(i, j, tileType))
 						{
 							continue;
@@ -304,6 +304,11 @@ class TiledLevel extends TiledMap
 			var h : HurtingSprite = new HurtingSpriteLeft(x * GP.WorldTileSizeInPixel, y * GP.WorldTileSizeInPixel, true);
 			hurtingTiles.push(h);
 		}
+		else if (tileType == TileIDHurtingLeft2 + 2)
+		{
+			var s : MovingTileBreak = new MovingTileBreak(x * GP.WorldTileSizeInPixel, y * GP.WorldTileSizeInPixel);
+			movingTiles.push(s);
+		}
 		else
 		{
 			// nothing to do here
@@ -354,6 +359,10 @@ class TiledLevel extends TiledMap
 		for (h in hurtingTiles)
 		{
 			h.cameras = [GP.CameraMain];
+		}
+		for (s in movingTiles)
+		{
+			s.resetCamera();
 		}
 		for (e in exits)
 		{

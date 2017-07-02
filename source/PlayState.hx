@@ -89,6 +89,16 @@ class PlayState extends BasicState
 			e.update(elapsed);
 		}
 		
+		for (s in _level.movingTiles)
+		{
+			s.setDino(d);
+			FlxG.collide(d, s, function(d, s : MovingTile) { s.touchMe(); } );
+			if (d.touchedGround == false)		
+			{
+				d.touchedGround = d.isTouching(FlxObject.DOWN);
+			}
+		}
+		
 		for (h in _level.hurtingTiles)
 		{
 			if (!h.alive) continue;

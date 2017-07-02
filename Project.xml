@@ -33,6 +33,7 @@
 	<classpath name="source/RunvsTools" />
 	<classpath name="source/PlayableCharacter" />
 	<classpath name="source/HurtingSprites" />
+	<classpath name="source/MovingTiles" />
 	<classpath name="source/Enemies" />
 	<classpath name="source/Fishing" />
 	<assets path="assets" />
