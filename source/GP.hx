@@ -55,6 +55,7 @@ class GP
 	public static var EnemyBoarChargeAcceleration (default, null) : Float = 20;
 	
 	public static var FishingTimerMax (default, null) : Float = 3.0;
+	static public var DinoMoveMentJumpLeftGroundTolerance (default, null) : Float = 0.22;
 	
 	public static function WorldLoadMaps() : Void 
 	{

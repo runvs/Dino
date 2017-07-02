@@ -14,6 +14,8 @@ import flixel.util.FlxTimer;
  */
 class Dino extends PlayableCharacter
 {	
+	
+	private var _leftGroundTimer : Float = 0;
 	public function new() 
 	{
 		super();
@@ -40,26 +42,35 @@ class Dino extends PlayableCharacter
 		this.alpha = 0.0;
 	}
 	
+	override public function update(elapsed:Float):Void 
+	{
+		super.update(elapsed);
+		if (touchedGround == false)
+		{
+			_leftGroundTimer += elapsed;
+		}
+		else
+		{
+			_leftGroundTimer = 0;
+		}
+	}
 	
 	private override function handleInput() 
 	{
 		super.handleInput();
-		if (_jumpTimer <= 0)
+	
+		if (MyInput.JumpButtonJustPressed && _leftGroundTimer < GP.DinoMoveMentJumpLeftGroundTolerance )
 		{
-			if (MyInput.JumpButtonJustPressed && _isOnGround)
-			{
-				_jumpTimer = 0.25;
-				_sprite.animation.play("jumpUp", true);
-				this.velocity.set(velocity.x, GP.DinoMovementJumpStrength);
-				SpawnStepsDirt();
-			}
+			_sprite.animation.play("jumpUp", true);
+			this.velocity.set(velocity.x, GP.DinoMovementJumpStrength);
+			SpawnStepsDirt();
 		}
 	}
 	
 	private override function handleAnimations()
 	{
 		super.handleAnimations();
-		if(Math.abs(velocity.y) > 0.05)
+		if(Math.abs(velocity.y) > 0.05)	
 		{
 			if (velocity.y > 0 )
 			_sprite.animation.play("jumpDown", false);

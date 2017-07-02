@@ -13,13 +13,9 @@ import flixel.util.FlxTimer;
  */
 class PlayableCharacter extends FlxSprite
 {
-	// deadtimer for jumping
-	var _jumpTimer : Float;
 	
 	// variables for checking if dino is on ground
 	public var touchedGround : Bool = false;
-	var _isOnGround : Bool;
-	var _isOnGroundTimer  : Float = 0;
 	
 	// stepsdirt & stepsdirt timer
 	var _stepsDirt : MyParticleSystem;
@@ -42,7 +38,6 @@ class PlayableCharacter extends FlxSprite
 		loadSprite();
 		this.cameras = [GP.CameraMain];
 		_sprite.cameras = [GP.CameraMain];
-		_jumpTimer = 0;
 		
 		
 		// steps dirt stuff
@@ -59,10 +54,6 @@ class PlayableCharacter extends FlxSprite
 	
 	public override function update(elapsed : Float) : Void 
 	{
-		_isOnGround = (velocity.y == 0);
-		if ( _isOnGround) _isOnGroundTimer += elapsed;
-		else _isOnGroundTimer = 0;
-		_jumpTimer -= elapsed;
 		handleInput();
 		handleAnimations();
 		super.update(elapsed);
