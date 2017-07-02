@@ -17,6 +17,7 @@ class Dino extends PlayableCharacter
 	
 	private var _leftGroundTimer : Float = 0;
 	private var _jumpbuttonPreholdTimer : Float = -1;
+	private var _stepsdirtDeadTime : Float = 0;
 	
 	public function new() 
 	{
@@ -55,7 +56,7 @@ class Dino extends PlayableCharacter
 		{
 			_leftGroundTimer = 0;
 		}
-		
+		_stepsdirtDeadTime -= elapsed;
 		_jumpbuttonPreholdTimer -= elapsed;
 	}
 	
@@ -72,7 +73,11 @@ class Dino extends PlayableCharacter
 		{
 			_sprite.animation.play("jumpUp", true);
 			this.velocity.set(velocity.x, GP.DinoMovementJumpStrength);
-			SpawnStepsDirt();
+			if (_stepsdirtDeadTime >= 0)
+			{
+				_stepsdirtDeadTime = 0.1;
+				SpawnStepsDirt();
+			}
 		}
 	}
 	

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="2017.05.26" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="16" tileheight="16" nextobjectid="179">
- <tileset firstgid="1" name="tileset_new.png" tilewidth="16" tileheight="16" tilecount="432" columns="24">
-  <image source="../images/tileset_new.png" width="384" height="288"/>
+ <tileset firstgid="1" name="tileset_new.png" tilewidth="16" tileheight="16" tilecount="744" columns="24">
+  <image source="../images/tileset_new.png" width="384" height="500"/>
  </tileset>
  <layer name="tiles" width="50" height="30">
   <properties>
@@ -264,6 +264,7 @@
    <property name="backgroundSizeX" value="800"/>
    <property name="backgroundSizeY" value="600"/>
    <property name="clouds" value="normal"/>
+   <property name="flocks" value="true"/>
    <property name="moon" value="false"/>
    <property name="parallax" value="mountain"/>
    <property name="stars" value="false"/>
