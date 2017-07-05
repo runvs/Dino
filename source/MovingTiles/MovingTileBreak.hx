@@ -17,7 +17,7 @@ class MovingTileBreak extends MovingTile
 	{
 		super(X, Y);
 		this.makeGraphic(GP.WorldTileSizeInPixel, Std.int(GP.WorldTileSizeInPixel/2), FlxColor.fromRGB(255, 0, 0, 100));
-		_sprite.makeGraphic(GP.WorldTileSizeInPixel, Std.int(GP.WorldTileSizeInPixel / 2), FlxColor.fromRGB(255, 255, 255, 255));
+		_sprite.makeGraphic(GP.WorldTileSizeInPixel*GP.CameraMain.zoom, Std.int(GP.WorldTileSizeInPixel /2 * GP.CameraMain.zoom), FlxColor.fromRGB(255, 255, 255, 255));
 	}
 
 	override public function update(elapsed:Float):Void 
@@ -31,7 +31,6 @@ class MovingTileBreak extends MovingTile
 			if (_wiggleTimer <= 0)
 			{
 				_wiggleTimer = 0.1;
-				
 				_sprite.offset.set(FlxG.random.floatNormal(0, 1), FlxG.random.floatNormal(0, 1));
 			}
 		}
@@ -51,13 +50,17 @@ class MovingTileBreak extends MovingTile
 		else
 		{
 			breakTimer -= elapsed;
-			if (breakTimer +elapsed > 0 && breakTimer < 0)	// we have crossed the zero
+			if (breakTimer + elapsed > 0 && breakTimer < 0)	// we have crossed the zero
 			{
 				_following = false;
 				_sprite.acceleration.set(0, GP.WorldGravity);
 				_sprite.velocity.set(0, 20);
 				this.setPosition( -5000000, -5000000);
 				this.alive = false;
+			}
+			if (breakTimer <= -10)
+			{
+				resetMe();
 			}
 		}
 	}
@@ -73,5 +76,19 @@ class MovingTileBreak extends MovingTile
 		_wiggle = false;
 		_sprite.offset.set();
 		_sprite.color = FlxColor.WHITE;
+	}
+	
+	override public function resetCamera() 
+	{
+		//super.resetCamera();
+		_sprite.cameras = [GP.CameraOverlay];
+	}
+	override function SpriteFollows():Void 
+	{
+		if (_following)
+		{
+			_sprite.setPosition(x * GP.CameraMain.zoom, y * GP.CameraMain.zoom);
+			//_sprite.setPosition(x,y);
+		}
 	}
 }

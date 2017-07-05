@@ -22,7 +22,7 @@ class MovingTile extends FlxSprite
 		_sprite = new FlxSprite();
 		this.immovable = true;
 		_sprite.immovable = true;
-		_sprite.cameras = [GP.CameraMain];
+		resetCamera();
 	}
 	
 	override public function loadGraphic(Graphic:FlxGraphicAsset, Animated:Bool = false, Width:Int = 0, Height:Int = 0, Unique:Bool = false, ?Key:String):FlxSprite 
@@ -33,16 +33,14 @@ class MovingTile extends FlxSprite
 	override public function update(elapsed:Float):Void 
 	{
 		super.update(elapsed);
-		if (_following)
-		{
-			_sprite.setPosition(x,y);
-		}
+		SpriteFollows();
 	}
 	
 	override public function draw():Void 
 	{
-		//super.draw();
+		
 		_sprite.draw();
+		super.draw();
 	}
 	
 	public function setDino (di:PlayableCharacter)
@@ -64,5 +62,13 @@ class MovingTile extends FlxSprite
 	public function resetCamera()
 	{
 		_sprite.cameras = [GP.CameraMain];
+	}
+	
+	function SpriteFollows():Void 
+	{
+		if (_following)
+		{
+			_sprite.setPosition(x,y);
+		}
 	}
 }

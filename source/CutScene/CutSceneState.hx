@@ -23,9 +23,10 @@ class CutSceneState extends BasicState
 	var _actors : Array<CutSceneActor>;
 	var _actions : Array<CutSceneAction>;
 	
-	
-	
 	var _name: String;
+	
+	var _lastActionTime : Float = -1;
+	var _endActionTime : Float = -1;
 	
 	// this overlay is for fading in cutscenes
 	public var _overlay2 : FlxSprite;
@@ -108,6 +109,18 @@ class CutSceneState extends BasicState
 		for (a in _actors)
 		{
 			a.update(elapsed);
+		}
+		
+		// check for input if cutscene will be skipped
+		if (MyInput.JumpButtonJustPressed)
+		{
+			if (_endActionTime != -1)			// there is an end action present at all.
+			{
+				if (_timer < _endActionTime)	// cutscene may not be skipped twice
+				{
+					_timer = _endActionTime;
+				}
+			}
 		}
 		
 	}
@@ -219,6 +232,15 @@ class CutSceneState extends BasicState
 		}
 		if (action.timer < 0) 
 			throw "Action Error: Time must not be negative!";
+		
+		
+			
+		if (a.type == "end")
+		{
+			_endActionTime = _lastActionTime;
+		}
+		
+		_lastActionTime = action.timer;
 		
 		
 		//trace("\t\taction: " + action.timer);	
