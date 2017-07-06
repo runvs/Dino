@@ -1,5 +1,6 @@
 package;
 import flixel.FlxG;
+import flixel.math.FlxPoint;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 
@@ -13,11 +14,13 @@ class MovingTileBreak extends MovingTile
 	private var breakTimer : Float = 0.5;
 	private var _wiggle : Bool = false;
 	private var _wiggleTimer : Float = 0;
+	private var _originalPosition : FlxPoint;
 	public function new(?X:Float=0, ?Y:Float=0) 
 	{
 		super(X, Y);
 		this.makeGraphic(GP.WorldTileSizeInPixel, Std.int(GP.WorldTileSizeInPixel/2), FlxColor.fromRGB(255, 0, 0, 100));
-		_sprite.makeGraphic(GP.WorldTileSizeInPixel*GP.CameraMain.zoom, Std.int(GP.WorldTileSizeInPixel /2 * GP.CameraMain.zoom), FlxColor.fromRGB(255, 255, 255, 255));
+		_sprite.makeGraphic(Std.int(GP.WorldTileSizeInPixel * GP.CameraMain.zoom), Std.int(GP.WorldTileSizeInPixel / 2 * GP.CameraMain.zoom), FlxColor.fromRGB(255, 255, 255, 255));
+		_originalPosition = new FlxPoint(X, Y);
 	}
 
 	override public function update(elapsed:Float):Void 
@@ -31,7 +34,7 @@ class MovingTileBreak extends MovingTile
 			if (_wiggleTimer <= 0)
 			{
 				_wiggleTimer = 0.1;
-				_sprite.offset.set(FlxG.random.floatNormal(0, 1), FlxG.random.floatNormal(0, 1));
+				_sprite.offset.set(FlxG.random.floatNormal(0, 4), FlxG.random.floatNormal(0, 4));
 			}
 		}
 		
@@ -58,7 +61,7 @@ class MovingTileBreak extends MovingTile
 				this.setPosition( -5000000, -5000000);
 				this.alive = false;
 			}
-			if (breakTimer <= -10)
+			if (breakTimer <= -GP.WorldBreakableRespawnTime)
 			{
 				resetMe();
 			}
@@ -71,11 +74,13 @@ class MovingTileBreak extends MovingTile
 		_following = true;
 		breakTimer = 0.5;
 		breaking = false;
+		_touched = false;
 		_sprite.velocity.set(0, 0);
 		_sprite.acceleration.set(0, 0);
 		_wiggle = false;
 		_sprite.offset.set();
 		_sprite.color = FlxColor.WHITE;
+		setPosition(_originalPosition.x, _originalPosition.y);
 	}
 	
 	override public function resetCamera() 
@@ -83,12 +88,9 @@ class MovingTileBreak extends MovingTile
 		//super.resetCamera();
 		_sprite.cameras = [GP.CameraOverlay];
 	}
+	
 	override function SpriteFollows():Void 
 	{
-		if (_following)
-		{
-			_sprite.setPosition(x * GP.CameraMain.zoom, y * GP.CameraMain.zoom);
-			//_sprite.setPosition(x,y);
-		}
+		_sprite.setPosition((x + GP.WorldTileSizeInPixel/2) * GP.CameraMain.zoom + 8  , (y+ GP.WorldTileSizeInPixel/2) * GP.CameraMain.zoom - 4);
 	}
 }

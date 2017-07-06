@@ -114,15 +114,27 @@ class CutSceneState extends BasicState
 		// check for input if cutscene will be skipped
 		if (MyInput.JumpButtonJustPressed)
 		{
+			trace("jumppress");
+			trace(_endActionTime);
 			if (_endActionTime != -1)			// there is an end action present at all.
 			{
 				if (_timer < _endActionTime)	// cutscene may not be skipped twice
 				{
+					var delta : Float = _endActionTime - _timer;
+					for (idx in 0..._actions.length)
+					{
+						if (idx != _actions.length - 2 && idx != _actions.length - 1)
+						{
+							_actions[idx].skip();
+						}
+						_actions[idx].update(delta);
+					}
 					_timer = _endActionTime;
 				}
 			}
 		}
 		
+		trace(_timer);
 	}
 	
 	public override function internalDrawTop() : Void

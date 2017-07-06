@@ -57,6 +57,7 @@ class GP
 	public static var FishingTimerMax (default, null) : Float = 3.0;
 	static public var DinoMoveMentJumpLeftGroundTolerance (default, null) : Float = 0.22;
 	static public var DinoMovementJumpPreHoldTimer (default, null) : Float = 0.1;
+	static public var WorldBreakableRespawnTime (default, null) : Float = -7;
 	
 	public static function WorldLoadMaps() : Void 
 	{

@@ -26,6 +26,10 @@ class CutSceneAction
 	{
 		performed = true;
 	}
+	public function skip ()
+	{
+		performed = true;
+	}
 	
 	public function update(elapsed : Float )
 	{

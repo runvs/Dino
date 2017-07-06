@@ -33,7 +33,11 @@ class MovingTile extends FlxSprite
 	override public function update(elapsed:Float):Void 
 	{
 		super.update(elapsed);
-		SpriteFollows();
+	
+		if (_following)
+		{
+			SpriteFollows();
+		}
 	}
 	
 	override public function draw():Void 
@@ -66,9 +70,6 @@ class MovingTile extends FlxSprite
 	
 	function SpriteFollows():Void 
 	{
-		if (_following)
-		{
-			_sprite.setPosition(x,y);
-		}
+		_sprite.setPosition(x,y);
 	}
 }
