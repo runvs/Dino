@@ -180,13 +180,13 @@ class TiledLevel extends TiledMap
 			}
 		}
 		loadObjects();
-		loadBackground();		
+		loadGlobalProperties();		
 		
 		clouds = new CloudLayer(cloudName);
 		parallax = new ParallaxLayer(parallaxName);
 	}
 	
-	function loadBackground() 
+	function loadGlobalProperties() 
 	{
 		for (layer in layers)
 		{
@@ -204,10 +204,7 @@ class TiledLevel extends TiledMap
 			var bgsx : Int = Std.parseInt(layer.properties.get("backgroundSizeX"));
 			var bgsy : Int = Std.parseInt(layer.properties.get("backgroundSizeY"));
 			//trace("create sprite");
-		
-			
-			
-			
+
 			var bgscale : Float = 1;
 			var bgOffsetX : Float = 0;
 			var bgOffsetY : Float = 0;
@@ -464,11 +461,63 @@ class TiledLevel extends TiledMap
 			{
 				LoadTutorial(objectLayer);
 			}
+			else if (objectLayer.name == "platforms")
+			{
+				LoadPlatforms(objectLayer);
+			}
+			else if (objectLayer.name == "global") continue;
 			else
 			{
-				trace ("WARNING: Unsupported object layer");
+				trace ("WARNING: Unsupported object layer: " + objectLayer.name);
 			}
 		}
+	}
+	
+	
+	function LoadPlatforms(objectLayer:TiledObjectLayer) 
+	{
+		trace("load platform Positions");
+		//DeterministicRandom.reset();
+		var positions : Array<MovingTilePlatformPosition> = new Array<MovingTilePlatformPosition>();
+		for (o in objectLayer.objects)
+		{
+			var x:Int = o.x;
+			var y:Int = o.y;
+			var name :String = o.name;
+			
+			if(o.type.toLowerCase() == "ppos")
+			{
+				var ppos : MovingTilePlatformPosition = new MovingTilePlatformPosition(x, y);
+				ppos.name = name;
+				if (o.properties.get("wait") != null)
+				{
+					ppos.wait = Std.parseFloat(o.properties.get("wait"));
+				}
+				positions.push(ppos);
+			}
+		}
+		trace(positions.length  + " platforms loaded");
+		trace("load platforms");
+		for (o in objectLayer.objects)
+		{
+			var x:Int = o.x;
+			var y:Int = o.y;
+			var w:Int = o.width;
+			var name :String = o.name;
+			
+			if(o.type.toLowerCase() == "moving")
+			{
+				trace("create Platform");
+				var p : MovingTileMove = new MovingTileMove(x, y,w);
+		
+				var idstring : String = o.properties.get("ids");
+				p.AddPlatformPositions(idstring, positions);
+		
+				movingTiles.push(p);
+			}
+		}
+		
+		
 	}
 	
 	function LoadTutorial(objectLayer:TiledObjectLayer) 
