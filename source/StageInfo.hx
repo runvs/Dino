@@ -26,7 +26,7 @@ class StageInfo
 			data.stages[i].name, 
 			Std.int(data.stages[i].stage), Std.int(data.stages[i].episode), 
 			data.stages[i].type, data.stages[i].actor,
-			data.stages[i].level);
+			data.stages[i].level, data.stages[i].icon);
 			trace(s.name);
 			
 			s.setRequirements(data.stages[i].requirements);
@@ -78,6 +78,7 @@ typedef StageData =
 	var name : String;
 	var stage: Float;
 	var episode : Float;
+	var icon : String;	
 	var type : String;	// cut, play, gather, ...
 	var actor : String;	// dino, dinobag, baby
 	var level : String;	// json file for cutscenes, level name for play or gather

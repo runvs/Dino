@@ -4,6 +4,7 @@
 		{
 			"name" 			: "s0_e0_intro", 
 			"stage" 		: 0, "episode" : 0, 
+			"icon"			: "default",
 			"type" 			: "cut", 
 			"level"			: "assets/data/stage0_intro.json",
 			"requirements" 	: [],
@@ -12,6 +13,7 @@
 		{
 			"name" 			: "s0_e1_play", 
 			"stage" 		: 0, "episode" : 1, 
+			"icon"			: "",
 			"type" 			: "play",
 			"actor"			: "dinobag",
 			"level"			: "assets/data/stage0.tmx",
@@ -21,6 +23,7 @@
 		{
 			"name" 			: "s0_e2_outro", 
 			"stage" 		: 0, "episode" : 2, 
+			"icon"			: "",
 			"type" 			: "cut", 
 			"level"			: "assets/data/stage0_found_cave.json",
 			"requirements" 	: [],
@@ -33,6 +36,7 @@
 		{
 			"name" 			: "s1_e0_intro", 
 			"stage" 		: 1, "episode" : 0,
+			"icon"			: "default",
 			"type" 			: "cut", 
 			"level"			: "assets/data/stage1_intro.json",
 			"requirements" 	: ["stage0complete"],
@@ -41,6 +45,7 @@
 		{
 			"name" 			: "s1_e1_play", 
 			"stage" 		: 1, "episode" : 1, 
+			"icon"			: "",
 			"type" 			: "gather", 
 			"actor"			: "dino",
 			"level"			: "assets/data/stage1_gather_full.tmx",
@@ -51,6 +56,7 @@
 		{
 			"name" 			: "s1_e2_build", 
 			"stage" 		: 1, "episode" : 2,
+			"icon"			: "",
 			"type" 			: "cut", 
 			"level"			: "assets/data/stage1_build.json",
 			"requirements" 	: ["stage0complete"],
@@ -64,6 +70,7 @@
 		{
 			"name"			: "s2_e0_fishing_intro",
 			"stage"			: 2, "episode" : 0,
+			"icon"			: "default",
 			"type"			: "cut",
 			"level"			: "assets/data/stage2_fishing_intro.json",
 			"requirements" 	: [],
@@ -72,6 +79,7 @@
 		{
 			"name" 			: "s2_e1_gotoFishing", 
 			"stage" 		: 2, "episode" : 1, 
+			"icon"			: "",
 			"type" 			: "play",
 			"actor"			: "dino",
 			"level"			: "assets/data/stage1_caveToPond.tmx",
@@ -81,6 +89,7 @@
 		{
 			"name"			: "s2_e2_fishing",
 			"stage"			: 2, "episode" : 2,
+			"icon"			: "",
 			"type"			: "fishing",
 			"level"			: "assets/data/fishing.tmx",
 			"requirements" 	: [],
@@ -94,6 +103,7 @@
 		{
 			"name"			: "s3_e0_end",
 			"stage"			: 3, "episode" : 0,
+			"icon"			: "",
 			"type"			: "end",
 			"level"			: "",
 			"requirements" 	: [],
@@ -102,6 +112,7 @@
 		{
 			"name" 			: "s3_e1_gotoFishing", 
 			"stage" 		: 3, "episode" : 1, 
+			"icon"			: "default",
 			"type" 			: "play",
 			"actor"			: "dino",
 			"level"			: "assets/data/stage3_tiletest.tmx",

@@ -49,7 +49,10 @@ class MenuState extends FlxState
 		for ( i in 0... allStages.length)
 		{
 			var s : StageItem = allStages[i];
-			_stages[s.stage].push(s);
+			if (s.stageToStartFrom)
+			{
+				_stages[s.stage].push(s);
+			}
 		}
 		
 		//trace("sorting stages");

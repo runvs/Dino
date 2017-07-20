@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxG;
+import flixel.FlxSprite;
 import flixel.group.FlxSpriteGroup;
 import flixel.text.FlxText;
 
@@ -14,17 +15,20 @@ class StageItem extends FlxSpriteGroup
 	public var name : String; 
 	public var stage (default, null) : Int = 0;
 	public var episode (default, null): Int = 0;
+	public var stageToStartFrom (default, null) : Bool = true;
 	private var _type : String = "";
 	private var actor : String = "";
 	private var _level : String = "";
-	
+	private var _iconName : String = "";
+	private var _icon : FlxSprite;
 	private var _nameText : FlxText;
+	
 	
 	private var _gather : Array<String>;
 	private var _storysettings:Array<String>;
 	
 	
-	public function new(n: String, s : Int, e : Int, t : String, a:String, l : String) 
+	public function new(n: String, s : Int, e : Int, t : String, a:String, l : String, i: String) 
 	{
 		super();
 		
@@ -35,7 +39,18 @@ class StageItem extends FlxSpriteGroup
 		actor = a;
 		_level = l;
 		_gather = new Array<String>();
-		
+		_iconName = i;
+		if (_iconName == "")
+		{
+			stageToStartFrom = false;
+		}
+		else
+		{
+			_icon = new FlxSprite(GP.MenuItemsOffsetX + episode * (GP.MenuItemsSize + GP.MenuItemsPadding), 
+		GP.MenuItemsOffsetY + (GP.MenuItemsSize + GP.MenuItemsPadding) * stage);
+		_icon.loadGraphic("assets/images/stageicon_" + _iconName + ".png", false, 24, 24);
+		add(_icon);
+		}
 		this.cameras = [GP.CameraMain ];
 		
 		_nameText = new FlxText(
@@ -43,7 +58,8 @@ class StageItem extends FlxSpriteGroup
 		GP.MenuItemsOffsetY + (GP.MenuItemsSize + GP.MenuItemsPadding) * stage, 
 		GP.MenuItemsSize, name, 2);
 		_nameText.cameras = [GP.CameraMain];
-		add(_nameText);
+		//add(_nameText);
+		
 	}
 	
 	public function SetGatherItems (arr: Array<String>)
