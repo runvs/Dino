@@ -27,6 +27,7 @@ class StageItem extends FlxSpriteGroup
 	private var _gather : Array<String>;
 	private var _storysettings:Array<String>;
 	
+	public var gridXPos : Int = 0;
 	
 	public function new(n: String, s : Int, e : Int, t : String, a:String, l : String, i: String) 
 	{
@@ -46,7 +47,7 @@ class StageItem extends FlxSpriteGroup
 		}
 		else
 		{
-			_icon = new FlxSprite(GP.MenuItemsOffsetX + episode * (GP.MenuItemsSize + GP.MenuItemsPadding), 
+			_icon = new FlxSprite(GP.MenuItemsOffsetX + gridXPos * (GP.MenuItemsSize + GP.MenuItemsPadding), 
 		GP.MenuItemsOffsetY + (GP.MenuItemsSize + GP.MenuItemsPadding) * stage);
 		_icon.loadGraphic("assets/images/stageicon_" + _iconName + ".png", false, 24, 24);
 		add(_icon);
@@ -62,6 +63,8 @@ class StageItem extends FlxSpriteGroup
 		
 	}
 	
+
+	
 	public function SetGatherItems (arr: Array<String>)
 	{
 		if (arr != null)
@@ -71,7 +74,8 @@ class StageItem extends FlxSpriteGroup
 	override public function update(elapsed:Float):Void 
 	{
 		super.update(elapsed);
-		
+		_icon.setPosition(GP.MenuItemsOffsetX + gridXPos * (GP.MenuItemsSize + GP.MenuItemsPadding), 
+		GP.MenuItemsOffsetY + (GP.MenuItemsSize + GP.MenuItemsPadding) * stage);
 	}
 	
 	public function setRequirements(requirements:Array<String>) 

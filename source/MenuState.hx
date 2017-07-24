@@ -51,7 +51,9 @@ class MenuState extends FlxState
 			var s : StageItem = allStages[i];
 			if (s.stageToStartFrom)
 			{
+				s.gridXPos = _stages[s.stage].length;
 				_stages[s.stage].push(s);
+				
 			}
 		}
 		
