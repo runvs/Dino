@@ -161,6 +161,12 @@ class PlayState extends BasicState
 	override public function internalDraw ()
 	{
 		//trace("PlayState internal draw");
+		
+		//for (s in _level.collisionMap)
+		//{
+			//s.draw();
+		//}
+		
 		d.draw();
 		
 		

@@ -43,7 +43,7 @@ class MovingTile extends FlxSprite
 	override public function draw():Void 
 	{
 		_sprite.draw();
-		super.draw();
+		//super.draw();
 	}
 	
 	public function setDino (di:PlayableCharacter)

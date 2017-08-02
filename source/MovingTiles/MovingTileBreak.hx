@@ -36,7 +36,7 @@ class MovingTileBreak extends MovingTile
 			if (_wiggleTimer <= 0)
 			{
 				_wiggleTimer = 0.1;
-				_sprite.offset.set(FlxG.random.floatNormal(0, 4), FlxG.random.floatNormal(0, 4));
+				_sprite.offset.set(FlxG.random.floatNormal(0, 2), FlxG.random.floatNormal(0, 2));
 			}
 		}
 		

@@ -17,7 +17,6 @@ class GatherState extends PlayState
 	private var _inventoryBackground : FlxSprite;
 	
 	private var _collectiblesList : Array<String>;
-	private var _indicator : TargetIndicator;
 	private var _gatherID : Int;
 	
 	public function new(n:String, a : String) 
@@ -36,9 +35,8 @@ class GatherState extends PlayState
 		
 		
 		createCollectibleListIntern();
-		_indicator = new TargetIndicator(this.d);
+		
 		trace("gatherstate create mid");
-		SetTarget();
 		trace("create done");
 	}
 	
@@ -51,8 +49,7 @@ class GatherState extends PlayState
 	public override function LoadLevel(l : String)
 	{
 		super.LoadLevel(l);
-		SetTarget();
-		trace("loadlevel done");
+		//trace("loadlevel done");
 	}
 	
 	private function createCollectibleListIntern ()
@@ -76,40 +73,6 @@ class GatherState extends PlayState
 		_inventoryBackground.scrollFactor.set(0, 0);
 		
 		_inventoryBackground.setPosition(FlxG.width/2/GP.CameraMain.zoom - 22 * nhalf, FlxG.height / GP.CameraMain.zoom - 16);
-		
-	}
-	
-	private function SetTarget():Void 
-	{
-		if (_indicator == null) return;
-		trace("settarget " + _gatherID);
-		if (_gatherID >= 0 && _gatherID < _collectiblesList.length)
-		{
-			var cName : String = _collectiblesList[_gatherID];
-			trace ("Name: " + cName);
-			var condObject : ConditionalObject = _level.getConditionalObjectByName(cName);
-			_indicator.SetTarget(condObject);
-			
-			if (condObject != null)
-			{
-				trace("found condObject");
-				if (Std.is(condObject, Collectible))
-				{
-					var coll : Collectible = cast condObject;
-					trace("checking " + coll._storyManagerID);
-					if (StoryManager.getBool(coll._storyManagerID))
-					{
-						trace("increase gatherID");
-						_gatherID += 1;
-						SetTarget();
-					}
-				}
-			}
-		}
-		else
-		{
-			_indicator.SetTarget(null);
-		}
 		
 	}
 	
@@ -148,7 +111,6 @@ class GatherState extends PlayState
 				if (MyInput.AttackButtonJustPressed)
 				{
 					c.collectMe(this);
-					SetTarget();
 				}
 			}
 		}
@@ -168,9 +130,6 @@ class GatherState extends PlayState
 		CheckCollectibles();
 		ClearCollectibles();	
 		UpdateIcons();
-		
-		
-		_indicator.update(elapsed);
 	}
 	
 	override public function internalDraw() 
@@ -201,6 +160,5 @@ class GatherState extends PlayState
 			s.draw();
 			
 		}
-		_indicator.draw();
 	}
 }
