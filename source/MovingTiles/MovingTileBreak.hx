@@ -28,6 +28,8 @@ class MovingTileBreak extends MovingTile
 		super.update(elapsed);
 		_sprite.update(elapsed);
 
+		//trace("w: "  + _wiggleTimer + "b: " + breakTimer);
+		
 		if (_wiggle)
 		{
 			_wiggleTimer -= elapsed;
@@ -44,6 +46,7 @@ class MovingTileBreak extends MovingTile
 			{
 				if (_touched)
 				{
+					//trace("touched");
 					breaking = true;
 					_wiggle = true;
 					FlxTween.color(_sprite, 0.5, FlxColor.WHITE, FlxColor.RED);
@@ -56,12 +59,12 @@ class MovingTileBreak extends MovingTile
 			if (breakTimer + elapsed > 0 && breakTimer < 0)	// we have crossed the zero
 			{
 				_following = false;
-				_sprite.acceleration.set(0, GP.WorldGravity);
-				_sprite.velocity.set(0, 20);
+				_sprite.acceleration.set(0, 1.2*GP.WorldGravity);
+				_sprite.velocity.set(0, 300);
 				this.setPosition( -5000000, -5000000);
 				this.alive = false;
 			}
-			if (breakTimer <= -GP.WorldBreakableRespawnTime)
+			if (breakTimer <= GP.WorldBreakableRespawnTime)
 			{
 				resetMe();
 			}
@@ -70,6 +73,7 @@ class MovingTileBreak extends MovingTile
 	
 	override public function resetMe() 
 	{
+		//trace("reset");
 		super.resetMe();
 		_following = true;
 		breakTimer = 0.5;
