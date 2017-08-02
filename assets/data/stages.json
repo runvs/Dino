@@ -110,7 +110,7 @@
 			"storysettings" : ["fire_burning", "has_leaf", "has_stone", "has_branch"]
 		},
 		{
-			"name" 			: "s3_e1_gotoFishing", 
+			"name" 			: "s3_e1_tileTest", 
 			"stage" 		: 3, "episode" : 1, 
 			"icon"			: "default",
 			"type" 			: "play",

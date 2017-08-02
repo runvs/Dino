@@ -51,6 +51,9 @@ class TiledLevel extends TiledMap
 	// the images are not used but a separate collider.
 	// Those colloders will be stored in this collisionMap
 	public var collisionMap : FlxSpriteGroup;
+	
+	
+	
 	public var hurtingTiles : Array<HurtingSprite>;
 	public var movingTiles : Array<MovingTile>;
 	
@@ -109,8 +112,11 @@ class TiledLevel extends TiledMap
 		wind = new WindSystem();
 		
 		doors = new Array<Door>();
+		var collisionArray : Array<Int> = new Array<Int>();
 		
 		speechBubbleAreas = new Array<SpeechBubbleArea>();
+		
+		var tilemap:FlxTilemap = new FlxTilemap();
 		// Load Tile Maps
 		for (layer in layers)
 		{
@@ -140,10 +146,17 @@ class TiledLevel extends TiledMap
 			var imagePath 		= new Path(_tileSet.imageSource);
 			var processedPath 	= c_PATH_LEVEL_TILESHEETS + imagePath.file + "." + imagePath.ext;
 			
-			var tilemap:FlxTilemap = new FlxTilemap();
+			
 			tilemap.loadMapFromArray(tileLayer.tileArray, width, height, processedPath,
 				_tileSet.tileWidth, _tileSet.tileHeight, OFF, _tileSet.firstGID, 1, 1);
 				
+			for (i in 0... (tilemap.heightInTiles * tilemap.widthInTiles))
+			{
+				collisionArray.push(0);
+			}
+
+			
+			
 			var tileSheetPath : String = "assets/images/" + tileSheetName ;
 			for (i in 0...tilemap.widthInTiles)
 			{
@@ -163,13 +176,13 @@ class TiledLevel extends TiledMap
 							continue;
 						}
 						foregroundTiles.add(s);
-						CreateCollisionTile(i, j, tileType);
+						CreateCollisionTile(i, j, tileType, tilemap.widthInTiles, collisionArray);
 						
 					}
 					else if (tileLayer.name == "tiles2")
 					{
 						foregroundTiles2.add(s);
-						CreateCollisionTile(i, j, tileType);
+						CreateCollisionTile(i, j, tileType, tilemap.widthInTiles, collisionArray);
 					}
 					else if (tileLayer.name == "top")
 					{
@@ -179,11 +192,40 @@ class TiledLevel extends TiledMap
 				}
 			}
 		}
+		
+		MergeColliders(collisionArray, tilemap.widthInTiles, tilemap.heightInTiles);
+		
 		loadObjects();
 		loadGlobalProperties();		
 		
 		clouds = new CloudLayer(cloudName);
 		parallax = new ParallaxLayer(parallaxName);
+	}
+	
+	function MergeColliders(collisionArray : Array<Int>, sx : Int, sy: Int) 
+	{
+		var refinedCollisions : Array<Array<Int> > = new Array<Array<Int> >();
+		refinedCollisions = CollisionMerger.Merge(collisionArray, sx,sy);
+		
+		for (i in 0 ... collisionArray.length)
+		{
+			if (refinedCollisions[i][0] == 0)
+			{
+				continue;
+			}
+			else
+			{
+				var t : FlxSprite = new FlxSprite(0, 0);
+				t.makeGraphic(Std.int(GP.WorldTileSizeInPixel* refinedCollisions[i][1]), Std.int(GP.WorldTileSizeInPixel * refinedCollisions[i][0]));
+				SpriteFunctions.shadeSpriteWithBorder(t, FlxColor.fromRGB(255,0,0,100));
+				t.setPosition(i % sx * GP.WorldTileSizeInPixel, Std.int(i / sx) * GP.WorldTileSizeInPixel);
+				t.update(0.1);
+				t.immovable = true;
+				collisionMap.add(t);
+			}
+
+		}
+		
 	}
 	
 	function loadGlobalProperties() 
@@ -395,7 +437,7 @@ class TiledLevel extends TiledMap
 	}
 	
 	
-	function CreateCollisionTile(x : Int, y : Int, type : Int) 
+	function CreateCollisionTile(x : Int, y : Int, type : Int, tilemapWidthInTiles : Int, collisionArray : Array<Int>) 
 	{
 		var cols : Int = _tileSet.numCols;
 		var rows : Int = _tileSet.numRows;
@@ -409,12 +451,14 @@ class TiledLevel extends TiledMap
 		{
 			if (rowIndex == 0 && type == 0) return;
 			//trace("addinc collision sprite at " + Std.string(x) + " " + Std.string(y) );
-			var c : FlxSprite = new FlxSprite(x * GP.WorldTileSizeInPixel, y * GP.WorldTileSizeInPixel);
-			c.makeGraphic(16, 16, FlxColor.RED);
-			c.alpha = 0.35;
-			c.immovable = true;
-			c.cameras = [GP.CameraMain];
-			collisionMap.add(c);
+			//var c : FlxSprite = new FlxSprite(x * GP.WorldTileSizeInPixel, y * GP.WorldTileSizeInPixel);
+			//c.makeGraphic(16, 16, FlxColor.RED);
+			//c.alpha = 0.35;
+			//c.immovable = true;
+			//c.cameras = [GP.CameraMain];
+			//collisionMap.add(c);
+			var idx = x + y * tilemapWidthInTiles;
+			collisionArray[idx] = 1;
 		}
 		else if (rowIndex == 0) // special collisions for row zero
 		{	

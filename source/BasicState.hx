@@ -3,6 +3,7 @@ package;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxCollision;
 import flixel.util.FlxColor;
@@ -31,6 +32,7 @@ class BasicState extends FlxState
 	var inTransition : Bool = false;
 	private var _overlay :FlxSprite;
 	
+	var _infostring : FlxText;
 	
 	
 	public function new() 
@@ -78,6 +80,12 @@ class BasicState extends FlxState
 		_overlay.alpha = 0;
 		
 		_speechbubbles = new SpeechBubbleManager();
+	
+		
+		_infostring = new FlxText(10, 10, 0, "");
+		_infostring.scrollFactor.set();
+		_infostring.cameras = [GP.CameraOverlay];
+		
 		
 		trace("Basicstate create end");
 	}
@@ -122,8 +130,10 @@ class BasicState extends FlxState
 	
 	public override function update(elapsed: Float) : Void 
 	{
+		
 		//trace("basicstate update");
 		super.update(elapsed);
+		_infostring.text = "CollisionBoxes: " + _level.collisionMap.length + "\n";
 		_flakes.update(elapsed);
 		_stars.update(elapsed);
 		_level.collisionMap.update(elapsed);
@@ -178,6 +188,8 @@ class BasicState extends FlxState
 			internalUpdate(elapsed);
 		}
 		//trace("basicstate update end");
+		
+		
 	}
 	
 	// should be overwritten by child classes
@@ -271,6 +283,8 @@ class BasicState extends FlxState
 		internalDrawTop();
 		
 		_overlay.draw();
+		
+		_infostring.draw();
 	}
 	
 	public function Fade2Black()

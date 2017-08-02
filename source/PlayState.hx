@@ -17,6 +17,8 @@ class PlayState extends BasicState
 	var d : PlayableCharacter;
 	var _actorName : String;
 	
+
+	
 	public function new ( n : String, a : String )
 	{
 		super();
@@ -59,6 +61,8 @@ class PlayState extends BasicState
 		FlxG.collide(d, _level.collisionMap);
 		d.touchedGround = d.isTouching(FlxObject.DOWN);
 		
+		
+		_infostring.text += "\nDino Position" + Std.int(d.x) + ", " + Std.int(d.y) + "\n";
 		
 		CheckSpeechBubbleAreas();
 		CheckExits();
