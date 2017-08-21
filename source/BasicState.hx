@@ -96,8 +96,11 @@ class BasicState extends FlxState
 		//trace("BasicState LoadLevel");
 		//_level = new TiledLevel(_levelName);
 		
+		_speechbubbles.clear();
+		
 		_level = GP.WorldMapPool.getLevel(_levelName);
 		_level.resetCameras();
+		
 		
 		
 		FlxG.worldBounds.set(0, 0, _level.width * GP.WorldTileSizeInPixel, _level.height * GP.WorldTileSizeInPixel);
@@ -133,7 +136,10 @@ class BasicState extends FlxState
 		
 		//trace("basicstate update");
 		super.update(elapsed);
-		_infostring.text = "CollisionBoxes: " + _level.collisionMap.length + "\n";
+		_infostring.text = "";
+		_infostring.text += "FPS: " + 1.0 / elapsed + "\n";
+		_infostring.text += "\nLevel: " + _levelName + "\n";
+		_infostring.text += "CollisionBoxes: " + _level.collisionMap.length + "\n";
 		_flakes.update(elapsed);
 		_stars.update(elapsed);
 		_level.collisionMap.update(elapsed);

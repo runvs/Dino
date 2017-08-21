@@ -13,10 +13,10 @@ import flixel.util.FlxColor;
  */
 class GP
 {
-	public static var DinoMovementDragX (default, null) : Float = 250;
+	public static var DinoMovementDragX (default, null) : Float = 210;
 	public static var DinoMovementDragY (default, null) : Float = 80;
 	
-	public static var DinoMovementMaxVelocityX (default, null) : Float = 55;
+	public static var DinoMovementMaxVelocityX (default, null) : Float = 60;
 	public static var DinoMovementMaxVelocityY (default, null) : Float = 120;
 	
 	public static var DinoMovementAccelerationFactor (default, null) : Float = 250;

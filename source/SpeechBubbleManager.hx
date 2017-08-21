@@ -72,5 +72,10 @@ class SpeechBubbleManager extends FlxObject
 	{
 		return _speechbubbles.length;
 	}
+	
+	public function clear() 
+	{
+		_speechbubbles = new Array<SpeechBubble>();
+	}
 
 }

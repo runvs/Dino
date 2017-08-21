@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="2017.05.26" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="16" tileheight="16" nextobjectid="179">
+<map version="2017.05.26" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="16" tileheight="16" nextobjectid="183">
  <tileset firstgid="1" name="tileset_new.png" tilewidth="16" tileheight="16" tilecount="744" columns="24">
   <image source="../images/tileset_new.png" width="384" height="500"/>
  </tileset>
@@ -63,7 +63,7 @@
   <object id="109" name="exitGather" type="teleport" x="16" y="416" width="32" height="32">
    <properties>
     <property name="entryID" value="1"/>
-    <property name="name" value="stage1_gather_full.tmx"/>
+    <property name="level" value="stage1_gather_full.tmx"/>
     <property name="type" value="enter"/>
    </properties>
   </object>
@@ -72,8 +72,23 @@
     <property name="ID" value="1"/>
    </properties>
   </object>
+  <object id="181" name="door" type="door" x="80" y="112" width="48" height="48">
+   <properties>
+    <property name="close" value="has_leaf"/>
+    <property name="name" value="test"/>
+    <property name="open" value="doors_gather_open"/>
+    <property name="teleportName" value="exitGatherLeaf"/>
+   </properties>
+  </object>
+  <object id="182" name="exitGatherLeaf" type="teleport" x="92" y="136" width="24" height="24">
+   <properties>
+    <property name="entryID" value="1"/>
+    <property name="level" value="stage1_gather_leaf2.tmx"/>
+    <property name="type" value="enter"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup color="#320a640a" name="foliage">
+ <objectgroup color="#320a640a" name="foliage" visible="0">
   <object id="121" name="grass" type="grass" x="176" y="216" width="64" height="8"/>
   <object id="122" name="grass" type="grass" x="272" y="216" width="128" height="8"/>
   <object id="123" name="grass" type="grass" x="432" y="216" width="92" height="8"/>
@@ -270,12 +285,5 @@
    <property name="stars" value="false"/>
   </properties>
  </objectgroup>
- <objectgroup name="collectibles">
-  <object id="118" name="leaf" type="collectible" x="96" y="144" width="16" height="16">
-   <properties>
-    <property name="teleportToID" value="3"/>
-    <property name="teleportToLevel" value="stage1_gather_full.tmx"/>
-   </properties>
-  </object>
- </objectgroup>
+ <objectgroup name="collectibles"/>
 </map>
