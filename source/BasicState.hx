@@ -140,6 +140,7 @@ class BasicState extends FlxState
 		_infostring.text += "FPS: " + 1.0 / elapsed + "\n";
 		_infostring.text += "\nLevel: " + _levelName + "\n";
 		_infostring.text += "CollisionBoxes: " + _level.collisionMap.length + "\n";
+		
 		_flakes.update(elapsed);
 		_stars.update(elapsed);
 		_level.collisionMap.update(elapsed);
