@@ -51,7 +51,7 @@
   </object>
  </objectgroup>
  <objectgroup name="exits">
-  <object id="111" name="entryE" type="entry" x="288" y="160" width="16" height="32" rotation="180">
+  <object id="111" name="entryE" type="entry" x="848" y="332" width="16" height="32" rotation="180">
    <properties>
     <property name="ID" value="1"/>
    </properties>

@@ -29,6 +29,8 @@ class EnemyBoar extends BasicEnemy
 	
 	
 	private static var _collideSparkz : MyParticleSystem;
+	private var _sparkRight : Bool = false;
+	private var _sparkLeft : Bool = false;
 	
 	
 	public function new(X: Float, Y: Float) 
@@ -57,6 +59,7 @@ class EnemyBoar extends BasicEnemy
 	public override function update(elapsed:Float)
 	{
 		super.update(elapsed);
+		
 		
 		updateStepsDirt(elapsed);
 		_collideSparkz.update(elapsed);
@@ -94,7 +97,8 @@ class EnemyBoar extends BasicEnemy
 			//  get out of charge mode if we have reached the end of the enemies walking line.
 			if (this.x - _startingPos > distance)
 			{
-				SpawnSpakz();
+				if (_sparkRight)
+					SpawnSpakz();
 				_mode = 0;
 				this.x = distance + _startingPos;
 				_sprite.animation.play("walk", true);
@@ -102,7 +106,8 @@ class EnemyBoar extends BasicEnemy
 			}
 			if (this.x - _startingPos < 0  )
 			{
-				SpawnSpakz();
+				if (_sparkLeft)
+					SpawnSpakz();
 				_mode = 0;
 				this.x = _startingPos;
 				_sprite.animation.play("walk", true);
@@ -258,4 +263,13 @@ class EnemyBoar extends BasicEnemy
 		_collideSparkz.cameras = [GP.CameraMain];
 	}
 
+	
+	public function setLeftRightSpark(l : Bool, r : Bool)
+	{
+		trace(l +  " " + r);
+		_sparkLeft = l;
+		_sparkRight = r;
+		
+	}
+	
 }

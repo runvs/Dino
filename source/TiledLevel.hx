@@ -1,6 +1,8 @@
 package;
 
 
+import flixel.FlxBasic;
+import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.addons.editors.tiled.TiledLayer.TiledLayerType;
 import flixel.addons.editors.tiled.TiledMap;
@@ -634,8 +636,7 @@ class TiledLevel extends TiledMap
 				if (o.properties.get("start") != null) 
 				e.setStart(Std.parseFloat(o.properties.get("start")));
 				
-				enemies.push(e);				
-			
+				enemies.push(e);
 			case "boar":
 				trace("boar");
 				var e : EnemyBoar = new EnemyBoar(x, y);
@@ -644,6 +645,13 @@ class TiledLevel extends TiledMap
 				
 				if (o.properties.get("start") != null) 
 				e.setStart(Std.parseFloat(o.properties.get("start")));
+				
+				var px1 : FlxPoint = new FlxPoint ( e.x - GP.WorldTileSizeInPixel/2, e.y + 2);
+				var px2 : FlxPoint = new FlxPoint ( e.x + e.width + distance + GP.WorldTileSizeInPixel / 2, e.y + 2);
+				
+				
+				e.setLeftRightSpark(collisionMap.overlapsPoint(px1), collisionMap.overlapsPoint(px2));
+				
 				
 				enemies.push(e);				
 			default:
