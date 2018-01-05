@@ -47,7 +47,7 @@ class PlayableCharacter extends FlxSprite
 		_stepsDirt.cameras = [GP.CameraMain];
 	
 		// jumpparticles 
-		_jumpParticles = new MyParticleSystem();
+		_jumpParticles = new MyParticleSystem(24);
 		_jumpParticles.cameras = [GP.CameraMain];
 		
 		// exitbar stuff

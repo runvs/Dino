@@ -2,6 +2,7 @@ package;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
+import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 
@@ -27,6 +28,9 @@ class EnemyBoar extends BasicEnemy
 	var _stepsTimer:Float = 0;
 	
 	
+	private static var _collideSparkz : MyParticleSystem;
+	
+	
 	public function new(X: Float, Y: Float) 
 	{
 		super(X, Y);
@@ -46,20 +50,23 @@ class EnemyBoar extends BasicEnemy
 		_stepsDirt = new MyParticleSystem();
 		_stepsDirt.cameras = [GP.CameraMain];
 		
+		_collideSparkz = new MyParticleSystem();
+		_collideSparkz.cameras = [GP.CameraMain];
 	}
 	
 	public override function update(elapsed:Float)
 	{
 		super.update(elapsed);
 		
+		updateStepsDirt(elapsed);
+		_collideSparkz.update(elapsed);
+		
+		//trace(_collideSparkz.length);
+		
 		if (_chargeTimer > 0)
 		{
 			_chargeTimer -= elapsed;
 		}
-		
-		updateStepsDirt(elapsed);
-		
-		
 		if (_mode == 0)
 		{
 			this.maxVelocity.set( 55, 100);
@@ -87,12 +94,15 @@ class EnemyBoar extends BasicEnemy
 			//  get out of charge mode if we have reached the end of the enemies walking line.
 			if (this.x - _startingPos > distance)
 			{
+				SpawnSpakz();
 				_mode = 0;
 				this.x = distance + _startingPos;
 				_sprite.animation.play("walk", true);
+			
 			}
 			if (this.x - _startingPos < 0  )
 			{
+				SpawnSpakz();
 				_mode = 0;
 				this.x = _startingPos;
 				_sprite.animation.play("walk", true);
@@ -100,17 +110,41 @@ class EnemyBoar extends BasicEnemy
 		}
 	}
 	
+	
 	override public function draw() 
 	{
+		//trace("draw");
 		_stepsDirt.draw();
 		super.draw();
+		_collideSparkz.draw();
 	}
 	
-	override public function resetCamera() 
+	function SpawnSpakz() 
 	{
-		super.resetCamera();
-		_stepsDirt.cameras = [GP.CameraMain];
+		trace("sparkz");
+		_collideSparkz.Spawn(6, function(s:FlxSprite) 
+		{
+			s.alive = true;
+			s.alpha = FlxG.random.float(0.5,0.8);
+			
+			var T : Float = FlxG.random.float(0.125,0.25);
+			var left : Bool = velocity.x < 0;
+			if (left)
+				s.setPosition(x + FlxG.random.floatNormal(0,this.width/8) , y + FlxG.random.float(0,height) );
+			else
+				s.setPosition(x + this.width + FlxG.random.floatNormal(0,this.width/8) , y + FlxG.random.float(0,height) );
+			
+			s.velocity.set( FlxG.random.floatNormal(0,10), - 18+ FlxG.random.floatNormal(((_mode != 1)? 0 : -15), 5));
+			s.acceleration.set(0, 75);
+			FlxTween.tween(s, { alpha : 0 }, T / 4, { startDelay:T / 4 * 3, onComplete : function (t) { s.alive = false; }} );
+		},
+		function (s:FlxSprite)
+		{
+			s.makeGraphic(1, 1, FlxColor.fromRGB(150,144,72));
+		});
 	}
+	
+	
 	
 	function SpawnStepsDirt() 
 	{		
@@ -216,4 +250,12 @@ class EnemyBoar extends BasicEnemy
 	{
 		this.x += s * GP.WorldTileSizeInPixel;
 	}
+	
+	override public function resetCamera() 
+	{
+		super.resetCamera();
+		_stepsDirt.cameras = [GP.CameraMain];
+		_collideSparkz.cameras = [GP.CameraMain];
+	}
+
 }
