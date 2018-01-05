@@ -248,6 +248,10 @@ class BasicState extends FlxState
 			_droplets.draw();
 		}
 		_level.foregroundTiles.draw();
+		for (s in _level.movingTiles)
+		{
+			s.draw();
+		}
 		_level.foregroundTiles2.draw();
 		for (t in _level.trees)
 		{
@@ -257,10 +261,6 @@ class BasicState extends FlxState
 		for (h in _level.hurtingTiles)
 		{
 			h.draw();
-		}
-		for (s in _level.movingTiles)
-		{
-			s.draw();
 		}
 		
 		super.draw();

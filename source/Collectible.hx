@@ -33,8 +33,8 @@ class Collectible extends ConditionalObject
 		
 		LoadSprites(this, name);
 		
-		_glow = new GlowOverlay(x, y, GP.CameraMain, Std.int(32), 0.7, 1.5);
-		_glow.alpha = 0.2;
+		_glow = new GlowOverlay((x+this.width) * GP.CameraMain.zoom , (y+this.height) * GP.CameraMain.zoom, GP.CameraOverlay, 120, 1, 0.5);
+		_glow.alpha = 0.4;
 		
 		_particles = new MyParticleSystem(30);
 	}
@@ -66,7 +66,7 @@ class Collectible extends ConditionalObject
 	{
 		super.update(elapsed);
 		
-		_glow.setPosition(( x + 8) ,(y + 8) );
+		_glow.setPosition(( x + 16) * GP.CameraMain.zoom ,(y + 16)* GP.CameraMain.zoom );
 		_glow.update(elapsed);
 		
 		_particles.update(elapsed);
@@ -126,7 +126,7 @@ class Collectible extends ConditionalObject
 	
 	public function resetCamera()
 	{
-		_glow.cameras = [GP.CameraMain];
+		_glow.cameras = [GP.CameraOverlay];
 		//_particles.cameras = [GP.CameraMain];
 	}
 	

@@ -55,7 +55,7 @@ class SpeechBubble extends FlxSprite
 		else
 		{
 			this.animation.add("idle", [3]);
-			this.animation.play("idke", true);
+			this.animation.play("idle", true);
 		}
 	}
 	
@@ -76,9 +76,9 @@ class SpeechBubble extends FlxSprite
 			if (!_isInFadeOut)
 			{
 				_isInFadeOut = true;
-				FlxTween.tween(this, { alpha:0 }, 0.3);
-				FlxTween.tween(this.scale, { x:1.5, y:1.5 }, 0.2, {startDelay:0.1 } );
-				FlxTween.tween(this._icon, { alpha:0 }, 0.1);
+				FlxTween.tween(this, { alpha:0 }, 0.25);
+				FlxTween.tween(this.scale, { x:1.5, y:1.5 }, 0.1, {startDelay:0.1 } );
+				FlxTween.tween(this._icon, { alpha:0 }, 0.075);
 			}
 		}
 		
