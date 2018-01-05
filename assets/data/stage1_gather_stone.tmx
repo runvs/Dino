@@ -51,7 +51,7 @@
   </object>
  </objectgroup>
  <objectgroup name="exits">
-  <object id="111" name="entryE" type="entry" x="316" y="160" width="16" height="32" rotation="180">
+  <object id="111" name="entryE" type="entry" x="288" y="160" width="16" height="32" rotation="180">
    <properties>
     <property name="ID" value="1"/>
    </properties>
@@ -70,7 +70,7 @@
     <property name="type" value="enter"/>
    </properties>
   </object>
-  <object id="179" name="door" type="door" x="32" y="368" width="48" height="48">
+  <object id="179" name="door" type="door" x="16" y="80" width="48" height="48">
    <properties>
     <property name="close" value="has_leaf"/>
     <property name="name" value="test"/>

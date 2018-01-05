@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
+import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 
@@ -121,6 +122,39 @@ class PlayableCharacter extends FlxSprite
 		});
 	}
 	
+	function SpawnJumpParticles() 
+	{
+		_jumpParticles.Spawn(12, function(s:FlxSprite) 
+		{
+			s.alive = true;
+			s.alpha = FlxG.random.float(0.6,0.9);
+			s.scale.set(1, 1);
+			
+			var T : Float = FlxG.random.float(0.75,1.25);
+			s.setPosition(x + this.width/2 + FlxG.random.floatNormal(0,this.width/4) , y + height );
+			
+			var vel : Float = 20;
+			var vx : Float = FlxG.random.bool() ? - vel : vel;
+			vx *= FlxG.random.float(0.4, 0.9);
+			
+			s.velocity.set( vx, - 9 + FlxG.random.float(0, 5));
+			s.angle = 0;
+			s.angularVelocity = -2 * s.velocity.x ;
+			s.drag.set(10, 10);
+			var sc : Float  = FlxG.random.float(2, 4);
+			FlxTween.tween(s.scale, { x: sc, y : sc }, T, { onComplete:function(t) { s.alive = false; }} );
+			FlxTween.tween(s, { alpha : 0 }, T);
+			
+		},
+		function (s:FlxSprite)
+		{
+			if (FlxG.random.bool())
+				s.makeGraphic(2, 2, FlxColor.GRAY);
+			else
+				s.makeGraphic(1, 1, FlxColor.GRAY);
+		});
+	}
+	
 	function handleInput()
     {
 		var _accelFactor : Float = GP.DinoMovementAccelerationFactor;
@@ -161,6 +195,8 @@ class PlayableCharacter extends FlxSprite
 		var ay : Float = GP.WorldGravity;
 		acceleration.set(vx,ay);
     }
+	
+
 	
 	
 	function loadSprite():Void 
