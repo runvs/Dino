@@ -187,7 +187,6 @@ class TiledLevel extends TiledMap
 					else if (tileLayer.name == "top")
 					{
 						topTiles.add(s);
-						//foregroundTiles.add(s);
 					}
 				}
 			}
@@ -444,27 +443,15 @@ class TiledLevel extends TiledMap
 		
 		var rowIndex : Int = Std.int((type-1) / rows);
 		
-		//trace(Std.string(cols) + " " + Std.string(rows));
-		
 		
 		if (rowIndex >= 0 && rowIndex <= 6)
 		{
 			if (rowIndex == 0 && type == 0) return;
-			//trace("addinc collision sprite at " + Std.string(x) + " " + Std.string(y) );
-			//var c : FlxSprite = new FlxSprite(x * GP.WorldTileSizeInPixel, y * GP.WorldTileSizeInPixel);
-			//c.makeGraphic(16, 16, FlxColor.RED);
-			//c.alpha = 0.35;
-			//c.immovable = true;
-			//c.cameras = [GP.CameraMain];
-			//collisionMap.add(c);
 			var idx = x + y * tilemapWidthInTiles;
 			collisionArray[idx] = 1;
 		}
 		else if (rowIndex == 0) // special collisions for row zero
 		{	
-			
-			//else 
-			// no collision for tiles in row 0
 			return;
 		}
 		

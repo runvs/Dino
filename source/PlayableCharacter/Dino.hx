@@ -48,6 +48,13 @@ class Dino extends PlayableCharacter
 	override public function update(elapsed:Float):Void 
 	{
 		super.update(elapsed);
+	
+		// triggers once you start touching the ground
+		if (_leftGroundTimer != 0 && touchedGround)
+		{
+			SpawnJumpParticles();
+		}
+		
 		if (touchedGround == false)
 		{
 			_leftGroundTimer += elapsed;
@@ -58,6 +65,42 @@ class Dino extends PlayableCharacter
 		}
 		_stepsdirtDeadTime -= elapsed;
 		_jumpbuttonPreholdTimer -= elapsed;
+		
+		
+		
+	}
+	
+	function SpawnJumpParticles() 
+	{
+		_jumpParticles.Spawn(12, function(s:FlxSprite) 
+		{
+			s.alive = true;
+			s.alpha = FlxG.random.float(0.6,0.9);
+			s.scale.set(1, 1);
+			
+			var T : Float = FlxG.random.float(0.75,1.25);
+			s.setPosition(x + this.width/2 + FlxG.random.floatNormal(0,this.width/4) , y + height );
+			
+			var vel : Float = 20;
+			var vx : Float = FlxG.random.bool() ? - vel : vel;
+			vx *= FlxG.random.float(0.4, 0.9);
+			
+			s.velocity.set( vx, - 6 + FlxG.random.float(0, 5));
+			s.angle = 0;
+			s.angularVelocity = -2 * s.velocity.x ;
+			s.drag.set(10, 10);
+			var sc : Float  = FlxG.random.float(2, 4);
+			FlxTween.tween(s.scale, { x: sc, y : sc }, T, { onComplete:function(t) { s.alive = false; }} );
+			FlxTween.tween(s, { alpha : 0 }, T);
+			
+		},
+		function (s:FlxSprite)
+		{
+			if (FlxG.random.bool())
+				s.makeGraphic(2, 2, FlxColor.GRAY);
+			else
+				s.makeGraphic(1, 1, FlxColor.GRAY);
+		});
 	}
 	
 	private override function handleInput() 

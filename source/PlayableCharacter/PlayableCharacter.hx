@@ -20,6 +20,7 @@ class PlayableCharacter extends FlxSprite
 	// stepsdirt & stepsdirt timer
 	var _stepsDirt : MyParticleSystem;
 	var _stepsTimer :Float = 0;
+	var _jumpParticles : MyParticleSystem;
 	
 	// picking up stuff
 	public var isOnCollectible : Bool = false;
@@ -43,6 +44,10 @@ class PlayableCharacter extends FlxSprite
 		// steps dirt stuff
 		_stepsDirt = new MyParticleSystem();
 		_stepsDirt.cameras = [GP.CameraMain];
+	
+		// jumpparticles 
+		_jumpParticles = new MyParticleSystem();
+		_jumpParticles.cameras = [GP.CameraMain];
 		
 		// exitbar stuff
 		_exitBar = new HudBar(0, 0, 8, 4, false);
@@ -67,6 +72,8 @@ class PlayableCharacter extends FlxSprite
 	
 		_exitBar.setBarPosition(x, this.y -2);
 		_exitBar.update(elapsed);
+		
+		_jumpParticles.update(elapsed);
 		
 		transport = _exitBar.health >= 1;
 		if (_exitBar.health <= 0) _exitBar.health = 0;
@@ -169,6 +176,7 @@ class PlayableCharacter extends FlxSprite
 	public override function draw()
 	{
 		_stepsDirt.draw();
+		_jumpParticles.draw();
 		_sprite.draw();
 		super.draw();
 		_exitBar.draw();
