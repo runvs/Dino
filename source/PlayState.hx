@@ -96,7 +96,7 @@ class PlayState extends BasicState
 		for (s in _level.movingTiles)
 		{
 			s.setDino(d);
-			FlxG.collide(d, s, function(d, s : MovingTile) { s.touchMe(); } );
+			FlxG.collide(d, s, function(d, s : MovingTile) { if (s.isTouching(FlxObject.UP)) s.touchMe(); } );
 			if (d.touchedGround == false)		
 			{
 				d.touchedGround = d.isTouching(FlxObject.DOWN);
