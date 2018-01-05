@@ -17,7 +17,8 @@
 	[
 		{ "time": "0.0 ",  "actor": "overlay", "type" : "fade", "p1":"0", "p2":"0.5"},
 		{ "time": "0.0 ",  "actor": "dinobag", "type": "animate", "p1": "sleep", "p2" : "true"},
-
+		{ "time": "0.5",   "actor": "dinobag", "type": "speak", "p1":"sleep", "p2": "2.0"},
+		
 		{ "time": "3.0 ",  "actor": "dinobag", "type": "animate", "p1": "wakeup", "p2" : "true"},
 		{ "time": "8.0 ",  "actor": "dinobag", "type": "animate", "p1": "walk", "p2" : "true"},
 		{ "time": "8.0 ",  "actor": "dinobag", "type": "move", "p1": "dinoEnd", "p2": "1.5" },
