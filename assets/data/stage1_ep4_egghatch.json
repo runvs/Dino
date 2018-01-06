@@ -1,0 +1,34 @@
+{
+	"level" : "assets/data/stage1_cave.tmx",
+	"follow" : "dino",
+	"positions":
+	[
+		{"name": "origin",   "x": 0,  "y": 0},
+		{"name": "entry",   "x": 40,  "y": 174},
+		{"name": "back2",   "x": 41,  "y": 174},
+		{"name": "right",   "x": 60,  "y": 176}
+		
+	],
+	"actors":
+	[
+		{"name": "dino", "position": "entry"},
+		{"name": "egg", "position": "right"},
+		{"name": "overlay", "position": "origin"}
+	],
+    "actions": 
+	[
+		{"time"  : "0.0", "actor": "dino", "type" : "move", "p1":"back2", "p2":"0.01"},
+		{"time"  : "0.0", "actor": "overlay", "type" : "fade", "p1":"0", "p2":"0.5"},
+		
+		{ "time" : "next",  "actor": "egg", "type": "animate", "p1": "egg_idle", "p2" : "true"},
+		{ "time" : "same",  "actor": "egg", "type":  "speak", "p1": "excamation", "p2" : "1.4"},
+		{ "time" : "next",  "actor": "egg", "type": "animate", "p1": "egg_hatch", "p2" : "true"},
+		{ "time" : "next3.5", "actor": "egg", "type": "animate", "p1": "baby_greet", "p2" : "true"},
+		{ "time" : "same", "actor": "dino", "type": "animate", "p1": "salto", "p2" : "true"},
+		{ "time" : "next0.9", "actor": "egg", "type": "animate", "p1": "baby_idle", "p2" : "true"},
+		{ "time" : "next",  "actor": "dino", "type":  "speak", "p1": "heart", "p2" : "1.4"},
+		
+		{ "time" : "next",  "actor": "overlay", "type":  "fade", "p1": "1", "p2" : "0.5"},
+		{ "time" : "next0.1",  "actor": "global", "type" : "end", "p1":"s2_e0_fishing_intro"}
+    ]
+}

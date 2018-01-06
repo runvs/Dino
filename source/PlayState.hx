@@ -189,7 +189,7 @@ class PlayState extends BasicState
 	{
 		
 		if (d.inputEnabled == false) return;
-		trace("out");
+		//trace("out");
 		
 		var T : Float = 1.0;
 		

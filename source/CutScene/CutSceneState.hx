@@ -134,7 +134,7 @@ class CutSceneState extends BasicState
 			}
 		}
 		
-		trace(_timer);
+		//trace(_timer);
 	}
 	
 	public override function internalDrawTop() : Void

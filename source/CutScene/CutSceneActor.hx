@@ -42,6 +42,8 @@ class CutSceneActor extends FlxSprite
 				this.animation.add("jumpUp", [15, 16, 17], 4, false);
 				this.animation.add("jumpDown", [18, 19, 20], 4, false);
 				this.animation.add("fire", [for (value in 28...71) value], 5, false);
+				this.animation.add("salto", [for (value in 72...88) value], 7, false);
+				
 				this.animation.play("idle", true);
 				setFacingFlip(FlxObject.LEFT, false, false);
 				setFacingFlip(FlxObject.RIGHT, true, false);
@@ -57,15 +59,24 @@ class CutSceneActor extends FlxSprite
 				this.animation.play("idle");
 				setFacingFlip(FlxObject.LEFT, false, false);
 				setFacingFlip(FlxObject.RIGHT, true, false);
+				
+			case "egg":
+				this.loadGraphic(AssetPaths.babydino_hedge__png, true, 16, 16);
+				//this.scale.set(1.5, 1.5);
+				this.animation.add("egg_idle", [0, 1, 0, 2], 4, true);
+				this.animation.add("egg_hatch", [for (value in 3...25) value], 6, false);
+				this.animation.add("baby_idle", [25, 26, 25, 27, 28, 28], 6, true);
+				this.animation.add("baby_greet", [for (value in 29...34) value], 6, false);
+				setFacingFlip(FlxObject.LEFT, false, false);
+				setFacingFlip(FlxObject.RIGHT, true, false);
+				
 			case "overlay":
-				//trace("load overlay");
 				this.makeGraphic(FlxG.width, FlxG.height, FlxColor.WHITE);
 				this.alpha = 0;
 				this.scrollFactor.set();
 				this.color.setRGB(0, 0, 0);
 				this.cameras = [GP.CameraOverlay];
 			case "invis":
-				//trace ("load invis");
 				this.makeGraphic(1, 1, FlxColor.TRANSPARENT);
 				
 			default:

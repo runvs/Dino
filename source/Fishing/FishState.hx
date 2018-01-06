@@ -29,6 +29,10 @@ class FishState extends BasicState
 	
 	private var _nextStageName : String = "s3_e0_end";
 	
+	private var _isOverTarget : Bool = false;
+	
+	private var _age : Float = 0;
+	
 	public function new() 
 	{
 		super();
@@ -142,6 +146,7 @@ class FishState extends BasicState
 		_speech.update(elapsed);
 		
 		_dinoAnimTimer -= elapsed;
+		_age += elapsed;
 		
 		if (_dinoAnimTimer <= 0)
 		{
@@ -152,17 +157,19 @@ class FishState extends BasicState
 			ti2.start(2, function(t) { _dino.animation.play("fish1", true); } );
 		}
 		
-		
+		_isOverTarget = false;
 		for (t in _targets)
 		{
 			if (FlxG.overlap(t, _player))
 			{
 				t.overlap = true;
+				_isOverTarget = true;
 			}
 			else 
 			{
 				t.overlap = false;
 			}
+			
 			
 			if (t.timer >= t.maxTimer)
 			{
@@ -179,6 +186,16 @@ class FishState extends BasicState
 				t.resetToNewPosition();
 				_speech = new SpeechBubble(_dino, "heart", 1.25);
 			}
+		}
+		
+		if (_isOverTarget)
+		{
+			var f : Float = 0.4 * (Math.sin(_age*6.5) +1) + 1 ;
+			_player.scale.set( f, f);
+		}
+		else
+		{
+			_player.scale.set(1, 1);
 		}
 	
 		if (_caughtFishNumber >= 4)

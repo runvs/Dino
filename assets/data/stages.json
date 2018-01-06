@@ -62,7 +62,15 @@
 			"requirements" 	: ["stage0complete"],
 			"storysettings" : ["has_leaf", "has_stone", "has_branch"]
 		},
-		
+		{
+			"name" 			: "s1_e4_build", 
+			"stage" 		: 1, "episode" : 4,
+			"icon"			: "default",
+			"type" 			: "cut", 
+			"level"			: "assets/data/stage1_ep4_egghatch.json",
+			"requirements" 	: ["stage0complete"],
+			"storysettings" : ["fire_burning", "has_leaf", "has_stone", "has_branch"]
+		},
 		
 		
 		

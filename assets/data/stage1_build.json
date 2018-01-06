@@ -27,6 +27,6 @@
 		{ "time" : "next0.5",   "actor": "dino", "type": "speak", "p1":"heart", "p2": "1.4"},
 		
 		{ "time" : "next0.5",  "actor": "overlay", "type" : "fade", "p1":"1.0", "p2":"0.5"},
-		{ "time" : "next0.1",  "actor": "global", "type" : "end", "p1":"s2_e0_fishing_intro"}
+		{ "time" : "next0.1",  "actor": "global", "type" : "end", "p1":"s1_e4_build"}
     ]
 }
