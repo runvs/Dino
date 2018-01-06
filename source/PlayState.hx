@@ -11,13 +11,12 @@ import flixel.tweens.FlxTween;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import flixel.util.FlxColor;
+import flixel.util.FlxTimer;
 
 class PlayState extends BasicState
 {
 	var d : PlayableCharacter;
 	var _actorName : String;
-	
-
 	
 	public function new ( n : String, a : String )
 	{
@@ -33,8 +32,7 @@ class PlayState extends BasicState
 		super.create();
 		LoadLevel(_levelName);
 		
-		
-		
+	
 		//trace("Playstate create mid");
 		
 		var hasBag : Bool = _actorName == "dinobag";
@@ -86,7 +84,7 @@ class PlayState extends BasicState
 			{
 				if (FlxG.pixelPerfectOverlap(d._sprite, e._sprite))
 				{
-					RestartMap();
+					DinoDie();
 				}
 			}
 			
@@ -114,7 +112,7 @@ class PlayState extends BasicState
 				if (FlxG.pixelPerfectOverlap(d._sprite, h, 0))
 				{
 					//trace("pp overlap");
-					RestartMap();
+					DinoDie();
 				}
 			}
 		}
@@ -184,13 +182,36 @@ class PlayState extends BasicState
 		}
 		//d.tracer.draw();
 		
+		_overlay.draw();
+	}
+	
+	function DinoDie()
+	{
+		
+		if (d.inputEnabled == false) return;
+		trace("out");
+		
+		var T : Float = 1.0;
+		
+		d.inputEnabled = false;
+		d._sprite.angle = 90;
+		d._sprite.color = FlxColor.GRAY;
+		var t : FlxTimer = new FlxTimer();
+		t.start(T, function ( t) { RestartMap(); } );
+		//GP.CameraOverlay.fade(FlxColor.BLACK, 0.7, false, function(){});
+		FlxTween.tween(_overlay, { alpha:1 }, T/2, {startDelay: T/2-0.1, type:FlxTween.PERSIST} );
 		
 	}
 	
 	function RestartMap() 
 	{
 		LoadLevel(_levelName);
+		d._sprite.angle = 0;
+		d._sprite.color = FlxColor.WHITE;
 		jumpToEntryPoint(1);
+		d.inputEnabled = true;
+		//_overlay.alpha = 0;
+		FlxTween.tween(_overlay, { alpha:0 }, 0.75);
 	}
 	
 	function CheckExits() 

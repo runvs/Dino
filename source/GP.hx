@@ -66,7 +66,6 @@ class GP
 		WorldMapPool = new MapPool();
 	}
 	
-	
 	public static function CamerasCreate()
 	{
 		trace("setting cameras");

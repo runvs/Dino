@@ -33,6 +33,8 @@ class PlayableCharacter extends FlxSprite
 	public var tracer : FlxSprite;
 	public var _sprite : FlxSprite;
 	
+	public var inputEnabled : Bool = true;
+	
 	public function new() 
 	{
 		super();
@@ -139,7 +141,7 @@ class PlayableCharacter extends FlxSprite
 			
 			s.velocity.set( vx, - 9 + FlxG.random.float(0, 5));
 			s.angle = 0;
-			s.angularVelocity = -2 * s.velocity.x ;
+			s.angularVelocity = -8 * s.velocity.x ;
 			s.drag.set(10, 10);
 			var sc : Float  = FlxG.random.float(2, 4);
 			FlxTween.tween(s.scale, { x: sc, y : sc }, T, { onComplete:function(t) { s.alive = false; }} );
@@ -157,6 +159,8 @@ class PlayableCharacter extends FlxSprite
 	
 	function handleInput()
     {
+		if (!inputEnabled) return;
+		
 		var _accelFactor : Float = GP.DinoMovementAccelerationFactor;
 		
 		acceleration.set();

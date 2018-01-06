@@ -79,6 +79,7 @@ class Dino extends PlayableCharacter
 	
 	private override function handleInput() 
 	{
+		if (!inputEnabled) return;
 		super.handleInput();
 		
 		if (MyInput.JumpButtonJustPressed)
@@ -123,9 +124,6 @@ class Dino extends PlayableCharacter
 		{
 			this.velocity.set(velocity.x,  velocity.y + 0.8 *GP.DinoMovementJumpStrength * _jumpbuttonPressedTimer/GP.DinoMovementJumpPostHoldTimer);
 		}
-		
-		
-		
 	}
 	
 	private override function handleAnimations()
