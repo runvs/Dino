@@ -131,7 +131,7 @@ class PlayableCharacter extends FlxSprite
 			s.scale.set(1, 1);
 			
 			var T : Float = FlxG.random.float(0.75,1.25);
-			s.setPosition(x + this.width/2 + FlxG.random.floatNormal(0,this.width/4) , y + height );
+			s.setPosition(x + this.width/2 + FlxG.random.floatNormal(0,this.width/4), y + height );
 			
 			var vel : Float = 20;
 			var vx : Float = FlxG.random.bool() ? - vel : vel;

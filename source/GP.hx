@@ -21,7 +21,8 @@ class GP
 	
 	public static var DinoMovementAccelerationFactor (default, null) : Float = 250;
 	
-	public static var DinoMovementJumpStrength (default, null) : Float = -230;
+	static public var DinoMovementJumpPostHoldTimer (default, null) : Float = 0.35;
+	public static var DinoMovementJumpStrength (default, null) : Float = -100;
 	
 	public static var LevelHurtingFallingXMarginFactor (default, null) : Float = 1.5;
 	public static var LevelHurtingFallingVelocity (default, null) : Float = 80;
@@ -58,6 +59,7 @@ class GP
 	static public var DinoMoveMentJumpLeftGroundTolerance (default, null) : Float = 0.22;
 	static public var DinoMovementJumpPreHoldTimer (default, null) : Float = 0.1;
 	static public var WorldBreakableRespawnTime (default, null) : Float = -7;
+	
 	
 	public static function WorldLoadMaps() : Void 
 	{

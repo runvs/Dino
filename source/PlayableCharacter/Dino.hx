@@ -19,6 +19,10 @@ class Dino extends PlayableCharacter
 	private var _jumpbuttonPreholdTimer : Float = -1;
 	private var _stepsdirtDeadTime : Float = 0;
 	
+	private var _jumpbuttonPressedTimer : Float = 0;
+	private var _myElapsed : Float = 0;
+	
+	
 	public function new() 
 	{
 		super();
@@ -49,6 +53,7 @@ class Dino extends PlayableCharacter
 	{
 		super.update(elapsed);
 	
+		_myElapsed = elapsed;
 		// triggers once you start touching the ground
 		if (_leftGroundTimer != 0 && touchedGround)
 		{
@@ -79,18 +84,44 @@ class Dino extends PlayableCharacter
 		if (MyInput.JumpButtonJustPressed)
 		{
 			_jumpbuttonPreholdTimer = GP.DinoMovementJumpPreHoldTimer;
+			
 		}
+		
+		
+		
+		if (MyInput.JumpButtonPressed)
+		{
+			_jumpbuttonPressedTimer += _myElapsed;
+			if (_jumpbuttonPressedTimer >= GP.DinoMovementJumpPostHoldTimer)
+			{
+				_jumpbuttonPressedTimer = GP.DinoMovementJumpPostHoldTimer;
+			}
+		}
+		else
+		{
+			_jumpbuttonPressedTimer = 0;
+		}
+		
 	
 		if ( _jumpbuttonPreholdTimer >= 0 && _leftGroundTimer < GP.DinoMoveMentJumpLeftGroundTolerance )
 		{
 			_sprite.animation.play("jumpUp", true);
-			this.velocity.set(velocity.x, GP.DinoMovementJumpStrength);
+			
+			this.velocity.set(velocity.x,  GP.DinoMovementJumpStrength);
 			if (_stepsdirtDeadTime >= 0)
 			{
 				_stepsdirtDeadTime = 0.1;
 				SpawnStepsDirt();
 			}
 		}
+		
+		if (_jumpbuttonPressedTimer> 0 && _jumpbuttonPressedTimer < GP.DinoMovementJumpPostHoldTimer && _leftGroundTimer <= GP.DinoMovementJumpPostHoldTimer)
+		{
+			this.velocity.set(velocity.x,  velocity.y + 0.8 *GP.DinoMovementJumpStrength * _jumpbuttonPressedTimer/GP.DinoMovementJumpPostHoldTimer);
+		}
+		
+		
+		
 	}
 	
 	private override function handleAnimations()
