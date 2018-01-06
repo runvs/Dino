@@ -21,7 +21,7 @@ class GP
 	
 	public static var DinoMovementAccelerationFactor (default, null) : Float = 250;
 	
-	static public var DinoMovementJumpPostHoldTimer (default, null) : Float = 0.35;
+	static public var DinoMovementJumpPostHoldTimer (default, null) : Float = 0.2;
 	public static var DinoMovementJumpStrength (default, null) : Float = -100;
 	
 	public static var LevelHurtingFallingXMarginFactor (default, null) : Float = 1.5;

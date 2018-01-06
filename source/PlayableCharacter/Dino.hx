@@ -102,6 +102,10 @@ class Dino extends PlayableCharacter
 			_jumpbuttonPressedTimer = 0;
 		}
 		
+		if (MyInput.JumpButtonJustPressed && _leftGroundTimer <= 0.01)
+		{
+			SpawnJumpParticles();
+		}
 	
 		if ( _jumpbuttonPreholdTimer >= 0 && _leftGroundTimer < GP.DinoMoveMentJumpLeftGroundTolerance )
 		{
