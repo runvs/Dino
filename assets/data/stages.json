@@ -4,7 +4,7 @@
 		{
 			"name" 			: "s0_e0_intro", 
 			"stage" 		: 0, "episode" : 0, 
-			"icon"			: "default",
+			"icon"			: "cave",
 			"type" 			: "cut", 
 			"level"			: "assets/data/stage0_intro.json",
 			"requirements" 	: [],
@@ -36,7 +36,7 @@
 		{
 			"name" 			: "s1_e0_intro", 
 			"stage" 		: 1, "episode" : 0,
-			"icon"			: "default",
+			"icon"			: "campfire",
 			"type" 			: "cut", 
 			"level"			: "assets/data/stage1_intro.json",
 			"requirements" 	: ["stage0complete"],
@@ -65,7 +65,7 @@
 		{
 			"name" 			: "s1_e4_build", 
 			"stage" 		: 1, "episode" : 4,
-			"icon"			: "default",
+			"icon"			: "",
 			"type" 			: "cut", 
 			"level"			: "assets/data/stage1_ep4_egghatch.json",
 			"requirements" 	: ["stage0complete"],
@@ -78,7 +78,7 @@
 		{
 			"name"			: "s2_e0_fishing_intro",
 			"stage"			: 2, "episode" : 0,
-			"icon"			: "default",
+			"icon"			: "fishing",
 			"type"			: "cut",
 			"level"			: "assets/data/stage2_fishing_intro.json",
 			"requirements" 	: [],
