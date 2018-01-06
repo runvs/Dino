@@ -49,7 +49,7 @@ class StageItem extends FlxSpriteGroup
 		{
 			_icon = new FlxSprite(GP.MenuItemsOffsetX + gridXPos * (GP.MenuItemsSize + GP.MenuItemsPadding), 
 		GP.MenuItemsOffsetY + (GP.MenuItemsSize + GP.MenuItemsPadding) * stage);
-		_icon.loadGraphic("assets/images/stageicon_" + _iconName + ".png", false, 24, 24);
+		_icon.loadGraphic("assets/images/TN_" + _iconName + ".png", false, 24, 24);
 		add(_icon);
 		}
 		this.cameras = [GP.CameraMain ];
