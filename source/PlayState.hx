@@ -210,7 +210,7 @@ class PlayState extends BasicState
 		d._sprite.color = FlxColor.WHITE;
 		jumpToEntryPoint(1);
 		d.inputEnabled = true;
-		//_overlay.alpha = 0;
+		
 		FlxTween.tween(_overlay, { alpha:0 }, 0.75);
 	}
 	
