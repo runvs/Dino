@@ -126,13 +126,13 @@ class EnemyBoar extends BasicEnemy
 	
 	function SpawnSpakz() 
 	{
-		trace("sparkz");
-		_collideSparkz.Spawn(6, function(s:FlxSprite) 
+		//trace("sparkz");
+		_collideSparkz.Spawn(20, function(s:FlxSprite) 
 		{
 			s.alive = true;
 			s.alpha = FlxG.random.float(0.5,0.8);
 			
-			var T : Float = FlxG.random.float(0.125,0.25);
+			var T : Float = FlxG.random.float(0.25,0.35);
 			var left : Bool = velocity.x < 0;
 			if (left)
 				s.setPosition(x + FlxG.random.floatNormal(0,this.width/8) , y + FlxG.random.float(0,height) );
@@ -140,12 +140,12 @@ class EnemyBoar extends BasicEnemy
 				s.setPosition(x + this.width + FlxG.random.floatNormal(0,this.width/8) , y + FlxG.random.float(0,height) );
 			
 			s.velocity.set( FlxG.random.floatNormal(0,10), - 18+ FlxG.random.floatNormal(((_mode != 1)? 0 : -15), 5));
-			s.acceleration.set(0, 75);
+			s.acceleration.set(0, 125);
 			FlxTween.tween(s, { alpha : 0 }, T / 4, { startDelay:T / 4 * 3, onComplete : function (t) { s.alive = false; }} );
 		},
 		function (s:FlxSprite)
 		{
-			s.makeGraphic(1, 1, FlxColor.fromRGB(150,144,72));
+			s.makeGraphic(1, 1, FlxColor.fromRGB(180,164,92));
 		});
 	}
 	
